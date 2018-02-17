@@ -3,19 +3,21 @@
 
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include "button.h"
 
-class MainWindow : public QGraphicsView{
+class MainWindow :public QGraphicsView
+{
+    Q_OBJECT
 public:
-    MainWindow(QWidget * parent = 0);
+    MainWindow(QWidget * parent = NULL);
     void mainmenu();
     QGraphicsScene * scene;
-
-private:
-
-    const int Width = 1280;
-    const int Height = 720;
-
-    //QRect screenGeometry = QApplication::desktop()->screenGeometry();
+    QGraphicsPixmapItem *logo;
+    Button *playBtn;
+    Button *quitBtn;
+    void gameplay();
+public slots:
+    void start();
 
 };
 
