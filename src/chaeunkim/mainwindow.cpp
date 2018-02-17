@@ -30,17 +30,17 @@ MainWindow::MainWindow(QWidget *parent){
 void MainWindow::mainmenu(){
     scene->clear();
     // add logo to start menu
-    logo = new QGraphicsPixmapItem(QPixmap("/Users/chaeunkim/QT_proj/FISH_N_CHIPS/images/icon_shark.png"));
+    logo = new QGraphicsPixmapItem(QPixmap(":/images/icon_shark.png"));
     logo->setPos((scene->width() - logo->boundingRect().width()) / 2, scene->height() / 12);
     scene->addItem(logo);
 
     //add play and quit buttons
-    playBtn = new Button("/Users/chaeunkim/QT_proj/FISH_N_CHIPS/images/play3.png");
+    playBtn = new Button(":/images/play3.png");
     playBtn->setGeometry((scene->width() - playBtn->width()) /2,scene->height()/2,0,0);
     connect(playBtn,SIGNAL(clicked()),this,SLOT(start()));
     scene->addWidget(playBtn);
 
-    quitBtn = new Button("/Users/chaeunkim/QT_proj/FISH_N_CHIPS/images/quit3.png");
+    quitBtn = new Button(":/images/quit3.png");
     quitBtn->setGeometry((scene->width() - quitBtn->width()) /2,playBtn->pos().y()+quitBtn->height(),0,0);
     connect(quitBtn,SIGNAL(clicked()),this,SLOT(close()));
     scene->addWidget(quitBtn);
