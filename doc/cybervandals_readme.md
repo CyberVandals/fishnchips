@@ -44,4 +44,4 @@ It is important to avoid the use of the git command modifier 'force' when pushin
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
