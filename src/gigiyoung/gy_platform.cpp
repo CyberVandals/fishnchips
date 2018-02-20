@@ -2,10 +2,24 @@
  * By Gigi Young
  */
 
-#include "gy_object.h"
+#include <QGraphicsRectItem>
+#include "../../inc/gigiyoung/gy_object.h"
 
-Platform::Platform(int height, int width, int pos_x, int pos_y,
+
+
+Platform::Platform(QGraphicsItem *parent): QGraphicsRectItem(parent) {
+    setRect( DEFAULT_POS_X, DEFAULT_POS_Y, 
+             DEFAULT_PLAT_WIDTH, DEFAULT_PLAT_HEIGHT ); 
+}
+
+Platform::Platform(int pos_x, int pos_y, 
     QGraphicsItem *parent): QGraphicsRectItem(parent)
 {
-    setRect(pos_x, pos_y, width, height); 
+    setRect( pos_x, pos_y, DEFAULT_PLAT_WIDTH, DEFAULT_PLAT_HEIGHT ); 
+}
+
+Platform::Platform(int width, int height, int pos_x, int pos_y,
+    QGraphicsItem *parent): QGraphicsRectItem(parent)
+{
+    setRect( pos_x, pos_y, width, height ); 
 }

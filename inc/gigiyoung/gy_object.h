@@ -8,6 +8,7 @@
 #include <QObject>
 #include <QTimer>
 #include <QGraphicsRectItem>
+#include <QGraphicsItem>
 
 #define UPDATE_MS 50
 
@@ -18,14 +19,14 @@
 
 #define DEFAULT_PLAT_HEIGHT 10
 #define DEFAULT_PLAT_WIDTH 10
-#define DEFAULT_SHARK_HEIGHT 50
-#define DEFAULT_SHARK_WIDTH 150
-#define DEFAULT_BANANA_HEIGHT 50
-#define DEFAULT_BANANA_WIDTH 150
+#define DEFAULT_SHARK_HEIGHT 30
+#define DEFAULT_SHARK_WIDTH 70
+#define DEFAULT_BANANA_HEIGHT 30
+#define DEFAULT_BANANA_WIDTH 30
 #define DEFAULT_STEAM_HEIGHT 50
-#define DEFAULT_STEAM_WIDTH 150
+#define DEFAULT_STEAM_WIDTH 50
 #define DEFAULT_EXIT_HEIGHT 50
-#define DEFAULT_EXIT_WIDTH 150
+#define DEFAULT_EXIT_WIDTH 50
 
 // structs
 struct Velocity {
@@ -37,8 +38,9 @@ struct Velocity {
 // Platform
 class Platform: public QGraphicsRectItem {
 public:
-    Platform(int height=DEFAULT_PLAT_HEIGHT, int width=DEFAULT_PLAT_WIDTH, 
-             int pos_x=DEFAULT_POS_X, int pos_y=DEFAULT_POS_Y, 
+    Platform(QGraphicsItem *parent=0);
+    Platform(int pos_x, int pos_y, QGraphicsItem *parent=0);
+    Platform(int width, int height, int pos_x, int pos_y, 
              QGraphicsItem *parent=0);
 };
 
@@ -46,47 +48,66 @@ public:
 class Shark: public QObject, public QGraphicsRectItem {
     Q_OBJECT
 public:
-    Shark(int height=DEFAULT_PLAT_HEIGHT, int width=DEFAULT_PLAT_WIDTH, 
-          int pos_x=DEFAULT_POS_X, int pos_y=DEFAULT_POS_Y, 
-          int vel_x=DEFAULT_VEL_X, int vel_y=DEFAULT_VEL_Y,
+    Shark(QGraphicsItem *parent=0);
+    Shark(int pos_x, int pos_y, QGraphicsItem *parent=0);
+    Shark(int pos_x, int pos_y, int vel_x, int vel_y, 
           QGraphicsItem *parent=0);
+    Shark(int width, int height, int pos_x, int pos_y, 
+          int vel_x, int vel_y, QGraphicsItem *parent=0);
+
+    bool stunned(int time);
 
 public slots:
     void move();
 
 private:
+    int stun_duration;
     struct Velocity vel;
     QTimer *timer;
 };
 
 // Banana 
-class Banana: public QGraphicsRectItem {
+class Banana: public QObject, public QGraphicsRectItem {
+    Q_OBJECT
 public:
     Banana(QGraphicsItem *parent = 0);
+    Banana(int pos_x, int pos_y, QGraphicsItem *parent = 0);
+    Banana(int width, int height, int pos_x, int pos_y,
+           QGraphicsItem *parent = 0);
+public slots:
+    void check_player();
 
 private:
+    QTimer *timer;
 };
 
 // Banana projectile
-class BananaProjectile: public QObject, public Banana {
-    Q_OBJECT
+/*
+class BananaProjectile: public Banana {
 public:
     BananaProjectile(QGraphicsItem *parent = 0);
 
-private:
-    struct Velocity vel;
-    QTimer *timer;
+public slots:
+    void move();
+
+//private:
+//    struct Velocity vel;
+//    QTimer *timer;
 };
+*/
 
 
 // Steam needs to check if SomeObject collided with it
 class Steam: public QObject, public QGraphicsRectItem {
     Q_OBJECT
 public:
-    Steam(int height=DEFAULT_PLAT_HEIGHT, int width=DEFAULT_PLAT_WIDTH, 
-          int pos_x=DEFAULT_POS_X, int pos_y=DEFAULT_POS_Y, 
+    Steam(QGraphicsItem *parent=0);
+    Steam(int pos_x, int pos_y, QGraphicsItem *parent=0);
+    Steam(int width, int height, int pos_x, int pos_y, 
           QGraphicsItem *parent=0);
 
+public slots:
+    void status();
 private:
     int countdown;
     QTimer *timer;
@@ -94,10 +115,11 @@ private:
 
 // Exit Object - needs to check whether play has collided with it
 class Exit: public QObject, public QGraphicsRectItem {
-    Q_OBJECT()
+    Q_OBJECT
 public:
-    Exit(int height=DEFAULT_PLAT_HEIGHT, int width=DEFAULT_PLAT_WIDTH, 
-         int pos_x=DEFAULT_POS_X, int pos_y=DEFAULT_POS_Y, 
+    Exit(QGraphicsItem *parent=0);
+    Exit(int pos_x, int pos_y, QGraphicsItem *parent=0);
+    Exit(int width, int height, int pos_x, int pos_y, 
          QGraphicsItem *parent=0);
 
 public slots:
