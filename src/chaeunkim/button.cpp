@@ -4,34 +4,69 @@
 #include <QGraphicsTextItem>
 #include <QIcon>
 
-Button::Button(QString txt, QPushButton *parent) : QPushButton(parent)
+Button::Button(QString path, QPushButton *parent) : QPushButton(parent)
 {
-    QPixmap pixmap(txt);
+    QPixmap pixmap(path);
     QIcon ButtonIcon(pixmap);
     this->setIcon(ButtonIcon);
-    this->setIconSize(pixmap.rect().size());
-    this->setStyleSheet("QPushButton {background-color:transparent;}");
+    this->setFixedSize(150,100);
+    this->setIconSize(QSize(150,100));
+
+    // allow tracking mouse for mouse hovering effect
+    setMouseTracking(true);
+    setAttribute(Qt::WA_Hover);
 
 
 }
 
-/*void Button::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void Button::hoverEnter(QHoverEvent *)
+{
+    int newW = this->width() + 5;
+    int newH = this->height() + 5;
+    this->setIconSize(QSize(newW,newH));
+
+}
+
+void Button::hoverLeave(QHoverEvent *)
+{
+    int newW = this->width() - 5;
+    int newH = this->height() - 5;
+    this->setIconSize(QSize(newW,newH));
+}
+
+void Button::hoverMove(QHoverEvent *)
+{
+    int newW = this->width() + 5;
+    int newH = this->height() + 5;
+    this->setIconSize(QSize(newW,newH));
+
+}
+void Button::mousePressEvent(QMouseEvent *)
 {
     emit clicked();
 }
-
-void Button::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+bool Button::event(QEvent *event)
 {
-    QBrush brush;
-    brush.setStyle(Qt::SolidPattern);
-    brush.setColor(Qt::cyan);
-    //setBrush(brush);
+    switch(event->type())
+    {
+    case QEvent::HoverEnter:
+        hoverEnter(static_cast<QHoverEvent*>(event));
+        return true;
+        break;
+    case QEvent::HoverLeave:
+        hoverLeave(static_cast<QHoverEvent*>(event));
+        return true;
+        break;
+    case QEvent::HoverMove:
+        hoverMove(static_cast<QHoverEvent*>(event));
+        return true;
+        break;
+    case QEvent::MouseButtonPress:
+        mousePressEvent(static_cast<QMouseEvent*>(event));
+        return true;
+        break;
+    default:
+        break;
+    }
+    return QWidget::event(event);
 }
-
-void Button::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
-{
-    QBrush brush;
-    brush.setStyle(Qt::SolidPattern);
-    brush.setColor(Qt::darkCyan);
-    //setBrush(brush);
-}*/
