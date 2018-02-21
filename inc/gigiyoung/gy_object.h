@@ -28,7 +28,7 @@
 #define DEFAULT_EXIT_HEIGHT 50
 #define DEFAULT_EXIT_WIDTH 50
 
-#define DEFAULT_STUN_DURATION 5
+#define DEFAULT_STUN_DURATION 40
 
 // structs
 struct Velocity {
@@ -58,13 +58,16 @@ public:
           int vel_x, int vel_y, QGraphicsItem *parent=0);
 
     bool stun(int time=DEFAULT_STUN_DURATION);
+    bool cook();
 
 public slots:
     void move();
+    void status();
 
 private:
     void init();
 
+    bool cooked;
     int stun_duration;
     struct Velocity vel;
     QTimer *timer;

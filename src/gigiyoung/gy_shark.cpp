@@ -7,6 +7,7 @@
 #include <QObject>
 #include <QTimer>
 #include <QList>
+#include <QDebug>
 #include "../../inc/gigiyoung/gy_object.h"
 
 using namespace std;
@@ -14,6 +15,7 @@ using namespace std;
 void Shark::init() {
 
     stun_duration = 0;
+    cooked = false;
 
     // create timer for move slot
     timer = new QTimer(this);
@@ -86,7 +88,21 @@ bool Shark::stun(int time) {
     return false;
 }
 
+bool Shark::cook() {
+    // "cook" shark
+
+    // change public slot
+
+    return (cooked = true);
+}
+
 void Shark::move() {
+    // stunned, decrement
+    if( stun_duration > 0 ) {
+        stun_duration--;
+        return;
+    }
+
     QList<QGraphicsItem *> colliding_items = 
         collidingItems(Qt::IntersectsItemShape);
 
@@ -100,3 +116,7 @@ void Shark::move() {
     setPos( x()+vel.x, y()+vel.y );
 }
 
+void Shark::status() {
+    qDebug() << "I am a shark. I am now chum.";
+
+}
