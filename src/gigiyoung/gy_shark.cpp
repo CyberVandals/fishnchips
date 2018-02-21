@@ -11,10 +11,18 @@
 
 using namespace std;
 
-// Default constructor 
-Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent){
+void Shark::init() {
+
     stun_duration = 0;
 
+    // create timer for move slot
+    timer = new QTimer(this);
+    connect( timer, SIGNAL(timeout()), this, SLOT(move()) );
+    timer->start(UPDATE_MS);
+}
+
+// Default constructor 
+Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent){
     // init size and position
     setRect( DEFAULT_POS_X, DEFAULT_POS_Y, DEFAULT_SHARK_WIDTH,
              DEFAULT_SHARK_HEIGHT );
@@ -23,10 +31,7 @@ Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent){
     vel.x = DEFAULT_VEL_X;
     vel.y = DEFAULT_VEL_Y;    
 
-    // create timer for move slot
-    timer = new QTimer(this);
-    connect( timer, SIGNAL(timeout()), this, SLOT(move()) );
-    timer->start(UPDATE_MS);
+    init();
 }
 
 
@@ -34,8 +39,6 @@ Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent){
 Shark::Shark(int pos_x, int pos_y,
     QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent)
 {
-    stun_duration = 0;
-
     // init size and position
     setRect( pos_x, pos_y, DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT );
 
@@ -43,18 +46,13 @@ Shark::Shark(int pos_x, int pos_y,
     vel.x = DEFAULT_VEL_X;
     vel.y = DEFAULT_VEL_Y;    
 
-    // create timer for move slot
-    timer = new QTimer(this);
-    connect( timer, SIGNAL(timeout()), this, SLOT(move()) );
-    timer->start(UPDATE_MS);
+    init();
 } 
 
 // Constructor with position and velocity 
 Shark::Shark(int pos_x, int pos_y, int vel_x, int vel_y,
     QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent)
 {
-    stun_duration = 0;
-
     // init size and position
     setRect( pos_x, pos_y, DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT );
 
@@ -62,18 +60,13 @@ Shark::Shark(int pos_x, int pos_y, int vel_x, int vel_y,
     vel.x = vel_x;
     vel.y = vel_y;    
 
-    // create timer for move slot
-    timer = new QTimer(this);
-    connect( timer, SIGNAL(timeout()), this, SLOT(move()) );
-    timer->start(UPDATE_MS);
+    init();
 }
 
 // Constructor with all arguments
 Shark::Shark(int width, int height, int pos_x, int pos_y, int vel_x, int vel_y,
     QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent)
 {
-    stun_duration = 0;
-
     // init size and position
     setRect( pos_x, pos_y, width, height );
 
@@ -81,14 +74,11 @@ Shark::Shark(int width, int height, int pos_x, int pos_y, int vel_x, int vel_y,
     vel.x = vel_x;
     vel.y = vel_y;    
 
-    // create timer for move slot
-    timer = new QTimer(this);
-    connect( timer, SIGNAL(timeout()), this, SLOT(move()) );
-    timer->start(UPDATE_MS);
+    init();
 }
 
 
-bool Shark::stunned(int time) {
+bool Shark::stun(int time) {
     if( time > 0 ) {
         stun_duration = time;
         return true;

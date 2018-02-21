@@ -11,6 +11,14 @@
 #include "../../inc/gigiyoung/gy_object.h"
 
 
+void Banana::init() {
+
+    timer = new QTimer(this);
+    connect( timer, SIGNAL(timeout()), this, SLOT(status()) );
+    timer->start(UPDATE_MS);
+}
+
+
 // Banana
 Banana::Banana(QGraphicsItem *parent): 
     QObject(), QGraphicsRectItem(parent) 
@@ -19,9 +27,7 @@ Banana::Banana(QGraphicsItem *parent):
     setRect( DEFAULT_POS_X, DEFAULT_POS_Y, 
              DEFAULT_PLAT_WIDTH, DEFAULT_PLAT_HEIGHT ); 
 
-    timer = new QTimer(this);
-    connect( timer, SIGNAL(timeout()), this, SLOT(check_player()) );
-    timer->start(UPDATE_MS);
+    init();
 }
 
 Banana::Banana(int pos_x, int pos_y, QGraphicsItem *parent): 
@@ -30,9 +36,7 @@ Banana::Banana(int pos_x, int pos_y, QGraphicsItem *parent):
     setRect( pos_x, pos_y, 
              DEFAULT_PLAT_WIDTH, DEFAULT_PLAT_HEIGHT ); 
 
-    timer = new QTimer(this);
-    connect( timer, SIGNAL(timeout()), this, SLOT(check_player()) );
-    timer->start(UPDATE_MS);
+    init();
 }
 
 Banana::Banana(int width, int height, int pos_x, int pos_y,
@@ -40,38 +44,19 @@ Banana::Banana(int width, int height, int pos_x, int pos_y,
 {
     setRect( pos_x, pos_y, width, height ); 
 
-    timer = new QTimer(this);
-    connect( timer, SIGNAL(timeout()), this, SLOT(check_player()) );
-    timer->start(UPDATE_MS);
+    init();
 }
 
-void Banana::check_player() {
+void Banana::status() {
     qDebug() << "in Banana::check_player()\n";
 }
 
 
-// BananaProjectile
-
-/*
-BananaProjectile::BananaProjectile(QGraphicsItem *parent): 
-    QObject(), QGraphicsRectItem(parent) 
-{
-    setRect( DEFAULT_POS_X, DEFAULT_POS_Y, 
-             DEFAULT_PLAT_WIDTH, DEFAULT_PLAT_HEIGHT ); 
-    
-    vel.x = DEFAULT_VEL_X;
-    vel.y = DEFAULT_VEL_Y;
-
-    timer = new QTimer(this);
-    connect( timer, SIGNAL(timeout()), this, SLOT(move()) );
-    timer->start(UPDATE_MS);
-}
-
-void BananaProjectile::move() {
+void Banana::move() {
     QList<QGraphicsItem *> colliding_items = 
         collidingItems(Qt::IntersectsItemShape);
 
-    qDebug() << "in Banana::move()\n";
+    qDebug() << "in BananaProjectile::move()\n";
 
     for( int i = 0; i < colliding_items.size() ; i++ ) {
         // if collision with platform, deallocate banana
@@ -89,4 +74,15 @@ void BananaProjectile::move() {
     setPos( x()+vel.x, y()+vel.y );
 
 }
-*/
+
+bool Banana::chuck(int direction) {
+
+}
+
+bool Banana::pickup() {
+
+}
+
+bool Banana::eat() {
+
+}
