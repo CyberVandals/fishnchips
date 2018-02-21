@@ -9,7 +9,7 @@ class MainWindow :public QGraphicsView
 {
     Q_OBJECT
 public:
-    MainWindow(QWidget * parent = NULL);
+    MainWindow(QWidget *parent = 0);
     void mainmenu();
     QGraphicsScene * scene;
     QGraphicsPixmapItem *logo;

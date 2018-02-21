@@ -1,5 +1,4 @@
-#include "mainwindow.h"
-#include "button.h"
+#include "../../inc/chaeunkim/mainwindow.h"
 #include <iostream>
 #include <QGraphicsView>
 #include <QGraphicsPixmapItem>

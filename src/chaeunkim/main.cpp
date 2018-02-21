@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "../../inc/chaeunkim/mainwindow.h"
 #include <QSplashScreen>
 
 
