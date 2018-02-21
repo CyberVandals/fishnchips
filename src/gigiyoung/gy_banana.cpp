@@ -76,13 +76,13 @@ void Banana::move() {
 }
 
 bool Banana::chuck(int direction) {
-
+    return false;
 }
 
 bool Banana::pickup() {
-
+    return false;
 }
 
 bool Banana::eat() {
-
+    return false;
 }
