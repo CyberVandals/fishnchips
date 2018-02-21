@@ -39,24 +39,19 @@ SOURCES += \
         src/gigiyoung/gy_platform.cpp \
         src/gigiyoung/gy_shark.cpp \
         src/gigiyoung/gy_steam.cpp \
-<<<<<<< HEAD
         src/henry/hh_main_player.cpp \
-    src/henry/hh_health.cpp
-
-=======
+        src/henry/hh_health.cpp
         src/koffi/scenemanager.cpp
->>>>>>> a76e4c6862eb3e49ea6e85ac8efd9e8b825ead05
+
 
 HEADERS  += \
         inc/chaeunkim/button.h \
         inc/chaeunkim/mainwindow.h \
         inc/gigiyoung/gy_object.h \
-<<<<<<< HEAD
         inc/henry/hh_main_player.h \
-    inc/henry/hh_health.h
-=======
+        inc/henry/hh_health.h
         inc/koffi/scenemanager.h
->>>>>>> a76e4c6862eb3e49ea6e85ac8efd9e8b825ead05
+
 
 RESOURCES += \
         resources/images/images.qrc
