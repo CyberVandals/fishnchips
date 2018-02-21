@@ -39,11 +39,13 @@ SOURCES += \
         #src/gigiyoung/gy_platform \
         src/gigiyoung/gy_shark.cpp \
         src/gigiyoung/gy_steam.cpp \
+        src/koffi/scenemanager.cpp
 
 HEADERS  += \
         inc/chaeunkim/button.h \
         inc/chaeunkim/mainwindow.h \
         inc/gigiyoung/gy_object.h \
+        inc/koffi/scenemanager.h
 
 RESOURCES += \
         resources/images/images.qrc
