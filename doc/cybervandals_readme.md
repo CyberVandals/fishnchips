@@ -1,6 +1,6 @@
-# Project Title
+# CyberVandals Readme
 
-One Paragraph of project description goes here
+Readme file for the team
 
 ## Getting Started
 
