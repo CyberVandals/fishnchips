@@ -12,8 +12,8 @@
 
 #define UPDATE_MS 50
 
-#define DEFAULT_POS_X 0
-#define DEFAULT_POS_Y 0
+#define DEFAULT_POS_X 30 
+#define DEFAULT_POS_Y 30
 #define DEFAULT_VEL_X 10
 #define DEFAULT_VEL_Y 0
 
@@ -27,6 +27,8 @@
 #define DEFAULT_STEAM_WIDTH 50
 #define DEFAULT_EXIT_HEIGHT 50
 #define DEFAULT_EXIT_WIDTH 50
+
+#define DEFAULT_STUN_DURATION 5
 
 // structs
 struct Velocity {
@@ -55,12 +57,14 @@ public:
     Shark(int width, int height, int pos_x, int pos_y, 
           int vel_x, int vel_y, QGraphicsItem *parent=0);
 
-    bool stunned(int time);
+    bool stun(int time=DEFAULT_STUN_DURATION);
 
 public slots:
     void move();
 
 private:
+    void init();
+
     int stun_duration;
     struct Velocity vel;
     QTimer *timer;
@@ -74,28 +78,22 @@ public:
     Banana(int pos_x, int pos_y, QGraphicsItem *parent = 0);
     Banana(int width, int height, int pos_x, int pos_y,
            QGraphicsItem *parent = 0);
-public slots:
-    void check_player();
 
-private:
-    QTimer *timer;
-};
-
-// Banana projectile
-/*
-class BananaProjectile: public Banana {
-public:
-    BananaProjectile(QGraphicsItem *parent = 0);
+    // 0 for up, 1 for down, 2 for left, 3 for right
+    bool chuck(int direction);
+    bool pickup();
+    bool eat();
 
 public slots:
+    void status();
     void move();
 
-//private:
-//    struct Velocity vel;
-//    QTimer *timer;
-};
-*/
+private:
+    void init();
 
+    struct Velocity vel;
+    QTimer *timer;
+};
 
 // Steam needs to check if SomeObject collided with it
 class Steam: public QObject, public QGraphicsRectItem {
@@ -108,7 +106,11 @@ public:
 
 public slots:
     void status();
+
 private:
+    void init();
+
+    bool exploded;
     int countdown;
     QTimer *timer;
 };
@@ -123,9 +125,11 @@ public:
          QGraphicsItem *parent=0);
 
 public slots:
-    void check_player();
+    void status();
 
 private:
+    void init();
+
     QTimer *timer;
 };
 

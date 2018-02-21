@@ -4,6 +4,13 @@
 
 #include "../../inc/gigiyoung/gy_object.h"
 
+void Exit::init() {
+
+    // create timer for move slot
+    timer = new QTimer(this);
+    connect( timer, SIGNAL(timeout()), this, SLOT(status()) );
+    timer->start(UPDATE_MS);
+}
 
 // Default constructor 
 Exit::Exit(QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent){
@@ -11,11 +18,7 @@ Exit::Exit(QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent){
     // init size and position
     setRect( DEFAULT_POS_X, DEFAULT_POS_Y, DEFAULT_EXIT_WIDTH,
              DEFAULT_EXIT_HEIGHT );
-
-    // create timer for move slot
-    timer = new QTimer(this);
-    connect( timer, SIGNAL(timeout()), this, SLOT(move()) );
-    timer->start(UPDATE_MS);
+    init();
 }
 
 
@@ -27,10 +30,7 @@ Exit::Exit(int pos_x, int pos_y,
     // init size and position
     setRect( pos_x, pos_y, DEFAULT_EXIT_WIDTH, DEFAULT_EXIT_HEIGHT );
 
-    // create timer for move slot
-    timer = new QTimer(this);
-    connect( timer, SIGNAL(timeout()), this, SLOT(move()) );
-    timer->start(UPDATE_MS);
+    init();
 } 
 
 // Constructor with position and velocity 
@@ -41,12 +41,9 @@ Exit::Exit(int width, int height, int pos_x, int pos_y,
     // init size and position
     setRect( pos_x, pos_y, width, height );
 
-    // create timer for move slot
-    timer = new QTimer(this);
-    connect( timer, SIGNAL(timeout()), this, SLOT(move()) );
-    timer->start(UPDATE_MS);
+    init();
 }
 
-void Exit::check_player() {
+void Exit::status() {
 
 }
