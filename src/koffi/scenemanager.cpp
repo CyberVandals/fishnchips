@@ -3,9 +3,6 @@
 #include <QGraphicsPixmapItem>
 SceneManager::SceneManager()
 {
-    QGraphicsPixmapItem *shark = new QGraphicsPathItem();
-    shark->setPixmap(QPixmap(":/images/"));
-    this->shark = new Shark()
 }
 
 void SceneManager::playGame(QGraphicsScene * scene){
