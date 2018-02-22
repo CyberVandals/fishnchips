@@ -2,6 +2,7 @@
 #include <QGraphicsPixmapItem>
 #include <QApplication>
 #include <QDesktopWidget>
+#include <QPainter>
 
 SceneManager::SceneManager()
 {
@@ -11,7 +12,8 @@ SceneManager::SceneManager()
 
     player = new Main_player();
     QPixmap playerGraphic(":/images/monkey.png");
-    player->setBrush(QBrush(playerGraphic.scaled(80,165,Qt::IgnoreAspectRatio,Qt::SmoothTransformation)));
+    player->setRect(60, 60, 65, 65);
+    player->setBrush(QBrush(playerGraphic.scaled(65,100,Qt::KeepAspectRatio,Qt::SmoothTransformation)));
 }
 
 void SceneManager::playGame(QGraphicsScene * scene){
@@ -22,4 +24,5 @@ void SceneManager::playGame(QGraphicsScene * scene){
     scene->setBackgroundBrush(pim.scaled(sceneWidth,sceneHeight,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     scene->addItem(shark);
     scene->addItem(player);
+    scene->setFocusItem(player);
 }
