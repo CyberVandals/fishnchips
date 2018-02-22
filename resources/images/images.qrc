@@ -7,6 +7,10 @@
         <file>pause.png</file>
         <file>menu_background.jpg</file>
         <file>back_ground.jpg</file>
+        <file>banana.png</file>
+        <file>blue_shark.png</file>
+        <file>dark_shark.png</file>
+        <file>monkey.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>
