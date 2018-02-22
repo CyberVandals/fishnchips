@@ -4,15 +4,25 @@
 #include <QObject>
 #include <QKeyEvent>
 #include <QWidget>
+#include <QObject>
+#include <QGraphicsRectItem>
+#include <QDesktopWidget>
+#include <QTimer>
+#include <QGraphicsScene>
+#include <QApplication>
 
-class hh_main_player
+class Main_player: public QObject, public QGraphicsRectItem
 {
+Q_OBJECT
 private:
-    float x_pos, y_pos;
+bool has_banana;
 
 public:
-    hh_main_player();
+    Main_player();
     void keyPressEvent(QKeyEvent * event);
+
+public slots:
+    void sink();
 };
 
 #endif // HH_MAIN_PLAYER_H
