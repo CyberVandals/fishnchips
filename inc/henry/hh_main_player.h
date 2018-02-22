@@ -10,6 +10,7 @@
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QApplication>
+#include <QGraphicsItem>
 
 class Main_player: public QObject, public QGraphicsRectItem
 {
@@ -18,7 +19,7 @@ private:
 bool has_banana;
 
 public:
-    Main_player();
+    Main_player(QGraphicsItem *parent=0);
     void keyPressEvent(QKeyEvent * event);
 
 public slots:
