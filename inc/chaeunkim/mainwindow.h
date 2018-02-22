@@ -5,7 +5,7 @@
 #include <QGraphicsView>
 #include "button.h"
 #include "pausebutton.h"
-#include "scenemanager.h"
+#include "koffi/scenemanager.h"
 
 class MainWindow :public QGraphicsView
 {
