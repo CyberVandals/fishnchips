@@ -1,11 +1,11 @@
 #include "koffi/scenemanager.h"
 #include <QRect>
 #include <QGraphicsPixmapItem>
+#include <QApplication>
+#include <QDesktopWidget>
+
 SceneManager::SceneManager()
 {
-    QGraphicsPixmapItem *shark = new QGraphicsPathItem();
-    shark->setPixmap(QPixmap(":/images/"));
-    this->shark = new Shark()
 }
 
 void SceneManager::playGame(QGraphicsScene * scene){
