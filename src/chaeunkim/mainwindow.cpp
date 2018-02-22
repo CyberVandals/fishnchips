@@ -7,7 +7,7 @@
 #include <QApplication>
 
 
-MainWindow::MainWindow(QWidget *parent){
+MainWindow::MainWindow(){//QWidget *parent){
 
     // get desktop resolution
     QRect rec = QApplication::desktop()->screenGeometry();
@@ -17,6 +17,8 @@ MainWindow::MainWindow(QWidget *parent){
     scene = new QGraphicsScene();
     setFixedSize(width/1.5, height/1.1);
     scene->setSceneRect(0,0,width/1.5,height/1.1);
+    QPixmap pim(":/images/menu_background.jpg");
+    scene->setBackgroundBrush(pim.scaled(width,height,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     setScene(scene);
 
     // turn off the scroll bars both horizontal and vertical
@@ -44,7 +46,9 @@ void MainWindow::mainmenu(){
     connect(quitBtn,SIGNAL(clicked()),this,SLOT(close()));
     scene->addWidget(quitBtn);
 
-
+    pauseBtn = new PauseButton(":/images/pause.png");
+    pauseBtn->setGeometry(scene->width() - pauseBtn->width(), 0,0,0);
+    scene->addWidget(pauseBtn);
 
 
 
@@ -56,5 +60,8 @@ void MainWindow::start(){
     scene->removeItem(logo);
     playBtn->deleteLater();
     quitBtn->deleteLater();
+    pauseBtn->deleteLater();
+    SceneManager * gamescene = new SceneManager;
+    gamescene->playGame(scene);
 }
 

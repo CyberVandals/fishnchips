@@ -3,5 +3,10 @@
         <file>icon_shark.png</file>
         <file>play3.png</file>
         <file>quit3.png</file>
+        <file>continue.png</file>
+        <file>pause.png</file>
+        <file>menu_background.jpg</file>
+        <file>back_ground.jpg</file>
     </qresource>
+    <qresource prefix="/"/>
 </RCC>
