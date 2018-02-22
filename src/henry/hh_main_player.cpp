@@ -20,7 +20,7 @@ Main_player::Main_player(QGraphicsItem *parent): QObject(), QGraphicsRectItem(pa
 
 void Main_player::keyPressEvent(QKeyEvent *event)
 {
-    if( event->key() == Qt::Key_Left && (this->boundingRect().left()) > (this->scene()->sceneRect().left()))
+    if( event->key() == Qt::Key_Left && (this->boundingRect().left()) < (this->scene()->sceneRect().left()))
     {
      this->setPos(x()-10, y());
         //move left
@@ -31,7 +31,7 @@ else if( event->key() == Qt::Key_Right && (this->boundingRect().right()) < (this
 
         //move right
     }
-else if( event->key() == Qt::Key_Up && (this->boundingRect().top()) > (this->scene()->sceneRect().top()))
+else if( event->key() == Qt::Key_Up && (this->boundingRect().top()) < (this->scene()->sceneRect().top()))
     {
         this->setPos(x(), y()-10);
 
