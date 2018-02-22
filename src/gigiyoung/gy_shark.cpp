@@ -108,7 +108,7 @@ bool Shark::cook() {
 }
 
 void Shark::move() {
-    qDebug() << "Shark is moving\n";
+    //qDebug() << "Shark is moving\n";
 
     // stunned, decrement
     if( stun_duration > 0 ) {
@@ -119,9 +119,14 @@ void Shark::move() {
     QList<QGraphicsItem *> colliding_items = 
         collidingItems(Qt::IntersectsItemShape);
 
+    qDebug() << scene()->sceneRect().left() << ", "
+             << scene()->sceneRect().right();
+    qDebug() << "Shark is at " << x(); 
+    qDebug() << "Shark's velocity is " << vel.x; 
+
     // if edge of scene, reverse x velocity
-    if ( x() >= scene()->sceneRect().right() || 
-         x() <= scene()->sceneRect().left() ) 
+    if ( (x() >= scene()->sceneRect().right() && vel.x > 0) || 
+         (x() <= scene()->sceneRect().left() && vel.x < 0) ) 
     {
         vel.x = -vel.x;
     }
