@@ -8,6 +8,7 @@
 #include <QObject>
 #include <QTimer>
 #include <QGraphicsRectItem>
+#include <QGraphicsPixmapItem>
 #include <QGraphicsItem>
 
 #define UPDATE_MS 50
@@ -51,7 +52,7 @@ private:
 };
 
 // Shark - needs to move 
-class Shark: public QObject, public QGraphicsRectItem, public QGraphicsPixmapItem
+class Shark: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:

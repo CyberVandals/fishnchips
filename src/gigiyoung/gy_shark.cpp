@@ -4,6 +4,8 @@
 
 #include <typeinfo>
 #include <QGraphicsRectItem>
+#include <QGraphicsPixmapItem>
+#include <QGraphicsScene>
 #include <QObject>
 #include <QTimer>
 #include <QList>
@@ -13,7 +15,9 @@
 using namespace std;
 
 void Shark::init() {
-
+    //setPixmap(":../../resources/images/blue_shark.png");
+    //setPixmap(":/images/dark_shark.png");
+ 
     stun_duration = 0;
     cooked = false;
 
@@ -24,11 +28,15 @@ void Shark::init() {
 }
 
 // Default constructor 
-Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent){
+//Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent), QGraphicsPixmapItem()
+Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
+{
     // init size and position
-    setRect( DEFAULT_POS_X, DEFAULT_POS_Y, DEFAULT_SHARK_WIDTH,
-             DEFAULT_SHARK_HEIGHT );
+    //setRect( DEFAULT_POS_X, DEFAULT_POS_Y, DEFAULT_SHARK_WIDTH,
+    //         DEFAULT_SHARK_HEIGHT );
 
+    QRectF( DEFAULT_POS_X, DEFAULT_POS_Y, DEFAULT_SHARK_WIDTH,
+             DEFAULT_SHARK_HEIGHT );
     // init velocity
     vel.x = DEFAULT_VEL_X;
     vel.y = DEFAULT_VEL_Y;    
@@ -39,10 +47,12 @@ Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent){
 
 // Constructor with position 
 Shark::Shark(int pos_x, int pos_y,
-    QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent), QGraphicsPixmapItem()
+    //QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent), QGraphicsPixmapItem()
+    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
     // init size and position
-    setRect( pos_x, pos_y, DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT );
+    //setRect( pos_x, pos_y, DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT );
+    QRectF( pos_x, pos_y, DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT );
 
     // init velocity
     vel.x = DEFAULT_VEL_X;
@@ -53,10 +63,12 @@ Shark::Shark(int pos_x, int pos_y,
 
 // Constructor with position and velocity 
 Shark::Shark(int pos_x, int pos_y, int vel_x, int vel_y,
-    QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent), QGraphicsPixmapItem
+    //QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent), QGraphicsPixmapItem()
+    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
     // init size and position
-    setRect( pos_x, pos_y, DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT );
+    //setRect( pos_x, pos_y, DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT );
+    QRectF( pos_x, pos_y, DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT );
 
     // init velocity
     vel.x = vel_x;
@@ -67,10 +79,12 @@ Shark::Shark(int pos_x, int pos_y, int vel_x, int vel_y,
 
 // Constructor with all arguments
 Shark::Shark(int width, int height, int pos_x, int pos_y, int vel_x, int vel_y,
-    QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent), QGraphicsPixmapItem
+    //QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent), QGraphicsPixmapItem()
+    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
     // init size and position
-    setRect( pos_x, pos_y, width, height );
+    //setRect( pos_x, pos_y, width, height );
+    QRectF( pos_x, pos_y, width, height );
 
     // init velocity
     vel.x = vel_x;
@@ -107,7 +121,9 @@ void Shark::move() {
         collidingItems(Qt::IntersectsItemShape);
 
     // if edge of scene, reverse x velocity
-    if ( scene()->sceneRect()->.right() || scene()->sceneRect()->left() ) {
+    if ( x() >= scene()->sceneRect().right() || 
+         x() <= scene()->sceneRect().left() ) 
+    {
         vel.x = -vel.x;
     }
 
