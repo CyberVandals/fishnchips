@@ -109,6 +109,11 @@ bool Shark::cook() {
 
 void Shark::move() {
     //qDebug() << "Shark is moving\n";
+    int scene_right, scene_left, scene_top, scene_bottom;
+    scene_right = scene()->sceneRect().right();
+    scene_left = scene()->sceneRect().left();
+    scene_top = scene()->sceneRect().top();
+    scene_bottom = scene()->sceneRect().bottom();
 
     // stunned, decrement
     if( stun_duration > 0 ) {
@@ -121,15 +126,23 @@ void Shark::move() {
 
     qDebug() << scene()->sceneRect().left() << ", "
              << scene()->sceneRect().right();
-    qDebug() << "Shark is at " << x(); 
-    qDebug() << "Shark's velocity is " << vel.x; 
+    qDebug() << "Shark is at " << x() << ", " << y(); 
+    qDebug() << "Shark's velocity is " << vel.x << ", " << vel.y; 
 
-    // if edge of scene, reverse x velocity
-    if ( (x() >= scene()->sceneRect().right() && vel.x > 0) || 
-         (x() <= scene()->sceneRect().left() && vel.x < 0) ) 
+    // if left or right edges of scene, reverse x velocity
+    if ( (x() >= ( scene_right-boundingRect().width() ) && vel.x > 0) || 
+         (x() <= scene_left && vel.x < 0) ) 
     {
         vel.x = -vel.x;
     }
+    // if top or bottom edges of scene, reverse x velocity
+    else if ( (y() <= scene_top && vel.y < 0) || 
+         (y() >= ( scene_bottom-boundingRect().height() ) && vel.y > 0) ) 
+    {
+        vel.y = -vel.y;
+    }
+
+
 
     // if collision with platform, invert x velocity
     //for( int i = 0; i < colliding_items.size() ; i++ ) {
