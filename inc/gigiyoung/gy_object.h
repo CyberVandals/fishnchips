@@ -52,7 +52,7 @@ private:
 };
 
 // Shark - needs to move 
-class Shark: public QObject, public QGraphicsPixmapItem
+class Shark: public QObject, public QGraphicsRectItem
 {
     Q_OBJECT
 public:

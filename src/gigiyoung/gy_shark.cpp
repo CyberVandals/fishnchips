@@ -15,9 +15,6 @@
 using namespace std;
 
 void Shark::init() {
-    //setPixmap(":../../resources/images/blue_shark.png");
-    //setPixmap(":/images/dark_shark.png");
- 
     stun_duration = 0;
     cooked = false;
 
@@ -28,15 +25,15 @@ void Shark::init() {
 }
 
 // Default constructor 
-//Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent), QGraphicsPixmapItem()
-Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
+Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent)
+//Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
     // init size and position
-    //setRect( DEFAULT_POS_X, DEFAULT_POS_Y, DEFAULT_SHARK_WIDTH,
-    //         DEFAULT_SHARK_HEIGHT );
-
-    QRectF( DEFAULT_POS_X, DEFAULT_POS_Y, DEFAULT_SHARK_WIDTH,
+    setRect( DEFAULT_POS_X, DEFAULT_POS_Y, DEFAULT_SHARK_WIDTH,
              DEFAULT_SHARK_HEIGHT );
+
+    //QRectF( DEFAULT_POS_X, DEFAULT_POS_Y, DEFAULT_SHARK_WIDTH,
+    //         DEFAULT_SHARK_HEIGHT );
     // init velocity
     vel.x = DEFAULT_VEL_X;
     vel.y = DEFAULT_VEL_Y;    
@@ -47,12 +44,12 @@ Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 
 // Constructor with position 
 Shark::Shark(int pos_x, int pos_y,
-    //QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent), QGraphicsPixmapItem()
-    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
+    QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent)
+//    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
     // init size and position
-    //setRect( pos_x, pos_y, DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT );
-    QRectF( pos_x, pos_y, DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT );
+    setRect( pos_x, pos_y, DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT );
+    //QRectF( pos_x, pos_y, DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT );
 
     // init velocity
     vel.x = DEFAULT_VEL_X;
@@ -63,12 +60,12 @@ Shark::Shark(int pos_x, int pos_y,
 
 // Constructor with position and velocity 
 Shark::Shark(int pos_x, int pos_y, int vel_x, int vel_y,
-    //QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent), QGraphicsPixmapItem()
-    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
+    QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent)
+//    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
     // init size and position
-    //setRect( pos_x, pos_y, DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT );
-    QRectF( pos_x, pos_y, DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT );
+    setRect( pos_x, pos_y, DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT );
+    //QRectF( pos_x, pos_y, DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT );
 
     // init velocity
     vel.x = vel_x;
@@ -79,12 +76,12 @@ Shark::Shark(int pos_x, int pos_y, int vel_x, int vel_y,
 
 // Constructor with all arguments
 Shark::Shark(int width, int height, int pos_x, int pos_y, int vel_x, int vel_y,
-    //QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent), QGraphicsPixmapItem()
-    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
+    QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent)
+//    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
     // init size and position
-    //setRect( pos_x, pos_y, width, height );
-    QRectF( pos_x, pos_y, width, height );
+    setRect( pos_x, pos_y, width, height );
+    //QRectF( pos_x, pos_y, width, height );
 
     // init velocity
     vel.x = vel_x;
@@ -111,6 +108,8 @@ bool Shark::cook() {
 }
 
 void Shark::move() {
+    qDebug() << "Shark is moving\n";
+
     // stunned, decrement
     if( stun_duration > 0 ) {
         stun_duration--;
@@ -128,10 +127,10 @@ void Shark::move() {
     }
 
     // if collision with platform, invert x velocity
-    for( int i = 0; i < colliding_items.size() ; i++ ) {
-        if( typeid( *(colliding_items[i]) ) == typeid(Platform) )
-            vel.x = -vel.x; 
-    }
+    //for( int i = 0; i < colliding_items.size() ; i++ ) {
+    //    if( typeid( *(colliding_items[i]) ) == typeid(Platform) )
+    //        vel.x = -vel.x; 
+    //}
 
     // update position
     setPos( x()+vel.x, y()+vel.y );
