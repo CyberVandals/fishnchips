@@ -4,9 +4,9 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
-#include <QRect>
 
 #include "gigiyoung/gy_object.h"
+#include "henry/hh_main_player.h"
 
 class SceneManager: public QGraphicsView
 {
@@ -15,7 +15,7 @@ public:
     void playGame(QGraphicsScene * scene);
 private:
     Shark *shark;
-    QRect *rect;
+    hh_main_player *player;
 };
 
 #endif // SCENEMANAGER_H
