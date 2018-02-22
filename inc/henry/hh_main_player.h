@@ -4,14 +4,17 @@
 #include <QObject>
 #include <QKeyEvent>
 #include <QWidget>
+#include <QObject>
+#include <QGraphicsRectItem>
 
-class hh_main_player
+class Main_player: public QObject, public QGraphicsRectItem
 {
+Q_OBJECT
 private:
-    float x_pos, y_pos;
+
 
 public:
-    hh_main_player();
+    Main_player();
     void keyPressEvent(QKeyEvent * event);
 };
 

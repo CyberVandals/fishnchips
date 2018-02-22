@@ -1,11 +1,18 @@
 #include "../../inc/henry/hh_main_player.h"
 
-hh_main_player::hh_main_player()
+Main_player::Main_player()
 {
+    QRect rec = QApplication::desktop()->screenGeometry();
+    int height = rec.height();
+    int width = rec.width();
+    setRect(width/2 + 25, height, 50, 50);
+    setFlag(QGraphicsItem::ItemIsFocusable);
+    setFocus();
+
 
 }
 
-void hh_main_player::keyPressEvent(QKeyEvent *event)
+void Main_player::keyPressEvent(QKeyEvent *event)
 {
     if( event->key() == Qt::Key_Left)
     {
