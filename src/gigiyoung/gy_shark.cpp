@@ -18,6 +18,9 @@ void Shark::init() {
     stun_duration = 0;
     cooked = false;
 
+    //setBoundingRegionGranularity(1);
+    setActive(false);
+
     // create timer for move slot
     timer = new QTimer(this);
     connect( timer, SIGNAL(timeout()), this, SLOT(move()) );
