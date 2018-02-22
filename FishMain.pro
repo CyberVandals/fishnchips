@@ -34,7 +34,7 @@ SOURCES += \
         src/chaeunkim/main.cpp \
         src/chaeunkim/mainwindow.cpp \
         src/chaeunkim/button.cpp \
-	src/chaeunkim/scenemanager.cpp\
+#	src/chaeunkim/scenemanager.cpp\
 	src/chaeunkim/pausebutton.cpp\
         src/gigiyoung/gy_banana.cpp \
         src/gigiyoung/gy_exit.cpp \
@@ -43,18 +43,18 @@ SOURCES += \
         src/gigiyoung/gy_steam.cpp \
         src/henry/hh_main_player.cpp \
 #        src/henry/hh_health.cpp
-#        src/koffi/scenemanager.cpp
+        src/koffi/scenemanager.cpp
 
 
 HEADERS  += \
         inc/chaeunkim/button.h \
         inc/chaeunkim/mainwindow.h \
 	inc/chaeunkim/pausebutton.h\
-	inc/chaeunkim/scenemanager.h\
+#	inc/chaeunkim/scenemanager.h\
         inc/gigiyoung/gy_object.h \
         inc/henry/hh_main_player.h \
 #        inc/henry/hh_health.h
-#        inc/koffi/scenemanager.h
+        inc/koffi/scenemanager.h
 
 
 RESOURCES += \
