@@ -44,10 +44,15 @@ public:
     Platform(int pos_x, int pos_y, QGraphicsItem *parent=0);
     Platform(int width, int height, int pos_x, int pos_y, 
              QGraphicsItem *parent=0);
+
+private:
+    void init();
+
 };
 
 // Shark - needs to move 
-class Shark: public QObject, public QGraphicsRectItem {
+class Shark: public QObject, public QGraphicsRectItem, public QGraphicsPixmapItem
+{
     Q_OBJECT
 public:
     Shark(QGraphicsItem *parent=0);
