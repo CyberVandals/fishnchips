@@ -5,12 +5,15 @@
 #include <QGraphicsScene>
 
 #include "mainwindow.h"
+#include "../../inc/gigiyoung/gy_object.h"
 
 class SceneManager :public QGraphicsView
 {
 public:
     SceneManager();
     void playGame(QGraphicsScene * scene);
+    void addObjects();
+    Shark * shark;
 
 };
 

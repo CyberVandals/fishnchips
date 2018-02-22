@@ -14,4 +14,15 @@ void SceneManager::playGame(QGraphicsScene * scene){
     scene->setSceneRect(0,0,width/1.5,height/1.1);
     QPixmap pim(":/images/back_ground.jpg");
     scene->setBackgroundBrush(pim.scaled(width,height,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+
+    shark = new Shark();
+    shark->setPos(width/2,height);
+    shark->brush();
+    scene->addItem(shark);
+
+
+
+}
+void SceneManager::addObjects(){
+
 }
