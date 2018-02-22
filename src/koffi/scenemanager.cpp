@@ -21,4 +21,5 @@ void SceneManager::playGame(QGraphicsScene * scene){
     QPixmap pim(":/images/back_ground.jpg");
     scene->setBackgroundBrush(pim.scaled(sceneWidth,sceneHeight,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     scene->addItem(shark);
+    scene->addItem(player);
 }
