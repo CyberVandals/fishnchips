@@ -1,17 +1,19 @@
-#include "../../inc/chaeunkim/button.h"
+#include "../../inc/chaeunkim/pausebutton.h"
 #include <QPushButton>
 #include <QBrush>
 #include <QGraphicsTextItem>
 #include <QIcon>
 
-Button::Button(QString path, QPushButton *parent) : QPushButton(parent)
+
+PauseButton::PauseButton(QString path, QPushButton *parent) : QPushButton(parent)
 {
     QPixmap pixmap(path);
     QIcon ButtonIcon(pixmap);
     this->setIcon(ButtonIcon);
-    this->setFixedSize(150,100);
-    this->setIconSize(QSize(150,100));
+    this->setFixedSize(50,50);
+    this->setIconSize(QSize(50,50));
     this->setStyleSheet("QPushButton{background: transparent;}");
+
     // allow tracking mouse for mouse hovering effect
     setMouseTracking(true);
     setAttribute(Qt::WA_Hover);
@@ -19,33 +21,33 @@ Button::Button(QString path, QPushButton *parent) : QPushButton(parent)
 
 }
 
-void Button::hoverEnter(QHoverEvent *)
+void PauseButton::hoverEnter(QHoverEvent *)
 {
-    int newW = this->width() + 5;
-    int newH = this->height() + 5;
+    int newW = this->width() + 1;
+    int newH = this->height() + 1;
     this->setIconSize(QSize(newW,newH));
 
 }
 
-void Button::hoverLeave(QHoverEvent *)
+void PauseButton::hoverLeave(QHoverEvent *)
 {
-    int newW = this->width() - 5;
-    int newH = this->height() - 5;
+    int newW = this->width() - 1;
+    int newH = this->height() - 1;
     this->setIconSize(QSize(newW,newH));
 }
 
-void Button::hoverMove(QHoverEvent *)
+void PauseButton::hoverMove(QHoverEvent *)
 {
-    int newW = this->width() + 5;
-    int newH = this->height() + 5;
+    int newW = this->width() + 1;
+    int newH = this->height() + 1;
     this->setIconSize(QSize(newW,newH));
 
 }
-void Button::mousePressEvent(QMouseEvent *)
+void PauseButton::mousePressEvent(QMouseEvent *)
 {
     emit clicked();
 }
-bool Button::event(QEvent *event)
+bool PauseButton::event(QEvent *event)
 {
     switch(event->type())
     {
@@ -70,3 +72,5 @@ bool Button::event(QEvent *event)
     }
     return QWidget::event(event);
 }
+
+

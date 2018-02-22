@@ -3,17 +3,18 @@
 
 #include <QGraphicsView>
 #include <QGraphicsScene>
-#include <QGraphicsPixmapItem>
 
-#include "gigiyoung/gy_object.h"
+#include "mainwindow.h"
+#include "../../inc/gigiyoung/gy_object.h"
 
-class SceneManager: public QGraphicsView
+class SceneManager :public QGraphicsView
 {
 public:
     SceneManager();
     void playGame(QGraphicsScene * scene);
-private:
-    Shark *shark;
+    void addObjects();
+    Shark * shark;
+
 };
 
 #endif // SCENEMANAGER_H

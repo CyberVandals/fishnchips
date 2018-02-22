@@ -1,11 +1,11 @@
-#include "hh_main_player.h"
+#include "../../inc/henry/hh_main_player.h"
 
 hh_main_player::hh_main_player()
 {
 
 }
 
-void Player::keyPressEvent(QKeyEvent *event)
+void hh_main_player::keyPressEvent(QKeyEvent *event)
 {
     if( event->key() == Qt::Key_Left)
     {
@@ -23,3 +23,4 @@ else if( event->key() == Qt::Key_Down)
     {
     //move down
     }
+}

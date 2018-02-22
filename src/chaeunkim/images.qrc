@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/images">
-        <file>icon_shark.png</file>
-        <file>play3.png</file>
-        <file>quit3.png</file>
-    </qresource>
-</RCC>
