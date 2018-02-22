@@ -1,6 +1,9 @@
 #include "koffi/scenemanager.h"
 #include <QRect>
 #include <QGraphicsPixmapItem>
+#include <QApplication>
+#include <QDesktopWidget>
+
 SceneManager::SceneManager()
 {
 }
