@@ -10,8 +10,8 @@ SceneManager::SceneManager()
     shark->setBrush(QBrush(sharkGraphic.scaled(165,80,Qt::IgnoreAspectRatio,Qt::SmoothTransformation)));
 
     player = new hh_main_player();
-    QPixmap sharkGraphic(":/images/monkey.png");
-    shark->setBrush(QBrush(sharkGraphic.scaled(80,165,Qt::IgnoreAspectRatio,Qt::SmoothTransformation)));
+    QPixmap playerGraphic(":/images/monkey.png");
+    player->setBrush(QBrush(playerGraphic.scaled(80,165,Qt::IgnoreAspectRatio,Qt::SmoothTransformation)));
 }
 
 void SceneManager::playGame(QGraphicsScene * scene){
