@@ -15,7 +15,7 @@ public:
     void playGame(QGraphicsScene * scene);
 private:
     Shark *shark;
-    hh_main_player *player;
+    Main_player *player;
 };
 
 #endif // SCENEMANAGER_H
