@@ -1,7 +1,7 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include <QPushButton>
+//#include <QPushButton>
 #include <QGraphicsTextItem>
 #include <QtWidgets>
 
