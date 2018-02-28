@@ -1,4 +1,4 @@
-#include "graphics.h"
+#include "../../inc/wei/graphics.h"
 
 /*void Graphics::load_main_player(Main_player *player)
 {

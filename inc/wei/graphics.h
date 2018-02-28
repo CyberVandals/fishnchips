@@ -4,6 +4,7 @@
 #include <QGraphicsPixmapItem>
 #include "../henry/hh_main_player.h"
 #include "../gigiyoung/gy_object.h"
+
 class Graphics : public QGraphicsPathItem
 {
     Q_OBJECT
