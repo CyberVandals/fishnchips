@@ -23,8 +23,6 @@ void Main_player::keyPressEvent(QKeyEvent *event)
     if( event->key() == Qt::Key_Left && (this->pos().x()) > (this->scene()->sceneRect().left()))
     {
         this->setPos(x()-10, y());
-  //qDebug() << "left side of player: " << this->pos().x() << endl;
-  //qDebug() << "left side of screen: " << this->scene()->sceneRect().left() << endl;
         //move left
     }
 
@@ -49,5 +47,13 @@ void Main_player::keyPressEvent(QKeyEvent *event)
 
 void Main_player::sink()
 {
+    QList<QGraphicsItem *> collision_item = collidingItems(Qt::IntersectsItemShape);
+
+    for( int i = 0; i < collision_item.size() ; i++ ) {
+        if( typeid(*(collision_item[i])) == typeid(Shark) )
+        {
+            qDebug() << "hit a shark";
+        }
+
     setPos(x(), y()+1);
 }
