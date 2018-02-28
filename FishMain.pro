@@ -54,10 +54,9 @@ HEADERS  += \
         inc/gigiyoung/gy_object.h \
         inc/henry/hh_main_player.h \
 #        inc/henry/hh_health.h
-        inc/koffi/scenemanager.h
+        inc/koffi/scenemanager.h\
+        config/constants.h
 
 
 RESOURCES += \
         resources/images/images.qrc
-
-#FORMS    +=
