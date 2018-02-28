@@ -10,6 +10,7 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsItem>
+#include <../wei/graphics.h>
 
 #define UPDATE_MS 50
 
@@ -38,7 +39,8 @@ struct Velocity {
 };
 
 
-// Platform
+
+// Platform - maybe use Draw/Paint() instead of an image
 class Platform: public QGraphicsRectItem {
 public:
     Platform(QGraphicsItem *parent=0);
@@ -52,7 +54,7 @@ private:
 };
 
 // Shark - needs to move 
-class Shark: public QObject, public QGraphicsRectItem
+class Shark: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
@@ -60,8 +62,8 @@ public:
     Shark(int pos_x, int pos_y, QGraphicsItem *parent=0);
     Shark(int pos_x, int pos_y, int vel_x, int vel_y, 
           QGraphicsItem *parent=0);
-    Shark(int width, int height, int pos_x, int pos_y, 
-          int vel_x, int vel_y, QGraphicsItem *parent=0);
+    Shark(int width, int height, int pos_x, int pos_y, int vel_x, int vel_y, 
+          QGraphicsItem *parent=0);
 
     bool stun(int time=DEFAULT_STUN_DURATION);
     bool cook();
@@ -73,14 +75,17 @@ public slots:
 private:
     void init();
 
+
     bool cooked;
     int stun_duration;
     struct Velocity vel;
+
     QTimer *timer;
+    Graphics graphics;
 };
 
 // Banana 
-class Banana: public QObject, public QGraphicsRectItem {
+class Banana: public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:
     Banana(QGraphicsItem *parent = 0);
@@ -105,13 +110,11 @@ private:
 };
 
 // Steam needs to check if SomeObject collided with it
-class Steam: public QObject, public QGraphicsRectItem {
+class Steam: public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:
     Steam(QGraphicsItem *parent=0);
     Steam(int pos_x, int pos_y, QGraphicsItem *parent=0);
-    Steam(int width, int height, int pos_x, int pos_y, 
-          QGraphicsItem *parent=0);
 
 public slots:
     void status();
@@ -125,13 +128,11 @@ private:
 };
 
 // Exit Object - needs to check whether play has collided with it
-class Exit: public QObject, public QGraphicsRectItem {
+class Exit: public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:
     Exit(QGraphicsItem *parent=0);
     Exit(int pos_x, int pos_y, QGraphicsItem *parent=0);
-    Exit(int width, int height, int pos_x, int pos_y, 
-         QGraphicsItem *parent=0);
 
 public slots:
     void status();

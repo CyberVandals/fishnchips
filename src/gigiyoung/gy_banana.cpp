@@ -21,34 +21,21 @@ void Banana::init() {
 
 // Banana
 Banana::Banana(QGraphicsItem *parent): 
-    QObject(), QGraphicsRectItem(parent) 
+    QObject(), QGraphicsPixmapItem(parent) 
 {
-
-    setRect( DEFAULT_POS_X, DEFAULT_POS_Y, 
-             DEFAULT_PLAT_WIDTH, DEFAULT_PLAT_HEIGHT ); 
-
+    setPos( DEFAULT_POS_X, DEFAULT_POS_Y );
     init();
 }
 
 Banana::Banana(int pos_x, int pos_y, QGraphicsItem *parent): 
-    QObject(), QGraphicsRectItem(parent) 
+    QObject(), QGraphicsPixmapItem(parent) 
 {
-    setRect( pos_x, pos_y, 
-             DEFAULT_PLAT_WIDTH, DEFAULT_PLAT_HEIGHT ); 
-
-    init();
-}
-
-Banana::Banana(int width, int height, int pos_x, int pos_y,
-    QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent) 
-{
-    setRect( pos_x, pos_y, width, height ); 
-
+    setPos( pos_x, pos_y );
     init();
 }
 
 void Banana::status() {
-    qDebug() << "in Banana::check_player()\n";
+    //qDebug() << "in Banana::check_player()\n";
 }
 
 
@@ -56,7 +43,7 @@ void Banana::move() {
     QList<QGraphicsItem *> colliding_items = 
         collidingItems(Qt::IntersectsItemShape);
 
-    qDebug() << "in BananaProjectile::move()\n";
+    //qDebug() << "in BananaProjectile::move()\n";
 
     for( int i = 0; i < colliding_items.size() ; i++ ) {
         // if collision with platform, deallocate banana

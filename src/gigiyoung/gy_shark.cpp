@@ -3,8 +3,9 @@
  */
 
 #include <typeinfo>
-#include <QGraphicsRectItem>
+#include <QGraphicsItem>
 #include <QGraphicsPixmapItem>
+#include <QPixmap>
 #include <QGraphicsScene>
 #include <QObject>
 #include <QTimer>
@@ -18,8 +19,13 @@ void Shark::init() {
     stun_duration = 0;
     cooked = false;
 
-    //setBoundingRegionGranularity(1);
-    setActive(false);
+    //QPixmap pixmap = QPixmap("...");
+    //shark->setPixmap(pixmap.scaled(width,height);
+
+
+    //setPixmap(QPixmap("../../resources/images/blue_shark.png").scaled(10,10));
+
+    graphics = new Graphics();
 
     // create timer for move slot
     timer = new QTimer(this);
@@ -28,16 +34,11 @@ void Shark::init() {
 }
 
 // Default constructor 
-Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent)
-//Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
+Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
-    // init size and position
-    setRect( DEFAULT_POS_X, DEFAULT_POS_Y, DEFAULT_SHARK_WIDTH,
-             DEFAULT_SHARK_HEIGHT );
+    graphics->load_shark(this);
+    setPos( DEFAULT_POS_X, DEFAULT_POS_Y );
 
-    //QRectF( DEFAULT_POS_X, DEFAULT_POS_Y, DEFAULT_SHARK_WIDTH,
-    //         DEFAULT_SHARK_HEIGHT );
-    // init velocity
     vel.x = DEFAULT_VEL_X;
     vel.y = DEFAULT_VEL_Y;    
 
@@ -47,14 +48,11 @@ Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent)
 
 // Constructor with position 
 Shark::Shark(int pos_x, int pos_y,
-    QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent)
-//    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
+    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
-    // init size and position
-    setRect( pos_x, pos_y, DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT );
-    //QRectF( pos_x, pos_y, DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT );
+    graphics->load_shark(this);
+    setPos( pos_x, pos_y );
 
-    // init velocity
     vel.x = DEFAULT_VEL_X;
     vel.y = DEFAULT_VEL_Y;    
 
@@ -63,30 +61,24 @@ Shark::Shark(int pos_x, int pos_y,
 
 // Constructor with position and velocity 
 Shark::Shark(int pos_x, int pos_y, int vel_x, int vel_y,
-    QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent)
-//    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
+    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
-    // init size and position
-    setRect( pos_x, pos_y, DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT );
-    //QRectF( pos_x, pos_y, DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT );
+    graphics->load_shark(this);
+    setPos( pos_x, pos_y );
 
-    // init velocity
     vel.x = vel_x;
     vel.y = vel_y;    
 
     init();
 }
 
-// Constructor with all arguments
+// Constructor with position and velocity 
 Shark::Shark(int width, int height, int pos_x, int pos_y, int vel_x, int vel_y,
-    QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent)
-//    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
+    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
-    // init size and position
-    setRect( pos_x, pos_y, width, height );
-    //QRectF( pos_x, pos_y, width, height );
+    graphics->load_shark(width, height, this);
+    setPos( pos_x, pos_y );
 
-    // init velocity
     vel.x = vel_x;
     vel.y = vel_y;    
 
@@ -118,6 +110,8 @@ void Shark::move() {
     scene_top = scene()->sceneRect().top();
     scene_bottom = scene()->sceneRect().bottom();
 
+    
+
     // stunned, decrement
     if( stun_duration > 0 ) {
         stun_duration--;
@@ -127,10 +121,10 @@ void Shark::move() {
     QList<QGraphicsItem *> colliding_items = 
         collidingItems(Qt::IntersectsItemShape);
 
-    qDebug() << scene()->sceneRect().left() << ", "
-             << scene()->sceneRect().right();
-    qDebug() << "Shark is at " << x() << ", " << y(); 
-    qDebug() << "Shark's velocity is " << vel.x << ", " << vel.y; 
+    //qDebug() << scene()->sceneRect().left() << ", "
+    //         << scene()->sceneRect().right();
+    //qDebug() << "Shark is at " << x() << ", " << y(); 
+    //qDebug() << "Shark's velocity is " << vel.x << ", " << vel.y; 
 
     // if left or right edges of scene, reverse x velocity
     if ( (x() >= ( scene_right-boundingRect().width() ) && vel.x > 0) || 
