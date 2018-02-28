@@ -44,7 +44,9 @@ SOURCES += \
         src/henry/hh_main_player.cpp \
 #        src/henry/hh_health.cpp
         src/koffi/scenemanager.cpp \
-        src/wei/graphics.cpp
+        src/wei/graphics.cpp \
+    src/henry/hh_health.cpp \
+    src/henry/hh_health_bar.cpp
 
 
 HEADERS  += \
@@ -56,7 +58,9 @@ HEADERS  += \
         inc/henry/hh_main_player.h \
 #        inc/henry/hh_health.h
         inc/koffi/scenemanager.h\
-        inc/wei/graphics.h
+        inc/wei/graphics.h \
+    inc/henry/hh_health.h \
+    inc/henry/hh_health_bar.h
 #        config/constants.h
 
 

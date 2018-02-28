@@ -2,14 +2,12 @@
 #include <QDebug>
 Main_player::Main_player(QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent)
 {
-    QRect rec = QApplication::desktop()->screenGeometry();
-    int height = rec.height();
-    int width = rec.width();
     setRect(0,0, 50, 50);
     setFlag(QGraphicsItem::ItemIsFocusable);
     setFocus();
 
     has_banana = false;
+    health = 5;//change this to constant
 
     QTimer * timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(sink()));
@@ -43,6 +41,12 @@ void Main_player::keyPressEvent(QKeyEvent *event)
         this->setPos(x(), y()+10);
         //move down
     }
+}
+
+void Main_player::decrease_health()
+{
+    health--;
+
 }
 
 void Main_player::sink()

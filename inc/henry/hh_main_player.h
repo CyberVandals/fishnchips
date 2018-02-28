@@ -11,16 +11,20 @@
 #include <QGraphicsScene>
 #include <QApplication>
 #include <QGraphicsItem>
+#include <QList>
+#include "../../inc/henry/hh_health.h"
 
 class Main_player: public QObject, public QGraphicsRectItem
 {
 Q_OBJECT
 private:
 bool has_banana;
+Health health;
 
 public:
     Main_player(QGraphicsItem *parent=0);
     void keyPressEvent(QKeyEvent * event);
+    void decrease_health();
 
 public slots:
     void sink();
