@@ -50,6 +50,9 @@ Banana::Banana(int width, int height, int pos_x, int pos_y,
 
 
 void Banana::status() {
+    QList<QGraphicsItem *> items = 
+        collidingItems(Qt::IntersectsItemShape);
+
     //qDebug() << "in Banana::check_player()\n";
     for( int i = 0; i < items.size() ; i++ ) {
         // player picked up banana 
