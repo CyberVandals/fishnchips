@@ -32,6 +32,9 @@
 
 #define DEFAULT_STUN_DURATION 40
 
+// forward declarations
+class Graphics;
+
 // structs
 struct Velocity {
     int x;
@@ -96,6 +99,7 @@ public:
     bool chuck(int direction);
     bool pickup();
     bool eat();
+    bool is_thrown();
 
 public slots:
     void status();

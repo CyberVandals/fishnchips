@@ -56,9 +56,9 @@ void Banana::status() {
     //qDebug() << "in Banana::check_player()\n";
     for( int i = 0; i < items.size() ; i++ ) {
         // player picked up banana 
-        if( typeid( *(items[i]) ) == typeid(MainPlayer) ) {
+        //if( typeid( *(items[i]) ) == typeid(MainPlayer) ) {
             
-        }
+        //}
     }
 }
 
@@ -80,9 +80,10 @@ void Banana::move() {
         // if collision with shark, deallocate banana and set shark
         // paralysis timer 
         else if( typeid( *(items[i]) ) == typeid(Shark) ) {
+            Shark *shark = (Shark *)items[i];
             // splat sound effect
 
-            items[i].stun();
+            shark->stun();
 
             // deallocate
             delete this;
@@ -90,7 +91,6 @@ void Banana::move() {
     }
 
 
-    }
 
     // update position
     setPos( x()+vel.x, y()+vel.y );
@@ -98,9 +98,17 @@ void Banana::move() {
 }
 
 bool Banana::chuck(int direction) {
-
     thrown = true;
-    return false;
+
+    // disconnect timer from method
+    timer->stop();
+    disconnect( timer, SIGNAL(timeout()), this, SLOT(status()) );
+
+    // connect to new method
+    connect( timer, SIGNAL(timeout()), this, SLOT(move()) );
+    timer->start(UPDATE_MS);
+    
+    return thrown;
 }
 
 bool Banana::pickup() {
@@ -109,4 +117,8 @@ bool Banana::pickup() {
 
 bool Banana::eat() {
     return false;
+}
+
+bool Banana::is_thrown() {
+    return thrown > 0;
 }

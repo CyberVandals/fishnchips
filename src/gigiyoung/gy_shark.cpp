@@ -92,7 +92,7 @@ bool Shark::stun(int time) {
         //return true;
     
     //return false;
-    return stunned > 0
+    return stunned > 0;
 }
 
 bool Shark::cook() {
@@ -114,8 +114,8 @@ void Shark::move() {
     
 
     // stunned, decrement
-    if( stun_duration > 0 ) {
-        stun_duration--;
+    if( stunned > 0 ) {
+        stunned--;
         return;
     }
 
@@ -148,11 +148,15 @@ void Shark::move() {
             vel.x = -vel.x; 
 
         // if collision with thrown banana, stun shark
-        if( typeid(*(items[i])) == typeid(Banana) && (items[i]).thrown )
-            stun(); 
+        if( typeid(*(items[i])) == typeid(Banana) ) {
+            Banana *banana = (Banana *)items[i];
+
+            if( banana->is_thrown() )
+                stun(); 
+        }
     }
 
-     update position
+    // update position
     setPos( x()+vel.x, y()+vel.y );
 }
 
