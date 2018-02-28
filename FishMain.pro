@@ -43,7 +43,8 @@ SOURCES += \
         src/gigiyoung/gy_steam.cpp \
         src/henry/hh_main_player.cpp \
 #        src/henry/hh_health.cpp
-        src/koffi/scenemanager.cpp
+        src/koffi/scenemanager.cpp \
+        src/wei/graphics.cpp
 
 
 HEADERS  += \
@@ -55,7 +56,8 @@ HEADERS  += \
         inc/henry/hh_main_player.h \
 #        inc/henry/hh_health.h
         inc/koffi/scenemanager.h\
-        config/constants.h
+        inc/wei/graphics.h
+#        config/constants.h
 
 
 RESOURCES += \
