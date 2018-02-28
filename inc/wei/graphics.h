@@ -2,8 +2,8 @@
 #define GRAPHICS_H
 
 #include <QGraphicsPixmapItem>
-#include "Main_player.h"
-#include "gy_object.h"
+#include "../henry/hh_main_player.h"
+#include "../gigiyoung/gy_object.h"
 class Graphics : public QGraphicsPathItem
 {
     Q_OBJECT

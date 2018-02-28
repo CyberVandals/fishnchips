@@ -1,5 +1,5 @@
 #include "../../inc/henry/hh_main_player.h"
-
+#include <QDebug>
 Main_player::Main_player(QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent)
 {
     QRect rec = QApplication::desktop()->screenGeometry();
@@ -20,27 +20,29 @@ Main_player::Main_player(QGraphicsItem *parent): QObject(), QGraphicsRectItem(pa
 
 void Main_player::keyPressEvent(QKeyEvent *event)
 {
-    if( event->key() == Qt::Key_Left && (this->boundingRect().left()) > (this->scene()->sceneRect().left()))
+    if( event->key() == Qt::Key_Left && (this->pos().x()) > (this->scene()->sceneRect().left()))
     {
-     this->setPos(x()-10, y());
+        this->setPos(x()-10, y());
+  //qDebug() << "left side of player: " << this->pos().x() << endl;
+  //qDebug() << "left side of screen: " << this->scene()->sceneRect().left() << endl;
         //move left
     }
-else if( event->key() == Qt::Key_Right && (this->boundingRect().right()) < (this->scene()->sceneRect().right()))
+
+    else if( event->key() == Qt::Key_Right && (this->pos().x()+(boundingRect().right()-boundingRect().left())) < (this->scene()->sceneRect().right()))
     {
         this->setPos(x()+10, y());
-
         //move right
     }
-else if( event->key() == Qt::Key_Up && (this->boundingRect().top()) > (this->scene()->sceneRect().top()))
+
+    else if( event->key() == Qt::Key_Up && (this->pos().y()) > (this->scene()->sceneRect().top()))
     {
         this->setPos(x(), y()-10);
-
         //move up
     }
-else if( event->key() == Qt::Key_Down && (this->boundingRect().bottom()) < (this->scene()->sceneRect().bottom()))
-    {
-       this->setPos(x(), y()+10);
 
+    else if( event->key() == Qt::Key_Down && (this->pos().y()+(boundingRect().bottom()-boundingRect().top())) < (this->scene()->sceneRect().bottom()))
+    {
+        this->setPos(x(), y()+10);
         //move down
     }
 }
