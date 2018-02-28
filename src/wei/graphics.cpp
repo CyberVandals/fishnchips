@@ -13,7 +13,7 @@ void Graphics::load_shark(Shark *shark)
 }*/
 void Graphics::load_shark(Shark *shark)
 {
-    shark->setPixmap(QPixmap(":/blue_shark.png"));
+    shark->setPixmap(QPixmap(":/resources/images/blue_shark.png"));
     /*QPixmap pixmap(":/steam.png");
     pixmap = pixmap.scaled(width,heigh,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     shark->setPixmap(pixmap);
@@ -23,7 +23,7 @@ void Graphics::load_shark(Shark *shark)
 void Graphics::load_shark(int width,int heigh,Shark *shark)
 {
     //shark->setPixmap(QPixmap(":/blue_shark.png"));
-    QPixmap pixmap(":/blue_shark.png");
+    QPixmap pixmap(":/resources/images/blue_shark.png");
     pixmap = pixmap.scaled(width,heigh,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     shark->setPixmap(pixmap);
     
