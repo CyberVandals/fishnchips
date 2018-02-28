@@ -16,7 +16,7 @@
 using namespace std;
 
 void Shark::init() {
-    stun_duration = 0;
+    stunned = 0;
     cooked = false;
 
     //QPixmap pixmap = QPixmap("...");
@@ -87,11 +87,12 @@ Shark::Shark(int width, int height, int pos_x, int pos_y, int vel_x, int vel_y,
 
 
 bool Shark::stun(int time) {
-    if( time > 0 ) {
-        stun_duration = time;
-        return true;
-    }
-    return false;
+    if( time > 0 ) 
+        stunned = time;
+        //return true;
+    
+    //return false;
+    return stunned > 0
 }
 
 bool Shark::cook() {
@@ -99,7 +100,7 @@ bool Shark::cook() {
 
     // change public slot
 
-    return (cooked = true);
+    return cooked = true;
 }
 
 void Shark::move() {
@@ -118,7 +119,7 @@ void Shark::move() {
         return;
     }
 
-    QList<QGraphicsItem *> colliding_items = 
+    QList<QGraphicsItem *> items = 
         collidingItems(Qt::IntersectsItemShape);
 
     //qDebug() << scene()->sceneRect().left() << ", "
@@ -141,13 +142,17 @@ void Shark::move() {
 
 
 
-    // if collision with platform, invert x velocity
-    //for( int i = 0; i < colliding_items.size() ; i++ ) {
-    //    if( typeid( *(colliding_items[i]) ) == typeid(Platform) )
-    //        vel.x = -vel.x; 
-    //}
+    for( int i = 0; i < items.size() ; i++ ) {
+        // if collision with platform, invert x velocity
+        if( typeid(*(items[i])) == typeid(Platform) )
+            vel.x = -vel.x; 
 
-    // update position
+        // if collision with thrown banana, stun shark
+        if( typeid(*(items[i])) == typeid(Banana) && (items[i]).thrown )
+            stun(); 
+    }
+
+     update position
     setPos( x()+vel.x, y()+vel.y );
 }
 

@@ -10,7 +10,7 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsItem>
-#include <../wei/graphics.h>
+#include "../wei/graphics.h"
 
 #define UPDATE_MS 50
 
@@ -75,13 +75,12 @@ public slots:
 private:
     void init();
 
-
     bool cooked;
-    int stun_duration;
+    int stunned;
     struct Velocity vel;
 
     QTimer *timer;
-    Graphics graphics;
+    Graphics *graphics;
 };
 
 // Banana 
@@ -105,7 +104,9 @@ public slots:
 private:
     void init();
 
+    bool thrown;
     struct Velocity vel;
+    Graphics *graphics;
     QTimer *timer;
 };
 
