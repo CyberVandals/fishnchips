@@ -1,5 +1,7 @@
 #include "../../inc/henry/hh_main_player.h"
+#include "../../inc/gigiyoung/gy_object.h"
 #include <QDebug>
+#include <typeinfo>
 Main_player::Main_player(QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent)
 {
     setRect(0,0, 50, 50);
@@ -7,7 +9,7 @@ Main_player::Main_player(QGraphicsItem *parent): QObject(), QGraphicsRectItem(pa
     setFocus();
 
     has_banana = false;
-    health = 5;//change this to constant
+    //health = 5;//change this to constant
 
     QTimer * timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(sink()));
@@ -45,7 +47,7 @@ void Main_player::keyPressEvent(QKeyEvent *event)
 
 void Main_player::decrease_health()
 {
-    health--;
+    //health--;
 
 }
 
@@ -54,10 +56,12 @@ void Main_player::sink()
     QList<QGraphicsItem *> collision_item = collidingItems(Qt::IntersectsItemShape);
 
     for( int i = 0; i < collision_item.size() ; i++ ) {
+
         if( typeid(*(collision_item[i])) == typeid(Shark) )
         {
             qDebug() << "hit a shark";
         }
 
+    }
     setPos(x(), y()+1);
 }

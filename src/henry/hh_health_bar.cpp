@@ -16,11 +16,11 @@ void Health::renew_health()
 
 HealthBar::HealthBar()
 {
-    Health * new_health = tail;
-    new_health = new Health(0,0 50,50);
+    //Health * new_health = tail;
+    Health tail = new Health(0,0,0,this);
 
-    for(int i = 0; i < 5; i++)
+    for(int i = 1; i <= 5; i++)
     {
-        new_health = new Health(this->pos().x()+10,this->pos().y(),this)
+        tail = new Health(tail->pos().x()+10,tail->pos().y(), i, tail)
     }
 }

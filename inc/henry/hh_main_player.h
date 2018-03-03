@@ -12,6 +12,7 @@
 #include <QApplication>
 #include <QGraphicsItem>
 #include <QList>
+#include <typeinfo>
 #include "../../inc/henry/hh_health.h"
 
 class Main_player: public QObject, public QGraphicsRectItem
@@ -19,7 +20,7 @@ class Main_player: public QObject, public QGraphicsRectItem
 Q_OBJECT
 private:
 bool has_banana;
-Health health;
+//Health health;
 
 public:
     Main_player(QGraphicsItem *parent=0);

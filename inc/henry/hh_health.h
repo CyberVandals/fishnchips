@@ -11,7 +11,7 @@ private:
     int ID;
     //Health * next;
 public:
-    Health(QGraphicsRectItem * parent = 0);
+    Health(int x, int y, int id, QGraphicsRectItem * parent = 0);
 
 
 
