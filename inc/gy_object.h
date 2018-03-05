@@ -10,7 +10,7 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsItem>
-#include "../wei/graphics.h"
+//#include "../wei/wz_graphics.h"
 
 #define UPDATE_MS 50
 
