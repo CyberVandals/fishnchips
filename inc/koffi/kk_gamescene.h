@@ -4,7 +4,7 @@
 #endif // GAMESCENE_H
 
 #include <QGraphicsScene>
-#include <QPixmap>
+#include <QString>
 
 #include "kk_scene.h"
 
@@ -12,7 +12,7 @@ class GameScene: public Scene
 {
 public:
     GameScene(QGraphicsScene *scene);
-    void addGameObject(QGraphicsItem* gameObject, QPixmap imagePath, int scaledWidth, int scaledHeight) override;
+    void addGameObject(QGraphicsItem* gameObject, QString imagePath, int scaledWidth, int scaledHeight) override;
     void removeGameObject(QGraphicsItem* gameObject) override;
 private:
     QGraphicsScene *gameScene;
