@@ -5,6 +5,7 @@
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QGraphicsItem>
+#include <QDebug>
 
 #include "../../inc/gy_autotest.h"
 
@@ -16,11 +17,12 @@ AutoTest::AutoTest(QGraphicsScene *main_window, QGraphicsItem *object):
     list_pos = 0;
     dest = QPoint(-1,-1);
 
+    add_point(QPoint(500,500));
     this->object = object; 
     receiver = main_window;
     timer = new QTimer(this);
 
-    connect(timer, SIGNAL(timeout()), this, SLOT(simulate_key()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(simulate_keypress()));
     timer->start(50);
 }
 
@@ -56,6 +58,8 @@ void AutoTest::add_path(QList<QPoint> points) {
 void AutoTest::simulate_keypress() {
     int x = object->x();
     int y = object->y();
+
+    qDebug() << "simulate_keypress()";
 
     // init if self.points isn't empty
     if( (dest.x() == -1 && dest.y() == -1) && points.size() > 0 )
