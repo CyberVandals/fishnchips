@@ -4,6 +4,7 @@
 #endif // GAMESCENE_H
 
 #include <QGraphicsScene>
+#include <QPixmap>
 
 #include "kk_scene.h"
 #include "kk_gamescene.h"
