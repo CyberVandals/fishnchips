@@ -2,8 +2,8 @@
 #define GRAPHICS_H
 
 #include <QGraphicsPixmapItem>
-#include "../henry/hh_main_player.h"
-#include "../gigiyoung/gy_object.h"
+#include "hh_main_player.h"
+#include "gy_object.h"
 #include <QGraphicsPathItem>
 
 class Shark;
