@@ -1,6 +1,6 @@
 #include "../../inc/henry/hh_health_bar.h"
 #include "../../inc/henry/hh_health.h"
-
+#include <QDebug>
 
 void HealthBar::add_health()
 {
@@ -16,8 +16,16 @@ void HealthBar::renew_health()
 
 void HealthBar::decrease_health()
 {
-    delete health_list.last();
-    //health_list.removeLast();
+    qDebug() << "in decrease health\n";
+    if(health_list.isEmpty() == false)
+    {
+        delete health_list.last();
+    }
+
+    else if(health_list.isEmpty())
+    {
+        qDebug() << "you dead";
+    }
 }
 
 
