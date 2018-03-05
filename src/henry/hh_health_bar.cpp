@@ -19,7 +19,7 @@ void HealthBar::decrease_health()
     qDebug() << "in decrease health\n";
     if(health_list.isEmpty() == false)
     {
-        delete health_list.last();
+         health_list.removeLast();
     }
 
     else if(health_list.isEmpty())

@@ -11,7 +11,7 @@ Main_player::Main_player(QGraphicsItem *parent): QObject(), QGraphicsRectItem(pa
     setFocus();
 
     player_health = new HealthBar();
-    this->scene()->addItem(player_health);
+    //this->scene()->addItem(player_health);
 
     has_banana = false;
     //health = 5;//change this to constant
