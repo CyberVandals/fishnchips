@@ -23,7 +23,7 @@ AutoTest::AutoTest(QGraphicsScene *main_window, QGraphicsItem *object):
     timer = new QTimer(this);
 
     connect(timer, SIGNAL(timeout()), this, SLOT(simulate_keypress()));
-    timer->start(50);
+    timer->start(200);
 }
 
 bool AutoTest::change_scene(QGraphicsScene *main_window) {
