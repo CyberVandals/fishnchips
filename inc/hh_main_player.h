@@ -13,8 +13,8 @@
 #include <QGraphicsItem>
 #include <QList>
 #include <typeinfo>
-#include "../../inc/henry/hh_health.h"
-#include "../../inc/henry/hh_health_bar.h"
+#include "henry/hh_health.h"
+#include "henry/hh_health_bar.h"
 
 class Main_player: public QObject, public QGraphicsRectItem
 {
