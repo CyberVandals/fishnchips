@@ -35,7 +35,7 @@ SOURCES += \
         src/chaeunkim/mainwindow.cpp \
         src/chaeunkim/button.cpp \
 #	src/chaeunkim/scenemanager.cpp\
-	src/chaeunkim/pausebutton.cpp\
+        src/chaeunkim/pausebutton.cpp\
         src/gigiyoung/gy_banana.cpp \
         src/gigiyoung/gy_exit.cpp \
         src/gigiyoung/gy_platform.cpp \
@@ -51,6 +51,9 @@ SOURCES += \
     src/chaeunkim/ck_mainwindow.cpp \
     src/chaeunkim/ck_pausebutton.cpp \
     src/matthew/soundmanager.cpp
+    src/koffi/kk_scenemanager
+    src/koffi/kk_gamelevel.cpp
+    src/koffi/kk_gamescene.cpp
 
 
 HEADERS  += \
@@ -70,6 +73,11 @@ HEADERS  += \
     inc/wei/wz_graphics.h \
     inc/ck_mainwindow.h
 #        config/constants.h
+    inc/kk_scenemanager.h
+    inc/koffi/kk_gamelevel.h
+    inc/koffi/kk_gamescen.h
+    inc/koffi/kk_scene.h
+    inc/koffi/config.h
 
 
 RESOURCES += \
