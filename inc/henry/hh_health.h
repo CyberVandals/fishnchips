@@ -7,11 +7,10 @@ class Health: public QGraphicsRectItem
 {
 private:
     int height, width;
-    int x_pos, y_pos;
-    int ID;
-    //Health * next;
+
 public:
-    Health(QGraphicsRectItem * parent = 0);
+    Health(int x_pos);
+    int x_pos;
 
 
 
