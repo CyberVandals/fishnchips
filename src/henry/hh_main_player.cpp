@@ -1,4 +1,6 @@
 #include "../../inc/henry/hh_main_player.h"
+#include "../../inc/henry/hh_health_bar.h"
+
 #include "../../inc/gigiyoung/gy_object.h"
 #include <QDebug>
 #include <typeinfo>
@@ -7,6 +9,8 @@ Main_player::Main_player(QGraphicsItem *parent): QObject(), QGraphicsRectItem(pa
     setRect(0,0, 50, 50);
     setFlag(QGraphicsItem::ItemIsFocusable);
     setFocus();
+
+    player_health = new HealthBar();
 
     has_banana = false;
     //health = 5;//change this to constant
@@ -55,6 +59,7 @@ void Main_player::sink()
         if( typeid(*(collision_item[i])) == typeid(Shark) )
         {
             qDebug() << "hit a shark";
+            this->player_health->decrease_health();
         }
 
     }
