@@ -26,7 +26,7 @@ AutoTest::AutoTest(QGraphicsScene *main_window, QGraphicsItem *object):
     timer->start(50);
 }
 
-bool AutoTest::change_scene(QObject *main_window) {
+bool AutoTest::change_scene(QGraphicsScene *main_window) {
     if( main_window != NULL ) {
         receiver = main_window;
         return true;
