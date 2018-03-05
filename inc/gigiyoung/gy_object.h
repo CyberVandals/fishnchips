@@ -33,7 +33,7 @@
 #define DEFAULT_STUN_DURATION 40
 
 // forward declarations
-class Graphics;
+// class Graphics;
 
 // structs
 struct Velocity {
@@ -83,7 +83,7 @@ private:
     struct Velocity vel;
 
     QTimer *timer;
-    Graphics *graphics;
+    //Graphics *graphics;
 };
 
 // Banana 
@@ -110,7 +110,7 @@ private:
 
     bool thrown;
     struct Velocity vel;
-    Graphics *graphics;
+    //Graphics *graphics;
     QTimer *timer;
 };
 
