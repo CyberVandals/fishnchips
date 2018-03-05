@@ -5,13 +5,14 @@
 
 #include <QGraphicsItem>
 #include <QGraphicsScene>
+#include <QString>
 
 class Scene
 {
 public:
-    GameScene();
+    void GameScene();
     virtual void loadScene();
-    virtual void addGameObject(QGraphicsItem* gameObject, imagePath, scaledWidth, scaledWidth);
+    virtual void addGameObject(QGraphicsItem* gameObject, QString imagePath, int scaledWidth, int scaledHeight);
     virtual void removeGameObject(QGraphicsItem* gameObject);
 protected:
     virtual void generateLevel();

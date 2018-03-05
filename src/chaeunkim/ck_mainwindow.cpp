@@ -61,7 +61,7 @@ void MainWindow::start(){
     playBtn->deleteLater();
     quitBtn->deleteLater();
     pauseBtn->deleteLater();
-    SceneManager * gamescene = new SceneManager;
-    gamescene->playGame(scene);
+    SceneManager * gamescene = new SceneManager(scene);
+    gamescene->playGame();
 }
 
