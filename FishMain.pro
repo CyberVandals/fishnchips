@@ -49,7 +49,8 @@ SOURCES += \
         src/koffi/kk_gamescene.cpp \
         src/koffi/kk_scenemanager.cpp \
 	src/matthew/mm_soundmanager.cpp \
-        src/wei/wz_graphics.cpp 
+        src/wei/wz_graphics.cpp \ 
+    src/chaeunkim/ck_pausescreen.cpp
 
 
 HEADERS  += \
@@ -69,6 +70,7 @@ HEADERS  += \
 	inc/koffi/kk_scene.h \
 	inc/mm_soundmanager.h \
 	inc/wz_graphics.h \
+    inc/chaeunkim/ck_pausescreen.h
 
 
 RESOURCES += \

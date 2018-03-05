@@ -27,10 +27,9 @@ SceneManager::SceneManager(QGraphicsScene *scene, bool demo)
 
     if(demo) {
         AutoTest * autoTest = new AutoTest(scene, player);
-    } else {
-        shark = new Shark(100, 50, 30, 30, 10, 0);
-        gameScene->addGameObject(shark, ":/images/blue_shark.png", 65, 100);
     }
+    shark = new Shark(100, 50, 30, 30, 10, 0);
+    gameScene->addGameObject(shark, ":/images/blue_shark.png", 65, 100);
 }
 
 void SceneManager::playGame(){
