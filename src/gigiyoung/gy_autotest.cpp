@@ -4,11 +4,13 @@
 #include <QCoreApplication>
 #include <QTimer>
 #include <QGraphicsScene>
+#include <QGraphicsItem>
 
 #include "../../inc/gy_autotest.h"
 
 // add main player
-AutoTest::AutoTest(QObject *main_window, QGraphicsItem *object): 
+//AutoTest::AutoTest(QObject *main_window, QGraphicsItem *object): 
+AutoTest::AutoTest(QGraphicsScene *main_window, QGraphicsItem *object): 
     QObject() 
 {
     list_pos = 0;

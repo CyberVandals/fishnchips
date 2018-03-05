@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QGraphicsItem>
+#include <QGraphicsScene>
 #include <QTimer>
 #include <QPoint>
 #include <QList>
@@ -11,7 +12,7 @@ class AutoTest: public QObject {
     Q_OBJECT
 
 public:
-    AutoTest(QObject *main_window, QGraphicsItem *object); 
+    AutoTest(QGraphicsScene *main_window, QGraphicsItem *object); 
     bool change_scene(QObject *main_window);
     void add_point(QPoint point);
     void add_path(QList<QPoint> points);
