@@ -1,4 +1,4 @@
-#include "koffi/kk_scenemanager.h"
+#include "kk_scenemanager.h"
 #include <QGraphicsPixmapItem>
 #include <QApplication>
 #include <QDesktopWidget>
@@ -11,8 +11,8 @@ SceneManager::SceneManager(QGraphicsScene *scene)
 
     player = new Main_player();
 
-    gameScene->addGameObject(shark);
-    gameScene->addGameObject(player);
+    gameScene->addGameObject(shark, ":/images/blue_shark.png", 65, 100);
+    gameScene->addGameObject(player, ":/images/monkey.png", 165,80);
 }
 
 void SceneManager::playGame(){

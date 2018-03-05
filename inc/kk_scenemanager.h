@@ -5,10 +5,10 @@
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
 
-#include "gigiyoung/gy_object.h"
-#include "henry/hh_main_player.h"
-#include "kk_gamelevel.h"
-#include "kk_gamescene.h"
+#include "gy_object.h"
+#include "hh_main_player.h"
+#include "inc/koffi/kk_gamelevel.h"
+#include "inc/koffi/kk_gamescene.h"
 
 class SceneManager: public QGraphicsView
 {

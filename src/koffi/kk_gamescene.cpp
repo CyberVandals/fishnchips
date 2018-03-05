@@ -5,8 +5,10 @@ GameScene::GameScene(QGraphicsScene *scene)
     gameScene = scene;
 }
 
-void GameScene::addGameObject(QGraphicsItem *gameObject)
+void GameScene::addGameObject(QGraphicsItem *gameObject, imagePath, scaledWidth, scaledWidth)
 {
+    QPixmap gameImage(imagePath);
+    gameScene->setBackgroundBrush(gameImage.scaled(scaledWidth,scaledWidth,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     gameScene->addItem(gameObject);
 }
 
