@@ -7,7 +7,6 @@
 #include <QPixmap>
 
 #include "kk_scene.h"
-#include "kk_gamescene.h"
 
 class GameScene: public Scene,
 {
