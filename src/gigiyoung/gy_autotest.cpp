@@ -17,7 +17,10 @@ AutoTest::AutoTest(QGraphicsScene *main_window, QGraphicsItem *object):
     list_pos = 0;
     dest = QPoint(-1,-1);
 
+    // test points
     add_point(QPoint(500,500));
+    add_point(QPoint(0,700));
+
     this->object = object; 
     receiver = main_window;
     timer = new QTimer(this);
@@ -56,10 +59,11 @@ void AutoTest::add_path(QList<QPoint> points) {
 
 
 void AutoTest::simulate_keypress() {
+    //QKeyEvent key_event;
     int x = object->x();
     int y = object->y();
 
-    qDebug() << "simulate_keypress()";
+    //qDebug() << "simulate_keypress()";
 
     // init if self.points isn't empty
     if( (dest.x() == -1 && dest.y() == -1) && points.size() > 0 )
@@ -73,20 +77,34 @@ void AutoTest::simulate_keypress() {
 
     // up or down
     if( y != dest.y() ) {
-        if( y < dest.y() )
+        if( y < dest.y() ) {
             object->setPos(x, y+10);
-        else if( y > dest.y() )
+            //QKeyEvent event(QEvent::KeyPress, Qt::Key_Down, Qt::NoModifier);
+            //QCoreApplication::sendEvent(receiver, &event);
+        }
+        else if( y > dest.y() ) {
             object->setPos(x, y-10);
+            //QKeyEvent event(QEvent::KeyPress, Qt::Key_Up, Qt::NoModifier);
+            //QCoreApplication::sendEvent(receiver, &event);
+        }
             
     }
         
     // left or right
     if( x != dest.x() ) {
-        if( x < dest.x() )
+        if( x < dest.x() ) {
             object->setPos(x+10, y);
-        else if( x > dest.x() )
+            //QKeyEvent event(QEvent::KeyPress, Qt::Key_Right, Qt::NoModifier);
+            //QCoreApplication::sendEvent(receiver, &event);
+        }
+        else if( x > dest.x() ) {
             object->setPos(x-10, y);
+            //QKeyEvent event(QEvent::KeyPress, Qt::Key_Left, Qt::NoModifier);
+            //QCoreApplication::sendEvent(receiver, &event);
+        }
     }
+
+    //if( y !
 
    
      
