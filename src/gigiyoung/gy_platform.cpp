@@ -3,7 +3,7 @@
  */
 
 #include <QGraphicsRectItem>
-#include "../../inc/gigiyoung/gy_object.h"
+#include "../../inc/gy_object.h"
 
 
 void Platform::init() {

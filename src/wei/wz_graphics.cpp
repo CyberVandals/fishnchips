@@ -1,4 +1,4 @@
-#include "../../inc/wei/graphics.h"
+#include "../../inc/wei/wz_graphics.h"
 #include "../../inc/gigiyoung/gy_object.h"
 
 

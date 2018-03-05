@@ -8,7 +8,7 @@
 #include <QGraphicsRectItem>
 #include <QDebug>
 #include <typeinfo>
-#include "../../inc/gigiyoung/gy_object.h"
+#include "../../inc/gy_object.h"
 //#include "../../inc/wei/wz_graphics.h"
 
 

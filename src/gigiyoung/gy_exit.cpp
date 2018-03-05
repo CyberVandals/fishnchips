@@ -2,7 +2,7 @@
  * By Gigi Young
  */
 
-#include "../../inc/gigiyoung/gy_object.h"
+#include "../../inc/gy_object.h"
 
 void Exit::init() {
 
