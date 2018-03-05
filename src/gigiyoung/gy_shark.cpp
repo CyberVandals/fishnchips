@@ -12,13 +12,14 @@
 #include <QList>
 #include <QDebug>
 #include "../../inc/gigiyoung/gy_object.h"
+#include "../../inc/wei/graphics.h"
 
 using namespace std;
 
 void Shark::init() {
     stunned = 0;
     cooked = false;
-
+ 
     //QPixmap pixmap = QPixmap("...");
     //shark->setPixmap(pixmap.scaled(width,height);
 
