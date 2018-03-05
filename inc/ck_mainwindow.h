@@ -3,9 +3,9 @@
 
 #include <QGraphicsScene>
 #include <QGraphicsView>
-#include "button.h"
-#include "pausebutton.h"
-#include "koffi/scenemanager.h"
+#include "inc/chaeunkim/ck_button.h"
+#include "inc/chaeunkim/ck_pausebutton.h"
+#include "inc/koffi/kk_scenemanager.h"
 
 class MainWindow :public QGraphicsView
 {
@@ -13,13 +13,13 @@ class MainWindow :public QGraphicsView
 public:
     MainWindow();
     void mainmenu();
+    void gameplay();
+private:
     QGraphicsScene * scene;
-    //Koffisclass* gameplay;
     QGraphicsPixmapItem *logo;
     Button *playBtn;
     Button *quitBtn;
     PauseButton *pauseBtn;
-    void gameplay();
 public slots:
     void start();
 

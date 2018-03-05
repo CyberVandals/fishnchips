@@ -1,4 +1,4 @@
-#include "../../inc/chaeunkim/pausebutton.h"
+#include "../../inc/chaeunkim/ck_pausebutton.h"
 #include <QPushButton>
 #include <QBrush>
 #include <QGraphicsTextItem>
