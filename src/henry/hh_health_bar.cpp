@@ -25,6 +25,6 @@ HealthBar::HealthBar()
 
     for(int i = 1; i <= 5; i++)
     {
-        tail = new Health(tail->pos().x()+10,tail->pos().y(), i, tail)
+        tail = new Health(tail->pos().x()+10,tail->pos().y(), i, tail);
     }
 }
