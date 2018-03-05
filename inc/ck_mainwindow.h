@@ -14,14 +14,22 @@ public:
     MainWindow();
     void mainmenu();
     void gameplay();
+
 private:
     QGraphicsScene * scene;
     QGraphicsPixmapItem *logo;
+
     Button *playBtn;
     Button *quitBtn;
+    Button *demoBtn;
+
     PauseButton *pauseBtn;
+
+    SceneManager * gamescene;
+
 public slots:
     void start();
+    void start_demo();
 
 };
 

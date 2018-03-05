@@ -7,7 +7,7 @@
 #include <QApplication>
 
 
-MainWindow::MainWindow(){//QWidget *parent){
+MainWindow::MainWindow(){
 
     // get desktop resolution
     QRect rec = QApplication::desktop()->screenGeometry();
@@ -46,13 +46,19 @@ void MainWindow::mainmenu(){
     connect(quitBtn,SIGNAL(clicked()),this,SLOT(close()));
     scene->addWidget(quitBtn);
 
-    pauseBtn = new PauseButton(":/images/pause.png");
+    demoBtn = new Button(":/images/demoBtn.png");
+    demoBtn->setGeometry((scene->width() - demoBtn->width())/2, playBtn->pos().y()-demoBtn->height(),0,0);
+    connect(demoBtn,SIGNAL(clicked()),this,SLOT(start_demo()));
+    scene->addWidget(demoBtn);
+
+    /*pauseBtn = new PauseButton(":/images/pause.png");
     pauseBtn->setGeometry(scene->width() - pauseBtn->width(), 0,0,0);
-    scene->addWidget(pauseBtn);
+    scene->addWidget(pauseBtn);*/
 
 
 
 }
+
 void MainWindow::gameplay(){
 
 }
@@ -60,8 +66,18 @@ void MainWindow::start(){
     scene->removeItem(logo);
     playBtn->deleteLater();
     quitBtn->deleteLater();
+    demoBtn->deleteLater();
     pauseBtn->deleteLater();
-    SceneManager * gamescene = new SceneManager(scene);
+    gamescene = new SceneManager(scene);
+    gamescene->playGame();
+}
+void MainWindow::start_demo(){
+    scene->removeItem(logo);
+    playBtn->deleteLater();
+    quitBtn->deleteLater();
+    demoBtn->deleteLater();
+    pauseBtn->deleteLater();
+    gamescene = new SceneManager(scene);
     gamescene->playGame();
 }
 

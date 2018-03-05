@@ -11,6 +11,7 @@
         <file>blue_shark.png</file>
         <file>dark_shark.png</file>
         <file>monkey.png</file>
+        <file>demoBtn.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>
