@@ -2,22 +2,26 @@
 #include "../../inc/henry/hh_health.h"
 
 
-void Health::add_health()
+void HealthBar::add_health()
 {
     //tail = new Health(tail);
 
 
 }
 
-void Health::renew_health()
+void HealthBar::renew_health()
+{
+
+}
+
+void HealthBar::decrease_health()
 {
 
 }
 
 HealthBar::HealthBar()
 {
-    //Health * new_health = tail;
-    Health tail = new Health(0,0,0,this);
+    tail = new Health(0,0,0,this);
 
     for(int i = 1; i <= 5; i++)
     {

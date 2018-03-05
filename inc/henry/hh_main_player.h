@@ -25,7 +25,6 @@ bool has_banana;
 public:
     Main_player(QGraphicsItem *parent=0);
     void keyPressEvent(QKeyEvent * event);
-    void decrease_health();
 
 public slots:
     void sink();

@@ -45,11 +45,6 @@ void Main_player::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void Main_player::decrease_health()
-{
-    //health--;
-
-}
 
 void Main_player::sink()
 {
