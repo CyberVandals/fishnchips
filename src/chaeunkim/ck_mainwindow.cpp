@@ -64,19 +64,25 @@ void MainWindow::gameplay(){
 }
 void MainWindow::start(){
     scene->removeItem(logo);
+    playBtn->disconnect();
+    quitBtn->disconnect();
+    demoBtn->disconnect();
     playBtn->deleteLater();
     quitBtn->deleteLater();
     demoBtn->deleteLater();
-    pauseBtn->deleteLater();
+    //pauseBtn->deleteLater();
     gamescene = new SceneManager(scene);
     gamescene->playGame();
 }
 void MainWindow::start_demo(){
     scene->removeItem(logo);
+    playBtn->disconnect();
+    quitBtn->disconnect();
+    demoBtn->disconnect();
     playBtn->deleteLater();
     quitBtn->deleteLater();
     demoBtn->deleteLater();
-    pauseBtn->deleteLater();
+    //pauseBtn->deleteLater();
     gamescene = new SceneManager(scene);
     gamescene->playGame();
 }
