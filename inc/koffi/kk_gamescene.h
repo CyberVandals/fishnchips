@@ -8,12 +8,12 @@
 
 #include "kk_scene.h"
 
-class GameScene: public Scene,
+class GameScene: public Scene
 {
 public:
     GameScene(QGraphicsScene *scene);
-    void addGameObject(QGraphicsItem* gameObject, QPixmap imagePath, int scaledWidth, int scaledWidth);
-    void removeGameObject(QGraphicsItem* gameObject);
+    void addGameObject(QGraphicsItem* gameObject, QPixmap imagePath, int scaledWidth, int scaledHeight) override;
+    void removeGameObject(QGraphicsItem* gameObject) override;
 private:
     QGraphicsScene *gameScene;
 };
