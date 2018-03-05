@@ -16,3 +16,15 @@ void GameScene::removeGameObject(QGraphicsItem *gameObject)
 {
 
 }
+
+void GameScene::setBackground(QString imagePath)
+{
+    int sceneHeight = gameScene->height();
+    int sceneWidth = gameScene->width();
+
+    QPixmap backgrounImage(imagePath);
+    gameScene->setBackgroundBrush(backgrounImage.scaled(sceneWidth,
+                                         sceneHeight,
+                                         Qt::IgnoreAspectRatio,
+                                         Qt::SmoothTransformation));
+}

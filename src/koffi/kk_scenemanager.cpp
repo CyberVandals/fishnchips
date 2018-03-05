@@ -16,12 +16,5 @@ SceneManager::SceneManager(QGraphicsScene *scene)
 }
 
 void SceneManager::playGame(){
-
-    int sceneHeight = gameScene->height();
-    int sceneWidth = gameScene->width();
-    QPixmap backgrounImage(":/images/back_ground.jpg");
-    gameScene->setBackgroundBrush(backgrounImage.scaled(sceneWidth,
-                                         sceneHeight,
-                                         Qt::IgnoreAspectRatio,
-                                         Qt::SmoothTransformation));
+    gameScene->setBackground(":/images/back_ground.jpg");
 }
