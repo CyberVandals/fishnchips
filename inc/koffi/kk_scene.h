@@ -11,9 +11,9 @@ class Scene
 {
 public:
     void GameScene();
-    virtual void loadScene();
-    virtual void addGameObject(QGraphicsItem* gameObject, QString imagePath, int scaledWidth, int scaledHeight);
-    virtual void removeGameObject(QGraphicsItem* gameObject);
+//    virtual void loadScene();
+    virtual void addGameObject(QGraphicsItem* gameObject, QString imagePath, int scaledWidth, int scaledHeight) = 0;
+//    virtual void removeGameObject(QGraphicsItem* gameObject);
 protected:
-    virtual void generateLevel();
+//    virtual void generateLevel();
 };
