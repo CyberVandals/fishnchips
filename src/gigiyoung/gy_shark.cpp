@@ -12,7 +12,7 @@
 #include <QList>
 #include <QDebug>
 #include "../../inc/gigiyoung/gy_object.h"
-#include "../../inc/wei/graphics.h"
+//#include "../../inc/wei/wz_graphics.h"
 
 using namespace std;
 

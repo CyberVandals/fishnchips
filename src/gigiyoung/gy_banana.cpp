@@ -9,7 +9,8 @@
 #include <QDebug>
 #include <typeinfo>
 #include "../../inc/gigiyoung/gy_object.h"
-#include "../../inc/wei/graphics.h"
+//#include "../../inc/wei/wz_graphics.h"
+
 
 
 void Banana::init() {
