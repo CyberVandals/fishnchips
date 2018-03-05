@@ -14,6 +14,7 @@ class SceneManager: public QGraphicsView
 {
 public:
     SceneManager(QGraphicsScene *scene);
+    SceneManager(QGraphicsScene *scene, bool demo);
     void playGame();
 private:
     Shark *shark;
