@@ -1,4 +1,4 @@
-#include "../../inc/chaeunkim/button.h"
+#include "../../inc/chaeunkim/ck_button.h"
 #include <QPushButton>
 #include <QBrush>
 #include <QGraphicsTextItem>
