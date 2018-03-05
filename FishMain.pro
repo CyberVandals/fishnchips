@@ -35,6 +35,8 @@ SOURCES += \
         src/chaeunkim/ck_mainwindow.cpp \
         src/chaeunkim/ck_button.cpp \
 	src/chaeunkim/ck_pausebutton.cpp\
+	src/gigiyoung/gy_abstract.cpp \
+	src/gigiyoung/gy_autotest.cpp \
         src/gigiyoung/gy_banana.cpp \
         src/gigiyoung/gy_exit.cpp \
         src/gigiyoung/gy_platform.cpp \
@@ -54,7 +56,9 @@ HEADERS  += \
         inc/ck_mainwindow.h \
         inc/chaeunkim/ck_button.h \
 	inc/chaeunkim/ck_pausebutton.h\
+	inc/gy_autotest.h \
         inc/gy_object.h \
+	inc/gigiyoung/gy_abstract.h \
         inc/hh_main_player.h \
 	inc/henry/hh_health.h \
 	inc/henry/hh_health_bar.h \
@@ -63,7 +67,7 @@ HEADERS  += \
 	inc/koffi/kk_gamelevel.h \
 	inc/koffi/kk_gamescene.h \
 	inc/koffi/kk_scene.h \
-	inc/soundmanager.h \
+	inc/mm_soundmanager.h \
 	inc/wz_graphics.h \
 
 
