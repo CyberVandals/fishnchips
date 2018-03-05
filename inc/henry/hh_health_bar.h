@@ -2,6 +2,8 @@
 #define HH_HEALTH_BAR_H
 #include <QGraphicsRectItem>
 #include <QList>
+#include <QLinkedList>
+#include <QWidget>
 
 #include "../../inc/henry/hh_health.h"
 
@@ -13,7 +15,7 @@ public:
     void renew_health();
     HealthBar();
 private:
-Health * tail;
+QLinkedList<Health *> health_list;
 
 };
 
