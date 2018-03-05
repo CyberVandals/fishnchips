@@ -46,9 +46,11 @@ SOURCES += \
         src/wei/graphics.cpp \
     src/henry/hh_health.cpp \
     src/henry/hh_health_bar.cpp \
-    src/koffi/kk_gamelevel.cpp \
-    src/koffi/kk_scenemanager.cpp \
-    src/koffi/kk_gamescene.cpp
+    src/chaeunkim/ck_button.cpp \
+    src/chaeunkim/ck_main.cpp \
+    src/chaeunkim/ck_mainwindow.cpp \
+    src/chaeunkim/ck_pausebutton.cpp \
+    src/matthew/soundmanager.cpp
 
 
 HEADERS  += \
@@ -62,13 +64,11 @@ HEADERS  += \
         inc/wei/graphics.h \
     inc/henry/hh_health.h \
     inc/henry/hh_health_bar.h \
-    src/koffi/gamelevel.h \
-    inc/koffi/kk_gamescene.h \
-    inc/koffi/kk_scene.h \
-    inc/koffi/kk_scenemanager.h \
-    inc/koffi/kk_gamelevel.h \
-    inc/koffi/kk_config.h \
-    src/koffi/kk_gamescene.h
+    inc/chaeunkim/ck_button.h \
+    inc/chaeunkim/ck_pausebutton.h \
+    inc/matthew/soundmanager.h \
+    inc/wei/wz_graphics.h \
+    inc/ck_mainwindow.h
 #        config/constants.h
 
 

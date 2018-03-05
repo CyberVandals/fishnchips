@@ -12,20 +12,23 @@
 #include <QList>
 #include <QDebug>
 #include "../../inc/gigiyoung/gy_object.h"
+//#include "../../inc/wei/wz_graphics.h"
 
 using namespace std;
 
 void Shark::init() {
     stunned = 0;
     cooked = false;
-
+ 
     //QPixmap pixmap = QPixmap("...");
     //shark->setPixmap(pixmap.scaled(width,height);
 
 
-    //setPixmap(QPixmap("../../resources/images/blue_shark.png").scaled(10,10));
+//    setPixmap(QPixmap("../../resources/images/blue_shark.png").scaled(10,10));
+    //setPixmap(QPixmap(":/images/blue_shark.png").scaled(10,10));
+    setPixmap(QPixmap(":/images/blue_shark.png"));
 
-    graphics = new Graphics();
+    //graphics = new Graphics();
 
     // create timer for move slot
     timer = new QTimer(this);
@@ -36,7 +39,7 @@ void Shark::init() {
 // Default constructor 
 Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
-    graphics->load_shark(this);
+    //graphics->load_shark(this);
     setPos( DEFAULT_POS_X, DEFAULT_POS_Y );
 
     vel.x = DEFAULT_VEL_X;
@@ -50,7 +53,7 @@ Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 Shark::Shark(int pos_x, int pos_y,
     QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
-    graphics->load_shark(this);
+    //graphics->load_shark(this);
     setPos( pos_x, pos_y );
 
     vel.x = DEFAULT_VEL_X;
@@ -63,7 +66,7 @@ Shark::Shark(int pos_x, int pos_y,
 Shark::Shark(int pos_x, int pos_y, int vel_x, int vel_y,
     QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
-    graphics->load_shark(this);
+    //graphics->load_shark(this);
     setPos( pos_x, pos_y );
 
     vel.x = vel_x;
@@ -76,7 +79,7 @@ Shark::Shark(int pos_x, int pos_y, int vel_x, int vel_y,
 Shark::Shark(int width, int height, int pos_x, int pos_y, int vel_x, int vel_y,
     QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
-    graphics->load_shark(width, height, this);
+    //graphics->load_shark(width, height, this);
     setPos( pos_x, pos_y );
 
     vel.x = vel_x;

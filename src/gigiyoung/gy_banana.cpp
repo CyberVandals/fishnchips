@@ -9,13 +9,15 @@
 #include <QDebug>
 #include <typeinfo>
 #include "../../inc/gigiyoung/gy_object.h"
+//#include "../../inc/wei/wz_graphics.h"
+
 
 
 void Banana::init() {
 
     thrown = false;
 
-    graphics = new Graphics();
+//    graphics = new Graphics();
 
     timer = new QTimer(this);
     connect( timer, SIGNAL(timeout()), this, SLOT(status()) );

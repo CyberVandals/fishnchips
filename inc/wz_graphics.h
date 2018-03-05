@@ -5,6 +5,8 @@
 #include "../henry/hh_main_player.h"
 //#include "../gigiyoung/gy_object.h"
 #include "../gigiyoung/gy_object.h"
+#include <QGraphicsPathItem>
+
 class Shark;
 class Graphics : public QGraphicsPathItem {
 public:

@@ -2,25 +2,33 @@
 #include "../../inc/henry/hh_health.h"
 
 
-void Health::add_health()
+void HealthBar::add_health()
 {
-    //tail = new Health(tail);
+    int new_x_pos = health_list.last()->x_pos+10;
+    Health * health = new Health(new_x_pos);
+    health_list.append(health);
+}
 
+void HealthBar::renew_health()
+{
 
 }
 
-void Health::renew_health()
+void HealthBar::decrease_health()
 {
-
+    delete health_list.last();
+    //health_list.removeLast();
 }
+
+
 
 HealthBar::HealthBar()
 {
-    //Health * new_health = tail;
-    Health tail = new Health(0,0,0,this);
-
-    for(int i = 1; i <= 5; i++)
+    static int x_pos = 0;
+    for(int i = 0; i < 5; i++)
     {
-        tail = new Health(tail->pos().x()+10,tail->pos().y(), i, tail)
+        Health * health = new Health(x_pos); //y position doesnt need to change
+        x_pos = x_pos + 10;
+        health_list.append(health);
     }
 }
