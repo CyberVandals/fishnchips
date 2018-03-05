@@ -43,10 +43,12 @@ SOURCES += \
         src/gigiyoung/gy_steam.cpp \
         src/henry/hh_main_player.cpp \
 #        src/henry/hh_health.cpp
-        src/koffi/scenemanager.cpp \
         src/wei/graphics.cpp \
     src/henry/hh_health.cpp \
-    src/henry/hh_health_bar.cpp
+    src/henry/hh_health_bar.cpp \
+    src/koffi/kk_gamelevel.cpp \
+    src/koffi/kk_scenemanager.cpp \
+    src/koffi/kk_gamescene.cpp
 
 
 HEADERS  += \
@@ -57,10 +59,16 @@ HEADERS  += \
         inc/gigiyoung/gy_object.h \
         inc/henry/hh_main_player.h \
 #        inc/henry/hh_health.h
-        inc/koffi/scenemanager.h\
         inc/wei/graphics.h \
     inc/henry/hh_health.h \
-    inc/henry/hh_health_bar.h
+    inc/henry/hh_health_bar.h \
+    src/koffi/gamelevel.h \
+    inc/koffi/kk_gamescene.h \
+    inc/koffi/kk_scene.h \
+    inc/koffi/kk_scenemanager.h \
+    inc/koffi/kk_gamelevel.h \
+    inc/koffi/kk_config.h \
+    src/koffi/kk_gamescene.h
 #        config/constants.h
 
 
