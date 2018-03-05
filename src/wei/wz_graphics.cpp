@@ -1,5 +1,5 @@
-#include "../../inc/wei/wz_graphics.h"
-#include "../../inc/gigiyoung/gy_object.h"
+#include "../../inc/wz_graphics.h"
+#include "../../inc/gy_object.h"
 
 
 /*void Graphics::load_main_player(Main_player *player)
