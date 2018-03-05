@@ -5,7 +5,7 @@
 #include <QLinkedList>
 #include <QWidget>
 
-#include "../../inc/henry/hh_health.h"
+#include "henry/hh_health.h"
 
 class HealthBar: public QGraphicsRectItem
 {
