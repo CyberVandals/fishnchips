@@ -13,8 +13,8 @@
 #include <QGraphicsItem>
 #include <QList>
 #include <typeinfo>
-#include "henry/hh_health.h"
-#include "henry/hh_health_bar.h"
+#include "../../inc/henry/hh_health.h"
+#include "../../inc/henry/hh_health_bar.h"
 
 class Main_player: public QObject, public QGraphicsRectItem
 {
@@ -22,12 +22,14 @@ Q_OBJECT
 private:
 bool has_banana;
 HealthBar *player_health;
+QList<QGraphicsItem *> collision_item;
+
 //Health health;
 
 public:
     Main_player(QGraphicsItem *parent=0);
     void keyPressEvent(QKeyEvent * event);
-
+    bool shark_collision();
 public slots:
     void sink();
 };
