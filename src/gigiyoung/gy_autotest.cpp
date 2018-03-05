@@ -63,7 +63,7 @@ void AutoTest::simulate_keypress() {
 
     // init if self.points isn't empty
     if( (dest.x() == -1 && dest.y() == -1) && points.size() > 0 )
-        dest == (points.at(list_pos));
+        dest = (points.at(list_pos));
 
     // wrap-around list if index is beyond array
     //if( list_pos >= points.size() )
