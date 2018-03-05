@@ -31,53 +31,44 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        src/chaeunkim/main.cpp \
-        src/chaeunkim/mainwindow.cpp \
-        src/chaeunkim/button.cpp \
-#	src/chaeunkim/scenemanager.cpp\
-        src/chaeunkim/pausebutton.cpp\
+        src/chaeunkim/ck_main.cpp \
+        src/chaeunkim/ck_mainwindow.cpp \
+        src/chaeunkim/ck_button.cpp \
+	src/chaeunkim/ck_pausebutton.cpp\
+	src/gigiyoung/gy_abstract.cpp \
+	src/gigiyoung/gy_autotest.cpp \
         src/gigiyoung/gy_banana.cpp \
         src/gigiyoung/gy_exit.cpp \
         src/gigiyoung/gy_platform.cpp \
         src/gigiyoung/gy_shark.cpp \
         src/gigiyoung/gy_steam.cpp \
         src/henry/hh_main_player.cpp \
-#        src/henry/hh_health.cpp
-        src/wei/graphics.cpp \
-    src/henry/hh_health.cpp \
-    src/henry/hh_health_bar.cpp \
-    src/chaeunkim/ck_button.cpp \
-    src/chaeunkim/ck_main.cpp \
-    src/chaeunkim/ck_mainwindow.cpp \
-    src/chaeunkim/ck_pausebutton.cpp \
-    src/matthew/soundmanager.cpp    \
-    src/koffi/kk_scenemanager.cpp   \
-    src/koffi/kk_gamelevel.cpp  \
-    src/koffi/kk_gamescene.cpp  \
+        src/henry/hh_health.cpp \
+        src/henry/hh_health_bar.cpp \
+        src/koffi/kk_gamelevel.cpp \
+        src/koffi/kk_gamescene.cpp \
+        src/koffi/kk_scenemanager.cpp \
+	src/matthew/mm_soundmanager.cpp \
+        src/wei/wz_graphics.cpp 
 
 
 HEADERS  += \
-        inc/chaeunkim/button.h \
-        inc/chaeunkim/mainwindow.h \
-	inc/chaeunkim/pausebutton.h\
-#	inc/chaeunkim/scenemanager.h\
-        inc/gigiyoung/gy_object.h \
-        inc/henry/hh_main_player.h \
-#        inc/henry/hh_health.h
-        inc/wei/graphics.h \
-    inc/henry/hh_health.h \
-    inc/henry/hh_health_bar.h \
-    inc/chaeunkim/ck_button.h \
-    inc/chaeunkim/ck_pausebutton.h \
-    inc/matthew/soundmanager.h \
-    inc/wei/wz_graphics.h \
-    inc/ck_mainwindow.h \
-#        config/constants.h
-    inc/kk_scenemanager.h   \
-    inc/koffi/kk_gamelevel.h    \
-    inc/koffi/kk_gamescene.h \
-    inc/koffi/kk_scene.h    \
-    inc/koffi/config.h  \
+        inc/ck_mainwindow.h \
+        inc/chaeunkim/ck_button.h \
+	inc/chaeunkim/ck_pausebutton.h\
+	inc/gy_autotest.h \
+        inc/gy_object.h \
+	inc/gigiyoung/gy_abstract.h \
+        inc/hh_main_player.h \
+	inc/henry/hh_health.h \
+	inc/henry/hh_health_bar.h \
+        inc/kk_scenemanager.h \
+	inc/koffi/kk_config.h \
+	inc/koffi/kk_gamelevel.h \
+	inc/koffi/kk_gamescene.h \
+	inc/koffi/kk_scene.h \
+	inc/mm_soundmanager.h \
+	inc/wz_graphics.h \
 
 
 RESOURCES += \
