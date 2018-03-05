@@ -50,10 +50,10 @@ SOURCES += \
     src/chaeunkim/ck_main.cpp \
     src/chaeunkim/ck_mainwindow.cpp \
     src/chaeunkim/ck_pausebutton.cpp \
-    src/matthew/soundmanager.cpp
-    src/koffi/kk_scenemanager
-    src/koffi/kk_gamelevel.cpp
-    src/koffi/kk_gamescene.cpp
+    src/matthew/soundmanager.cpp    \
+    src/koffi/kk_scenemanager   \
+    src/koffi/kk_gamelevel.cpp  \
+    src/koffi/kk_gamescene.cpp  \
 
 
 HEADERS  += \
@@ -71,13 +71,13 @@ HEADERS  += \
     inc/chaeunkim/ck_pausebutton.h \
     inc/matthew/soundmanager.h \
     inc/wei/wz_graphics.h \
-    inc/ck_mainwindow.h
+    inc/ck_mainwindow.h \
 #        config/constants.h
-    inc/kk_scenemanager.h
-    inc/koffi/kk_gamelevel.h
-    inc/koffi/kk_gamescen.h
-    inc/koffi/kk_scene.h
-    inc/koffi/config.h
+    inc/kk_scenemanager.h   \
+    inc/koffi/kk_gamelevel.h    \
+    inc/koffi/kk_gamescen.h \
+    inc/koffi/kk_scene.h    \
+    inc/koffi/config.h  \
 
 
 RESOURCES += \
