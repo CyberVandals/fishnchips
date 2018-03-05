@@ -15,6 +15,7 @@ public:
     void addGameObject(QGraphicsItem* gameObject, QString imagePath, int scaledWidth, int scaledHeight) override;
 //    void removeGameObject(QGraphicsItem* gameObject) override;
     void setBackground(QString imagePath);
+    void setFocus(QGraphicsItem* gameObject);
 private:
     QGraphicsScene *gameScene;
 };

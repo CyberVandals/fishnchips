@@ -13,6 +13,7 @@ SceneManager::SceneManager(QGraphicsScene *scene)
 
     gameScene->addGameObject(shark, ":/images/blue_shark.png", 65, 100);
     gameScene->addGameObject(player, ":/images/monkey.png", 165,80);
+    gameScene->setFocus(player);
 }
 
 void SceneManager::playGame(){

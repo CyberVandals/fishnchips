@@ -21,5 +21,10 @@ void GameScene::setBackground(QString imagePath)
     gameScene->setBackgroundBrush(backgroundImage.scaled(sceneWidth,
                                          sceneHeight,
                                          Qt::IgnoreAspectRatio,
-                                         Qt::SmoothTransformation));
+                                                         Qt::SmoothTransformation));
+}
+
+void GameScene::setFocus(QGraphicsItem *gameObject)
+{
+    gameScene->setFocusItem(gameObject);
 }
