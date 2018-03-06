@@ -36,7 +36,7 @@ void SceneManager::init(QGraphicsScene *scene, int demo)
     mainScene->setFocus(player);
 
     if(demo == 1) {
-        AutoTest * autoTest = new AutoTest(scene, this, player);
+        AutoTest * autoTest = new AutoTest(scene, player, this);
     }
 }
 
