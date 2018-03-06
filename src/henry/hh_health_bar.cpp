@@ -14,17 +14,21 @@ void HealthBar::renew_health()
 
 }
 
-void HealthBar::decrease_health()
+int HealthBar::decrease_health()
 {
     qDebug() << "in decrease health\n";
     if(health_list.isEmpty() == false)
     {
         health_list.last()->setVisible(false);
         health_list.removeLast();
+        if(health_list.count() == 0)
+        {
+        return health_list.count();
+        }
 
          if(health_list.isEmpty())
          {
-             qDebug() << "you dead";
+            qDebug() << "you dead";
          }
          qDebug()<< health_list.count();
     }

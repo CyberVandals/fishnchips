@@ -33,35 +33,34 @@ void Main_player::keyPressEvent(QKeyEvent *event)
 {
     if( event->key() == Qt::Key_Left && (this->pos().x()) > (this->scene()->sceneRect().left()))
     {
+        //if(platform_collision() == false)
         this->setPos(x()-10, y());
-
-
         //move left
     }
 
     else if( event->key() == Qt::Key_Right && (this->pos().x()+(boundingRect().right()-boundingRect().left())) < (this->scene()->sceneRect().right()))
     {
+        //if(platform_collision() == false)
         this->setPos(x()+10, y());
-
         //move right
     }
 
     else if( event->key() == Qt::Key_Up && (this->pos().y()) > (this->scene()->sceneRect().top()))
     {
+        //if(platform_collision() == false)
         this->setPos(x(), y()-10);
-
         //move up
     }
 
     else if( event->key() == Qt::Key_Down && (this->pos().y()+(boundingRect().bottom()-boundingRect().top())) < (this->scene()->sceneRect().bottom()))
     {
+        //if(platform_collision() == false)
         this->setPos(x(), y()+10);
-
         //move down
     }
 }
 
-bool Main_player::shark_collision()
+int Main_player::shark_collision()
 {
     collision_item = collidingItems(Qt::IntersectsItemShape);
 
@@ -72,18 +71,35 @@ bool Main_player::shark_collision()
 
             qDebug() << "hit a shark";
             //shield = true;
-            return true;
+            return 1;
         }
 
 
         else if(typeid(*(collision_item[i])) == typeid(Exit))
         {
+          return 0;
           qDebug() << "Level Finished";
         }
+        else if(typeid(*(collision_item[i])) == typeid(Platform))
+        {
+            return 2;
+        }
     }
-return false;
+    return 3;
 }
 
+bool Main_player::platform_collision()
+{
+    collision_item = collidingItems(Qt::IntersectsItemShape);
+    for( int i = 0; i < collision_item.size() ; i++ ) {
+
+        if( typeid(*(collision_item[i])) == typeid(Platform))
+        {
+            return true;
+        }
+    else return false;
+}
+}
 void Main_player::recover()
 {
     shield = false;
@@ -92,16 +108,25 @@ void Main_player::recover()
 
 void Main_player::sink()
 {
-    if(shark_collision()==true)
+    if(shark_collision()==1)
     {
 
         shield = true;
-        player_health->decrease_health();
+        if(player_health->decrease_health() == 0)
+        {
+            this->setPos(scene()->sceneRect().bottom(), scene()->sceneRect().bottom()-50);
+        }
         recover_timer->start(1000);
+    }
+
+    else if(shark_collision()==0)
+    {
+        this->setPos(scene()->sceneRect().bottom(), scene()->sceneRect().bottom()-50);
     }
 
     if(this->pos().y()+(boundingRect().bottom()-boundingRect().top()) < (this->scene()->sceneRect().bottom()))
     {
-    setPos(x(), y()+1);
+    if(shark_collision()!=2)
+        setPos(x(), y()+1);
     }
 }

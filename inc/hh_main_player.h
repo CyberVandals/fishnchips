@@ -38,7 +38,8 @@ Graphics * player_pic;
 public:
     Main_player(QGraphicsScene *scene, QGraphicsItem *parent=0);
     void keyPressEvent(QKeyEvent * event);
-    bool shark_collision();
+    int shark_collision();
+    bool platform_collision();
 
 public slots:
     void sink();
