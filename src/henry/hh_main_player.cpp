@@ -4,17 +4,16 @@
 #include "../../inc/gy_object.h"
 #include <QDebug>
 #include <typeinfo>
-Main_player::Main_player(QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent)
+Main_player::Main_player(QGraphicsScene * scene,QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent)
 {
     setRect(0,0, 50, 50);
     setFlag(QGraphicsItem::ItemIsFocusable);
     setFocus();
 
-    player_health = new HealthBar();
-    //this->scene()->addItem(player_health);
+    player_health = new HealthBar(scene);
 
     has_banana = false;
-    //health = 5;//change this to constant
+
 
     QTimer * timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(sink()));
@@ -41,6 +40,7 @@ void Main_player::keyPressEvent(QKeyEvent *event)
         this->setPos(x()+10, y());
         if(shark_collision())
         {
+
             this->player_health->decrease_health();
         }
 
@@ -74,11 +74,14 @@ bool Main_player::shark_collision()
 
     for( int i = 0; i < collision_item.size() ; i++ ) {
 
-        if( typeid(*(collision_item[i])) == typeid(Shark) )
+        if( typeid(*(collision_item[i])) == typeid(Shark))
         {
+
             qDebug() << "hit a shark";
             return true;
         }
+
+
         else if(typeid(*(collision_item[i])) == typeid(Exit))
         {
           qDebug() << "Level Finished";
@@ -86,8 +89,16 @@ bool Main_player::shark_collision()
     }
 }
 
+void Main_player::recover()
+{
+
+}
+
 
 void Main_player::sink()
 {
-      setPos(x(), y()+1);
+    if(this->pos().y()+(boundingRect().bottom()-boundingRect().top()) < (this->scene()->sceneRect().bottom()))
+    {
+    setPos(x(), y()+1);
+    }
 }

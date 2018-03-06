@@ -4,6 +4,8 @@
 #include <QList>
 #include <QLinkedList>
 #include <QWidget>
+#include <QGraphicsScene>
+#include <QGraphicsView>
 
 #include "henry/hh_health.h"
 
@@ -13,7 +15,7 @@ public:
     void add_health();
     void decrease_health();
     void renew_health();
-    HealthBar();
+    HealthBar(QGraphicsScene *);
 private:
 QLinkedList<Health *> health_list;
 

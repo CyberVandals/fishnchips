@@ -4,7 +4,7 @@
 
 void HealthBar::add_health()
 {
-    int new_x_pos = health_list.last()->x_pos+10;
+    int new_x_pos = health_list.last()->new_x_pos+30;
     Health * health = new Health(new_x_pos);
     health_list.append(health);
 }
@@ -20,6 +20,11 @@ void HealthBar::decrease_health()
     if(health_list.isEmpty() == false)
     {
          health_list.removeLast();
+         if(health_list.isEmpty())
+         {
+             qDebug() << "you dead";
+         }
+         qDebug()<< health_list.count();
     }
 
     else if(health_list.isEmpty())
@@ -30,13 +35,20 @@ void HealthBar::decrease_health()
 
 
 
-HealthBar::HealthBar()
+HealthBar::HealthBar(QGraphicsScene *scene): QGraphicsRectItem()
 {
-    static int x_pos = 0;
+
+    if(scene == 0)qDebug() << "no scene visualized";
+
+    //Health * health = new Health(); //y position doesnt need to change
+    //scene->addItem(health);
+
+    static int x_pos = 5;
     for(int i = 0; i < 5; i++)
     {
         Health * health = new Health(x_pos); //y position doesnt need to change
-        x_pos = x_pos + 10;
+        scene->addItem(health);
+        x_pos = x_pos + 30;
         health_list.append(health);
     }
 }
