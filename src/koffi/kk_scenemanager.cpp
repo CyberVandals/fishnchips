@@ -21,6 +21,10 @@ void SceneManager::init(QGraphicsScene *scene, int demo)
 {
 
     mainScene = new GameScene(scene);
+    if(demo == 2) {
+        AutoTest * autoTest = new AutoTest(scene);
+        return;
+    }
     player = new Main_player(scene);
     shark = new Shark(100, 50, 30, 30, 10, 0);
     exit = new Exit();
@@ -30,10 +34,9 @@ void SceneManager::init(QGraphicsScene *scene, int demo)
     mainScene->addGameObject(exit);
     mainScene->addGameObject(platform);
     mainScene->setFocus(player);
+
     if(demo == 1) {
         AutoTest * autoTest = new AutoTest(scene, player);
-    } else if(demo == 2) {
-        AutoTest * autoTest = new AutoTest(scene);
     }
 }
 
