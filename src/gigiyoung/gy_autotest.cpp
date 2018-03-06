@@ -30,16 +30,20 @@ AutoTest::AutoTest(QGraphicsScene *scene, QGraphicsItem *object, SceneManager *s
     dest = QPoint(-1,-1);
 
     // add test points
+    add_point(QPoint(300,400));
     add_point(QPoint(500,0));
-    add_point(QPoint(500,500));
-    add_point(QPoint(0,500));
+    add_point(QPoint(50,50));
+    add_point(QPoint(50,50));
+    add_point(QPoint(50,50));
+    add_point(QPoint(600,50));
+
 
     // if no player object passed, then create a demo level
     if(object == 0)
         create_demo();
 
     connect(timer, SIGNAL(timeout()), this, SLOT(simulate_keypress()));
-    timer->start(200);
+    timer->start(100);
 }
 
 bool AutoTest::change_scene(QGraphicsScene *scene) {

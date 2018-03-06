@@ -42,7 +42,7 @@ Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
     vel.y = DEFAULT_VEL_Y;    
 
     init();
-    graphics->load_shark(this);
+    graphics->load_shark(DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT, this);
 }
 
 
@@ -56,7 +56,7 @@ Shark::Shark(int pos_x, int pos_y,
     vel.y = DEFAULT_VEL_Y;    
 
     init();
-    graphics->load_shark(this);
+    graphics->load_shark(DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT, this);
 } 
 
 // Constructor with position and velocity 
@@ -69,7 +69,7 @@ Shark::Shark(int pos_x, int pos_y, int vel_x, int vel_y,
     vel.y = vel_y;    
 
     init();
-    graphics->load_shark(this);
+    graphics->load_shark(DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT, this);
 }
 
 // Constructor with position and velocity 
