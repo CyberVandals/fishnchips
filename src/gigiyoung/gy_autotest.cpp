@@ -8,35 +8,68 @@
 #include <QDebug>
 
 #include "../../inc/gy_autotest.h"
+#include "../../inc/gy_object.h"
+#include "../../inc/hh_main_player.h"
+
+class Main_player;
 
 // add main player
 //AutoTest::AutoTest(QObject *main_window, QGraphicsItem *object): 
-AutoTest::AutoTest(QGraphicsScene *main_window, QGraphicsItem *object): 
+AutoTest::AutoTest(QGraphicsScene *scene, QGraphicsItem *object): 
     QObject() 
 {
+    // init 
+    this->object = object; 
+    receiver = scene;
+    timer = new QTimer(this);
+
     list_pos = 0;
     dest = QPoint(-1,-1);
 
-    // test points
+    // add test points
     add_point(QPoint(500,0));
     add_point(QPoint(500,500));
     add_point(QPoint(0,500));
 
-    this->object = object; 
-    receiver = main_window;
-    timer = new QTimer(this);
+    // if no player object passed, then create a demo level
+    if(object == 0)
+        create_demo();
 
     connect(timer, SIGNAL(timeout()), this, SLOT(simulate_keypress()));
     timer->start(200);
 }
 
-bool AutoTest::change_scene(QGraphicsScene *main_window) {
-    if( main_window != NULL ) {
-        receiver = main_window;
+bool AutoTest::change_scene(QGraphicsScene *scene) {
+    if( scene != NULL ) {
+        receiver = scene;
         return true;
     }
     return false;
 }
+
+void AutoTest::create_demo() {
+    Main_player *player;
+    Shark *shark1, *shark2, *shark3, *shark4, *shark5;
+    Platform *plat1, *plat2, plat3;
+    Banana *bana1;
+    Steam *steam1;
+    Exit *exit;
+
+    player = new Main_player(receiver);
+ 
+    shark1 = new Shark();
+
+}
+
+void AutoTest::restart_scene() {
+    clear_scene();
+    create_demo();
+}
+
+void AutoTest::clear_scene() {
+
+}
+
 
 void AutoTest::add_point(QPoint point) {
     points.append(point);

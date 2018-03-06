@@ -54,16 +54,14 @@ void MainWindow::mainmenu(){
     scene->addWidget(quitBtn);
 
     demoBtn = new Button(":/images/demoBtn.png");
-    demoBtn->setGeometry((scene->width() - demoBtn->width())/2, playBtn->pos().y()-demoBtn->height(),0,0);
+    demoBtn->setGeometry((scene->width() - demoBtn->width()*2)/2, playBtn->pos().y()-demoBtn->height(),0,0);
     connect(demoBtn,SIGNAL(clicked()),this,SLOT(start_demo()));
     scene->addWidget(demoBtn);
 
-    /*pauseBtn = new PauseButton(":/images/pause.png");
-    pauseBtn->setGeometry(scene->width() - pauseBtn->width(), 0,0,0);
-    scene->addWidget(pauseBtn);*/
-
-
-
+    stressBtn = new Button(":/images/stressBtn.png");
+    stressBtn->setGeometry((scene->width() - stressBtn->width()/20)/2, playBtn->pos().y()-stressBtn->height(),0,0);
+    connect(stressBtn,SIGNAL(clicked()),this,SLOT(start_stress()));
+    scene->addWidget(stressBtn);
 }
 
 void MainWindow::handleKeyPressed(QKeyEvent * event){
@@ -110,12 +108,14 @@ void MainWindow::start(){
     playBtn->disconnect();
     quitBtn->disconnect();
     demoBtn->disconnect();
+    stressBtn->disconnect();
     playBtn->deleteLater();
     quitBtn->deleteLater();
     demoBtn->deleteLater();
-    //pauseBtn->deleteLater();
-    //gamescene = new SceneManager(scene);
+    stressBtn->deleteLater();
     gamescene = new SceneManager(scene,false);
+    //gamescene = new SceneManager(scene,0);
+
     gamescene->playGame();
 }
 void MainWindow::start_demo(){
@@ -123,12 +123,28 @@ void MainWindow::start_demo(){
     playBtn->disconnect();
     quitBtn->disconnect();
     demoBtn->disconnect();
+    stressBtn->disconnect();
     playBtn->deleteLater();
     quitBtn->deleteLater();
     demoBtn->deleteLater();
-    //pauseBtn->deleteLater();
-    //gamescene = new SceneManager(scene);
+    stressBtn->deleteLater();
     gamescene = new SceneManager(scene,true);
+    //gamescene = new SceneManager(scene,1);
+
     gamescene->playGame();
 }
+void MainWindow::start_stress(){
+    scene->removeItem(logo);
+    playBtn->disconnect();
+    quitBtn->disconnect();
+    demoBtn->disconnect();
+    stressBtn->disconnect();
+    playBtn->deleteLater();
+    quitBtn->deleteLater();
+    demoBtn->deleteLater();
+    stressBtn->deleteLater();
+    gamescene = new SceneManager(scene,true);
+    //gamescene = new SceneManager(scene,2);
 
+    gamescene->playGame();
+}

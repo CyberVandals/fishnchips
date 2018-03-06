@@ -12,8 +12,11 @@ class AutoTest: public QObject {
     Q_OBJECT
 
 public:
-    AutoTest(QGraphicsScene *main_window, QGraphicsItem *object); 
-    bool change_scene(QGraphicsScene *main_window);
+    AutoTest(QGraphicsScene *scene, QGraphicsItem *object=0); 
+    bool change_scene(QGraphicsScene *scene);
+    void create_demo();
+    void restart_scene();
+    void clear_scene();
     void add_point(QPoint point);
 //    void add_path(QPoint* points);
 
@@ -27,7 +30,8 @@ private:
  
     QGraphicsItem *object;
     QTimer *timer;
-    QObject *receiver;
+    //QObject *receiver;
+    QGraphicsScene *receiver;
 
 };
 

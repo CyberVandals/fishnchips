@@ -30,6 +30,7 @@ private:
     Button *playBtn;
     Button *quitBtn;
     Button *demoBtn;
+    Button *stressBtn;
 
     PauseButton *pauseBtn;
 
@@ -45,6 +46,7 @@ protected:
 public slots:
     void start();
     void start_demo();
+    void start_stress();
     void resume();
     void pause();
 

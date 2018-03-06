@@ -17,7 +17,7 @@ void Banana::init() {
 
     thrown = false;
 
-//    graphics = new Graphics();
+    graphics = new Graphics();
 
     timer = new QTimer(this);
     connect( timer, SIGNAL(timeout()), this, SLOT(status()) );
@@ -29,7 +29,8 @@ void Banana::init() {
 Banana::Banana(QGraphicsItem *parent): 
     QObject(), QGraphicsPixmapItem(parent) 
 {
-
+    graphics->load_banana(
+        DEFAULT_BANANA_WIDTH, DEFAULT_BANANA_HEIGHT, this);
     setPos( DEFAULT_POS_X, DEFAULT_POS_Y );
     init();
 }
@@ -37,6 +38,9 @@ Banana::Banana(QGraphicsItem *parent):
 Banana::Banana(int pos_x, int pos_y, QGraphicsItem *parent): 
     QObject(), QGraphicsPixmapItem(parent) 
 {
+
+    graphics->load_banana(
+        DEFAULT_BANANA_WIDTH, DEFAULT_BANANA_HEIGHT, this);
 
     setPos( pos_x, pos_y );
     init();
@@ -46,6 +50,7 @@ Banana::Banana(int width, int height, int pos_x, int pos_y,
     QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent) 
 {
 
+    graphics->load_banana(width, height, this);
     setPos( pos_x, pos_y );
     init();
 }
