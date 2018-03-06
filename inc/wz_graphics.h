@@ -10,18 +10,22 @@ class Shark;
 class Banana;
 class Platform;
 class Steam;
-
+class Main_player;
 class Graphics : public QGraphicsPathItem {
 public:
     //void load_mainPlayer(Main_player *player);
     Graphics();
+    void load_mainplayer(Main_player *main_player);
+    void load_mainplayer(int width,int heigh,Main_player *main_player);
+    void load_mainplayer();
     void load_shark (int width,int heigh,Shark *shark);
     void load_shark (Shark *shark);
     void load_banana(Banana *banana);
     void load_banana(int width,int heigh,Banana *banana);
-    //void load_platform(Platform *Platform);
-    //void load_steam(Steam *steam);
-
+    void load_platform(Platform *platform);
+    void load_platform(int width,int heigh,Platform *platform);
+    void load_steam(Steam *steam);
+    void load_steam(int width,int heigh,Steam *steam);
 private:
 };
 
