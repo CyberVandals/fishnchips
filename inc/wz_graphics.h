@@ -11,6 +11,7 @@ class Banana;
 class Platform;
 class Steam;
 class Main_player;
+class Exit;
 class Graphics : public QGraphicsPathItem {
 public:
     //void load_mainPlayer(Main_player *player);
@@ -26,6 +27,8 @@ public:
     void load_platform(int width,int heigh,Platform *platform);
     void load_steam(Steam *steam);
     void load_steam(int width,int heigh,Steam *steam);
+    void load_exit_door(Exit *exit_door);
+    void load_exit_door(int width,int heigh,Exit *exit_door);
 private:
 };
 
