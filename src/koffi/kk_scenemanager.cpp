@@ -36,7 +36,7 @@ void SceneManager::init(QGraphicsScene *scene, int demo)
     mainScene->setFocus(player);
 
     if(demo == 1) {
-        AutoTest * autoTest = new AutoTest(scene, player);
+        AutoTest * autoTest = new AutoTest(this, scene, player);
     }
 }
 
@@ -48,4 +48,6 @@ void SceneManager::restartGame()
 {
     mainScene->removeGameObject(player);
     mainScene->removeGameObject(shark);
+    mainScene->removeGameObject(exit);
+    mainScene->removeGameObject(platform);
 }
