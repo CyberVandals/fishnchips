@@ -9,7 +9,7 @@
 SceneManager::SceneManager(QGraphicsScene *scene)
 {
     gameScene = new GameScene(scene);
-    player = new Main_player();
+    player = new Main_player(scene);
     shark = new Shark(100, 50, 30, 30, 10, 0);
 
     gameScene->addGameObject(player, ":/images/monkey.png", 165,80);
@@ -21,7 +21,7 @@ SceneManager::SceneManager(QGraphicsScene *scene)
 SceneManager::SceneManager(QGraphicsScene *scene, bool demo)
 {
     gameScene = new GameScene(scene);
-    player = new Main_player();
+    player = new Main_player(scene);
     gameScene->addGameObject(player, ":/images/monkey.png", 165,80);
     gameScene->setFocus(player);
 
