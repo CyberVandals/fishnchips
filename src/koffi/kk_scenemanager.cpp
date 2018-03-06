@@ -14,7 +14,7 @@ SceneManager::SceneManager(QGraphicsScene *scene)
 SceneManager::SceneManager(QGraphicsScene *scene, int demo)
 {
     mainScene = new GameScene(scene);
-    init(demo);
+    init(scene, demo);
 }
 
 void SceneManager::init(QGraphicsScene *scene, int demo)
