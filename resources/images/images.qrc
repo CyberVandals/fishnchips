@@ -13,6 +13,8 @@
         <file>monkey.png</file>
         <file>demoBtn.png</file>
         <file>stressBtn.png</file>
+        <file>door.png</file>
+        <file>steam.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>
