@@ -15,7 +15,7 @@ public:
     AutoTest(QGraphicsScene *main_window, QGraphicsItem *object); 
     bool change_scene(QGraphicsScene *main_window);
     void add_point(QPoint point);
-    void add_path(QList<QPoint> points);
+//    void add_path(QPoint* points);
 
 public slots:
     void simulate_keypress();
