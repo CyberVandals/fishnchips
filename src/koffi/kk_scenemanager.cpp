@@ -26,6 +26,9 @@ SceneManager::SceneManager(QGraphicsScene *scene, int demo)
 {
     mainScene = new GameScene(scene);
     player = new Main_player(scene);
+    shark = new Shark(100, 50, 30, 30, 10, 0);
+    exit = new Exit();
+    platform = new Platform();
 
     mainScene->addGameObject(player);
     mainScene->setFocus(player);
@@ -35,8 +38,11 @@ SceneManager::SceneManager(QGraphicsScene *scene, int demo)
     } else if(demo == 2) {
         AutoTest * autoTest = new AutoTest(scene);
     }
-    shark = new Shark(100, 50, 30, 30, 10, 0);
+    mainScene->addGameObject(player);
     mainScene->addGameObject(shark);
+    mainScene->addGameObject(exit);
+    mainScene->addGameObject(platform);
+    mainScene->setFocus(player);
 }
 
 void SceneManager::playGame(){
