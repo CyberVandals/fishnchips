@@ -21,8 +21,8 @@
 
 #define DEFAULT_PLAT_HEIGHT 10
 #define DEFAULT_PLAT_WIDTH 10
-#define DEFAULT_SHARK_HEIGHT 30
-#define DEFAULT_SHARK_WIDTH 70
+#define DEFAULT_SHARK_HEIGHT 65
+#define DEFAULT_SHARK_WIDTH 100
 #define DEFAULT_BANANA_HEIGHT 30
 #define DEFAULT_BANANA_WIDTH 30
 #define DEFAULT_STEAM_HEIGHT 50
@@ -110,7 +110,7 @@ private:
 
     bool thrown;
     struct Velocity vel;
-    //Graphics *graphics;
+    Graphics *graphics;
     QTimer *timer;
 };
 
@@ -120,6 +120,7 @@ class Steam: public QObject, public QGraphicsPixmapItem {
 public:
     Steam(QGraphicsItem *parent=0);
     Steam(int pos_x, int pos_y, QGraphicsItem *parent=0);
+    Steam(int width, int height, int pos_x, int pos_y, QGraphicsItem *parent=0);
 
 public slots:
     void status();
@@ -130,6 +131,7 @@ private:
     bool exploded;
     int countdown;
     QTimer *timer;
+    Graphics *graphics;
 };
 
 // Exit Object - needs to check whether play has collided with it
@@ -138,6 +140,7 @@ class Exit: public QObject, public QGraphicsPixmapItem {
 public:
     Exit(QGraphicsItem *parent=0);
     Exit(int pos_x, int pos_y, QGraphicsItem *parent=0);
+    Exit(int width, int height, int pos_x, int pos_y, QGraphicsItem *parent=0);
 
 public slots:
     void status();
@@ -146,6 +149,7 @@ private:
     void init();
 
     QTimer *timer;
+    Graphics *graphics;
 };
 
 
