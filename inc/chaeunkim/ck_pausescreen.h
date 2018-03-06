@@ -2,11 +2,12 @@
 #define CK_PAUSESCREEN_H
 
 #include <QGraphicsTextItem>
+#include <QGraphicsScene>
 
 class PauseScreen : public QGraphicsTextItem{
 
 public:
-    PauseScreen();
+    PauseScreen(QGraphicsScene *);
     void bring_pauseScreen();
 
 };
