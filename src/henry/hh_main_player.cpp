@@ -31,10 +31,17 @@ Main_player::Main_player(QGraphicsScene * scene,QGraphicsItem *parent): QObject(
 
 void Main_player::keyPressEvent(QKeyEvent *event)
 {
+    //experi start
+    scene();
+    //experi end
     if( event->key() == Qt::Key_Left && (this->pos().x()) > (this->scene()->sceneRect().left()))
     {
         //if(platform_collision() == false)
-        this->setPos(x()-10, y());
+        //if(scene()->itemAt(this->pos().rx(), this->pos().ry()) == 0)
+        //{
+          this->setPos(x()-10, y());  //
+        //}
+        //this->setPos(x()-10, y());
         //move left
     }
 
@@ -48,6 +55,7 @@ void Main_player::keyPressEvent(QKeyEvent *event)
     else if( event->key() == Qt::Key_Up && (this->pos().y()) > (this->scene()->sceneRect().top()))
     {
         //if(platform_collision() == false)
+        //if(scene()->itemAt(QPointF(0, 0)) != Platform)
         this->setPos(x(), y()-10);
         //move up
     }
@@ -115,6 +123,11 @@ void Main_player::sink()
         if(player_health->decrease_health() == 0)
         {
             this->setPos(scene()->sceneRect().bottom(), scene()->sceneRect().bottom()-50);
+            //player_health->
+            QGraphicsScene *current_scene = scene();
+            player_health = new HealthBar(current_scene);
+//current_scene->addItem();
+
         }
         recover_timer->start(1000);
     }

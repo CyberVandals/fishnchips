@@ -35,6 +35,7 @@ int HealthBar::decrease_health()
 
     else if(health_list.isEmpty())
     {
+
         qDebug() << "you dead";
     }
 }
@@ -49,7 +50,7 @@ HealthBar::HealthBar(QGraphicsScene *scene): QGraphicsRectItem()
     //Health * health = new Health(); //y position doesnt need to change
     //scene->addItem(health);
 
-    static int x_pos = 5;
+    int x_pos = 5;
     for(int i = 0; i < 5; i++)
     {
         Health * health = new Health(x_pos); //y position doesnt need to change
