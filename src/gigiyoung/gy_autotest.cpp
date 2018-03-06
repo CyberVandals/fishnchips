@@ -125,7 +125,7 @@ void AutoTest::simulate_keypress() {
     int x = object->x();
     int y = object->y();
     
-    qDebug() << x << ", " << y;
+    //qDebug() << x << ", " << y;
 
     // init if self.points isn't empty
     if( (dest.x() == -1 && dest.y() == -1) && points.size() > 0 )
