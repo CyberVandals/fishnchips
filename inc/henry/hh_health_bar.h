@@ -13,7 +13,7 @@ class HealthBar: public QGraphicsRectItem
 {
 public:
     void add_health();
-    void decrease_health();
+    int decrease_health();
     void renew_health();
     HealthBar(QGraphicsScene *);
 private:
