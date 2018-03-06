@@ -15,6 +15,7 @@ class SceneManager: public QGraphicsView
 public:
     SceneManager(QGraphicsScene *scene);
     SceneManager(QGraphicsScene *scene, int demo);
+    void init(int demo);
     void playGame();
     void restartGame();
 private:
