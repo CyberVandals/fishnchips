@@ -16,6 +16,7 @@ void Graphics::load_mainplayer(int width, int heigh, Main_player *main_player)
     QPixmap pixmap(":/images/monkey.png");
     pixmap = pixmap.scaled(width,heigh,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     main_player->setPixmap(pixmap);
+
 }
 
 void Graphics::load_shark(Shark *shark)
@@ -71,4 +72,16 @@ void Graphics:: load_steam(int width,int heigh,Steam *steam)
     QPixmap pixmap(":/images/platform.png");
     pixmap = pixmap.scaled(width,heigh,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     steam->setPixmap(pixmap);
+}
+
+void Graphics::load_exit_door(Exit *exit_door)
+{
+     exit_door->setPixmap(QPixmap(":/images/door.png"));
+}
+
+void Graphics::load_exit_door(int width, int heigh, Exit *exit_door)
+{
+    QPixmap pixmap(":/images/door.png");
+    pixmap = pixmap.scaled(width,heigh,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    exit_door->setPixmap(pixmap);
 }
