@@ -105,8 +105,8 @@ bool Main_player::platform_collision()
         {
             return true;
         }
-    else return false;
-}
+     }
+     return false;
 }
 void Main_player::recover()
 {
@@ -116,23 +116,20 @@ void Main_player::recover()
 
 void Main_player::sink()
 {
-    if(shark_collision()==1)
+    if(shark_collision()==1)//shark
     {
 
         shield = true;
         if(player_health->decrease_health() == 0)
         {
             this->setPos(scene()->sceneRect().bottom(), scene()->sceneRect().bottom()-50);
-            //player_health->
             QGraphicsScene *current_scene = scene();
             player_health = new HealthBar(current_scene);
-//current_scene->addItem();
-
         }
         recover_timer->start(1000);
     }
 
-    else if(shark_collision()==0)
+    else if(shark_collision()==0)//door
     {
         this->setPos(scene()->sceneRect().bottom(), scene()->sceneRect().bottom()-50);
     }
