@@ -1,25 +1,26 @@
 #include "../../inc/wz_graphics.h"
 #include "../../inc/gy_object.h"
 
-
-/*void Graphics::load_main_player(Main_player *player)
+Graphics::Graphics()
 {
-    player->setPixmap(QPixmap(":/Object_image/monkey.png"));
+    //
+}
 
+void Graphics::load_mainplayer(Main_player *main_player)
+{
+    main_player->setPixmap(QPixmap(":/images/monkey.png"));
+}
+
+void Graphics::load_mainplayer(int width, int heigh, Main_player *main_player)
+{
+    QPixmap pixmap(":/images/monkey.png");
+    pixmap = pixmap.scaled(width,heigh,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    main_player->setPixmap(pixmap);
 }
 
 void Graphics::load_shark(Shark *shark)
 {
-    shark->setPixmap(QPixmap(":/Object_image/blue_shark.png"));
-
-}*/
-void Graphics::load_shark(Shark *shark)
-{
     shark->setPixmap(QPixmap(":/images/blue_shark.png"));
-    /*QPixmap pixmap(":/steam.png");
-    pixmap = pixmap.scaled(width,heigh,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-    shark->setPixmap(pixmap);
-     */
 
 }
 
@@ -44,26 +45,30 @@ void Graphics:: load_banana(int width,int heigh,Banana *banana)
     pixmap = pixmap.scaled(width,heigh,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     banana->setPixmap(pixmap);
 }
-Graphics::Graphics()
-{
-    //
-}
-
-/*
- void Graphics::load_banana(Banana *banana)
-{
-    banana->setPixmap(QPixmap(":/Object_image/banana.png"));
-
-}
 
 void Graphics::load_platform(Platform *platform)
 {
-   // Platform->setPixmap(QPixmap(":/Object_image/platform.png"));
+    //platform->setPixmap(QPixmap(":/images/platform.png"));
+}
 
+
+void Graphics:: load_platform(int width,int heigh,Platform *platform)
+{
+   /* QPixmap pixmap(":/images/platform.png");
+    pixmap = pixmap.scaled(width,heigh,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    platform->setPixmap(pixmap);
+    */
 }
 
 void Graphics::load_steam(Steam *steam)
 {
-    // steam->setPixmap(QPixmap(":/Object_image/steam.png"));
+    steam->setPixmap(QPixmap(":/images/steam.png"));
 }
-*/
+
+
+void Graphics:: load_steam(int width,int heigh,Steam *steam)
+{
+    QPixmap pixmap(":/images/platform.png");
+    pixmap = pixmap.scaled(width,heigh,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    steam->setPixmap(pixmap);
+}
