@@ -26,7 +26,7 @@ void SceneManager::init(QGraphicsScene *scene, int demo)
         return;
     }
     player = new Main_player(scene);
-    shark = new Shark(100, 50, 30, 30, 10, 0);
+    shark = new Shark(30, 30, 10, 0);
     exit = new Exit();
     platform = new Platform();
     mainScene->addGameObject(player);
