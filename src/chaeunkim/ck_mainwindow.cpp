@@ -113,8 +113,8 @@ void MainWindow::start(){
     quitBtn->deleteLater();
     demoBtn->deleteLater();
     stressBtn->deleteLater();
-    gamescene = new SceneManager(scene,false);
-    //gamescene = new SceneManager(scene,0);
+    //gamescene = new SceneManager(scene,false);
+    gamescene = new SceneManager(scene,0);
 
     gamescene->playGame();
 }
@@ -128,8 +128,8 @@ void MainWindow::start_demo(){
     quitBtn->deleteLater();
     demoBtn->deleteLater();
     stressBtn->deleteLater();
-    gamescene = new SceneManager(scene,true);
-    //gamescene = new SceneManager(scene,1);
+    //gamescene = new SceneManager(scene,true);
+    gamescene = new SceneManager(scene,1);
 
     gamescene->playGame();
 }
@@ -143,8 +143,8 @@ void MainWindow::start_stress(){
     quitBtn->deleteLater();
     demoBtn->deleteLater();
     stressBtn->deleteLater();
-    gamescene = new SceneManager(scene,true);
-    //gamescene = new SceneManager(scene,2);
+    //gamescene = new SceneManager(scene,true);
+    gamescene = new SceneManager(scene,2);
 
     gamescene->playGame();
 }
