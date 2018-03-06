@@ -29,30 +29,30 @@ void Banana::init() {
 Banana::Banana(QGraphicsItem *parent): 
     QObject(), QGraphicsPixmapItem(parent) 
 {
-    graphics->load_banana(
-        DEFAULT_BANANA_WIDTH, DEFAULT_BANANA_HEIGHT, this);
     setPos( DEFAULT_POS_X, DEFAULT_POS_Y );
     init();
+    graphics->load_banana(
+        DEFAULT_BANANA_WIDTH, DEFAULT_BANANA_HEIGHT, this);
 }
 
 Banana::Banana(int pos_x, int pos_y, QGraphicsItem *parent): 
     QObject(), QGraphicsPixmapItem(parent) 
 {
 
-    graphics->load_banana(
-        DEFAULT_BANANA_WIDTH, DEFAULT_BANANA_HEIGHT, this);
 
     setPos( pos_x, pos_y );
     init();
+    graphics->load_banana(
+        DEFAULT_BANANA_WIDTH, DEFAULT_BANANA_HEIGHT, this);
 }
 
 Banana::Banana(int width, int height, int pos_x, int pos_y, 
     QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent) 
 {
 
-    graphics->load_banana(width, height, this);
     setPos( pos_x, pos_y );
     init();
+    graphics->load_banana(width, height, this);
 }
 
 
