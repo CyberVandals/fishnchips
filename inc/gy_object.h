@@ -10,7 +10,7 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsItem>
-//#include "../wei/wz_graphics.h"
+#include "wz_graphics.h"
 
 #define UPDATE_MS 50
 
@@ -33,7 +33,7 @@
 #define DEFAULT_STUN_DURATION 40
 
 // forward declarations
-// class Graphics;
+class Graphics;
 
 // structs
 struct Velocity {
@@ -83,7 +83,7 @@ private:
     struct Velocity vel;
 
     QTimer *timer;
-    //Graphics *graphics;
+    Graphics *graphics;
 };
 
 // Banana 
