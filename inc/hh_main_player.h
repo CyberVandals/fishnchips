@@ -11,6 +11,7 @@
 #include <QGraphicsScene>
 #include <QApplication>
 #include <QGraphicsItem>
+#include <QGraphicsView>
 #include <QList>
 #include <typeinfo>
 #include <QGraphicsScene>
