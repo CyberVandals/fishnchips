@@ -13,7 +13,8 @@ class GameScene: public Scene
 public:
     GameScene(QGraphicsScene *scene);
     void addGameObject(QGraphicsItem* gameObject, QString imagePath, int scaledWidth, int scaledHeight) override;
-//    void removeGameObject(QGraphicsItem* gameObject) override;
+    void addGameObject(QGraphicsItem* gameObject) override;
+    void removeGameObject(QGraphicsItem* gameObject) override;
     void setBackground(QString imagePath);
     void setFocus(QGraphicsItem* gameObject);
 private:

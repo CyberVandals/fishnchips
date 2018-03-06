@@ -13,7 +13,8 @@ public:
     void GameScene();
 //    virtual void loadScene();
     virtual void addGameObject(QGraphicsItem* gameObject, QString imagePath, int scaledWidth, int scaledHeight) = 0;
-//    virtual void removeGameObject(QGraphicsItem* gameObject);
+    virtual void addGameObject(QGraphicsItem* gameObject) = 0;
+    virtual void removeGameObject(QGraphicsItem* gameObject) = 0;
 protected:
 //    virtual void generateLevel();
 };

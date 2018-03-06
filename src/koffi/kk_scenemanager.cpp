@@ -8,30 +8,43 @@
 
 SceneManager::SceneManager(QGraphicsScene *scene)
 {
-    gameScene = new GameScene(scene);
+    mainScene = new GameScene(scene);
     player = new Main_player(scene);
     shark = new Shark(100, 50, 30, 30, 10, 0);
+    exit = new Exit();
+    platform = new Platform();
 
-    gameScene->addGameObject(player, ":/images/monkey.png", 165,80);
-    gameScene->addGameObject(shark, ":/images/blue_shark.png", 65, 100);
-    gameScene->setFocus(player);
+    mainScene->addGameObject(player);
+    mainScene->addGameObject(shark);
+    mainScene->addGameObject(exit);
+    mainScene->addGameObject(platform);
+    mainScene->setFocus(player);
 
 }
 
-SceneManager::SceneManager(QGraphicsScene *scene, bool demo)
+SceneManager::SceneManager(QGraphicsScene *scene, int demo)
 {
-    gameScene = new GameScene(scene);
+    mainScene = new GameScene(scene);
     player = new Main_player(scene);
-    gameScene->addGameObject(player, ":/images/monkey.png", 165,80);
-    gameScene->setFocus(player);
 
-    if(demo) {
+    mainScene->addGameObject(player);
+    mainScene->setFocus(player);
+
+    if(demo == 1) {
         AutoTest * autoTest = new AutoTest(scene, player);
+    } else if(demo == 2) {
+        AutoTest * autoTest = new AutoTest(scene);
     }
     shark = new Shark(100, 50, 30, 30, 10, 0);
-    gameScene->addGameObject(shark, ":/images/blue_shark.png", 65, 100);
+    mainScene->addGameObject(shark);
 }
 
 void SceneManager::playGame(){
-    gameScene->setBackground(":/images/back_ground.jpg");
+    mainScene->setBackground(":/images/back_ground.jpg");
+}
+
+void SceneManager::restartGame()
+{
+    mainScene->removeGameObject(player);
+    mainScene->removeGameObject(shark);
 }

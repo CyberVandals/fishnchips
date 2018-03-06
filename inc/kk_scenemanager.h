@@ -14,13 +14,16 @@ class SceneManager: public QGraphicsView
 {
 public:
     SceneManager(QGraphicsScene *scene);
-    SceneManager(QGraphicsScene *scene, bool demo);
+    SceneManager(QGraphicsScene *scene, int demo);
     void playGame();
+    void restartGame();
 private:
     Shark *shark;
     Main_player *player;
     GameLevel *gameLevel;
-    GameScene *gameScene;
+    GameScene *mainScene;
+    Exit *exit;
+    Platform *platform;
 };
 
 #endif // SCENEMANAGER_H

@@ -12,6 +12,18 @@ void GameScene::addGameObject(QGraphicsItem *gameObject, QString imagePath, int 
     gameScene->addItem(gameObject);
 }
 
+void GameScene::addGameObject(QGraphicsItem *gameObject)
+{
+    gameScene->addItem(gameObject);
+}
+
+void GameScene::removeGameObject(QGraphicsItem *gameObject)
+{
+    gameScene->removeItem(gameObject);
+    gameObject = NULL;
+    delete gameObject;
+}
+
 void GameScene::setBackground(QString imagePath)
 {
     int sceneHeight = gameScene->height();
