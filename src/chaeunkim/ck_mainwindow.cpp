@@ -11,7 +11,8 @@
 MainWindow::MainWindow(){
     pauseScene = new PauseScreen();
     scene = new QGraphicsScene();
-    timer.start(1000/33);
+
+    //timer.start(1000/33);
 
     // get desktop resolution
     QRect rec = QApplication::desktop()->screenGeometry();
@@ -26,13 +27,13 @@ MainWindow::MainWindow(){
     scene->setBackgroundBrush(pim.scaled(width,height,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     setScene(scene);
 
-    scene->installEventFilter(this);
+    //scene->installEventFilter(this);
 
     // turn off the scroll bars both horizontal and vertical
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    resume();
+    //resume();
 
 }
 
@@ -71,7 +72,7 @@ void MainWindow::handleKeyPressed(QKeyEvent * event){
     if(!isPaused){
         switch (event->key()){
             case Qt::Key_Space:
-                pause();
+                //pause();
                 pauseScene->setVisible(true);
                 break;
             default:
