@@ -21,7 +21,7 @@ Exit::Exit(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
     //graphics->load_
 
     // init size and position
-    setPos( DEFAULT_POS_X, DEFAULT_POS_Y );
+    setPos( DEFAULT_EXIT_POS_X, DEFAULT_EXIT_POS_Y );
     //setRect( DEFAULT_POS_X, DEFAULT_POS_Y, DEFAULT_EXIT_WIDTH,
     //         DEFAULT_EXIT_HEIGHT );
     init();

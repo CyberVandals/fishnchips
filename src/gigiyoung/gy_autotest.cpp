@@ -10,12 +10,15 @@
 #include "../../inc/gy_autotest.h"
 #include "../../inc/gy_object.h"
 #include "../../inc/hh_main_player.h"
+#include "../../inc/kk_scenemanager.h"
 
+class SceneManager;
 class Main_player;
 
 // add main player
 //AutoTest::AutoTest(QObject *main_window, QGraphicsItem *object): 
-AutoTest::AutoTest(QGraphicsScene *scene, QGraphicsItem *object): 
+//AutoTest::AutoTest(QGraphicsScene *scene, SceneManager *sm, QGraphicsItem *object): 
+AutoTest::AutoTest(QGraphicsScene *scene, QGraphicsItem *object, SceneManager *sm): 
     QObject() 
 {
     // init 

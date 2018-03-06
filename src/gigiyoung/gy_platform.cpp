@@ -13,7 +13,7 @@ void Platform::init() {
 
 // constructors
 Platform::Platform(QGraphicsItem *parent): QGraphicsRectItem(parent) {
-    setRect( DEFAULT_POS_X, DEFAULT_POS_Y, 
+    setRect( DEFAULT_PLAT_POS_X, DEFAULT_PLAT_POS_Y, 
              DEFAULT_PLAT_WIDTH, DEFAULT_PLAT_HEIGHT ); 
 
     init();
