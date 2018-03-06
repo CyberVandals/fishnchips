@@ -24,15 +24,19 @@ private:
 bool has_banana;
 HealthBar *player_health;
 QList<QGraphicsItem *> collision_item;
+QTimer * recover_timer;
+QTimer * timer;
+bool shield;
 //Health health;
 
 public:
     Main_player(QGraphicsScene *scene, QGraphicsItem *parent=0);
     void keyPressEvent(QKeyEvent * event);
     bool shark_collision();
-    void recover();
+
 public slots:
     void sink();
+    void recover();
 };
 
 #endif // HH_MAIN_PLAYER_H
