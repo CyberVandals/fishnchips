@@ -14,10 +14,14 @@
 #include <QList>
 #include <typeinfo>
 #include <QGraphicsScene>
+#include <QGraphicsPixmapItem>
 #include "henry/hh_health.h"
 #include "henry/hh_health_bar.h"
+#include "wz_graphics.h"
 
-class Main_player: public QObject, public QGraphicsRectItem
+class Graphics;
+
+class Main_player: public QObject, public QGraphicsPixmapItem
 {
 Q_OBJECT
 private:
@@ -27,6 +31,8 @@ QList<QGraphicsItem *> collision_item;
 QTimer * recover_timer;
 QTimer * timer;
 bool shield;
+Graphics * player_pic;
+
 //Health health;
 
 public:

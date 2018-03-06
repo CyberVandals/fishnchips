@@ -4,9 +4,12 @@
 #include "../../inc/gy_object.h"
 #include <QDebug>
 #include <typeinfo>
-Main_player::Main_player(QGraphicsScene * scene,QGraphicsItem *parent): QObject(), QGraphicsRectItem(parent)
+Main_player::Main_player(QGraphicsScene * scene,QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
-    setRect(0,0, 50, 50);
+    player_pic = new Graphics();
+    player_pic->load_mainplayer(50,50, this);
+    //setPixmap(QPixmap());
+    setPos(scene->sceneRect().bottom(), scene->sceneRect().bottom()-50);
     setFlag(QGraphicsItem::ItemIsFocusable);
     setFocus();
 
