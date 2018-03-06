@@ -15,7 +15,6 @@ void Exit::init() {
 // Default constructor 
 Exit::Exit(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
 
-    graphics->load_exit_door(DEFAULT_EXIT_WIDTH, DEFAULT_EXIT_HEIGHT, this);
     //setPixmap(QPixmap(":/images/door.png"));
 
     //graphics->load_
@@ -25,6 +24,7 @@ Exit::Exit(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
     //setRect( DEFAULT_POS_X, DEFAULT_POS_Y, DEFAULT_EXIT_WIDTH,
     //         DEFAULT_EXIT_HEIGHT );
     init();
+    graphics->load_exit_door(DEFAULT_EXIT_WIDTH, DEFAULT_EXIT_HEIGHT, this);
 }
 
 
@@ -32,7 +32,6 @@ Exit::Exit(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
 Exit::Exit(int pos_x, int pos_y,
     QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
-    graphics->load_exit_door(DEFAULT_EXIT_WIDTH, DEFAULT_EXIT_HEIGHT, this);
 
     //setPixmap(QPixmap(":/images/door.png"));
 
@@ -40,6 +39,7 @@ Exit::Exit(int pos_x, int pos_y,
     setPos( pos_x, pos_y );
 
     init();
+    graphics->load_exit_door(DEFAULT_EXIT_WIDTH, DEFAULT_EXIT_HEIGHT, this);
 } 
 
 // Constructor with position and velocity 
@@ -47,7 +47,6 @@ Exit::Exit(int width, int height, int pos_x, int pos_y,
     QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
 
-    graphics->load_exit_door(width, height, this);
     //setPixmap(QPixmap(":/images/door.png").scaled(width,height));
 
     // init size and position
@@ -55,6 +54,7 @@ Exit::Exit(int width, int height, int pos_x, int pos_y,
     setPos( pos_x, pos_y );
 
     init();
+    graphics->load_exit_door(width, height, this);
 }
 
 

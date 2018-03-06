@@ -36,13 +36,13 @@ void Shark::init() {
 // Default constructor 
 Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
-    graphics->load_shark(this);
     setPos( DEFAULT_POS_X, DEFAULT_POS_Y );
 
     vel.x = DEFAULT_VEL_X;
     vel.y = DEFAULT_VEL_Y;    
 
     init();
+    graphics->load_shark(this);
 }
 
 
@@ -50,39 +50,39 @@ Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 Shark::Shark(int pos_x, int pos_y,
     QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
-    graphics->load_shark(this);
     setPos( pos_x, pos_y );
 
     vel.x = DEFAULT_VEL_X;
     vel.y = DEFAULT_VEL_Y;    
 
     init();
+    graphics->load_shark(this);
 } 
 
 // Constructor with position and velocity 
 Shark::Shark(int pos_x, int pos_y, int vel_x, int vel_y,
     QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
-    graphics->load_shark(this);
     setPos( pos_x, pos_y );
 
     vel.x = vel_x;
     vel.y = vel_y;    
 
     init();
+    graphics->load_shark(this);
 }
 
 // Constructor with position and velocity 
 Shark::Shark(int width, int height, int pos_x, int pos_y, int vel_x, int vel_y,
     QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
-    graphics->load_shark(width, height, this);
     setPos( pos_x, pos_y );
 
     vel.x = vel_x;
     vel.y = vel_y;    
 
     init();
+    graphics->load_shark(width, height, this);
 }
 
 

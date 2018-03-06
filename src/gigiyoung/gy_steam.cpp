@@ -23,13 +23,13 @@ void Steam::init() {
 Steam::Steam(QGraphicsItem *parent): 
     QObject(), QGraphicsPixmapItem(parent)
 {
-    graphics->load_steam(DEFAULT_STEAM_WIDTH, DEFAULT_STEAM_HEIGHT, this);
     // init size and position
     setPos( DEFAULT_POS_X, DEFAULT_POS_Y );
     //setRect( DEFAULT_POS_X, DEFAULT_POS_Y, DEFAULT_STEAM_WIDTH,
     //         DEFAULT_STEAM_HEIGHT );
 
     init();
+    graphics->load_steam(DEFAULT_STEAM_WIDTH, DEFAULT_STEAM_HEIGHT, this);
 }
 
 
@@ -37,12 +37,12 @@ Steam::Steam(QGraphicsItem *parent):
 Steam::Steam(int pos_x, int pos_y,
     QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
-    graphics->load_steam(DEFAULT_STEAM_WIDTH, DEFAULT_STEAM_HEIGHT, this);
     // init size and position
     setPos( pos_x, pos_y );
 //    setRect( pos_x, pos_y, DEFAULT_STEAM_WIDTH, DEFAULT_STEAM_HEIGHT );
 
     init();
+    graphics->load_steam(DEFAULT_STEAM_WIDTH, DEFAULT_STEAM_HEIGHT, this);
 } 
 
 
@@ -50,12 +50,12 @@ Steam::Steam(int pos_x, int pos_y,
 Steam::Steam(int width, int height, int pos_x, int pos_y,
     QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
-    graphics->load_steam(width, height, this);
     setPos( pos_x, pos_y );
     // init size and position
     //setRect( pos_x, pos_y, width, height );
 
     init();
+    graphics->load_steam(width, height, this);
 }
 
 
