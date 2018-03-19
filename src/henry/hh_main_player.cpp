@@ -14,6 +14,7 @@ Main_player::Main_player(QGraphicsScene * scene,QGraphicsItem *parent): QObject(
     setFocus();
 
     player_health = new HealthBar(scene);
+    player_oxygen = new Oxygen(scene);
 
     has_banana = false;
     shield = false;

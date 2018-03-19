@@ -19,6 +19,8 @@
 #include "henry/hh_health.h"
 #include "henry/hh_health_bar.h"
 #include "wz_graphics.h"
+#include "henry/hh_oxygen.h"
+
 
 class Graphics;
 
@@ -28,6 +30,7 @@ Q_OBJECT
 private:
 bool has_banana;
 HealthBar *player_health;
+Oxygen *player_oxygen;
 QList<QGraphicsItem *> collision_item;
 QTimer * recover_timer;
 QTimer * timer;
