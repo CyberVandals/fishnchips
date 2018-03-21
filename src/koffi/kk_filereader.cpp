@@ -6,21 +6,23 @@
 #include <QResource>
 #include <QIODevice>
 
-FileReader::FileReader(QString filename)
+FileReader::FileReader(const QString& filename)
 {
-    QFile file(filename);
+    this->file = new QFile(filename);
 }
 
 void FileReader::parseLevel()
 {
-    if (file.open(QIODevice::ReadOnly | QFile::Text))
+    if (!file->open(QIODevice::ReadOnly | QFile::Text))
     {
-       QTextStream in(&file);
-       while (!in.atEnd())
-       {
-          QString line = in.readLine();
-          qDebug() << line;
-       }
-       file.close();
+        qDebug() << "Could not open the file for reading";
+        return;
     }
+    QTextStream in(file);
+    while (!in.atEnd())
+    {
+       QString line = in.readLine();
+       qDebug() << line;
+    }
+    file->close();
 }

@@ -7,11 +7,11 @@
 class FileReader
 {
 public:
-    FileReader(QString filename);
+    FileReader(const QString &filename);
     void parseLevel();
 
 private:
-    QFile file;
+    QFile *file;
     QString level, score;
     qint8 numberOfPlatforms, numberOfEnemies;
 };
