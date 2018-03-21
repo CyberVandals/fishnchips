@@ -5,6 +5,8 @@
 #include <QTextStream>
 #include <QResource>
 #include <QIODevice>
+#include <QStringList>
+#include <QRegExp>
 
 FileReader::FileReader(const QString& filename)
 {
@@ -23,6 +25,13 @@ void FileReader::parseLevel()
     {
        QString line = in.readLine();
        qDebug() << line;
+       parse(line);
     }
     file->close();
+}
+
+void FileReader::parse(QString line)
+{
+    QStringList list = line.split(QRegExp("\\s+"), QString::SkipEmptyParts);
+    qDebug() << list.at(0) << " - " << list.at(1);
 }
