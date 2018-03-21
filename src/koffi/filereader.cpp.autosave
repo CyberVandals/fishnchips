@@ -1,0 +1,12 @@
+#include "koffi/kk_filereader.h"
+#include <QFile>
+#include <QString>
+#include <QDebug>
+#include <QTextStream>
+#include <QResource>
+#include <QIODevice>
+
+FileReader::FileReader()
+{
+
+}
