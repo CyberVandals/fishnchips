@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia
 
 TARGET = FishMain
 TEMPLATE = app
@@ -69,11 +69,12 @@ HEADERS  += \
 	inc/koffi/kk_gamelevel.h \
 	inc/koffi/kk_gamescene.h \
 	inc/koffi/kk_scene.h \
-	inc/mm_soundmanager.h \
 	inc/wz_graphics.h \
     inc/chaeunkim/ck_pausescreen.h \
-    inc/henry/hh_oxygen.h
+    inc/henry/hh_oxygen.h \
+    inc/mm_soundmanager.h
 
 
 RESOURCES += \
-        resources/images/images.qrc
+        resources/images/images.qrc \
+    resources/images/sounds.qrc
