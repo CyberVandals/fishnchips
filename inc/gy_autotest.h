@@ -20,7 +20,7 @@ public:
     //AutoTest(QGraphicsScene *scene, SceneManager *sm=0, QGraphicsItem *object=0); 
     AutoTest(QGraphicsScene *scene, QGraphicsItem *object=0, SceneManager *sm=0); 
     bool change_scene(QGraphicsScene *scene);
-    void create_demo();
+    void create_stress_level();
     void restart_scene();
     void clear_scene();
     void add_point(QPoint point);
