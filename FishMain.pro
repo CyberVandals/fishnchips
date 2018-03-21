@@ -77,8 +77,7 @@ HEADERS  += \
     inc/chaeunkim/ck_pausescreen.h \
     inc/henry/hh_oxygen.h \
     inc/koffi/gamecontroller.h \
-    inc/koffi/kk_filereader.h \
-    src/koffi/filereader.h
+    inc/koffi/kk_filereader.h
 
 
 RESOURCES += \

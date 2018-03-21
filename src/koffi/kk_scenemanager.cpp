@@ -43,6 +43,7 @@ void SceneManager::init(QGraphicsScene *scene, int demo)
 
 void SceneManager::playGame(){
     mainScene->setBackground(":/images/back_ground.jpg");
+    generateLevel(":/levels/level1.txt");
 }
 
 void SceneManager::restartGame()
@@ -55,7 +56,7 @@ void SceneManager::restartGame()
 
 void SceneManager::generateLevel(QString filename)
 {
-    FileReader *fileReader = new FileReader(":/levels/level1.txt");
+    FileReader *fileReader = new FileReader(filename);
     fileReader->parseLevel();
 }
 

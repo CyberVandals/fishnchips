@@ -8,19 +8,18 @@
 
 FileReader::FileReader(QString filename)
 {
-    QFile file(Filename);
+    QFile file(filename);
 }
 
 void FileReader::parseLevel()
 {
-    QFile file(fileName);
-    if (file.open(QIODevice::ReadOnly))
+    if (file.open(QIODevice::ReadOnly | QFile::Text))
     {
        QTextStream in(&file);
        while (!in.atEnd())
        {
           QString line = in.readLine();
-          qDebug << line;
+          qDebug() << line;
        }
        file.close();
     }
