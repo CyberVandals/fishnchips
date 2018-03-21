@@ -4,6 +4,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
+#include <QString>
 
 #include "gy_object.h"
 #include "hh_main_player.h"
@@ -18,6 +19,8 @@ public:
     void init(QGraphicsScene *scene, int demo);
     void playGame();
     void restartGame();
+    void generateLevel(QString filename);
+    Main_player* getMainPlayer();
 private:
     Shark *shark;
     Main_player *player;

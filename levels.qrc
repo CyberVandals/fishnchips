@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>../level1.txt</file>
+    </qresource>
+</RCC>

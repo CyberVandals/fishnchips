@@ -5,6 +5,7 @@
 
 #include "kk_scenemanager.h"
 #include "inc/gy_autotest.h"
+#include "koffi/kk_filereader.h"
 
 SceneManager::SceneManager(QGraphicsScene *scene)
 {
@@ -42,6 +43,7 @@ void SceneManager::init(QGraphicsScene *scene, int demo)
 
 void SceneManager::playGame(){
     mainScene->setBackground(":/images/back_ground.jpg");
+    generateLevel(":/levels/level1.txt");
 }
 
 void SceneManager::restartGame()
@@ -50,4 +52,15 @@ void SceneManager::restartGame()
     mainScene->removeGameObject(shark);
     mainScene->removeGameObject(exit);
     mainScene->removeGameObject(platform);
+}
+
+void SceneManager::generateLevel(QString filename)
+{
+    FileReader *fileReader = new FileReader(filename);
+    fileReader->parseLevel();
+}
+
+Main_player *SceneManager::getMainPlayer()
+{
+    return player;
 }
