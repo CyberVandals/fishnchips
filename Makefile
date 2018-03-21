@@ -56,6 +56,7 @@ SOURCES       = src/chaeunkim/ck_main.cpp \
 		src/gigiyoung/gy_autotest.cpp \
 		src/gigiyoung/gy_banana.cpp \
 		src/gigiyoung/gy_exit.cpp \
+		src/gigiyoung/gy_objecthandler.cpp \
 		src/gigiyoung/gy_platform.cpp \
 		src/gigiyoung/gy_shark.cpp \
 		src/gigiyoung/gy_steam.cpp \
@@ -82,6 +83,7 @@ OBJECTS       = ck_main.o \
 		gy_autotest.o \
 		gy_banana.o \
 		gy_exit.o \
+		gy_objecthandler.o \
 		gy_platform.o \
 		gy_shark.o \
 		gy_steam.o \
@@ -163,6 +165,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		inc/chaeunkim/ck_pausebutton.h \
 		inc/gy_autotest.h \
 		inc/gy_object.h \
+		inc/gy_objecthandler.h \
 		inc/gigiyoung/gy_abstract.h \
 		inc/hh_main_player.h \
 		inc/henry/hh_health.h \
@@ -182,6 +185,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		src/gigiyoung/gy_autotest.cpp \
 		src/gigiyoung/gy_banana.cpp \
 		src/gigiyoung/gy_exit.cpp \
+		src/gigiyoung/gy_objecthandler.cpp \
 		src/gigiyoung/gy_platform.cpp \
 		src/gigiyoung/gy_shark.cpp \
 		src/gigiyoung/gy_steam.cpp \
@@ -364,8 +368,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents resources/images/images.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents inc/ck_mainwindow.h inc/chaeunkim/ck_button.h inc/chaeunkim/ck_pausebutton.h inc/gy_autotest.h inc/gy_object.h inc/gigiyoung/gy_abstract.h inc/hh_main_player.h inc/henry/hh_health.h inc/henry/hh_health_bar.h inc/kk_scenemanager.h inc/koffi/kk_config.h inc/koffi/kk_gamelevel.h inc/koffi/kk_gamescene.h inc/koffi/kk_scene.h inc/mm_soundmanager.h inc/wz_graphics.h inc/chaeunkim/ck_pausescreen.h $(DISTDIR)/
-	$(COPY_FILE) --parents src/chaeunkim/ck_main.cpp src/chaeunkim/ck_mainwindow.cpp src/chaeunkim/ck_button.cpp src/chaeunkim/ck_pausebutton.cpp src/gigiyoung/gy_abstract.cpp src/gigiyoung/gy_autotest.cpp src/gigiyoung/gy_banana.cpp src/gigiyoung/gy_exit.cpp src/gigiyoung/gy_platform.cpp src/gigiyoung/gy_shark.cpp src/gigiyoung/gy_steam.cpp src/henry/hh_main_player.cpp src/henry/hh_health.cpp src/henry/hh_health_bar.cpp src/koffi/kk_gamelevel.cpp src/koffi/kk_gamescene.cpp src/koffi/kk_scenemanager.cpp src/matthew/mm_soundmanager.cpp src/wei/wz_graphics.cpp src/chaeunkim/ck_pausescreen.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents inc/ck_mainwindow.h inc/chaeunkim/ck_button.h inc/chaeunkim/ck_pausebutton.h inc/gy_autotest.h inc/gy_object.h inc/gy_objecthandler.h inc/gigiyoung/gy_abstract.h inc/hh_main_player.h inc/henry/hh_health.h inc/henry/hh_health_bar.h inc/kk_scenemanager.h inc/koffi/kk_config.h inc/koffi/kk_gamelevel.h inc/koffi/kk_gamescene.h inc/koffi/kk_scene.h inc/mm_soundmanager.h inc/wz_graphics.h inc/chaeunkim/ck_pausescreen.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/chaeunkim/ck_main.cpp src/chaeunkim/ck_mainwindow.cpp src/chaeunkim/ck_button.cpp src/chaeunkim/ck_pausebutton.cpp src/gigiyoung/gy_abstract.cpp src/gigiyoung/gy_autotest.cpp src/gigiyoung/gy_banana.cpp src/gigiyoung/gy_exit.cpp src/gigiyoung/gy_objecthandler.cpp src/gigiyoung/gy_platform.cpp src/gigiyoung/gy_shark.cpp src/gigiyoung/gy_steam.cpp src/henry/hh_main_player.cpp src/henry/hh_health.cpp src/henry/hh_health_bar.cpp src/koffi/kk_gamelevel.cpp src/koffi/kk_gamescene.cpp src/koffi/kk_scenemanager.cpp src/matthew/mm_soundmanager.cpp src/wei/wz_graphics.cpp src/chaeunkim/ck_pausescreen.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -538,6 +542,14 @@ gy_exit.o: src/gigiyoung/gy_exit.cpp inc/gy_object.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gy_exit.o src/gigiyoung/gy_exit.cpp
+
+gy_objecthandler.o: src/gigiyoung/gy_objecthandler.cpp inc/gy_objecthandler.h \
+		inc/gy_object.h \
+		inc/wz_graphics.h \
+		inc/hh_main_player.h \
+		inc/henry/hh_health.h \
+		inc/henry/hh_health_bar.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gy_objecthandler.o src/gigiyoung/gy_objecthandler.cpp
 
 gy_platform.o: src/gigiyoung/gy_platform.cpp inc/gy_object.h \
 		inc/wz_graphics.h \

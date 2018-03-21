@@ -39,6 +39,7 @@ SOURCES += \
 	src/gigiyoung/gy_autotest.cpp \
         src/gigiyoung/gy_banana.cpp \
         src/gigiyoung/gy_exit.cpp \
+	src/gigiyoung/gy_objecthandler.cpp \
         src/gigiyoung/gy_platform.cpp \
         src/gigiyoung/gy_shark.cpp \
         src/gigiyoung/gy_steam.cpp \
@@ -59,6 +60,7 @@ HEADERS  += \
 	inc/chaeunkim/ck_pausebutton.h\
 	inc/gy_autotest.h \
         inc/gy_object.h \
+	inc/gy_objecthandler.h \
 	inc/gigiyoung/gy_abstract.h \
         inc/hh_main_player.h \
 	inc/henry/hh_health.h \
