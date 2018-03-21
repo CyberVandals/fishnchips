@@ -10,7 +10,6 @@ void Platform::init() {
    // sound.loadPlatformSounds(this)
    graphics = new Graphics();
 
-   graphics->load_platform(this);
 }
 
 
@@ -20,8 +19,9 @@ Platform::Platform(QGraphicsItem *parent): QGraphicsPixmapItem(parent) {
     //setRect( DEFAULT_PLAT_POS_X, DEFAULT_PLAT_POS_Y, 
     //         DEFAULT_PLAT_WIDTH, DEFAULT_PLAT_HEIGHT ); 
 
-    setPos( DEFAULT_PLAT_POS_X, DEFAULT_PLAT_POS_Y );
     init();
+    setPos( DEFAULT_PLAT_POS_X, DEFAULT_PLAT_POS_Y );
+    graphics->load_platform(DEFAULT_PLAT_WIDTH,DEFAULT_PLAT_HEIGHT,this);
 }
 
 Platform::Platform(int pos_x, int pos_y, 
@@ -29,18 +29,23 @@ Platform::Platform(int pos_x, int pos_y,
 //    QGraphicsItem *parent): QGraphicsRectItem(parent)
 {
     //setRect( pos_x, pos_y, DEFAULT_PLAT_WIDTH, DEFAULT_PLAT_HEIGHT ); 
-    setPos( pos_x, pos_y ); 
-    
+
     init();
+
+    setPos( pos_x, pos_y ); 
+    graphics->load_platform(DEFAULT_PLAT_WIDTH,DEFAULT_PLAT_HEIGHT,this);
+    
 }
 
-Platform::Platform(int width, int height, int pos_x, int pos_y,
+Platform::Platform(int width, int pos_x, int pos_y,
     QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 //    QGraphicsItem *parent): QGraphicsRectItem(parent)
 {
     //setRect( pos_x, pos_y, width, height ); 
-    setPos( pos_x, pos_y ); 
 
     init();
+
+    setPos( pos_x, pos_y ); 
+    graphics->load_platform( width, DEFAULT_PLAT_HEIGHT,this);
 }
 
