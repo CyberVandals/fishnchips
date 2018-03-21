@@ -48,7 +48,6 @@ struct Velocity {
 };
 
 
-
 // Platform - maybe use Draw/Paint() instead of an image
 class Platform: public QGraphicsRectItem {
 public:
