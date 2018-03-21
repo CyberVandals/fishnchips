@@ -49,7 +49,8 @@ struct Velocity {
 
 
 // Platform - maybe use Draw/Paint() instead of an image
-class Platform: public QGraphicsRectItem {
+//class Platform: public QGraphicsRectItem {
+class Platform: public QGraphicsPixmapItem {
 public:
     Platform(QGraphicsItem *parent=0);
     Platform(int pos_x, int pos_y, QGraphicsItem *parent=0);
@@ -58,6 +59,8 @@ public:
 
 private:
     void init();
+
+    Graphics *graphics;
 
 };
 
