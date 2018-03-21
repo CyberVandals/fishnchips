@@ -39,7 +39,7 @@ AutoTest::AutoTest(QGraphicsScene *scene, QGraphicsItem *object, SceneManager *s
 
     // if no player object passed, then create a demo level
     if(object == 0 && sm == 0)
-        create_demo();
+        create_stress_level();
 
     connect(timer, SIGNAL(timeout()), this, SLOT(simulate_keypress()));
     timer->start(100);
@@ -53,7 +53,7 @@ bool AutoTest::change_scene(QGraphicsScene *scene) {
     return false;
 }
 
-void AutoTest::create_demo() {
+void AutoTest::create_stress_level() {
 
 //    QGraphicsItem *player, *shark1, *shark2, *shark3, *shark4, *shark5, *plat1, *plat2, *plat3, *bana1, *steam1, *exit;
     Main_player *player;
@@ -92,7 +92,7 @@ void AutoTest::create_demo() {
 
 void AutoTest::restart_scene() {
     clear_scene();
-    create_demo();
+    create_stress_level();
 }
 
 void AutoTest::clear_scene() {
