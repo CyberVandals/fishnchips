@@ -80,6 +80,10 @@ void MainWindow::bringGameOverScene(){
     connect(quitBtn,SIGNAL(clicked()),this,SLOT(close()));
     scene->addWidget(quitBtn);
 
+    replayBtn = new Button(":/images/replay.png");
+    replayBtn->setGeometry((scene->width() - replayBtn->width()/2.2) /2,scene->height() - (replayBtn->height()*2),0,0);
+    //connect(playBtn,SIGNAL(clicked()),this,SLOT(start()));
+    scene->addWidget(replayBtn);
 
 
 }

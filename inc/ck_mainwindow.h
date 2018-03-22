@@ -26,6 +26,7 @@ private:
     QGraphicsPixmapItem *logo;
 
     Button *playBtn;
+    Button *replayBtn;
     Button *quitBtn;
     Button *demoBtn;
     Button *stressBtn;
