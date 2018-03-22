@@ -104,6 +104,8 @@ bool Shark::cook() {
 }
 
 void Shark::move() {
+    static const int X_BUFFER = 50;
+    static const int Y_BUFFER = 8;
     //qDebug() << "Shark is moving\n";
     static int scene_right = scene()->sceneRect().right();
     static int scene_left = scene()->sceneRect().left(); 
@@ -130,6 +132,7 @@ void Shark::move() {
     //qDebug() << "Shark's velocity is " << vel.x << ", " << vel.y; 
 
     QList<QGraphicsItem *> items = 
+        //collidingItems(Qt::IntersectsItemBoundingRect);
         collidingItems(Qt::IntersectsItemShape);
 
     // if left or right edges of scene, reverse x velocity
@@ -139,7 +142,7 @@ void Shark::move() {
         vel.x = -vel.x;
     }
     // if top or bottom edges of scene, reverse x velocity
-    if ( (shark_top <= scene_top && vel.y < 0) || 
+    else if ( (shark_top <= scene_top && vel.y < 0) || 
          (shark_bottom >= scene_bottom && vel.y > 0) ) 
     {
         vel.y = -vel.y;
@@ -165,14 +168,42 @@ void Shark::move() {
                 if( vel.y > 0 || vel.y < 0)
                     vel.y = -vel.y;
             }
+
+            if( (shark_right >= plat_left && 
+                 shark_right <= plat_left + BUFFER &&
+                 shark_left < plat_left && vel.x > 0) ||
+                (shark_left <= plat_right && 
+                 shark_left >= plat_right - BUFFER && 
+                 shark_right > plat_right &&  vel.x < 0) ) 
+
+this one kind works
+            if( (shark_right >= plat_left && 
+                 shark_left < plat_left && vel.x > 0) ||
+                (shark_left <= plat_right && 
+                 shark_right > plat_right &&  vel.x < 0) ) 
 */
-            if( (shark_right >= plat_left && vel.x > 0) ||
-                (shark_left <= plat_right && vel.x < 0) ) 
+            if( ((shark_right >= plat_left && 
+                 shark_right <= plat_left + X_BUFFER) && vel.x > 0) ||
+                ((shark_left <= plat_right && 
+                 shark_left >= plat_right - X_BUFFER) &&  vel.x < 0) ) 
             {
                 vel.x = -vel.x;
             }
-            if( vel.y > 0 || vel.y < 0)
+
+            if( (shark_bottom >= plat_top && 
+                 shark_top < plat_top && vel.y > 0) || 
+                (shark_top <= plat_bottom && 
+                 shark_bottom > plat_bottom && vel.y < 0) )
+
+/*
+            if( (shark_bottom >= plat_top - Y_BUFFER && 
+                 shark_bottom <= plat_top + Y_BUFFER && vel.y > 0) || 
+                (shark_top <= plat_bottom + Y_BUFFER && 
+                 shark_top >= plat_bottom - Y_BUFFER && vel.y < 0) )
+*/
+            {
                 vel.y = -vel.y;
+            }
             
 
         }
@@ -182,7 +213,7 @@ void Shark::move() {
             }
             else {
                 sound->playChomp();
-                sound_count = DEFAULT_STUN_DURATION;
+                sound_count = PLAYER_IMMUNE_DURATION;
             }
         }
 
