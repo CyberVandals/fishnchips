@@ -137,6 +137,7 @@ private:
 
     bool cooked;
     int stunned;
+    int sound_count;
     struct Velocity vel;
 
     QTimer *timer;
