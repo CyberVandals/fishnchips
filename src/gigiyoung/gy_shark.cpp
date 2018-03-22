@@ -20,11 +20,10 @@ void Shark::init() {
     stunned = 0;
     cooked = false;
  
-//    setPixmap(QPixmap("../../resources/images/blue_shark.png").scaled(10,10));
     //setPixmap(QPixmap(":/images/blue_shark.png").scaled(10,10));
-
     //setPixmap(QPixmap(":/images/blue_shark.png"));
 
+    sound = new SoundManager();
     graphics = new Graphics();
 
     // create timer for move slot
@@ -146,6 +145,10 @@ void Shark::move() {
         // if collision with platform, invert x velocity
         if( typeid(*(items[i])) == typeid(Platform) )
             vel.x = -vel.x; 
+
+        if( typeid(*(items[i])) == typeid(Main_player) ) {
+            sound->playChomp();
+        }
 
         // if collision with thrown banana, stun shark
         if( typeid(*(items[i])) == typeid(Banana) ) {

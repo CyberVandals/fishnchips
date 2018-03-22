@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/sounds"/>
+    <qresource prefix="/">
+        <file>../sounds/background.mp3</file>
+        <file>../sounds/bump.mp3</file>
+        <file>../sounds/chomp.mp3</file>
+        <file>../sounds/die.mp3</file>
+        <file>../sounds/eat.mp3</file>
+        <file>../sounds/end.mp3</file>
+        <file>../sounds/hit.mp3</file>
+        <file>../sounds/levelup.mp3</file>
+        <file>../sounds/pickup.mp3</file>
+        <file>../sounds/start.mp3</file>
+        <file>../sounds/steam.mp3</file>
+        <file>../sounds/throw.mp3</file>
+    </qresource>
+</RCC>

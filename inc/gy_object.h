@@ -11,6 +11,7 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsItem>
 #include "wz_graphics.h"
+#include "mm_soundmanager.h"
 
 #define UPDATE_MS 50
 
@@ -40,6 +41,7 @@
 
 // forward declarations
 class Graphics;
+class SoundManager;
 
 // structs
 struct Velocity {
@@ -47,17 +49,67 @@ struct Velocity {
     int y;
 };
 
+// Banana 
+class Banana: public QObject, public QGraphicsPixmapItem {
+    Q_OBJECT
+public:
+    Banana(QGraphicsItem *parent = 0);
+    Banana(int pos_x, int pos_y, QGraphicsItem *parent = 0);
+    Banana(int width, int height, int pos_x, int pos_y,
+           QGraphicsItem *parent = 0);
+
+    // 0 for up, 1 for down, 2 for left, 3 for right
+    bool chuck(int direction);
+    bool pickup();
+    bool eat();
+    bool is_thrown();
+
+public slots:
+    void status();
+    void move();
+
+private:
+    void init();
+
+    bool thrown;
+    struct Velocity vel;
+    Graphics *graphics;
+    QTimer *timer;
+};
+
+// Exit Object - needs to check whether play has collided with it
+class Exit: public QObject, public QGraphicsPixmapItem {
+    Q_OBJECT
+public:
+    Exit(QGraphicsItem *parent=0);
+    Exit(int pos_x, int pos_y, QGraphicsItem *parent=0);
+    Exit(int width, int height, int pos_x, int pos_y, QGraphicsItem *parent=0);
+
+public slots:
+    void status();
+
+private:
+    void init();
+
+    QTimer *timer;
+    Graphics *graphics;
+};
+
+
 
 // Platform - maybe use Draw/Paint() instead of an image
-class Platform: public QGraphicsRectItem {
+//class Platform: public QGraphicsRectItem {
+class Platform: public QGraphicsPixmapItem {
 public:
     Platform(QGraphicsItem *parent=0);
     Platform(int pos_x, int pos_y, QGraphicsItem *parent=0);
-    Platform(int width, int height, int pos_x, int pos_y, 
+    Platform(int width, int pos_x, int pos_y, 
              QGraphicsItem *parent=0);
 
 private:
     void init();
+
+    Graphics *graphics;
 
 };
 
@@ -89,34 +141,7 @@ private:
 
     QTimer *timer;
     Graphics *graphics;
-};
-
-// Banana 
-class Banana: public QObject, public QGraphicsPixmapItem {
-    Q_OBJECT
-public:
-    Banana(QGraphicsItem *parent = 0);
-    Banana(int pos_x, int pos_y, QGraphicsItem *parent = 0);
-    Banana(int width, int height, int pos_x, int pos_y,
-           QGraphicsItem *parent = 0);
-
-    // 0 for up, 1 for down, 2 for left, 3 for right
-    bool chuck(int direction);
-    bool pickup();
-    bool eat();
-    bool is_thrown();
-
-public slots:
-    void status();
-    void move();
-
-private:
-    void init();
-
-    bool thrown;
-    struct Velocity vel;
-    Graphics *graphics;
-    QTimer *timer;
+    SoundManager *sound;
 };
 
 // Steam needs to check if SomeObject collided with it
@@ -135,24 +160,6 @@ private:
 
     bool exploded;
     int countdown;
-    QTimer *timer;
-    Graphics *graphics;
-};
-
-// Exit Object - needs to check whether play has collided with it
-class Exit: public QObject, public QGraphicsPixmapItem {
-    Q_OBJECT
-public:
-    Exit(QGraphicsItem *parent=0);
-    Exit(int pos_x, int pos_y, QGraphicsItem *parent=0);
-    Exit(int width, int height, int pos_x, int pos_y, QGraphicsItem *parent=0);
-
-public slots:
-    void status();
-
-private:
-    void init();
-
     QTimer *timer;
     Graphics *graphics;
 };

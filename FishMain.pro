@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia
 
 TARGET = FishMain
 TEMPLATE = app
@@ -31,10 +31,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        src/chaeunkim/ck_main.cpp \
-        src/chaeunkim/ck_mainwindow.cpp \
-        src/chaeunkim/ck_button.cpp \
-	src/chaeunkim/ck_pausebutton.cpp\
+	src/chaeunkim/ck_main.cpp \
+	src/chaeunkim/ck_mainwindow.cpp \
+	src/chaeunkim/ck_button.cpp \
+	src/chaeunkim/ck_pausebutton.cpp \
 	src/gigiyoung/gy_abstract.cpp \
 	src/gigiyoung/gy_autotest.cpp \
         src/gigiyoung/gy_banana.cpp \
@@ -51,35 +51,35 @@ SOURCES += \
         src/koffi/kk_scenemanager.cpp \
 	src/matthew/mm_soundmanager.cpp \
         src/wei/wz_graphics.cpp \ 
-    src/chaeunkim/ck_pausescreen.cpp \
-    src/henry/hh_oxygen.cpp \
-    src/koffi/kk_filereader.cpp
-
+	src/chaeunkim/ck_pausescreen.cpp \
+	src/henry/hh_oxygen.cpp \
+	src/koffi/kk_filereader.cpp
 
 HEADERS  += \
-        inc/ck_mainwindow.h \
-        inc/chaeunkim/ck_button.h \
+	inc/ck_mainwindow.h \
+	inc/chaeunkim/ck_button.h \
 	inc/chaeunkim/ck_pausebutton.h\
 	inc/gy_autotest.h \
-        inc/gy_object.h \
+	inc/gy_object.h \
 	inc/gy_objecthandler.h \
 	inc/gigiyoung/gy_abstract.h \
-        inc/hh_main_player.h \
+	inc/hh_main_player.h \
 	inc/henry/hh_health.h \
 	inc/henry/hh_health_bar.h \
-        inc/kk_scenemanager.h \
+	inc/kk_scenemanager.h \
 	inc/koffi/kk_config.h \
 	inc/koffi/kk_gamelevel.h \
 	inc/koffi/kk_gamescene.h \
 	inc/koffi/kk_scene.h \
-	inc/mm_soundmanager.h \
 	inc/wz_graphics.h \
-    inc/chaeunkim/ck_pausescreen.h \
-    inc/henry/hh_oxygen.h \
-    inc/koffi/gamecontroller.h \
-    inc/koffi/kk_filereader.h
-
+	inc/chaeunkim/ck_pausescreen.h \
+	inc/henry/hh_oxygen.h \
+	inc/mm_soundmanager.h \
+	inc/koffi/gamecontroller.h \
+	inc/koffi/kk_filereader.h
 
 RESOURCES += \
-        resources/images/images.qrc \
-    resources/levels/levels.qrc
+	resources/images/images.qrc \
+	resources/images/sounds.qrc \
+	resources/levels/levels.qrc
+

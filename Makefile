@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -m64 -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -m64 -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I. -Iinc -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64
+INCPATH       = -I. -Iinc -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtMultimedia -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64
 QMAKE         = /usr/lib/x86_64-linux-gnu/qt5/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -36,7 +36,7 @@ DISTNAME      = FishMain1.0.0
 DISTDIR = /home/gigi/Courses/cs383/fishnchips/.tmp/FishMain1.0.0
 LINK          = g++
 LFLAGS        = -m64 -Wl,-O1
-LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -lQt5Widgets -lQt5Multimedia -lQt5Gui -lQt5Network -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -69,7 +69,10 @@ SOURCES       = src/chaeunkim/ck_main.cpp \
 		src/matthew/mm_soundmanager.cpp \
 		src/wei/wz_graphics.cpp \
 		src/chaeunkim/ck_pausescreen.cpp \
-		src/henry/hh_oxygen.cpp qrc_images.cpp \
+		src/henry/hh_oxygen.cpp \
+		src/koffi/kk_filereader.cpp qrc_images.cpp \
+		qrc_sounds.cpp \
+		qrc_levels.cpp \
 		moc_ck_mainwindow.cpp \
 		moc_ck_button.cpp \
 		moc_ck_pausebutton.cpp \
@@ -99,7 +102,10 @@ OBJECTS       = ck_main.o \
 		wz_graphics.o \
 		ck_pausescreen.o \
 		hh_oxygen.o \
+		kk_filereader.o \
 		qrc_images.o \
+		qrc_sounds.o \
+		qrc_levels.o \
 		moc_ck_mainwindow.o \
 		moc_ck_button.o \
 		moc_ck_pausebutton.o \
@@ -126,6 +132,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_eglfs_device_lib_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_gui.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_gui_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimedia.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimediawidgets.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_opengl.pri \
@@ -179,10 +187,12 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		inc/koffi/kk_gamelevel.h \
 		inc/koffi/kk_gamescene.h \
 		inc/koffi/kk_scene.h \
-		inc/mm_soundmanager.h \
 		inc/wz_graphics.h \
 		inc/chaeunkim/ck_pausescreen.h \
-		inc/henry/hh_oxygen.h src/chaeunkim/ck_main.cpp \
+		inc/henry/hh_oxygen.h \
+		inc/mm_soundmanager.h \
+		inc/koffi/gamecontroller.h \
+		inc/koffi/kk_filereader.h src/chaeunkim/ck_main.cpp \
 		src/chaeunkim/ck_mainwindow.cpp \
 		src/chaeunkim/ck_button.cpp \
 		src/chaeunkim/ck_pausebutton.cpp \
@@ -203,7 +213,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		src/matthew/mm_soundmanager.cpp \
 		src/wei/wz_graphics.cpp \
 		src/chaeunkim/ck_pausescreen.cpp \
-		src/henry/hh_oxygen.cpp
+		src/henry/hh_oxygen.cpp \
+		src/koffi/kk_filereader.cpp
 QMAKE_TARGET  = FishMain
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = FishMain
@@ -253,6 +264,8 @@ Makefile: FishMain.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qmake.
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_eglfs_device_lib_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_gui.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_gui_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimedia.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimediawidgets.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_opengl.pri \
@@ -293,8 +306,12 @@ Makefile: FishMain.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qmake.
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		FishMain.pro \
 		resources/images/images.qrc \
+		resources/images/sounds.qrc \
+		resources/levels/levels.qrc \
 		/usr/lib/x86_64-linux-gnu/libQt5Widgets.prl \
+		/usr/lib/x86_64-linux-gnu/libQt5Multimedia.prl \
 		/usr/lib/x86_64-linux-gnu/libQt5Gui.prl \
+		/usr/lib/x86_64-linux-gnu/libQt5Network.prl \
 		/usr/lib/x86_64-linux-gnu/libQt5Core.prl
 	$(QMAKE) -o Makefile FishMain.pro
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf:
@@ -316,6 +333,8 @@ Makefile: FishMain.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qmake.
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_eglfs_device_lib_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_gui.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_gui_private.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimedia.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimediawidgets.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_opengl.pri:
@@ -356,8 +375,12 @@ Makefile: FishMain.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qmake.
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf:
 FishMain.pro:
 resources/images/images.qrc:
+resources/images/sounds.qrc:
+resources/levels/levels.qrc:
 /usr/lib/x86_64-linux-gnu/libQt5Widgets.prl:
+/usr/lib/x86_64-linux-gnu/libQt5Multimedia.prl:
 /usr/lib/x86_64-linux-gnu/libQt5Gui.prl:
+/usr/lib/x86_64-linux-gnu/libQt5Network.prl:
 /usr/lib/x86_64-linux-gnu/libQt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile FishMain.pro
@@ -373,9 +396,9 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents resources/images/images.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents inc/ck_mainwindow.h inc/chaeunkim/ck_button.h inc/chaeunkim/ck_pausebutton.h inc/gy_autotest.h inc/gy_object.h inc/gy_objecthandler.h inc/gigiyoung/gy_abstract.h inc/hh_main_player.h inc/henry/hh_health.h inc/henry/hh_health_bar.h inc/kk_scenemanager.h inc/koffi/kk_config.h inc/koffi/kk_gamelevel.h inc/koffi/kk_gamescene.h inc/koffi/kk_scene.h inc/mm_soundmanager.h inc/wz_graphics.h inc/chaeunkim/ck_pausescreen.h inc/henry/hh_oxygen.h $(DISTDIR)/
-	$(COPY_FILE) --parents src/chaeunkim/ck_main.cpp src/chaeunkim/ck_mainwindow.cpp src/chaeunkim/ck_button.cpp src/chaeunkim/ck_pausebutton.cpp src/gigiyoung/gy_abstract.cpp src/gigiyoung/gy_autotest.cpp src/gigiyoung/gy_banana.cpp src/gigiyoung/gy_exit.cpp src/gigiyoung/gy_objecthandler.cpp src/gigiyoung/gy_platform.cpp src/gigiyoung/gy_shark.cpp src/gigiyoung/gy_steam.cpp src/henry/hh_main_player.cpp src/henry/hh_health.cpp src/henry/hh_health_bar.cpp src/koffi/kk_gamelevel.cpp src/koffi/kk_gamescene.cpp src/koffi/kk_scenemanager.cpp src/matthew/mm_soundmanager.cpp src/wei/wz_graphics.cpp src/chaeunkim/ck_pausescreen.cpp src/henry/hh_oxygen.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents resources/images/images.qrc resources/images/sounds.qrc resources/levels/levels.qrc $(DISTDIR)/
+	$(COPY_FILE) --parents inc/ck_mainwindow.h inc/chaeunkim/ck_button.h inc/chaeunkim/ck_pausebutton.h inc/gy_autotest.h inc/gy_object.h inc/gy_objecthandler.h inc/gigiyoung/gy_abstract.h inc/hh_main_player.h inc/henry/hh_health.h inc/henry/hh_health_bar.h inc/kk_scenemanager.h inc/koffi/kk_config.h inc/koffi/kk_gamelevel.h inc/koffi/kk_gamescene.h inc/koffi/kk_scene.h inc/wz_graphics.h inc/chaeunkim/ck_pausescreen.h inc/henry/hh_oxygen.h inc/mm_soundmanager.h inc/koffi/gamecontroller.h inc/koffi/kk_filereader.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/chaeunkim/ck_main.cpp src/chaeunkim/ck_mainwindow.cpp src/chaeunkim/ck_button.cpp src/chaeunkim/ck_pausebutton.cpp src/gigiyoung/gy_abstract.cpp src/gigiyoung/gy_autotest.cpp src/gigiyoung/gy_banana.cpp src/gigiyoung/gy_exit.cpp src/gigiyoung/gy_objecthandler.cpp src/gigiyoung/gy_platform.cpp src/gigiyoung/gy_shark.cpp src/gigiyoung/gy_steam.cpp src/henry/hh_main_player.cpp src/henry/hh_health.cpp src/henry/hh_health_bar.cpp src/koffi/kk_gamelevel.cpp src/koffi/kk_gamescene.cpp src/koffi/kk_scenemanager.cpp src/matthew/mm_soundmanager.cpp src/wei/wz_graphics.cpp src/chaeunkim/ck_pausescreen.cpp src/henry/hh_oxygen.cpp src/koffi/kk_filereader.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -397,9 +420,9 @@ mocables: compiler_moc_header_make_all compiler_moc_source_make_all
 
 check: first
 
-compiler_rcc_make_all: qrc_images.cpp
+compiler_rcc_make_all: qrc_images.cpp qrc_sounds.cpp qrc_levels.cpp
 compiler_rcc_clean:
-	-$(DEL_FILE) qrc_images.cpp
+	-$(DEL_FILE) qrc_images.cpp qrc_sounds.cpp qrc_levels.cpp
 qrc_images.cpp: resources/images/images.qrc \
 		resources/images/continue.png \
 		resources/images/back_ground.jpg \
@@ -418,6 +441,25 @@ qrc_images.cpp: resources/images/images.qrc \
 		resources/images/demoBtn.png
 	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name images resources/images/images.qrc -o qrc_images.cpp
 
+qrc_sounds.cpp: resources/images/sounds.qrc \
+		resources/sounds/pickup.mp3 \
+		resources/sounds/throw.mp3 \
+		resources/sounds/hit.mp3 \
+		resources/sounds/die.mp3 \
+		resources/sounds/chomp.mp3 \
+		resources/sounds/background.mp3 \
+		resources/sounds/levelup.mp3 \
+		resources/sounds/start.mp3 \
+		resources/sounds/steam.mp3 \
+		resources/sounds/end.mp3 \
+		resources/sounds/bump.mp3 \
+		resources/sounds/eat.mp3
+	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name sounds resources/images/sounds.qrc -o qrc_sounds.cpp
+
+qrc_levels.cpp: resources/levels/levels.qrc \
+		resources/levels/level1.txt
+	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name levels resources/levels/levels.qrc -o qrc_levels.cpp
+
 compiler_moc_header_make_all: moc_ck_mainwindow.cpp moc_ck_button.cpp moc_ck_pausebutton.cpp moc_gy_autotest.cpp moc_gy_object.cpp moc_gy_objecthandler.cpp moc_hh_main_player.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_ck_mainwindow.cpp moc_ck_button.cpp moc_ck_pausebutton.cpp moc_gy_autotest.cpp moc_gy_object.cpp moc_gy_objecthandler.cpp moc_hh_main_player.cpp
@@ -431,17 +473,18 @@ moc_ck_mainwindow.cpp: inc/chaeunkim/ck_button.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
 		inc/henry/hh_oxygen.h \
+		inc/mm_soundmanager.h \
 		inc/koffi/kk_gamelevel.h \
 		inc/koffi/kk_gamescene.h \
 		inc/koffi/kk_scene.h \
 		inc/ck_mainwindow.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/gigi/Courses/cs383/fishnchips -I/home/gigi/Courses/cs383/fishnchips/inc -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include inc/ck_mainwindow.h -o moc_ck_mainwindow.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/gigi/Courses/cs383/fishnchips -I/home/gigi/Courses/cs383/fishnchips/inc -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include inc/ck_mainwindow.h -o moc_ck_mainwindow.cpp
 
 moc_ck_button.cpp: inc/chaeunkim/ck_button.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/gigi/Courses/cs383/fishnchips -I/home/gigi/Courses/cs383/fishnchips/inc -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include inc/chaeunkim/ck_button.h -o moc_ck_button.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/gigi/Courses/cs383/fishnchips -I/home/gigi/Courses/cs383/fishnchips/inc -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include inc/chaeunkim/ck_button.h -o moc_ck_button.cpp
 
 moc_ck_pausebutton.cpp: inc/chaeunkim/ck_pausebutton.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/gigi/Courses/cs383/fishnchips -I/home/gigi/Courses/cs383/fishnchips/inc -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include inc/chaeunkim/ck_pausebutton.h -o moc_ck_pausebutton.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/gigi/Courses/cs383/fishnchips -I/home/gigi/Courses/cs383/fishnchips/inc -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include inc/chaeunkim/ck_pausebutton.h -o moc_ck_pausebutton.cpp
 
 moc_gy_autotest.cpp: inc/kk_scenemanager.h \
 		inc/gy_object.h \
@@ -450,11 +493,12 @@ moc_gy_autotest.cpp: inc/kk_scenemanager.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
 		inc/henry/hh_oxygen.h \
+		inc/mm_soundmanager.h \
 		inc/koffi/kk_gamelevel.h \
 		inc/koffi/kk_gamescene.h \
 		inc/koffi/kk_scene.h \
 		inc/gy_autotest.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/gigi/Courses/cs383/fishnchips -I/home/gigi/Courses/cs383/fishnchips/inc -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include inc/gy_autotest.h -o moc_gy_autotest.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/gigi/Courses/cs383/fishnchips -I/home/gigi/Courses/cs383/fishnchips/inc -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include inc/gy_autotest.h -o moc_gy_autotest.cpp
 
 moc_gy_object.cpp: inc/wz_graphics.h \
 		inc/hh_main_player.h \
@@ -462,8 +506,9 @@ moc_gy_object.cpp: inc/wz_graphics.h \
 		inc/henry/hh_health_bar.h \
 		inc/henry/hh_oxygen.h \
 		inc/gy_object.h \
+		inc/mm_soundmanager.h \
 		inc/gy_object.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/gigi/Courses/cs383/fishnchips -I/home/gigi/Courses/cs383/fishnchips/inc -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include inc/gy_object.h -o moc_gy_object.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/gigi/Courses/cs383/fishnchips -I/home/gigi/Courses/cs383/fishnchips/inc -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include inc/gy_object.h -o moc_gy_object.cpp
 
 moc_gy_objecthandler.cpp: inc/gy_object.h \
 		inc/wz_graphics.h \
@@ -471,8 +516,9 @@ moc_gy_objecthandler.cpp: inc/gy_object.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
 		inc/henry/hh_oxygen.h \
+		inc/mm_soundmanager.h \
 		inc/gy_objecthandler.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/gigi/Courses/cs383/fishnchips -I/home/gigi/Courses/cs383/fishnchips/inc -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include inc/gy_objecthandler.h -o moc_gy_objecthandler.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/gigi/Courses/cs383/fishnchips -I/home/gigi/Courses/cs383/fishnchips/inc -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include inc/gy_objecthandler.h -o moc_gy_objecthandler.cpp
 
 moc_hh_main_player.cpp: inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
@@ -480,8 +526,9 @@ moc_hh_main_player.cpp: inc/henry/hh_health.h \
 		inc/hh_main_player.h \
 		inc/henry/hh_oxygen.h \
 		inc/gy_object.h \
+		inc/mm_soundmanager.h \
 		inc/hh_main_player.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/gigi/Courses/cs383/fishnchips -I/home/gigi/Courses/cs383/fishnchips/inc -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include inc/hh_main_player.h -o moc_hh_main_player.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/gigi/Courses/cs383/fishnchips -I/home/gigi/Courses/cs383/fishnchips/inc -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include inc/hh_main_player.h -o moc_hh_main_player.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -508,6 +555,7 @@ ck_main.o: src/chaeunkim/ck_main.cpp inc/ck_mainwindow.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
 		inc/henry/hh_oxygen.h \
+		inc/mm_soundmanager.h \
 		inc/koffi/kk_gamelevel.h \
 		inc/koffi/kk_gamescene.h \
 		inc/koffi/kk_scene.h
@@ -524,6 +572,7 @@ ck_mainwindow.o: src/chaeunkim/ck_mainwindow.cpp inc/ck_mainwindow.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
 		inc/henry/hh_oxygen.h \
+		inc/mm_soundmanager.h \
 		inc/koffi/kk_gamelevel.h \
 		inc/koffi/kk_gamescene.h \
 		inc/koffi/kk_scene.h
@@ -546,6 +595,7 @@ gy_autotest.o: src/gigiyoung/gy_autotest.cpp inc/gy_autotest.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
 		inc/henry/hh_oxygen.h \
+		inc/mm_soundmanager.h \
 		inc/koffi/kk_gamelevel.h \
 		inc/koffi/kk_gamescene.h \
 		inc/koffi/kk_scene.h
@@ -556,7 +606,8 @@ gy_banana.o: src/gigiyoung/gy_banana.cpp inc/gy_object.h \
 		inc/hh_main_player.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
-		inc/henry/hh_oxygen.h
+		inc/henry/hh_oxygen.h \
+		inc/mm_soundmanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gy_banana.o src/gigiyoung/gy_banana.cpp
 
 gy_exit.o: src/gigiyoung/gy_exit.cpp inc/gy_object.h \
@@ -564,7 +615,8 @@ gy_exit.o: src/gigiyoung/gy_exit.cpp inc/gy_object.h \
 		inc/hh_main_player.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
-		inc/henry/hh_oxygen.h
+		inc/henry/hh_oxygen.h \
+		inc/mm_soundmanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gy_exit.o src/gigiyoung/gy_exit.cpp
 
 gy_objecthandler.o: src/gigiyoung/gy_objecthandler.cpp inc/gy_objecthandler.h \
@@ -573,7 +625,8 @@ gy_objecthandler.o: src/gigiyoung/gy_objecthandler.cpp inc/gy_objecthandler.h \
 		inc/hh_main_player.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
-		inc/henry/hh_oxygen.h
+		inc/henry/hh_oxygen.h \
+		inc/mm_soundmanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gy_objecthandler.o src/gigiyoung/gy_objecthandler.cpp
 
 gy_platform.o: src/gigiyoung/gy_platform.cpp inc/gy_object.h \
@@ -581,7 +634,8 @@ gy_platform.o: src/gigiyoung/gy_platform.cpp inc/gy_object.h \
 		inc/hh_main_player.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
-		inc/henry/hh_oxygen.h
+		inc/henry/hh_oxygen.h \
+		inc/mm_soundmanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gy_platform.o src/gigiyoung/gy_platform.cpp
 
 gy_shark.o: src/gigiyoung/gy_shark.cpp inc/gy_object.h \
@@ -589,7 +643,8 @@ gy_shark.o: src/gigiyoung/gy_shark.cpp inc/gy_object.h \
 		inc/hh_main_player.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
-		inc/henry/hh_oxygen.h
+		inc/henry/hh_oxygen.h \
+		inc/mm_soundmanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gy_shark.o src/gigiyoung/gy_shark.cpp
 
 gy_steam.o: src/gigiyoung/gy_steam.cpp inc/gy_object.h \
@@ -597,7 +652,8 @@ gy_steam.o: src/gigiyoung/gy_steam.cpp inc/gy_object.h \
 		inc/hh_main_player.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
-		inc/henry/hh_oxygen.h
+		inc/henry/hh_oxygen.h \
+		inc/mm_soundmanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gy_steam.o src/gigiyoung/gy_steam.cpp
 
 hh_main_player.o: src/henry/hh_main_player.cpp inc/hh_main_player.h \
@@ -605,6 +661,7 @@ hh_main_player.o: src/henry/hh_main_player.cpp inc/hh_main_player.h \
 		inc/henry/hh_health_bar.h \
 		inc/wz_graphics.h \
 		inc/gy_object.h \
+		inc/mm_soundmanager.h \
 		inc/henry/hh_oxygen.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o hh_main_player.o src/henry/hh_main_player.cpp
 
@@ -629,13 +686,21 @@ kk_scenemanager.o: src/koffi/kk_scenemanager.cpp inc/kk_scenemanager.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
 		inc/henry/hh_oxygen.h \
+		inc/mm_soundmanager.h \
 		inc/koffi/kk_gamelevel.h \
 		inc/koffi/kk_gamescene.h \
 		inc/koffi/kk_scene.h \
-		inc/gy_autotest.h
+		inc/gy_autotest.h \
+		inc/koffi/kk_filereader.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o kk_scenemanager.o src/koffi/kk_scenemanager.cpp
 
-mm_soundmanager.o: src/matthew/mm_soundmanager.cpp inc/mm_soundmanager.h
+mm_soundmanager.o: src/matthew/mm_soundmanager.cpp inc/mm_soundmanager.h \
+		inc/hh_main_player.h \
+		inc/henry/hh_health.h \
+		inc/henry/hh_health_bar.h \
+		inc/wz_graphics.h \
+		inc/gy_object.h \
+		inc/henry/hh_oxygen.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mm_soundmanager.o src/matthew/mm_soundmanager.cpp
 
 wz_graphics.o: src/wei/wz_graphics.cpp inc/wz_graphics.h \
@@ -643,7 +708,8 @@ wz_graphics.o: src/wei/wz_graphics.cpp inc/wz_graphics.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
 		inc/henry/hh_oxygen.h \
-		inc/gy_object.h
+		inc/gy_object.h \
+		inc/mm_soundmanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o wz_graphics.o src/wei/wz_graphics.cpp
 
 ck_pausescreen.o: src/chaeunkim/ck_pausescreen.cpp inc/chaeunkim/ck_pausescreen.h
@@ -652,8 +718,17 @@ ck_pausescreen.o: src/chaeunkim/ck_pausescreen.cpp inc/chaeunkim/ck_pausescreen.
 hh_oxygen.o: src/henry/hh_oxygen.cpp inc/henry/hh_oxygen.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o hh_oxygen.o src/henry/hh_oxygen.cpp
 
+kk_filereader.o: src/koffi/kk_filereader.cpp inc/koffi/kk_filereader.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o kk_filereader.o src/koffi/kk_filereader.cpp
+
 qrc_images.o: qrc_images.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_images.o qrc_images.cpp
+
+qrc_sounds.o: qrc_sounds.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_sounds.o qrc_sounds.cpp
+
+qrc_levels.o: qrc_levels.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_levels.o qrc_levels.cpp
 
 moc_ck_mainwindow.o: moc_ck_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_ck_mainwindow.o moc_ck_mainwindow.cpp
