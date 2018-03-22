@@ -5,6 +5,7 @@
 #include <QGraphicsView>
 #include <QKeyEvent>
 #include <QTimer>
+#include "mm_soundmanager.h"
 
 #include "chaeunkim/ck_button.h"
 #include "chaeunkim/ck_pausebutton.h"
@@ -32,6 +33,8 @@ private:
     Button *stressBtn;
 
     SceneManager * gamescene;
+
+    SoundManager * backgroundMusic;
 
     int WID_WIDTH;
     int WID_HEI;

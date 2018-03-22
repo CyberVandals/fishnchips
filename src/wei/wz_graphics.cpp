@@ -63,13 +63,13 @@ void Graphics:: load_platform(int width,int heigh,Platform *platform)
 
 void Graphics::load_steam(Steam *steam)
 {
-    steam->setPixmap(QPixmap(":/images/steam.png"));
+    steam->setPixmap(QPixmap(":/images/steam_.png"));
 }
 
 
 void Graphics:: load_steam(int width,int heigh,Steam *steam)
 {
-    QPixmap pixmap(":/images/platform.png");
+    QPixmap pixmap(":/images/steam_.png");
     pixmap = pixmap.scaled(width,heigh,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     steam->setPixmap(pixmap);
 }
