@@ -4,9 +4,14 @@
 #include <QProgressBar>
 #include <QTimer>
 #include <QGraphicsScene>
+#include <QObject>
+#include <QCoreApplication>
+#include <QPalette>
+#include <QPropertyAnimation>
 
 class Oxygen: public QProgressBar
 {
+Q_OBJECT
 public:
     Oxygen(QGraphicsScene * scene);
     void renew();
