@@ -105,13 +105,12 @@ bool Shark::cook() {
 
 void Shark::move() {
     //qDebug() << "Shark is moving\n";
-    int scene_right, scene_left, scene_top, scene_bottom;
-    scene_right = scene()->sceneRect().right();
-    scene_left = scene()->sceneRect().left();
-    scene_top = scene()->sceneRect().top();
-    scene_bottom = scene()->sceneRect().bottom();
+    static int scene_right = scene()->sceneRect().right();
+    static int scene_left = scene()->sceneRect().left(); 
+    static int scene_top = scene()->sceneRect().top();
+    static int scene_bottom = scene()->sceneRect().bottom();
+    int shark_right, shark_left, shark_top, shark_bottom;
 
-    
 
     // stunned, decrement
     if( stunned > 0 ) {
@@ -119,23 +118,29 @@ void Shark::move() {
         return;
     }
 
-    QList<QGraphicsItem *> items = 
-        collidingItems(Qt::IntersectsItemShape);
+    // calculate
+    shark_right = x() + this->boundingRect().width();
+    shark_left = x(); //this->boundingRect().left();
+    shark_top = y(); //this->boundingRect().top();
+    shark_bottom = y() + this->boundingRect().height();
 
     //qDebug() << scene()->sceneRect().left() << ", "
     //         << scene()->sceneRect().right();
     //qDebug() << "Shark is at " << x() << ", " << y(); 
     //qDebug() << "Shark's velocity is " << vel.x << ", " << vel.y; 
 
+    QList<QGraphicsItem *> items = 
+        collidingItems(Qt::IntersectsItemShape);
+
     // if left or right edges of scene, reverse x velocity
-    if ( (x() >= ( scene_right-boundingRect().width() ) && vel.x > 0) || 
-         (x() <= scene_left && vel.x < 0) ) 
+    if ( (shark_left <= scene_left && vel.x < 0) || 
+         (shark_right >= scene_right && vel.x > 0) ) 
     {
         vel.x = -vel.x;
     }
     // if top or bottom edges of scene, reverse x velocity
-    else if ( (y() <= scene_top && vel.y < 0) || 
-         (y() >= ( scene_bottom-boundingRect().height() ) && vel.y > 0) ) 
+    if ( (shark_top <= scene_top && vel.y < 0) || 
+         (shark_bottom >= scene_bottom && vel.y > 0) ) 
     {
         vel.y = -vel.y;
     }
@@ -144,9 +149,33 @@ void Shark::move() {
 
     for( int i = 0; i < items.size() ; i++ ) {
         // if collision with platform, invert x velocity
-        if( typeid(*(items[i])) == typeid(Platform) )
-            vel.x = -vel.x; 
+        if( typeid(*(items[i])) == typeid(Platform) ) {
+            int plat_right, plat_left, plat_top, plat_bottom;
+            QGraphicsItem *platform = items[i];
 
+            // platforms will only be oriented horizontally
+            // get platform positions
+            plat_right = platform->x() + platform->boundingRect().width();
+            plat_left = platform->x(); 
+            plat_top = platform->y(); 
+            plat_bottom = platform->y() + 
+                          platform->boundingRect().height();
+/*
+            if( (y() >= plat_bottom) && (y() <= plat_top) ) {
+                if( vel.y > 0 || vel.y < 0)
+                    vel.y = -vel.y;
+            }
+*/
+            if( (shark_right >= plat_left && vel.x > 0) ||
+                (shark_left <= plat_right && vel.x < 0) ) 
+            {
+                vel.x = -vel.x;
+            }
+            if( vel.y > 0 || vel.y < 0)
+                vel.y = -vel.y;
+            
+
+        }
         if( typeid(*(items[i])) == typeid(Main_player) ) {
             if(sound_count > 0) {
                 sound_count--;
