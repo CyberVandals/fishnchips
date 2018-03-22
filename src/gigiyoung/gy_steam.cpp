@@ -1,4 +1,4 @@
-/* gy_steam.c - Implemention file for steam object
+/* gy_steam.cpp - Implemention file for steam object
  * By Gigi Young
  */
 
@@ -60,5 +60,18 @@ Steam::Steam(int width, int height, int pos_x, int pos_y,
 
 
 void Steam::status() {
+    if(countdown > 0) {
+        countdown--;
+    }
+    else 
+        exploded = true;
+
+    if(exploded) {
+        // make object visible
+    }
+    else {
+        // make invisible
+    }
+
 
 }

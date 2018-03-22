@@ -15,6 +15,9 @@
         <file>stressBtn.png</file>
         <file>door.png</file>
         <file>steam.png</file>
+        <file>GameOverS.png</file>
+        <file>replay.png</file>
+        <file>platform_.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

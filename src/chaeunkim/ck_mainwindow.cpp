@@ -9,20 +9,22 @@
 
 
 MainWindow::MainWindow(){
-    scene = new QGraphicsScene();
-    //pauseScene = new PauseScreen(scene);
+    scene = new QGraphicsScene(this);
+    backgroundMusic = new SoundManager();
+
+    backgroundMusic->playBackground();
 
     // get desktop resolution
     QRect rec = QApplication::desktop()->screenGeometry();
-    int height = rec.height();
-    int width = rec.width();
+    WID_HEI = rec.height();
+    WID_WIDTH = rec.width();
 
-    setFixedSize(width/1.5, height/1.1);
+    setFixedSize(WID_WIDTH/1.5, WID_HEI/1.1);
 
-    scene->setSceneRect(0,0,width/1.5,height/1.1);
+    scene->setSceneRect(0,0,WID_WIDTH/1.5,WID_HEI/1.1);
 
     QPixmap pim(":/images/menu_background.jpg");
-    scene->setBackgroundBrush(pim.scaled(width,height,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+    scene->setBackgroundBrush(pim.scaled(WID_WIDTH,WID_HEI,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     setScene(scene);
 
 
@@ -63,44 +65,30 @@ void MainWindow::mainmenu(){
     connect(stressBtn,SIGNAL(clicked()),this,SLOT(start_stress()));
     scene->addWidget(stressBtn);
 }
-
-void MainWindow::handleKeyPressed(QKeyEvent * event){
-    if(!isPaused){
-        switch (event->key()){
-            case Qt::Key_Space:
-                pause();
-                pauseScene->setVisible(true);
-                break;
-            default:
-                break;
-        }
+void MainWindow::displayGameover(){
+    for (size_t i = 0, n = scene->items().size(); i < n; i++){
+            scene->items()[i]->setEnabled(false);
     }
-    else{
-        qDebug() << "ispaused is true";
-        pauseScene->setVisible(false);
-        isPaused = false;
-    }
-}
+    scene->clear();
+    bringGameOverScene();
 
-bool MainWindow::eventFilter(QObject *object, QEvent *event)
-{
-    if (event->type() == QEvent::KeyPress) {
-        handleKeyPressed((QKeyEvent *)event);
-        return true;
-    } else {
-        return QObject::eventFilter(object, event);
-    }
 }
-void MainWindow::pause(){
-    disconnect(&timer, SIGNAL(timeout()),
-            scene, SLOT(advance()));
-    isPaused = true;
-}
+void MainWindow::bringGameOverScene(){
+    QPixmap pim(":/images/GameOverS.png");
+    scene->setBackgroundBrush(pim.scaled(WID_WIDTH,WID_HEI,Qt::KeepAspectRatio,Qt::SmoothTransformation));
+    setScene(scene);
 
-void MainWindow::resume(){
-    connect(&timer, SIGNAL(timeout()),
-            scene, SLOT(advance()));
-    isPaused = false;
+    quitBtn = new Button(":/images/quit3.png");
+    quitBtn->setGeometry((scene->width() - quitBtn->width()) /2,scene->height() - (quitBtn->height()*1.5),0,0);
+    connect(quitBtn,SIGNAL(clicked()),this,SLOT(close()));
+    scene->addWidget(quitBtn);
+
+    replayBtn = new Button(":/images/replay.png");
+    replayBtn->setGeometry((scene->width() - replayBtn->width()/2.2) /2,scene->height() - (replayBtn->height()*2),0,0);
+    //connect(playBtn,SIGNAL(clicked()),this,SLOT(start()));
+    scene->addWidget(replayBtn);
+
+
 }
 
 void MainWindow::start(){

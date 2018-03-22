@@ -15,6 +15,7 @@
 
 #define UPDATE_MS 50
 
+#define PLAYER_IMMUNE_DURATION 20
 #define DEFAULT_POS_X 30 
 #define DEFAULT_POS_Y 30
 #define DEFAULT_VEL_X 10
@@ -137,6 +138,7 @@ private:
 
     bool cooked;
     int stunned;
+    int sound_count;
     struct Velocity vel;
 
     QTimer *timer;
