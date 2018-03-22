@@ -118,10 +118,6 @@ void Shark::move() {
         stunned--;
         return;
     }
-    if(sound_count > 0) {
-        sound_count--;
-        return;
-    }
 
     QList<QGraphicsItem *> items = 
         collidingItems(Qt::IntersectsItemShape);
@@ -152,8 +148,13 @@ void Shark::move() {
             vel.x = -vel.x; 
 
         if( typeid(*(items[i])) == typeid(Main_player) ) {
-            sound->playChomp();
-            sound_count = DEFAULT_STUN_DURATION;
+            if(sound_count > 0) {
+                sound_count--;
+            }
+            else {
+                sound->playChomp();
+                sound_count = DEFAULT_STUN_DURATION;
+            }
         }
 
         // if collision with thrown banana, stun shark
