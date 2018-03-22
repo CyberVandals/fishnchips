@@ -119,7 +119,10 @@ void Shark::move() {
         stunned--;
         return;
     }
-
+    if(sound_count > 0) {
+        sound_count--;
+    }
+ 
     // calculate
     shark_right = x() + this->boundingRect().width();
     shark_left = x(); //this->boundingRect().left();
@@ -208,10 +211,7 @@ this one kind works
 
         }
         if( typeid(*(items[i])) == typeid(Main_player) ) {
-            if(sound_count > 0) {
-                sound_count--;
-            }
-            else {
+            if(sound_count == 0) {
                 sound->playChomp();
                 sound_count = PLAYER_IMMUNE_DURATION;
             }
