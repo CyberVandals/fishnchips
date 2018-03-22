@@ -59,37 +59,44 @@ void AutoTest::create_stress_level() {
     static Main_player *player;
     static Shark *shark1, *shark2, *shark3, *shark4, *shark5;
     static Platform *plat1, *plat2, *plat3;
-    static Banana *bana1;
+    static Banana *banana1;
     static Steam *steam1;
     static Exit *exit;
 
     player = new Main_player(receiver);
  
     shark1 = new Shark(30,30,5,5);
-//    shark2 = new Shark(50,30,10,0);
-//    shark3 = new Shark(100,30,3,7);
-//    shark4 = new Shark(300,500,10,0);
-//    shark5 = new Shark(500,30,10,0);
+    shark2 = new Shark(50,30,10,0);
+    shark3 = new Shark(100,30,3,7);
+    shark4 = new Shark(300,500,10,0);
+    shark5 = new Shark(500,30,10,0);
 
     plat1 = new Platform(500,0,200);
 //    plat2 = new Platform(500,200,400);
 //    plat3 = new Platform(500,100,600);
 
-//    exit = new Exit();
+    banana1 = new Banana();
+    steam1 = new Steam();
+
+    exit = new Exit();
 
     receiver->addItem(player);
 
     receiver->addItem(shark1);
-//    receiver->addItem(shark2);
-//    receiver->addItem(shark3);
-//    receiver->addItem(shark4);
-//    receiver->addItem(shark5);
+    receiver->addItem(shark2);
+    receiver->addItem(shark3);
+    receiver->addItem(shark4);
+    receiver->addItem(shark5);
 
     receiver->addItem(plat1);
 //    receiver->addItem(plat2);
 //    receiver->addItem(plat3);
 
-//    receiver->addItem(exit);
+    receiver->addItem(banana1);
+
+    receiver->addItem(steam1);
+
+    receiver->addItem(exit);
 
 }
 
