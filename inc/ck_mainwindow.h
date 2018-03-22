@@ -11,7 +11,6 @@
 #include "chaeunkim/ck_pausescreen.h"
 #include "kk_scenemanager.h"
 
-class QKeyEvent;
 
 class MainWindow :public QGraphicsView
 {
@@ -22,34 +21,26 @@ public:
     void gameplay();
 
 private:
+    void bringGameOverScene();
     QGraphicsScene * scene;
     QGraphicsPixmapItem *logo;
-    QTimer timer;
-    bool isPaused;
 
     Button *playBtn;
+    Button *replayBtn;
     Button *quitBtn;
     Button *demoBtn;
     Button *stressBtn;
 
-    PauseButton *pauseBtn;
-
     SceneManager * gamescene;
 
-    PauseScreen * pauseScene;
-
-    void handleKeyPressed(QKeyEvent * event);
-
-protected:
-    bool eventFilter(QObject *, QEvent *);
+    int WID_WIDTH;
+    int WID_HEI;
 
 public slots:
     void start();
     void start_demo();
     void start_stress();
-    void resume();
-    void pause();
-
+    void displayGameover();
 };
 
 
