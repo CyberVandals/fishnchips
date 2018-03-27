@@ -3,12 +3,12 @@
  */
 
 #include <typeinfo>
-#include <QGraphicsItem>
-#include <QGraphicsPixmapItem>
-#include <QPixmap>
-#include <QGraphicsScene>
-#include <QObject>
-#include <QTimer>
+//#include <QGraphicsItem>
+//#include <QGraphicsPixmapItem>
+//#include <QPixmap>
+//#include <QGraphicsScene>
+//#include <QObject>
+//#include <QTimer>
 #include <QList>
 #include <QDebug>
 #include "../../inc/gy_object.h"
@@ -16,62 +16,50 @@
 
 using namespace std;
 
-void Shark::init() {
-    sound_count = 0;
-    stunned = 0;
-    cooked = false;
- 
-    //setPixmap(QPixmap(":/images/blue_shark.png").scaled(10,10));
-    //setPixmap(QPixmap(":/images/blue_shark.png"));
-
-    sound = new SoundManager();
-    graphics = new Graphics();
-
-    // create timer for move slot
-    timer = new QTimer(this);
-    connect( timer, SIGNAL(timeout()), this, SLOT(move()) );
-    timer->start(UPDATE_MS);
-}
-
 // Default constructor 
-Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
-{
-    setPos( DEFAULT_POS_X, DEFAULT_POS_Y );
+//Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
+Shark::Shark(QGraphicsItem *parent): AbstractObject(parent) {
+    init();
 
+    setPos( DEFAULT_POS_X, DEFAULT_POS_Y );
     vel.x = DEFAULT_VEL_X;
     vel.y = DEFAULT_VEL_Y;    
 
-    init();
-    graphics->load_shark(DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT, this);
+    timer->start(UPDATE_MS);
 }
 
 
 // Constructor with position 
-Shark::Shark(int pos_x, int pos_y,
-    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
+//Shark::Shark(int pos_x, int pos_y,
+//    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
+Shark::Shark(int x, int y, QGraphicsItem *parent): 
+    AbstractObject(parent)
 {
-    setPos( pos_x, pos_y );
+    init();
 
+    setPos(x, y);
     vel.x = DEFAULT_VEL_X;
     vel.y = DEFAULT_VEL_Y;    
 
-    init();
-    graphics->load_shark(DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT, this);
+    timer->start(UPDATE_MS);
 } 
 
 // Constructor with position and velocity 
-Shark::Shark(int pos_x, int pos_y, int vel_x, int vel_y,
-    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
+//Shark::Shark(int pos_x, int pos_y, int vel_x, int vel_y,
+//    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
+Shark::Shark(int x, int y, int vel_x, int vel_y,
+    QGraphicsItem *parent): AbstractObject(parent)
 {
-    setPos( pos_x, pos_y );
+    init();
 
+    setPos(x, y);
     vel.x = vel_x;
     vel.y = vel_y;    
 
-    init();
-    graphics->load_shark(DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT, this);
+    timer->start(UPDATE_MS);
 }
 
+/*
 // Constructor with position and velocity 
 Shark::Shark(int width, int height, int pos_x, int pos_y, int vel_x, int vel_y,
     QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
@@ -84,7 +72,31 @@ Shark::Shark(int width, int height, int pos_x, int pos_y, int vel_x, int vel_y,
     init();
     graphics->load_shark(width, height, this);
 }
+*/
 
+void Shark::init() {
+    sound_count = 0;
+    stunned = 0;
+    cooked = false;
+ 
+    //setPixmap(QPixmap(":/images/blue_shark.png").scaled(10,10));
+    //setPixmap(QPixmap(":/images/blue_shark.png"));
+
+    timer = new QTimer(this);
+    graphics = new Graphics();
+    sound = new SoundManager();
+
+    graphics->load_shark(
+        DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT, this);
+    // create timer for move slot
+    connect( timer, SIGNAL(timeout()), this, SLOT(move()) );
+}
+
+
+
+void Shark::pause() {
+
+}
 
 bool Shark::stun(int time) {
     if( time > 0 ) 

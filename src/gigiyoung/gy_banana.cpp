@@ -1,11 +1,11 @@
-/* gy_banana.c - Implementation file for banana objects 
+/* gy_banana.cpp - Implementation file for banana objects 
  * By Gigi Young
  */
 
-#include <QObject>
-#include <QTimer>
+//#include <QObject>
+//#include <QTimer>
 #include <QList>
-#include <QGraphicsRectItem>
+//#include <QGraphicsRectItem>
 #include <QDebug>
 #include <typeinfo>
 #include "../../inc/gy_object.h"
@@ -13,39 +13,27 @@
 
 
 
-void Banana::init() {
 
-    thrown = false;
-
-    graphics = new Graphics();
-
-    timer = new QTimer(this);
-    connect( timer, SIGNAL(timeout()), this, SLOT(status()) );
+// Banana
+//Banana::Banana(QGraphicsItem *parent): 
+//    QObject(), QGraphicsPixmapItem(parent) 
+Banana::Banana(QGraphicsItem *parent): AbstractObject(parent) {
+    init();
+    setPos(DEFAULT_POS_X, DEFAULT_POS_Y);
     timer->start(UPDATE_MS);
 }
 
-
-// Banana
-Banana::Banana(QGraphicsItem *parent): 
-    QObject(), QGraphicsPixmapItem(parent) 
+//Banana::Banana(int x, int y, QGraphicsItem *parent): 
+//    QObject(), QGraphicsPixmapItem(parent) 
+Banana::Banana(int x, int y, QGraphicsItem *parent): 
+    AbstractObject(parent) 
 {
-    setPos( DEFAULT_POS_X, DEFAULT_POS_Y );
     init();
-    graphics->load_banana(
-        DEFAULT_BANANA_WIDTH, DEFAULT_BANANA_HEIGHT, this);
+    setPos(x, y);
+    timer->start(UPDATE_MS);
 }
 
-Banana::Banana(int pos_x, int pos_y, QGraphicsItem *parent): 
-    QObject(), QGraphicsPixmapItem(parent) 
-{
-
-
-    setPos( pos_x, pos_y );
-    init();
-    graphics->load_banana(
-        DEFAULT_BANANA_WIDTH, DEFAULT_BANANA_HEIGHT, this);
-}
-
+/*
 Banana::Banana(int width, int height, int pos_x, int pos_y, 
     QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent) 
 {
@@ -54,7 +42,28 @@ Banana::Banana(int width, int height, int pos_x, int pos_y,
     init();
     graphics->load_banana(width, height, this);
 }
+*/
 
+void Banana::init() {
+
+    thrown = false;
+
+    // #define these later
+    vel.x = 0;
+    vel.y = 0;
+
+    timer = new QTimer(this);
+    graphics = new Graphics();
+    sound = new SoundManager();
+
+    graphics->load_banana(
+        DEFAULT_BANANA_WIDTH, DEFAULT_BANANA_HEIGHT, this);
+    connect( timer, SIGNAL(timeout()), this, SLOT(status()) );
+}
+
+void Banana::pause() {
+
+}
 
 void Banana::status() {
     QList<QGraphicsItem *> items = 

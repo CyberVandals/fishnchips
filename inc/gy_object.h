@@ -5,13 +5,9 @@
 #ifndef GY_OBJECT_H
 #define GY_OBJECT_H
 
-#include <QObject>
-#include <QTimer>
-#include <QGraphicsRectItem>
-#include <QGraphicsPixmapItem>
-#include <QGraphicsItem>
 #include "wz_graphics.h"
 #include "mm_soundmanager.h"
+#include "gigiyoung/gy_abstract.h"
 
 #define UPDATE_MS 50
 
@@ -40,9 +36,6 @@
 
 #define DEFAULT_STUN_DURATION 40
 
-// forward declarations
-class Graphics;
-class SoundManager;
 
 // structs
 struct Velocity {
@@ -51,13 +44,13 @@ struct Velocity {
 };
 
 // Banana 
-class Banana: public QObject, public QGraphicsPixmapItem {
+class Banana: public AbstractObject {
     Q_OBJECT
 public:
     Banana(QGraphicsItem *parent = 0);
-    Banana(int pos_x, int pos_y, QGraphicsItem *parent = 0);
-    Banana(int width, int height, int pos_x, int pos_y,
-           QGraphicsItem *parent = 0);
+    Banana(int x, int y, QGraphicsItem *parent = 0);
+
+    void pause();
 
     // 0 for up, 1 for down, 2 for left, 3 for right
     bool chuck(int direction);
@@ -74,27 +67,24 @@ private:
 
     bool thrown;
     struct Velocity vel;
-    Graphics *graphics;
-    QTimer *timer;
 };
 
+
 // Exit Object - needs to check whether play has collided with it
-class Exit: public QObject, public QGraphicsPixmapItem {
+class Exit: public AbstractObject {
     Q_OBJECT
 public:
     Exit(QGraphicsItem *parent=0);
-    Exit(int pos_x, int pos_y, QGraphicsItem *parent=0);
-    Exit(int width, int height, int pos_x, int pos_y, QGraphicsItem *parent=0);
+    Exit(int x, int y, QGraphicsItem *parent=0);
 
+    void pause();
 public slots:
     void status();
 
 private:
     void init();
-
-    QTimer *timer;
-    Graphics *graphics;
 };
+
 
 
 
@@ -103,31 +93,27 @@ private:
 class Platform: public QGraphicsPixmapItem {
 public:
     Platform(QGraphicsItem *parent=0);
-    Platform(int pos_x, int pos_y, QGraphicsItem *parent=0);
-    Platform(int width, int pos_x, int pos_y, 
-             QGraphicsItem *parent=0);
+    Platform(int x, int y, QGraphicsItem *parent=0);
+    Platform(int x, int y, int width, QGraphicsItem *parent=0);
 
 private:
     void init();
 
     Graphics *graphics;
-
 };
 
 // Shark - needs to move 
-class Shark: public QObject, public QGraphicsPixmapItem
-{
+class Shark: public AbstractObject {
     Q_OBJECT
 public:
     Shark(QGraphicsItem *parent=0);
-    Shark(int pos_x, int pos_y, QGraphicsItem *parent=0);
-    Shark(int pos_x, int pos_y, int vel_x, int vel_y, 
-          QGraphicsItem *parent=0);
-    Shark(int width, int height, int pos_x, int pos_y, int vel_x, int vel_y, 
-          QGraphicsItem *parent=0);
+    Shark(int x, int y, QGraphicsItem *parent=0);
+    Shark(int x, int y, int vel_x, int vel_y, QGraphicsItem *parent=0);
 
+    void pause();
     bool stun(int time=DEFAULT_STUN_DURATION);
     bool cook();
+
 
 public slots:
     void move();
@@ -140,19 +126,17 @@ private:
     int stunned;
     int sound_count;
     struct Velocity vel;
-
-    QTimer *timer;
-    Graphics *graphics;
-    SoundManager *sound;
 };
 
+
 // Steam needs to check if SomeObject collided with it
-class Steam: public QObject, public QGraphicsPixmapItem {
+class Steam: public AbstractObject {
     Q_OBJECT
 public:
     Steam(QGraphicsItem *parent=0);
-    Steam(int pos_x, int pos_y, QGraphicsItem *parent=0);
-    Steam(int width, int height, int pos_x, int pos_y, QGraphicsItem *parent=0);
+    Steam(int x, int y, QGraphicsItem *parent=0);
+
+    void pause();
 
 public slots:
     void status();
@@ -162,8 +146,6 @@ private:
 
     bool exploded;
     int countdown;
-    QTimer *timer;
-    Graphics *graphics;
 };
 
 

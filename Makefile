@@ -78,8 +78,9 @@ SOURCES       = src/chaeunkim/ck_main.cpp \
 		moc_ck_pausebutton.cpp \
 		moc_gy_autotest.cpp \
 		moc_gy_object.cpp \
-		moc_gy_objecthandler.cpp \
-		moc_hh_main_player.cpp
+		moc_gy_abstract.cpp \
+		moc_hh_main_player.cpp \
+		moc_hh_oxygen.cpp
 OBJECTS       = ck_main.o \
 		ck_mainwindow.o \
 		ck_button.o \
@@ -111,8 +112,9 @@ OBJECTS       = ck_main.o \
 		moc_ck_pausebutton.o \
 		moc_gy_autotest.o \
 		moc_gy_object.o \
-		moc_gy_objecthandler.o \
-		moc_hh_main_player.o
+		moc_gy_abstract.o \
+		moc_hh_main_player.o \
+		moc_hh_oxygen.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -424,21 +426,24 @@ compiler_rcc_make_all: qrc_images.cpp qrc_sounds.cpp qrc_levels.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_images.cpp qrc_sounds.cpp qrc_levels.cpp
 qrc_images.cpp: resources/images/images.qrc \
-		resources/images/continue.png \
-		resources/images/back_ground.jpg \
-		resources/images/play3.png \
-		resources/images/blue_shark.png \
-		resources/images/dark_shark.png \
-		resources/images/stressBtn.png \
+		resources/images/replay.png \
 		resources/images/door.png \
-		resources/images/quit3.png \
-		resources/images/banana.png \
-		resources/images/steam.png \
+		resources/images/pause.png \
+		resources/images/platform_.png \
+		resources/images/continue.png \
 		resources/images/monkey.png \
 		resources/images/menu_background.jpg \
-		resources/images/icon_shark.png \
-		resources/images/pause.png \
-		resources/images/demoBtn.png
+		resources/images/back_ground.jpg \
+		resources/images/play3.png \
+		resources/images/GameOverS.png \
+		resources/images/stressBtn.png \
+		resources/images/steam.png \
+		resources/images/demoBtn.png \
+		resources/images/quit3.png \
+		resources/images/blue_shark.png \
+		resources/images/dark_shark.png \
+		resources/images/banana.png \
+		resources/images/icon_shark.png
 	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name images resources/images/images.qrc -o qrc_images.cpp
 
 qrc_sounds.cpp: resources/images/sounds.qrc \
@@ -460,20 +465,21 @@ qrc_levels.cpp: resources/levels/levels.qrc \
 		resources/levels/level1.txt
 	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name levels resources/levels/levels.qrc -o qrc_levels.cpp
 
-compiler_moc_header_make_all: moc_ck_mainwindow.cpp moc_ck_button.cpp moc_ck_pausebutton.cpp moc_gy_autotest.cpp moc_gy_object.cpp moc_gy_objecthandler.cpp moc_hh_main_player.cpp
+compiler_moc_header_make_all: moc_ck_mainwindow.cpp moc_ck_button.cpp moc_ck_pausebutton.cpp moc_gy_autotest.cpp moc_gy_object.cpp moc_gy_abstract.cpp moc_hh_main_player.cpp moc_hh_oxygen.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_ck_mainwindow.cpp moc_ck_button.cpp moc_ck_pausebutton.cpp moc_gy_autotest.cpp moc_gy_object.cpp moc_gy_objecthandler.cpp moc_hh_main_player.cpp
-moc_ck_mainwindow.cpp: inc/chaeunkim/ck_button.h \
-		inc/chaeunkim/ck_pausebutton.h \
-		inc/chaeunkim/ck_pausescreen.h \
-		inc/kk_scenemanager.h \
-		inc/gy_object.h \
-		inc/wz_graphics.h \
+	-$(DEL_FILE) moc_ck_mainwindow.cpp moc_ck_button.cpp moc_ck_pausebutton.cpp moc_gy_autotest.cpp moc_gy_object.cpp moc_gy_abstract.cpp moc_hh_main_player.cpp moc_hh_oxygen.cpp
+moc_ck_mainwindow.cpp: inc/mm_soundmanager.h \
 		inc/hh_main_player.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
+		inc/wz_graphics.h \
+		inc/gy_object.h \
+		inc/gigiyoung/gy_abstract.h \
 		inc/henry/hh_oxygen.h \
-		inc/mm_soundmanager.h \
+		inc/chaeunkim/ck_button.h \
+		inc/chaeunkim/ck_pausebutton.h \
+		inc/chaeunkim/ck_pausescreen.h \
+		inc/kk_scenemanager.h \
 		inc/koffi/kk_gamelevel.h \
 		inc/koffi/kk_gamescene.h \
 		inc/koffi/kk_scene.h \
@@ -494,6 +500,7 @@ moc_gy_autotest.cpp: inc/kk_scenemanager.h \
 		inc/henry/hh_health_bar.h \
 		inc/henry/hh_oxygen.h \
 		inc/mm_soundmanager.h \
+		inc/gigiyoung/gy_abstract.h \
 		inc/koffi/kk_gamelevel.h \
 		inc/koffi/kk_gamescene.h \
 		inc/koffi/kk_scene.h \
@@ -507,18 +514,20 @@ moc_gy_object.cpp: inc/wz_graphics.h \
 		inc/henry/hh_oxygen.h \
 		inc/gy_object.h \
 		inc/mm_soundmanager.h \
+		inc/gigiyoung/gy_abstract.h \
 		inc/gy_object.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/gigi/Courses/cs383/fishnchips -I/home/gigi/Courses/cs383/fishnchips/inc -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include inc/gy_object.h -o moc_gy_object.cpp
 
-moc_gy_objecthandler.cpp: inc/gy_object.h \
-		inc/wz_graphics.h \
+moc_gy_abstract.cpp: inc/wz_graphics.h \
 		inc/hh_main_player.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
 		inc/henry/hh_oxygen.h \
+		inc/gy_object.h \
 		inc/mm_soundmanager.h \
-		inc/gy_objecthandler.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/gigi/Courses/cs383/fishnchips -I/home/gigi/Courses/cs383/fishnchips/inc -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include inc/gy_objecthandler.h -o moc_gy_objecthandler.cpp
+		inc/gigiyoung/gy_abstract.h \
+		inc/gigiyoung/gy_abstract.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/gigi/Courses/cs383/fishnchips -I/home/gigi/Courses/cs383/fishnchips/inc -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include inc/gigiyoung/gy_abstract.h -o moc_gy_abstract.cpp
 
 moc_hh_main_player.cpp: inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
@@ -527,8 +536,12 @@ moc_hh_main_player.cpp: inc/henry/hh_health.h \
 		inc/henry/hh_oxygen.h \
 		inc/gy_object.h \
 		inc/mm_soundmanager.h \
+		inc/gigiyoung/gy_abstract.h \
 		inc/hh_main_player.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/gigi/Courses/cs383/fishnchips -I/home/gigi/Courses/cs383/fishnchips/inc -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include inc/hh_main_player.h -o moc_hh_main_player.cpp
+
+moc_hh_oxygen.cpp: inc/henry/hh_oxygen.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/gigi/Courses/cs383/fishnchips -I/home/gigi/Courses/cs383/fishnchips/inc -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include inc/henry/hh_oxygen.h -o moc_hh_oxygen.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -545,34 +558,36 @@ compiler_clean: compiler_rcc_clean compiler_moc_header_clean
 ####### Compile
 
 ck_main.o: src/chaeunkim/ck_main.cpp inc/ck_mainwindow.h \
+		inc/mm_soundmanager.h \
+		inc/hh_main_player.h \
+		inc/henry/hh_health.h \
+		inc/henry/hh_health_bar.h \
+		inc/wz_graphics.h \
+		inc/gy_object.h \
+		inc/gigiyoung/gy_abstract.h \
+		inc/henry/hh_oxygen.h \
 		inc/chaeunkim/ck_button.h \
 		inc/chaeunkim/ck_pausebutton.h \
 		inc/chaeunkim/ck_pausescreen.h \
 		inc/kk_scenemanager.h \
-		inc/gy_object.h \
-		inc/wz_graphics.h \
-		inc/hh_main_player.h \
-		inc/henry/hh_health.h \
-		inc/henry/hh_health_bar.h \
-		inc/henry/hh_oxygen.h \
-		inc/mm_soundmanager.h \
 		inc/koffi/kk_gamelevel.h \
 		inc/koffi/kk_gamescene.h \
 		inc/koffi/kk_scene.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ck_main.o src/chaeunkim/ck_main.cpp
 
 ck_mainwindow.o: src/chaeunkim/ck_mainwindow.cpp inc/ck_mainwindow.h \
+		inc/mm_soundmanager.h \
+		inc/hh_main_player.h \
+		inc/henry/hh_health.h \
+		inc/henry/hh_health_bar.h \
+		inc/wz_graphics.h \
+		inc/gy_object.h \
+		inc/gigiyoung/gy_abstract.h \
+		inc/henry/hh_oxygen.h \
 		inc/chaeunkim/ck_button.h \
 		inc/chaeunkim/ck_pausebutton.h \
 		inc/chaeunkim/ck_pausescreen.h \
 		inc/kk_scenemanager.h \
-		inc/gy_object.h \
-		inc/wz_graphics.h \
-		inc/hh_main_player.h \
-		inc/henry/hh_health.h \
-		inc/henry/hh_health_bar.h \
-		inc/henry/hh_oxygen.h \
-		inc/mm_soundmanager.h \
 		inc/koffi/kk_gamelevel.h \
 		inc/koffi/kk_gamescene.h \
 		inc/koffi/kk_scene.h
@@ -584,7 +599,14 @@ ck_button.o: src/chaeunkim/ck_button.cpp inc/chaeunkim/ck_button.h
 ck_pausebutton.o: src/chaeunkim/ck_pausebutton.cpp inc/chaeunkim/ck_pausebutton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ck_pausebutton.o src/chaeunkim/ck_pausebutton.cpp
 
-gy_abstract.o: src/gigiyoung/gy_abstract.cpp 
+gy_abstract.o: src/gigiyoung/gy_abstract.cpp inc/gigiyoung/gy_abstract.h \
+		inc/wz_graphics.h \
+		inc/hh_main_player.h \
+		inc/henry/hh_health.h \
+		inc/henry/hh_health_bar.h \
+		inc/henry/hh_oxygen.h \
+		inc/gy_object.h \
+		inc/mm_soundmanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gy_abstract.o src/gigiyoung/gy_abstract.cpp
 
 gy_autotest.o: src/gigiyoung/gy_autotest.cpp inc/gy_autotest.h \
@@ -596,6 +618,7 @@ gy_autotest.o: src/gigiyoung/gy_autotest.cpp inc/gy_autotest.h \
 		inc/henry/hh_health_bar.h \
 		inc/henry/hh_oxygen.h \
 		inc/mm_soundmanager.h \
+		inc/gigiyoung/gy_abstract.h \
 		inc/koffi/kk_gamelevel.h \
 		inc/koffi/kk_gamescene.h \
 		inc/koffi/kk_scene.h
@@ -607,7 +630,8 @@ gy_banana.o: src/gigiyoung/gy_banana.cpp inc/gy_object.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
 		inc/henry/hh_oxygen.h \
-		inc/mm_soundmanager.h
+		inc/mm_soundmanager.h \
+		inc/gigiyoung/gy_abstract.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gy_banana.o src/gigiyoung/gy_banana.cpp
 
 gy_exit.o: src/gigiyoung/gy_exit.cpp inc/gy_object.h \
@@ -616,7 +640,8 @@ gy_exit.o: src/gigiyoung/gy_exit.cpp inc/gy_object.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
 		inc/henry/hh_oxygen.h \
-		inc/mm_soundmanager.h
+		inc/mm_soundmanager.h \
+		inc/gigiyoung/gy_abstract.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gy_exit.o src/gigiyoung/gy_exit.cpp
 
 gy_objecthandler.o: src/gigiyoung/gy_objecthandler.cpp inc/gy_objecthandler.h \
@@ -626,7 +651,8 @@ gy_objecthandler.o: src/gigiyoung/gy_objecthandler.cpp inc/gy_objecthandler.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
 		inc/henry/hh_oxygen.h \
-		inc/mm_soundmanager.h
+		inc/mm_soundmanager.h \
+		inc/gigiyoung/gy_abstract.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gy_objecthandler.o src/gigiyoung/gy_objecthandler.cpp
 
 gy_platform.o: src/gigiyoung/gy_platform.cpp inc/gy_object.h \
@@ -635,7 +661,8 @@ gy_platform.o: src/gigiyoung/gy_platform.cpp inc/gy_object.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
 		inc/henry/hh_oxygen.h \
-		inc/mm_soundmanager.h
+		inc/mm_soundmanager.h \
+		inc/gigiyoung/gy_abstract.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gy_platform.o src/gigiyoung/gy_platform.cpp
 
 gy_shark.o: src/gigiyoung/gy_shark.cpp inc/gy_object.h \
@@ -644,7 +671,8 @@ gy_shark.o: src/gigiyoung/gy_shark.cpp inc/gy_object.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
 		inc/henry/hh_oxygen.h \
-		inc/mm_soundmanager.h
+		inc/mm_soundmanager.h \
+		inc/gigiyoung/gy_abstract.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gy_shark.o src/gigiyoung/gy_shark.cpp
 
 gy_steam.o: src/gigiyoung/gy_steam.cpp inc/gy_object.h \
@@ -653,7 +681,8 @@ gy_steam.o: src/gigiyoung/gy_steam.cpp inc/gy_object.h \
 		inc/henry/hh_health.h \
 		inc/henry/hh_health_bar.h \
 		inc/henry/hh_oxygen.h \
-		inc/mm_soundmanager.h
+		inc/mm_soundmanager.h \
+		inc/gigiyoung/gy_abstract.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gy_steam.o src/gigiyoung/gy_steam.cpp
 
 hh_main_player.o: src/henry/hh_main_player.cpp inc/hh_main_player.h \
@@ -662,6 +691,7 @@ hh_main_player.o: src/henry/hh_main_player.cpp inc/hh_main_player.h \
 		inc/wz_graphics.h \
 		inc/gy_object.h \
 		inc/mm_soundmanager.h \
+		inc/gigiyoung/gy_abstract.h \
 		inc/henry/hh_oxygen.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o hh_main_player.o src/henry/hh_main_player.cpp
 
@@ -687,6 +717,7 @@ kk_scenemanager.o: src/koffi/kk_scenemanager.cpp inc/kk_scenemanager.h \
 		inc/henry/hh_health_bar.h \
 		inc/henry/hh_oxygen.h \
 		inc/mm_soundmanager.h \
+		inc/gigiyoung/gy_abstract.h \
 		inc/koffi/kk_gamelevel.h \
 		inc/koffi/kk_gamescene.h \
 		inc/koffi/kk_scene.h \
@@ -700,6 +731,7 @@ mm_soundmanager.o: src/matthew/mm_soundmanager.cpp inc/mm_soundmanager.h \
 		inc/henry/hh_health_bar.h \
 		inc/wz_graphics.h \
 		inc/gy_object.h \
+		inc/gigiyoung/gy_abstract.h \
 		inc/henry/hh_oxygen.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mm_soundmanager.o src/matthew/mm_soundmanager.cpp
 
@@ -709,7 +741,8 @@ wz_graphics.o: src/wei/wz_graphics.cpp inc/wz_graphics.h \
 		inc/henry/hh_health_bar.h \
 		inc/henry/hh_oxygen.h \
 		inc/gy_object.h \
-		inc/mm_soundmanager.h
+		inc/mm_soundmanager.h \
+		inc/gigiyoung/gy_abstract.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o wz_graphics.o src/wei/wz_graphics.cpp
 
 ck_pausescreen.o: src/chaeunkim/ck_pausescreen.cpp inc/chaeunkim/ck_pausescreen.h
@@ -745,11 +778,14 @@ moc_gy_autotest.o: moc_gy_autotest.cpp
 moc_gy_object.o: moc_gy_object.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_gy_object.o moc_gy_object.cpp
 
-moc_gy_objecthandler.o: moc_gy_objecthandler.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_gy_objecthandler.o moc_gy_objecthandler.cpp
+moc_gy_abstract.o: moc_gy_abstract.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_gy_abstract.o moc_gy_abstract.cpp
 
 moc_hh_main_player.o: moc_hh_main_player.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_hh_main_player.o moc_hh_main_player.cpp
+
+moc_hh_oxygen.o: moc_hh_oxygen.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_hh_oxygen.o moc_hh_oxygen.cpp
 
 ####### Install
 
