@@ -10,6 +10,9 @@
 
 MainWindow::MainWindow(){
     scene = new QGraphicsScene(this);
+    backgroundMusic = new SoundManager();
+
+    backgroundMusic->playBackground();
 
     // get desktop resolution
     QRect rec = QApplication::desktop()->screenGeometry();

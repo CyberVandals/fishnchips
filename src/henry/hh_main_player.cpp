@@ -11,6 +11,9 @@ Main_player::Main_player(QGraphicsScene * scene,QGraphicsItem *parent): QObject(
     //setPixmap(QPixmap());
     setPos(scene->sceneRect().bottom(), scene->sceneRect().bottom()-50);
     setFlag(QGraphicsItem::ItemIsFocusable);
+
+    player_scene = scene;
+
     setFocus();
 
     player_health = new HealthBar(scene);
@@ -35,13 +38,24 @@ void Main_player::keyPressEvent(QKeyEvent *event)
 {
     //experi start
     scene();
+    QPointF current_pos = scenePos();
+    QPointF down_pos = QPointF(current_pos.x(), current_pos.y()+60);
+    QPointF up_pos = QPointF(current_pos.x(), current_pos.y()-5);
+    QPointF right_pos = QPointF(current_pos.x()+30, current_pos.y());
+    QPointF left_pos = QPointF(current_pos.x()-5, current_pos.y());
+
+
+
+    qreal x_pos = current_pos.x();
+    qreal y_pos = current_pos.y();
     //experi end
     if( event->key() == Qt::Key_Left && (this->pos().x()) > (this->scene()->sceneRect().left()))
     {
         //if(platform_collision() == false)
         //if(scene()->itemAt(this->pos().rx(), this->pos().ry()) == 0)
         //{
-          this->setPos(x()-10, y());  //
+        if(scene()->itemAt(left_pos, QTransform()) == 0)
+        this->setPos(x()-10, y());  //
         //}
         //this->setPos(x()-10, y());
         //move left
@@ -50,6 +64,7 @@ void Main_player::keyPressEvent(QKeyEvent *event)
     else if( event->key() == Qt::Key_Right && (this->pos().x()+(boundingRect().right()-boundingRect().left())) < (this->scene()->sceneRect().right()))
     {
         //if(platform_collision() == false)
+        if(scene()->itemAt(right_pos, QTransform()) == 0)
         this->setPos(x()+10, y());
         //move right
     }
@@ -58,14 +73,21 @@ void Main_player::keyPressEvent(QKeyEvent *event)
     {
         //if(platform_collision() == false)
         //if(scene()->itemAt(QPointF(0, 0)) != Platform)
+        if(scene()->itemAt(up_pos, QTransform()) == 0)
         this->setPos(x(), y()-10);
         //move up
     }
 
     else if( event->key() == Qt::Key_Down && (this->pos().y()+(boundingRect().bottom()-boundingRect().top())) < (this->scene()->sceneRect().bottom()))
     {
-        //if(platform_collision() == false)
-        this->setPos(x(), y()+10);
+        //QGraphicsScene * scene = this->scene();
+        //scene->itemAt(0,0);
+        //scene.itemAt(0,0);
+        if(scene()->itemAt(down_pos, QTransform()) == 0)
+        //if(scene()->itemAt(0.0,0.0))// != typeid(Platform))
+
+            //if(platform_collision() == false)
+       { this->setPos(x(), y()+10); }
         //move down
     }
 }
@@ -110,6 +132,7 @@ bool Main_player::platform_collision()
      }
      return false;
 }
+
 void Main_player::recover()
 {
     shield = false;
@@ -124,9 +147,10 @@ void Main_player::sink()
         shield = true;
         if(player_health->decrease_health() == 0)
         {
-            this->setPos(scene()->sceneRect().bottom(), scene()->sceneRect().bottom()-50);
-            QGraphicsScene *current_scene = scene();
-            player_health = new HealthBar(current_scene);
+            QTimer::singleShot(0,player_scene->parent(), SLOT(displayGameover()));
+            //this->setPos(scene()->sceneRect().bottom(), scene()->sceneRect().bottom()-50);
+            //QGraphicsScene *current_scene = scene();
+            //player_health = new HealthBar(current_scene);
         }
         recover_timer->start(1000);
     }
@@ -138,7 +162,7 @@ void Main_player::sink()
 
     if(this->pos().y()+(boundingRect().bottom()-boundingRect().top()) < (this->scene()->sceneRect().bottom()))
     {
-    if(shark_collision()!=2)
-        setPos(x(), y()+1);
+    //if(shark_collision()!=2)
+        //setPos(x(), y()+1);
     }
 }
