@@ -13,7 +13,7 @@ FileReader::FileReader(const QString& filename)
     this->file = new QFile(filename);
 }
 
-void FileReader::parseLevel()
+void FileReader::parse_level()
 {
     if (!file->open(QIODevice::ReadOnly | QFile::Text))
     {

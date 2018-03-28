@@ -7,9 +7,16 @@
 #include <QString>
 
 #include "gy_object.h"
+
 #include "hh_main_player.h"
+
+
+#include "inc/gy_autotest.h"
+
 #include "inc/koffi/kk_gamelevel.h"
 #include "inc/koffi/kk_gamescene.h"
+
+class ObjectHandler;
 
 class SceneManager: public QGraphicsView
 {
@@ -17,17 +24,14 @@ public:
     SceneManager(QGraphicsScene *scene);
     SceneManager(QGraphicsScene *scene, int demo);
     void init(QGraphicsScene *scene, int demo);
-    void playGame();
-    void restartGame();
-    void generateLevel(QString filename);
-    Main_player* getMainPlayer();
+    void play_game();
+    void restart_game();
+    void generate_level(QString filename);
+    Main_player* get_player();
 private:
-    Shark *shark;
+    ObjectHandler *object_handler;
     Main_player *player;
-    GameLevel *gameLevel;
-    GameScene *mainScene;
-    Exit *exit;
-    Platform *platform;
+    GameScene *main_scene;
 };
 
 #endif // SCENEMANAGER_H
