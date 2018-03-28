@@ -15,14 +15,15 @@ MainWindow::MainWindow(){
     backgroundMusic->playBackground();
 
     // get desktop resolution
-    QRect rec = QApplication::desktop()->screenGeometry();
-    WID_HEI = rec.height();
-    WID_WIDTH = rec.width();
-
-    setFixedSize(WID_WIDTH/1.5, WID_HEI/1.1);
-
-    scene->setSceneRect(0,0,WID_WIDTH/1.5,WID_HEI/1.1);
-
+    //QRect rec = QApplication::desktop()->screenGeometry();
+    //WID_HEI = rec.height();
+    //WID_WIDTH = rec.width();
+    WID_HEI = 800;
+    WID_WIDTH  = 1000;
+    setFixedSize(WID_WIDTH, WID_HEI);
+    //setFixedSize(1000,1000);
+    scene->setSceneRect(0,0,WID_WIDTH,WID_HEI);
+    //scene->setSceneRect(0,0,1000,1000);
     QPixmap pim(":/images/menu_background.jpg");
     scene->setBackgroundBrush(pim.scaled(WID_WIDTH,WID_HEI,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     setScene(scene);
@@ -79,18 +80,31 @@ void MainWindow::bringGameOverScene(){
     setScene(scene);
 
     quitBtn = new Button(":/images/quit3.png");
-    quitBtn->setGeometry((scene->width() - quitBtn->width()) /2,scene->height() - (quitBtn->height()*1.5),0,0);
+    quitBtn->setGeometry((scene->width() - quitBtn->width()*2.5) /2,scene->height() - (quitBtn->height()*2),0,0);
     connect(quitBtn,SIGNAL(clicked()),this,SLOT(close()));
     scene->addWidget(quitBtn);
 
     replayBtn = new Button(":/images/replay.png");
     replayBtn->setGeometry((scene->width() - replayBtn->width()/2.2) /2,scene->height() - (replayBtn->height()*2),0,0);
-    //connect(playBtn,SIGNAL(clicked()),this,SLOT(start()));
+    connect(replayBtn,SIGNAL(clicked()),this,SLOT(restart()));
     scene->addWidget(replayBtn);
 
 
 }
-
+void MainWindow::restart(){
+    /*replayBtn->disconnect();
+    quitBtn->disconnect();
+    replayBtn->deleteLater();
+    quitBtn->deleteLater();*/
+    for (size_t i = 0, n = scene->items().size(); i < n; i++){
+            scene->items()[i]->setEnabled(false);
+    }
+    scene->clear();
+    QPixmap pim(":/images/menu_background.jpg");
+    scene->setBackgroundBrush(pim.scaled(WID_WIDTH,WID_HEI,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+    //setScene(scene);
+    this->mainmenu();
+}
 void MainWindow::start(){
     scene->removeItem(logo);
     playBtn->disconnect();
@@ -101,10 +115,9 @@ void MainWindow::start(){
     quitBtn->deleteLater();
     demoBtn->deleteLater();
     stressBtn->deleteLater();
-    //gamescene = new SceneManager(scene,false);
     gamescene = new SceneManager(scene,0);
 
-    gamescene->playGame();
+    gamescene->play_game();
 }
 void MainWindow::start_demo(){
     scene->removeItem(logo);
@@ -116,10 +129,9 @@ void MainWindow::start_demo(){
     quitBtn->deleteLater();
     demoBtn->deleteLater();
     stressBtn->deleteLater();
-    //gamescene = new SceneManager(scene,true);
     gamescene = new SceneManager(scene,1);
 
-    gamescene->playGame();
+    gamescene->play_game();
 }
 void MainWindow::start_stress(){
     scene->removeItem(logo);
@@ -131,8 +143,7 @@ void MainWindow::start_stress(){
     quitBtn->deleteLater();
     demoBtn->deleteLater();
     stressBtn->deleteLater();
-    //gamescene = new SceneManager(scene,true);
     gamescene = new SceneManager(scene,2);
 
-    gamescene->playGame();
+    gamescene->play_game();
 }
