@@ -18,6 +18,7 @@
         <file>GameOverS.png</file>
         <file>replay.png</file>
         <file>platform_.png</file>
+        <file>blue_shark_left.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>
