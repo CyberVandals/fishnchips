@@ -143,3 +143,6 @@ void Banana::eat() {
 
 }
 
+bool Banana::is_thrown() {
+    return thrown;
+}

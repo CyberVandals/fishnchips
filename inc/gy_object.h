@@ -60,7 +60,7 @@ public:
     void chuck(int direction);
     void pickup();
     void eat();
-    //bool is_thrown();
+    bool is_thrown();
 
 public slots:
     void status();
