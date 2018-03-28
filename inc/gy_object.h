@@ -42,8 +42,11 @@
 
 // structs
 struct Velocity {
-    int x;
-    int y;
+    int x, y;
+};
+
+struct Size {
+    int x, y;
 };
 
 // Banana 
@@ -154,8 +157,8 @@ public slots:
 private:
     void init();
 
-    bool exploded;
-    int countdown;
+    bool is_exploded;
+    int count, time_active;
 };
 
 

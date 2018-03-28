@@ -131,6 +131,7 @@ void Shark::move() {
          (shark_right >= scene_right && vel.x > 0) ) 
     {
         vel.x = -vel.x;
+        set_image();
         //graphics->shark_flip(this,true,false);
     }
     // if top or bottom edges of scene, reverse x velocity
@@ -162,6 +163,7 @@ void Shark::move() {
                  shark_left >= plat_right - X_BUFFER) &&  vel.x < 0) ) 
             {
                 vel.x = -vel.x;
+                set_image();
                 //graphics->shark_flip(this,true,false);
             }
 

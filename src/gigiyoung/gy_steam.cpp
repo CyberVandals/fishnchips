@@ -12,45 +12,24 @@ Steam::Steam(QGraphicsItem *parent): AbstractObject(parent) {
     init();
 
     setPos(DEFAULT_POS_X, DEFAULT_POS_Y);
-    //graphics->load_steam(
-    //    DEFAULT_STEAM_WIDTH, DEFAULT_STEAM_HEIGHT, this);
 
     timer->start(UPDATE_MS);
 }
 
-
-// Constructor with position 
-//Steam::Steam(int pos_x, int pos_y,
-//    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 Steam::Steam(int x, int y, QGraphicsItem *parent): 
     AbstractObject(parent)
 {
     init();
 
     setPos(x, y);
-    //graphics->load_steam(
-    //    DEFAULT_STEAM_WIDTH, DEFAULT_STEAM_HEIGHT, this);
 
     timer->start(UPDATE_MS);
 } 
 
-/*
-// Constructor with position and velocity 
-Steam::Steam(int width, int height, int pos_x, int pos_y,
-    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
-{
-    init();
-    setPos( pos_x, pos_y );
-
-    graphics->load_steam(width, height, this);
-
-    timer->start(UPDATE_MS);
-}
-*/
-
 void Steam::init() {
 
-    countdown = rand() % 60;
+    time_active = 1 + rand() % 9;
+    count = time_active;
 
     timer = new QTimer(this);
     graphics = new Graphics();
@@ -74,17 +53,21 @@ void Steam::resume() {
 }
 
 void Steam::status() {
-    if(countdown > 0) {
-        countdown--;
+    if(count > 0) {
+        count--;
     }
-    else 
-        exploded = true;
+    else {
+        is_exploded = !is_exploded;
+        count = time_active;
+    }
 
-    if(exploded) {
+    if(is_exploded) {
         // make object visible
+        this->setVisible(true);
     }
     else {
         // make invisible
+        this->setVisible(false);
     }
 
 

@@ -7,9 +7,6 @@
 #include <typeinfo>
 #include "../../inc/gy_object.h"
 
-
-
-
 Banana::Banana(QGraphicsItem *parent): AbstractObject(parent) {
     init();
     setPos(DEFAULT_POS_X, DEFAULT_POS_Y);
