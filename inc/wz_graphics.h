@@ -21,6 +21,7 @@ public:
     void load_mainplayer();
     void load_shark (int width,int heigh,Shark *shark);
     void load_shark (Shark *shark);
+    void shark_flip(Shark *shark, bool horizontal, bool vertical);
     void load_banana(Banana *banana);
     void load_banana(int width,int heigh,Banana *banana);
     void load_platform(Platform *platform);

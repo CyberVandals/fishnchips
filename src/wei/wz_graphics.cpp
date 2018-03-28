@@ -25,8 +25,6 @@ void Graphics::load_shark(Shark *shark)
 
 }
 
-
-
 void Graphics::load_shark(int width,int heigh,Shark *shark)
 {
     //shark->setPixmap(QPixmap(":/blue_shark.png"));
@@ -35,6 +33,15 @@ void Graphics::load_shark(int width,int heigh,Shark *shark)
     shark->setPixmap(pixmap);
     
 }
+
+void Graphics :: shark_flip(Shark *shark, bool horizontal , bool vertical)
+{
+  QImage image(":/images/blue_shark.png");
+  QImage mirroredImage = image.mirrored(horizontal, vertical);
+  QPixmap pixmap = QPixmap::fromImage(mirroredImage);
+  shark->setPixmap(pixmap);
+}
+
 void Graphics::load_banana(Banana *banana)
 {
      banana->setPixmap(QPixmap(":/images/banana.png"));
