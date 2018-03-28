@@ -17,6 +17,7 @@ class AbstractObject: public QObject, public QGraphicsPixmapItem {
 public:
     AbstractObject(QGraphicsItem *parent = 0);
     virtual void pause() = 0;
+    virtual void resume() = 0;
 
 protected:
     virtual void init() = 0;

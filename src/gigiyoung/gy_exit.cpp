@@ -91,7 +91,13 @@ void Exit::init() {
 }
 
 void Exit::pause() {
+    if(timer != NULL)
+        timer->stop();
+}
 
+void Exit::resume() {
+    if(timer != NULL)
+        timer->start();
 }
 
 void Exit::status() {

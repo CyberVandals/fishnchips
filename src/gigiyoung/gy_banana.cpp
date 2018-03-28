@@ -2,29 +2,20 @@
  * By Gigi Young
  */
 
-//#include <QObject>
-//#include <QTimer>
 #include <QList>
-//#include <QGraphicsRectItem>
 #include <QDebug>
 #include <typeinfo>
 #include "../../inc/gy_object.h"
-//#include "../../inc/wei/wz_graphics.h"
 
 
 
 
-// Banana
-//Banana::Banana(QGraphicsItem *parent): 
-//    QObject(), QGraphicsPixmapItem(parent) 
 Banana::Banana(QGraphicsItem *parent): AbstractObject(parent) {
     init();
     setPos(DEFAULT_POS_X, DEFAULT_POS_Y);
     timer->start(UPDATE_MS);
 }
 
-//Banana::Banana(int x, int y, QGraphicsItem *parent): 
-//    QObject(), QGraphicsPixmapItem(parent) 
 Banana::Banana(int x, int y, QGraphicsItem *parent): 
     AbstractObject(parent) 
 {
@@ -33,23 +24,13 @@ Banana::Banana(int x, int y, QGraphicsItem *parent):
     timer->start(UPDATE_MS);
 }
 
-/*
-Banana::Banana(int width, int height, int pos_x, int pos_y, 
-    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent) 
-{
-
-    setPos( pos_x, pos_y );
-    init();
-    graphics->load_banana(width, height, this);
-}
-*/
-
 void Banana::init() {
 
     thrown = false;
+    picked_up = false;
 
     // #define these later
-    vel.x = 0;
+    vel.x = 30;
     vel.y = 0;
 
     timer = new QTimer(this);
@@ -62,19 +43,32 @@ void Banana::init() {
 }
 
 void Banana::pause() {
+    if(timer != NULL)
+        timer->stop();
+}
 
+void Banana::resume() {
+    if(timer != NULL)
+        timer->start();
 }
 
 void Banana::status() {
-    QList<QGraphicsItem *> items = 
-        collidingItems(Qt::IntersectsItemShape);
+    if(!picked_up) {
+        QList<QGraphicsItem *> items = 
+            collidingItems(Qt::IntersectsItemShape);
 
-    //qDebug() << "in Banana::check_player()\n";
-    for( int i = 0; i < items.size() ; i++ ) {
-        // player picked up banana 
-        //if( typeid( *(items[i]) ) == typeid(MainPlayer) ) {
-            
-        //}
+        //qDebug() << "in Banana::check_player()\n";
+        for( int i = 0; i < items.size() ; i++ ) {
+            // player picked up banana 
+            if(typeid(*(items[i])) == typeid(Main_player)) {
+               // make player parent of banana
+               this->setParentItem(items[i]); 
+               // sets banana position relative to parent's coord system
+               setPos(0,0);
+
+               pickup();
+            }
+        }
     }
 }
 
@@ -83,15 +77,21 @@ void Banana::move() {
     QList<QGraphicsItem *> items = 
         collidingItems(Qt::IntersectsItemShape);
 
-    //qDebug() << "in BananaProjectile::move()\n";
+    // move banana
+    setPos(x()+vel.x, y());
 
+    // check collisions
     for( int i = 0; i < items.size() ; i++ ) {
 
         // if collision with platform, deallocate banana
         if( typeid( *(items[i]) ) == typeid(Platform) ) {
             // splat sound effect
+
+            scene()->removeItem(this);
+            timer->stop();
+            disconnect( timer, SIGNAL(timeout()), this, SLOT(move()) );
             // deallocate
-            delete this;
+            //delete this;
         }
         // if collision with shark, deallocate banana and set shark
         // paralysis timer 
@@ -101,8 +101,11 @@ void Banana::move() {
 
             shark->stun();
 
+            scene()->removeItem(this);
+            timer->stop();
+            disconnect( timer, SIGNAL(timeout()), this, SLOT(move()) );
             // deallocate
-            delete this;
+            //delete this;
         }
     }
 
@@ -113,28 +116,30 @@ void Banana::move() {
 
 }
 
-bool Banana::chuck(int direction) {
+// 0 for left, 1 for right
+void Banana::chuck(int direction) {
     thrown = true;
+
+    if(direction == LEFT) 
+        vel.x = -vel.x;
+    
+    // connect to new method
+    connect( timer, SIGNAL(timeout()), this, SLOT(move()) );
+    timer->start(UPDATE_MS);
+    
+//    return thrown;
+}
+
+void Banana::pickup() {
+    picked_up = true;
 
     // disconnect timer from method
     timer->stop();
     disconnect( timer, SIGNAL(timeout()), this, SLOT(status()) );
 
-    // connect to new method
-    connect( timer, SIGNAL(timeout()), this, SLOT(move()) );
-    timer->start(UPDATE_MS);
-    
-    return thrown;
 }
 
-bool Banana::pickup() {
-    return false;
+void Banana::eat() {
+
 }
 
-bool Banana::eat() {
-    return false;
-}
-
-bool Banana::is_thrown() {
-    return thrown > 0;
-}

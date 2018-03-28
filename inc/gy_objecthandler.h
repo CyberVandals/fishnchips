@@ -11,14 +11,6 @@ class ObjectHandler {
 public:
     ObjectHandler(QGraphicsScene *scene);
 
-    //bool pause();
-    
-    //bool add_banana();
-    //bool add_exit();
-    //bool add_platform();
-    //bool add_shark();
-    //bool add_steam();
-
     void add_banana(QGraphicsItem *parent=0);
     void add_banana(int x, int y, QGraphicsItem *parent=0);
 
@@ -36,8 +28,10 @@ public:
     void add_steam(QGraphicsItem *parent=0);
     void add_steam(int x, int y, QGraphicsItem *parent=0);
 
-
     void pause();
+    void resume();
+
+    void remove_all();
 
 private:
     QList<Banana *> banana_list;

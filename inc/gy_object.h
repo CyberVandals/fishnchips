@@ -36,6 +36,9 @@
 
 #define DEFAULT_STUN_DURATION 40
 
+#define LEFT	0
+#define RIGHT	1
+
 
 // structs
 struct Velocity {
@@ -51,12 +54,13 @@ public:
     Banana(int x, int y, QGraphicsItem *parent = 0);
 
     void pause();
+    void resume();
 
-    // 0 for up, 1 for down, 2 for left, 3 for right
-    bool chuck(int direction);
-    bool pickup();
-    bool eat();
-    bool is_thrown();
+    // 0 left, 1 right 
+    void chuck(int direction);
+    void pickup();
+    void eat();
+    //bool is_thrown();
 
 public slots:
     void status();
@@ -65,6 +69,7 @@ public slots:
 private:
     void init();
 
+    bool picked_up;
     bool thrown;
     struct Velocity vel;
 };
@@ -78,6 +83,8 @@ public:
     Exit(int x, int y, QGraphicsItem *parent=0);
 
     void pause();
+    void resume();
+
 public slots:
     void status();
 
@@ -111,9 +118,10 @@ public:
     Shark(int x, int y, int vel_x, int vel_y, QGraphicsItem *parent=0);
 
     void pause();
+    void resume();
+
     bool stun(int time=DEFAULT_STUN_DURATION);
     bool cook();
-
 
 public slots:
     void move();
@@ -121,6 +129,7 @@ public slots:
 
 private:
     void init();
+    void set_image();
 
     bool cooked;
     int stunned;
@@ -137,6 +146,7 @@ public:
     Steam(int x, int y, QGraphicsItem *parent=0);
 
     void pause();
+    void resume();
 
 public slots:
     void status();

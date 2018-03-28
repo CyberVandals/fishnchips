@@ -4,7 +4,6 @@
 
 #include "../../inc/gy_objecthandler.h"
 
-//GameObjectHandler::GameObjectHandler(QObject *parent): QObject(parent) {
 ObjectHandler::ObjectHandler(QGraphicsScene *scene) {
     this->scene = scene;
 
@@ -88,6 +87,52 @@ void ObjectHandler::add_steam(int x, int y, QGraphicsItem *parent) {
     steam_list.append(obj);
 }
 
+/* Pause objects that use QTimer (banana, shark, steam, and exit)
+ */
 void ObjectHandler::pause() {
 
+    for(int i = 0; i < shark_list.size(); i++) 
+        shark_list[i]->pause(); 
+
+    for(int i = 0; i < steam_list.size(); i++) 
+        steam_list[i]->pause(); 
+
+    for(int i = 0; i < banana_list.size(); i++) 
+        banana_list[i]->pause(); 
+ 
+    exit->pause();
+}
+
+void ObjectHandler::resume() {
+
+    for(int i = 0; i < shark_list.size(); i++) 
+        shark_list[i]->resume(); 
+
+    for(int i = 0; i < steam_list.size(); i++) 
+        steam_list[i]->resume(); 
+
+    for(int i = 0; i < banana_list.size(); i++) 
+        banana_list[i]->resume(); 
+ 
+    exit->resume();
+
+}
+
+void ObjectHandler::remove_all() {
+    while(!shark_list.isEmpty()) 
+        shark_list.removeLast();
+
+    while(!steam_list.isEmpty()) 
+        steam_list.removeLast();
+
+    while(!banana_list.isEmpty()) 
+        banana_list.removeLast();
+
+    while(!platform_list.isEmpty()) 
+        platform_list.removeLast();
+
+    if(exit != NULL) {
+        delete exit;
+        exit = NULL;
+    }
 }

@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include "../../inc/gy_object.h"
 
-using namespace std;
+//using namespace std;
 
 // Default constructor 
 Steam::Steam(QGraphicsItem *parent): AbstractObject(parent) {
@@ -64,7 +64,13 @@ void Steam::init() {
 }
 
 void Steam::pause() {
+    if(timer != NULL)
+        timer->stop();
+}
 
+void Steam::resume() {
+    if(timer != NULL)
+        timer->start();
 }
 
 void Steam::status() {

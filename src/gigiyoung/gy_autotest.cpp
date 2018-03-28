@@ -1,20 +1,12 @@
 #include <QEvent>
 #include <QKeyEvent>
-//#include <QObject>
 #include <QCoreApplication>
-//#include <QTimer>
-//#include <QGraphicsScene>
-//#include <QGraphicsItem>
 #include <QDebug>
 
 #include "../../inc/gy_autotest.h"
-//#include "../../inc/gy_object.h"
 #include "../../inc/gy_objecthandler.h"
 #include "../../inc/hh_main_player.h"
 #include "../../inc/kk_scenemanager.h"
-
-//class SceneManager;
-//class Main_player;
 
 // add main player
 //AutoTest::AutoTest(QObject *main_window, QGraphicsItem *object): 
@@ -59,14 +51,6 @@ bool AutoTest::change_scene(QGraphicsScene *scene) {
 
 void AutoTest::create_stress_level() {
     static Main_player *player;
-/*    static Shark *shark1, *shark2, *shark3, *shark4, *shark5, *shark6,
-                 *shark7, *shark8, *shark9, *shark10, *shark11, 
-                 *shark12, *shark13, *shark14, *shark15;
-    static Platform *plat1, *plat2, *plat3;
-    static Banana *banana1;
-    static Steam *steam1;
-    static Exit *exit;
-*/
 
     player = new Main_player(scene);
     scene->addItem(player);
@@ -87,70 +71,28 @@ void AutoTest::create_stress_level() {
     obj_handler->add_shark(600,300,2,10);
     obj_handler->add_shark(600,300,10,5);
 
-    obj_handler->add_platform(500,0,200);
-    obj_handler->add_platform(800,200,400);
-    obj_handler->add_platform(500,100,600);
+    obj_handler->add_platform(0,150,600);
+    obj_handler->add_platform(200,300,1000);
+    obj_handler->add_platform(0,450,600);
+    obj_handler->add_platform(0,600,500);
+    obj_handler->add_platform(650,600,600);
 
-    obj_handler->add_banana(300, 300);
+    obj_handler->add_banana(300,200);
+    obj_handler->add_banana(500,700);
 
     obj_handler->add_steam(500, 200);
 
     obj_handler->add_exit();
+
 /*
-    shark1 = new Shark(30,30,5,5);
-    shark2 = new Shark(50,30,10,0);
-    shark3 = new Shark(100,30,3,7);
-    shark4 = new Shark(100,500,10,0);
-    shark5 = new Shark(300,30,10,0);
-    shark6 = new Shark(300,30,8,3);
-    shark7 = new Shark(300,30,10,3);
-    shark8 = new Shark(500,300,5,6);
-    shark9 = new Shark(500,300,8,4);
-    shark10 = new Shark(600,100,10,4);
-    shark11 = new Shark(600,100,9,3);
-    shark12 = new Shark(600,300,8,4);
-    shark13 = new Shark(600,300,10,5);
-    shark14 = new Shark(600,300,2,10);
-    shark15 = new Shark(600,300,10,5);
+    obj_handler->pause();
 
-    plat1 = new Platform(500,0,200);
-    plat2 = new Platform(800,200,400);
-    plat3 = new Platform(500,100,600);
+    for(int i = 0; i < 10e9; i++) {
+        qDebug() << "waiting...\n";
+    }
 
-    //banana1 = new Banana();
-    //steam1 = new Steam();
-
-    
-    exit = new Exit();
-
-
-    scene->addItem(shark1);
-    scene->addItem(shark2);
-    scene->addItem(shark3);
-    scene->addItem(shark4);
-    scene->addItem(shark5);
-    scene->addItem(shark6);
-    scene->addItem(shark7);
-    scene->addItem(shark8);
-    scene->addItem(shark9);
-    scene->addItem(shark10);
-    scene->addItem(shark11);
-    scene->addItem(shark12);
-    scene->addItem(shark13);
-    scene->addItem(shark14);
-    scene->addItem(shark15);
-
-    scene->addItem(plat1);
-    scene->addItem(plat2);
-    scene->addItem(plat3);
-
-    //scene->addItem(banana1);
-
-    //scene->addItem(steam1);
-
-    scene->addItem(exit);
+    obj_handler->resume();
 */
-
 }
 
 void AutoTest::restart_scene() {
