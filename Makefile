@@ -431,6 +431,7 @@ qrc_images.cpp: resources/images/images.qrc \
 		resources/images/monkey.png \
 		resources/images/menu_background.jpg \
 		resources/images/back_ground.jpg \
+		resources/images/blue_shark_left.png \
 		resources/images/play3.png \
 		resources/images/GameOverS.png \
 		resources/images/stressBtn.png \

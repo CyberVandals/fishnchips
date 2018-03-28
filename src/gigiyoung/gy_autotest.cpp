@@ -27,7 +27,7 @@ AutoTest::AutoTest(QGraphicsScene *scene, QGraphicsItem *object, SceneManager *s
     add_point(QPoint(300,400));
     add_point(QPoint(500,0));
     add_point(QPoint(200,0));
-    add_point(QPoint(100,60));
+    add_point(QPoint(100,120));
     add_point(QPoint(600,50));
 
 
