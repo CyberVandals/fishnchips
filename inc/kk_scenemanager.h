@@ -13,8 +13,12 @@
 
 #include "inc/gy_autotest.h"
 
-#include "inc/koffi/kk_gamelevel.h"
-#include "inc/koffi/kk_gamescene.h"
+//#include "inc/koffi/kk_gamelevel.h"
+//#include "inc/koffi/kk_gamescene.h"
+
+class GameLevel;
+
+class GameScene;
 
 class ObjectHandler;
 

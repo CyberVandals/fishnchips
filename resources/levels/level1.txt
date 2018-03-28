@@ -1,7 +1,9 @@
-LEVEL 1
-SCORE 0
-BANANAS 5
-SHARKS 10
-STEAMS 5
-PLATFORMS 5
-EXIT 1
+#ELEMENT_NAME   X_POS   Y_POS
+SCORE           10      5
+BANANA          100     100
+SHARK           120     120
+SHARK           130     130
+EXIT            50      50
+PLATFORM        150     150
+STEAM           180     180
+

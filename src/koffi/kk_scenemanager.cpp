@@ -2,12 +2,15 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QPainter>
+#include <QList>
 
 #include "gy_autotest.h"
 #include "gy_objecthandler.h"
 
 #include "kk_scenemanager.h"
-#include "koffi/kk_filereader.h"
+#include "koffi/kk_gamelevel.h"
+#include "koffi/kk_levelitem.h"
+#include "koffi/kk_gamescene.h"
 
 SceneManager::SceneManager(QGraphicsScene *scene)
 {
@@ -52,7 +55,7 @@ void SceneManager::init(QGraphicsScene *scene, int demo)
 
 void SceneManager::play_game(){
     main_scene->setBackground(":/images/back_ground.jpg");
-    generateLevel(":/levels/level1.txt");
+    generate_level(":/levels/level1.txt");
 }
 
 void SceneManager::restart_game()
@@ -65,11 +68,10 @@ void SceneManager::restart_game()
 
 void SceneManager::generate_level(QString filename)
 {
-    FileReader *file_reader = new FileReader(filename);
-    fileReader->parse_level();
+//    QList<ListItem> *levelItems = GameLevel.generate(filename);
 }
 
-Main_player *SceneManager::get_main_player()
+Main_player* SceneManager::get_player()
 {
     return player;
 }
