@@ -54,6 +54,7 @@ void AutoTest::create_stress_level() {
 
     player = new Main_player(scene);
     scene->addItem(player);
+    scene->setFocusItem(player);
 
     obj_handler->add_shark(30,30,5,5);
     obj_handler->add_shark(50,30,10,0);
