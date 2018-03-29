@@ -19,6 +19,11 @@ Main_player::Main_player(QGraphicsScene * scene,QGraphicsItem *parent): QObject(
     player_health = new HealthBar(scene);
     player_oxygen = new Oxygen(scene);
 
+    right_collision = false;
+    left_collision = false;
+    top_collision = false;
+    bottom_collision = false;
+
 
     has_banana = false;
     shield = false;
@@ -40,7 +45,7 @@ void Main_player::keyPressEvent(QKeyEvent *event)
     scene();
     QPointF current_pos = scenePos();
     QPointF down_pos = QPointF(current_pos.x(), current_pos.y()+60);
-    QPointF up_pos = QPointF(current_pos.x(), current_pos.y()-5);
+    QPointF up_pos = QPointF(this->pos().x(), this->boundingRect().top()+10);
     QPointF right_pos = QPointF(current_pos.x()+30, current_pos.y());
     QPointF left_pos = QPointF(current_pos.x()-5, current_pos.y());
 
@@ -51,43 +56,131 @@ void Main_player::keyPressEvent(QKeyEvent *event)
     //experi end
     if( event->key() == Qt::Key_Left && (this->pos().x()) > (this->scene()->sceneRect().left()))
     {
-        //if(platform_collision() == false)
-        //if(scene()->itemAt(this->pos().rx(), this->pos().ry()) == 0)
-        //{
-        if(scene()->itemAt(left_pos, QTransform()) == 0)
-        this->setPos(x()-10, y());  //
-        //}
-        //this->setPos(x()-10, y());
-        //move left
+        if(collidingItems(Qt::IntersectsItemShape).isEmpty())
+        {
+          setPos(x()-10,y());
+          if(!collidingItems(Qt::IntersectsItemShape).isEmpty())
+          {
+              this->left_collision = true;
+              qDebug() << "hit platform down";
+          }
+          this->right_collision = false;
+        }
+        else
+        {
+            if(!collidingItems(Qt::IntersectsItemShape).isEmpty())
+            {
+                if(this->left_collision == false)
+                {
+                    setPos(x()-10,y());
+                    this->right_collision = false;
+                }
+            }
+        }
+
+
+
     }
+        //move left
+
 
     else if( event->key() == Qt::Key_Right && (this->pos().x()+(boundingRect().right()-boundingRect().left())) < (this->scene()->sceneRect().right()))
     {
-        //if(platform_collision() == false)
-        if(scene()->itemAt(right_pos, QTransform()) == 0)
-        this->setPos(x()+10, y());
+        if(collidingItems(Qt::IntersectsItemShape).isEmpty())
+        {
+          setPos(x()+10,y());
+          if(!collidingItems(Qt::IntersectsItemShape).isEmpty())
+          {
+              this->right_collision = true;
+              qDebug() << "hit platform down";
+          }
+          this->left_collision = false;
+        }
+        else
+        {
+            if(!collidingItems(Qt::IntersectsItemShape).isEmpty())
+            {
+                if(this->right_collision == false)
+                {
+                    setPos(x()+10,y());
+                    this->left_collision = false;
+                }
+            }
+        }
+
+
         //move right
     }
 
     else if( event->key() == Qt::Key_Up && (this->pos().y()) > (this->scene()->sceneRect().top()))
     {
-        //if(platform_collision() == false)
-        //if(scene()->itemAt(QPointF(0, 0)) != Platform)
-        if(scene()->itemAt(up_pos, QTransform()) == 0)
-        this->setPos(x(), y()-10);
-        //move up
+        if(collidingItems(Qt::IntersectsItemShape).isEmpty())
+        {
+          setPos(x(),y()-10);
+          if(!collidingItems(Qt::IntersectsItemShape).isEmpty())
+          {
+              this->top_collision = true;
+              qDebug() << "hit platform up";
+          }
+          this->bottom_collision = false;
+        }
+        else
+        {
+            if(!collidingItems(Qt::IntersectsItemShape).isEmpty())
+            {
+                if(this->top_collision == false)
+                {
+                    setPos(x(),y()-10);
+                    this->bottom_collision = false;
+                }
+
+            }
+        }
+
     }
+
+     /*
+        if(collidingItems(Qt::IntersectsItemShape).isEmpty() && this->top_collision == false)
+        {
+            qDebug() << "good";
+            this->setPos(x(), y()-10);
+            this->bottom_collision = false;
+        }
+            else{
+            while(!collidingItems(Qt::IntersectsItemShape).isEmpty()){this->setPos(x(), y()+1);}
+            qDebug() << "bad";
+            this->top_collision=true;
+            this->bottom_collision = false;
+        }
+        //move up
+    */
+
 
     else if( event->key() == Qt::Key_Down && (this->pos().y()+(boundingRect().bottom()-boundingRect().top())) < (this->scene()->sceneRect().bottom()))
     {
-        //QGraphicsScene * scene = this->scene();
-        //scene->itemAt(0,0);
-        //scene.itemAt(0,0);
-        if(scene()->itemAt(down_pos, QTransform()) == 0)
-        //if(scene()->itemAt(0.0,0.0))// != typeid(Platform))
+        if(collidingItems(Qt::IntersectsItemShape).isEmpty())
+        {
+          setPos(x(),y()+10);
+          if(!collidingItems(Qt::IntersectsItemShape).isEmpty())
+          {
+              this->bottom_collision = true;
+              qDebug() << "hit platform down";
+          }
+          this->top_collision = false;
+        }
+        else
+        {
+            if(!collidingItems(Qt::IntersectsItemShape).isEmpty())
+            {
+                if(this->bottom_collision == false)
+                {
+                    setPos(x(),y()+10);
+                    this->top_collision = false;
+                }
+            }
+        }
 
-            //if(platform_collision() == false)
-       { this->setPos(x(), y()+10); }
+
         //move down
     }
 }
