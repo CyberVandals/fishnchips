@@ -5,72 +5,69 @@
 #include <stdlib.h>
 #include "../../inc/gy_object.h"
 
-using namespace std;
+//using namespace std;
 
-void Steam::init() {
+// Default constructor 
+Steam::Steam(QGraphicsItem *parent): AbstractObject(parent) {
+    init();
 
-    countdown = rand() % 60;
+    setPos(DEFAULT_POS_X, DEFAULT_POS_Y);
 
-    graphics = new Graphics();
-
-    // create timer for move slot
-    timer = new QTimer(this);
-    connect( timer, SIGNAL(timeout()), this, SLOT(status()) );
     timer->start(UPDATE_MS);
 }
 
-// Default constructor 
-Steam::Steam(QGraphicsItem *parent): 
-    QObject(), QGraphicsPixmapItem(parent)
+Steam::Steam(int x, int y, QGraphicsItem *parent): 
+    AbstractObject(parent)
 {
-    // init size and position
-    setPos( DEFAULT_POS_X, DEFAULT_POS_Y );
-    //setRect( DEFAULT_POS_X, DEFAULT_POS_Y, DEFAULT_STEAM_WIDTH,
-    //         DEFAULT_STEAM_HEIGHT );
-
     init();
-    graphics->load_steam(DEFAULT_STEAM_WIDTH, DEFAULT_STEAM_HEIGHT, this);
-}
 
+    setPos(x, y);
 
-// Constructor with position 
-Steam::Steam(int pos_x, int pos_y,
-    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
-{
-    // init size and position
-    setPos( pos_x, pos_y );
-//    setRect( pos_x, pos_y, DEFAULT_STEAM_WIDTH, DEFAULT_STEAM_HEIGHT );
-
-    init();
-    graphics->load_steam(DEFAULT_STEAM_WIDTH, DEFAULT_STEAM_HEIGHT, this);
+    timer->start(UPDATE_MS);
 } 
 
+void Steam::init() {
 
-// Constructor with position and velocity 
-Steam::Steam(int width, int height, int pos_x, int pos_y,
-    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
-{
-    setPos( pos_x, pos_y );
-    // init size and position
-    //setRect( pos_x, pos_y, width, height );
+    time_active = 20 + rand() % 100;
+    count = time_active;
 
-    init();
-    graphics->load_steam(width, height, this);
+    timer = new QTimer(this);
+    graphics = new Graphics();
+    sound = new SoundManager();
+
+    graphics->load_steam(
+        DEFAULT_STEAM_WIDTH, DEFAULT_STEAM_HEIGHT, this);
+
+    // create timer for move slot
+    connect( timer, SIGNAL(timeout()), this, SLOT(status()) );
 }
 
+void Steam::pause() {
+    if(timer != NULL)
+        timer->stop();
+}
+
+void Steam::resume() {
+    if(timer != NULL)
+        timer->start();
+}
 
 void Steam::status() {
-    if(countdown > 0) {
-        countdown--;
+    if(count > 0) {
+        count--;
     }
-    else 
-        exploded = true;
+    else {
+        is_exploded = !is_exploded;
+        count = time_active;
+    }
 
-    if(exploded) {
+    if(is_exploded) {
         // make object visible
+        this->setVisible(true);
     }
     else {
         // make invisible
+        this->setVisible(false);
     }
 
 

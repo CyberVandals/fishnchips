@@ -41,6 +41,7 @@ private:
 
 public slots:
     void start();
+    void restart();
     void start_demo();
     void start_stress();
     void displayGameover();

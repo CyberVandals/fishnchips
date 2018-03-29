@@ -9,8 +9,9 @@
 #include <QList>
 #include <QGraphicsView>
 
-#include "kk_scenemanager.h"
+//#include "kk_scenemanager.h"
 
+class ObjectHandler;
 class SceneManager;
 
 class AutoTest: public QObject {
@@ -37,7 +38,8 @@ private:
     QGraphicsItem *object;
     QTimer *timer;
     //QObject *receiver;
-    QGraphicsScene *receiver;
+    QGraphicsScene *scene;
+    ObjectHandler *obj_handler;
 
 };
 

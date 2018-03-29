@@ -2,65 +2,76 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QPainter>
+#include <QList>
+
+#include "gy_autotest.h"
+#include "gy_objecthandler.h"
 
 #include "kk_scenemanager.h"
-#include "inc/gy_autotest.h"
-#include "koffi/kk_filereader.h"
+#include "koffi/kk_gamelevel.h"
+#include "koffi/kk_levelitem.h"
+#include "koffi/kk_gamescene.h"
 
 SceneManager::SceneManager(QGraphicsScene *scene)
 {
-    mainScene = new GameScene(scene);
+    main_scene = new GameScene(scene);
+//    object_handler = new ObjectHandler(scene);
+    object_handler = NULL;
 }
 
 SceneManager::SceneManager(QGraphicsScene *scene, int demo)
 {
-    mainScene = new GameScene(scene);
+    main_scene = new GameScene(scene);
     init(scene, demo);
 }
 
 void SceneManager::init(QGraphicsScene *scene, int demo)
 {
 
-    mainScene = new GameScene(scene);
+    main_scene = new GameScene(scene);
+    object_handler = new ObjectHandler(scene);
+
+    // stress
     if(demo == 2) {
         AutoTest * autoTest = new AutoTest(scene);
         return;
     }
-    player = new Main_player(scene);
-    shark = new Shark(30, 30, 10, 0);
-    exit = new Exit();
-    platform = new Platform();
-    mainScene->addGameObject(player);
-    mainScene->addGameObject(shark);
-    mainScene->addGameObject(exit);
-    mainScene->addGameObject(platform);
-    mainScene->setFocus(player);
 
+    player = new Main_player(scene);
+    main_scene->addGameObject(player);
+    main_scene->setFocus(player);
+
+    object_handler->add_banana();
+    object_handler->add_exit();
+    object_handler->add_shark();
+    object_handler->add_platform();
+    object_handler->add_steam();
+
+    // demo
     if(demo == 1) {
         AutoTest * autoTest = new AutoTest(scene, player, this);
     }
 }
 
-void SceneManager::playGame(){
-    mainScene->setBackground(":/images/back_ground.jpg");
-    generateLevel(":/levels/level1.txt");
+void SceneManager::play_game(){
+    main_scene->setBackground(":/images/back_ground.jpg");
+    generate_level(":/levels/level1.txt");
 }
 
-void SceneManager::restartGame()
+void SceneManager::restart_game()
 {
-    mainScene->removeGameObject(player);
-    mainScene->removeGameObject(shark);
-    mainScene->removeGameObject(exit);
-    mainScene->removeGameObject(platform);
+//    main_scene->removeGameObject(player);
+//    main_scene->removeGameObject(shark);
+//    main_scene->removeGameObject(exit);
+//    main_scene->removeGameObject(platform);
 }
 
-void SceneManager::generateLevel(QString filename)
+void SceneManager::generate_level(QString filename)
 {
-    FileReader *fileReader = new FileReader(filename);
-    fileReader->parseLevel();
+//    QList<ListItem> *levelItems = GameLevel.generate(filename);
 }
 
-Main_player *SceneManager::getMainPlayer()
+Main_player* SceneManager::get_player()
 {
     return player;
 }

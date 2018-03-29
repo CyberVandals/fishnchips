@@ -25,16 +25,27 @@ void Graphics::load_shark(Shark *shark)
 
 }
 
-
-
-void Graphics::load_shark(int width,int heigh,Shark *shark)
+void Graphics::load_shark(int width,int heigh,Shark *shark, bool left, bool right)
 {
     //shark->setPixmap(QPixmap(":/blue_shark.png"));
-    QPixmap pixmap(":/images/blue_shark.png");
+    QPixmap pixmap;
+    if (right)
+        pixmap.load(":/images/blue_shark.png");
+    else if(left)
+        pixmap.load(":/images/blue_shark_left.png");
     pixmap = pixmap.scaled(width,heigh,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     shark->setPixmap(pixmap);
     
 }
+
+/*void Graphics :: shark_flip(Shark *shark, bool horizontal , bool vertical)
+{
+  QImage image(":/images/blue_shark.png");
+  QImage mirroredImage = image.mirrored(horizontal, vertical);
+  QPixmap pixmap = QPixmap::fromImage(mirroredImage);
+  shark->setPixmap(pixmap);
+}
+*/
 void Graphics::load_banana(Banana *banana)
 {
      banana->setPixmap(QPixmap(":/images/banana.png"));

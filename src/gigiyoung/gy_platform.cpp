@@ -2,7 +2,7 @@
  * By Gigi Young
  */
 
-#include <QGraphicsRectItem>
+//#include <QGraphicsRectItem>
 #include "../../inc/gy_object.h"
 
 
@@ -24,28 +24,28 @@ Platform::Platform(QGraphicsItem *parent): QGraphicsPixmapItem(parent) {
     graphics->load_platform(DEFAULT_PLAT_WIDTH,DEFAULT_PLAT_HEIGHT,this);
 }
 
-Platform::Platform(int pos_x, int pos_y, 
-    QGraphicsItem *parent): QGraphicsPixmapItem(parent)
+Platform::Platform(int x, int y, QGraphicsItem *parent): 
+    QGraphicsPixmapItem(parent)
 //    QGraphicsItem *parent): QGraphicsRectItem(parent)
 {
     //setRect( pos_x, pos_y, DEFAULT_PLAT_WIDTH, DEFAULT_PLAT_HEIGHT ); 
 
     init();
 
-    setPos( pos_x, pos_y ); 
+    setPos(x, y); 
     graphics->load_platform(DEFAULT_PLAT_WIDTH,DEFAULT_PLAT_HEIGHT,this);
     
 }
 
-Platform::Platform(int width, int pos_x, int pos_y,
-    QGraphicsItem *parent): QGraphicsPixmapItem(parent)
+Platform::Platform(int x, int y, int width, QGraphicsItem *parent):
+    QGraphicsPixmapItem(parent)
 //    QGraphicsItem *parent): QGraphicsRectItem(parent)
 {
     //setRect( pos_x, pos_y, width, height ); 
 
     init();
 
-    setPos( pos_x, pos_y ); 
+    setPos(x, y); 
     graphics->load_platform( width, DEFAULT_PLAT_HEIGHT,this);
 }
 
