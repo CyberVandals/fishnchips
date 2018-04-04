@@ -1,6 +1,8 @@
-/* gy_banana.cpp - Implementation file for banana objects 
+/******************************* 
+ * gy_banana.cpp 
+ * 
  * By Gigi Young
- */
+ ******************************/
 
 #include <QList>
 #include <QDebug>
@@ -23,8 +25,8 @@ Banana::Banana(int x, int y, QGraphicsItem *parent):
 
 void Banana::init() {
 
-    thrown = false;
-    picked_up = false;
+    is_thrown = false;
+    is_picked_up = false;
 
     // #define these later
     vel.x = 30;
@@ -36,28 +38,28 @@ void Banana::init() {
 
     graphics->load_banana(
         DEFAULT_BANANA_WIDTH, DEFAULT_BANANA_HEIGHT, this);
-    connect( timer, SIGNAL(timeout()), this, SLOT(status()) );
+    connect(timer, SIGNAL(timeout()), this, SLOT(status()));
 }
 
 void Banana::pause() {
-    if(timer != NULL)
+    if( timer != NULL )
         timer->stop();
 }
 
 void Banana::resume() {
-    if(timer != NULL)
+    if( timer != NULL )
         timer->start();
 }
 
 void Banana::status() {
-    if(!picked_up) {
+    if( !is_picked_up ) {
         QList<QGraphicsItem *> items = 
             collidingItems(Qt::IntersectsItemShape);
 
         //qDebug() << "in Banana::check_player()\n";
         for( int i = 0; i < items.size() ; i++ ) {
             // player picked up banana 
-            if(typeid(*(items[i])) == typeid(Main_player)) {
+            if( typeid(*(items[i])) == typeid(Main_player) ) {
                // make player parent of banana
                this->setParentItem(items[i]); 
                // sets banana position relative to parent's coord system
@@ -81,18 +83,16 @@ void Banana::move() {
     for( int i = 0; i < items.size() ; i++ ) {
 
         // if collision with platform, deallocate banana
-        if( typeid( *(items[i]) ) == typeid(Platform) ) {
+        if( typeid(*(items[i])) == typeid(Platform) ) {
             // splat sound effect
 
             scene()->removeItem(this);
             timer->stop();
-            disconnect( timer, SIGNAL(timeout()), this, SLOT(move()) );
-            // deallocate
-            //delete this;
+            disconnect(timer, SIGNAL(timeout()), this, SLOT(move()));
         }
         // if collision with shark, deallocate banana and set shark
         // paralysis timer 
-        else if( typeid( *(items[i]) ) == typeid(Shark) ) {
+        else if( typeid(*(items[i])) == typeid(Shark) ) {
             Shark *shark = (Shark *)items[i];
             // splat sound effect
 
@@ -100,39 +100,35 @@ void Banana::move() {
 
             scene()->removeItem(this);
             timer->stop();
-            disconnect( timer, SIGNAL(timeout()), this, SLOT(move()) );
-            // deallocate
-            //delete this;
+            disconnect(timer, SIGNAL(timeout()), this, SLOT(move()));
         }
     }
 
-
-
     // update position
-    setPos( x()+vel.x, y()+vel.y );
+    setPos(x()+vel.x, y()+vel.y);
 
 }
 
 // 0 for left, 1 for right
 void Banana::chuck(int direction) {
-    thrown = true;
+    is_thrown = true;
 
-    if(direction == LEFT) 
+    if( direction == LEFT ) 
         vel.x = -vel.x;
     
     // connect to new method
-    connect( timer, SIGNAL(timeout()), this, SLOT(move()) );
+    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
     timer->start(UPDATE_MS);
     
 //    return thrown;
 }
 
 void Banana::pickup() {
-    picked_up = true;
+    is_picked_up = true;
 
     // disconnect timer from method
     timer->stop();
-    disconnect( timer, SIGNAL(timeout()), this, SLOT(status()) );
+    disconnect(timer, SIGNAL(timeout()), this, SLOT(status()));
 
 }
 
@@ -140,6 +136,6 @@ void Banana::eat() {
 
 }
 
-bool Banana::is_thrown() {
-    return thrown;
+bool Banana::thrown() {
+    return is_thrown;
 }

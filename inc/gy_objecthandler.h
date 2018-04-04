@@ -1,6 +1,8 @@
-/* gy_objectihandler.h
- * Gigi Young
- */
+/*************************************
+ * gy_objectihandler.h
+ *
+ * By Gigi Young
+ ************************************/
 
 #include <QGraphicsScene>
 #include <QObject>

@@ -1,3 +1,9 @@
+/***********************************
+ * gy_abstract.h
+ *
+ * By Gigi Young
+ **********************************/
+
 #ifndef GY_ABSTRACT_H
 #define GY_ABSTRACT_H
 

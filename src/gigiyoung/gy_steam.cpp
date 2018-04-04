@@ -1,18 +1,17 @@
-/* gy_steam.cpp - Implemention file for steam object
+/*************************************
+ * gy_steam.cpp
+ * 
  * By Gigi Young
- */
+ ************************************/
 
 #include <stdlib.h>
 #include "../../inc/gy_object.h"
 
-//using namespace std;
 
 // Default constructor 
 Steam::Steam(QGraphicsItem *parent): AbstractObject(parent) {
     init();
-
     setPos(DEFAULT_POS_X, DEFAULT_POS_Y);
-
     timer->start(UPDATE_MS);
 }
 
@@ -20,14 +19,13 @@ Steam::Steam(int x, int y, QGraphicsItem *parent):
     AbstractObject(parent)
 {
     init();
-
     setPos(x, y);
-
     timer->start(UPDATE_MS);
 } 
 
 void Steam::init() {
 
+    is_active = false;
     time_active = 20 + rand() % 100;
     count = time_active;
 
@@ -39,7 +37,7 @@ void Steam::init() {
         DEFAULT_STEAM_WIDTH, DEFAULT_STEAM_HEIGHT, this);
 
     // create timer for move slot
-    connect( timer, SIGNAL(timeout()), this, SLOT(status()) );
+    connect(timer, SIGNAL(timeout()), this, SLOT(status()));
 }
 
 void Steam::pause() {
@@ -52,16 +50,20 @@ void Steam::resume() {
         timer->start();
 }
 
+bool Steam::active() {
+    return is_active;
+}
+
 void Steam::status() {
     if(count > 0) {
         count--;
     }
     else {
-        is_exploded = !is_exploded;
+        is_active = !is_active;
         count = time_active;
     }
 
-    if(is_exploded) {
+    if(is_active) {
         // make object visible
         this->setVisible(true);
     }
@@ -69,6 +71,4 @@ void Steam::status() {
         // make invisible
         this->setVisible(false);
     }
-
-
 }

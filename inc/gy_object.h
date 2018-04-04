@@ -1,6 +1,8 @@
-/* gy_object.h - Interface for game objects
+/******************************************** 
+ * gy_object.h - Interface for game objects
+ *
  * By Gigi Young
- */
+ *******************************************/
 
 #ifndef GY_OBJECT_H
 #define GY_OBJECT_H
@@ -45,9 +47,9 @@ struct Velocity {
     int x, y;
 };
 
-struct Size {
-    int x, y;
-};
+//struct Size {
+//    int x, y;
+//};
 
 // Banana 
 class Banana: public AbstractObject {
@@ -63,7 +65,7 @@ public:
     void chuck(int direction);
     void pickup();
     void eat();
-    bool is_thrown();
+    bool thrown();
 
 public slots:
     void status();
@@ -72,8 +74,8 @@ public slots:
 private:
     void init();
 
-    bool picked_up;
-    bool thrown;
+    bool is_picked_up;
+    bool is_thrown;
     struct Velocity vel;
 };
 
@@ -124,18 +126,18 @@ public:
     void resume();
 
     bool stun(int time=DEFAULT_STUN_DURATION);
-    bool cook();
+//    bool cook();
 
 public slots:
     void move();
-    void status();
+//    void status();
 
 private:
     void init();
     void set_image();
 
-    bool cooked;
-    int stunned;
+//    bool cooked;
+    int stun_duration;
     int sound_count;
     struct Velocity vel;
 };
@@ -151,13 +153,15 @@ public:
     void pause();
     void resume();
 
+    bool active();
+
 public slots:
     void status();
 
 private:
     void init();
 
-    bool is_exploded;
+    bool is_active;
     int count, time_active;
 };
 

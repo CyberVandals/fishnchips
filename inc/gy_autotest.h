@@ -1,3 +1,9 @@
+/*********************************
+ * gy_autotest.h
+ *
+ * By Gigi Young
+ ********************************/
+
 #ifndef AUTOTEST_H
 #define AUTOTEST_H
 

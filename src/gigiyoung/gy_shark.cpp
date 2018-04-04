@@ -1,6 +1,8 @@
-/* gy_shark.c - Implementation file for shark object
+/********************************* 
+ * gy_shark.cpp
+ * 
  * By Gigi Young
- */
+ ********************************/
 
 #include <typeinfo>
 #include <QList>
@@ -10,7 +12,7 @@
 Shark::Shark(QGraphicsItem *parent): AbstractObject(parent) {
     init();
 
-    setPos( DEFAULT_POS_X, DEFAULT_POS_Y );
+    setPos(DEFAULT_POS_X, DEFAULT_POS_Y);
     vel.x = DEFAULT_VEL_X;
     vel.y = DEFAULT_VEL_Y;    
 
@@ -47,20 +49,20 @@ Shark::Shark(int x, int y, int vel_x, int vel_y,
 
 void Shark::init() {
     sound_count = 0;
-    stunned = 0;
-    cooked = false;
+    stun_duration = 0;
+    //cooked = false;
  
     timer = new QTimer(this);
     graphics = new Graphics();
     sound = new SoundManager();
 
     // create timer for move slot
-    connect( timer, SIGNAL(timeout()), this, SLOT(move()) );
+    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 }
 
 void Shark::set_image() {
     // facing right 
-    if(vel.x > 0) {
+    if( vel.x > 0 ) {
         graphics->load_shark(
             DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT, this,
             false, true);
@@ -69,26 +71,27 @@ void Shark::set_image() {
     else {
         graphics->load_shark(
             DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT, this,
-            true, false );
+            true, false);
     }
 }
 
 void Shark::pause() {
-    if(timer != NULL)
+    if( timer != NULL )
         timer->stop();
 }
 
 void Shark::resume() {
-    if(timer != NULL)
+    if( timer != NULL )
         timer->start();
 }
 
 bool Shark::stun(int time) {
     if( time > 0 ) 
-        stunned = time;
-    return stunned > 0;
+        stun_duration = time;
+    return stun_duration > 0;
 }
 
+/*
 bool Shark::cook() {
     // "cook" shark
 
@@ -96,24 +99,27 @@ bool Shark::cook() {
 
     return cooked = true;
 }
+*/
 
 void Shark::move() {
     static const int X_BUFFER = 50;
-    static const int Y_BUFFER = 8;
+    //static const int Y_BUFFER = 8;
     //qDebug() << "Shark is moving\n";
     static int scene_right = scene()->sceneRect().right();
     static int scene_left = scene()->sceneRect().left(); 
     static int scene_top = scene()->sceneRect().top();
     static int scene_bottom = scene()->sceneRect().bottom();
-    int shark_right, shark_left, shark_top, shark_bottom;
+    static int shark_right, shark_left, shark_top, shark_bottom;
 
 
     // stunned, decrement
-    if( stunned > 0 ) {
-        stunned--;
+    if( stun_duration > 0 ) {
+        stun_duration--;
         return;
     }
-    if(sound_count > 0) {
+
+    // decrement timer for sound - same as player immunity duration
+    if( sound_count > 0 ) {
         sound_count--;
     }
  
@@ -127,16 +133,16 @@ void Shark::move() {
         collidingItems(Qt::IntersectsItemShape);
 
     // if left or right edges of scene, reverse x velocity
-    if ( (shark_left <= scene_left && vel.x < 0) || 
-         (shark_right >= scene_right && vel.x > 0) ) 
+    if ( (shark_left <= scene_left && vel.x < 0) 
+         || (shark_right >= scene_right && vel.x > 0) ) 
     {
         vel.x = -vel.x;
         set_image();
         //graphics->shark_flip(this,true,false);
     }
     // if top or bottom edges of scene, reverse x velocity
-    else if ( (shark_top <= scene_top && vel.y < 0) || 
-         (shark_bottom >= scene_bottom && vel.y > 0) ) 
+    else if ( (shark_top <= scene_top && vel.y < 0) 
+              || (shark_bottom >= scene_bottom && vel.y > 0) ) 
     {
         vel.y = -vel.y;
     }
@@ -157,20 +163,20 @@ void Shark::move() {
             plat_bottom = platform->y() + 
                           platform->boundingRect().height();
 
-            if( ((shark_right >= plat_left && 
-                 shark_right <= plat_left + X_BUFFER) && vel.x > 0) ||
-                ((shark_left <= plat_right && 
-                 shark_left >= plat_right - X_BUFFER) &&  vel.x < 0) ) 
+            if( ((shark_right >= plat_left 
+                && shark_right <= plat_left + X_BUFFER) && vel.x > 0) 
+                || ((shark_left <= plat_right 
+                && shark_left >= plat_right - X_BUFFER) &&  vel.x < 0) ) 
             {
                 vel.x = -vel.x;
                 set_image();
                 //graphics->shark_flip(this,true,false);
             }
 
-            if( (shark_bottom >= plat_top && 
-                 shark_top < plat_top && vel.y > 0) || 
-                (shark_top <= plat_bottom && 
-                 shark_bottom > plat_bottom && vel.y < 0) )
+            if( (shark_bottom >= plat_top 
+                && shark_top < plat_top && vel.y > 0) 
+                || (shark_top <= plat_bottom 
+                && shark_bottom > plat_bottom && vel.y < 0) )
             {
                 vel.y = -vel.y;
             }
@@ -178,7 +184,7 @@ void Shark::move() {
 
         }
         if( typeid(*(items[i])) == typeid(Main_player) ) {
-            if(sound_count == 0) {
+            if( sound_count == 0 ) {
                 sound->playChomp();
                 sound_count = PLAYER_IMMUNE_DURATION;
             }
@@ -188,16 +194,22 @@ void Shark::move() {
         if( typeid(*(items[i])) == typeid(Banana) ) {
             Banana *banana = (Banana *)items[i];
 
-            if( banana->is_thrown() )
+            if( banana->thrown() )
                 stun(); 
         }
     }
 
     // update position
-    setPos( x()+vel.x, y()+vel.y );
+    setPos(x()+vel.x, y()+vel.y);
 }
 
+/*
 void Shark::status() {
-    qDebug() << "I am a shark. I am now chum.";
+    //qDebug() << "I am a shark. I am now chum.";
+    if( stun_duration > 0 ) 
+        stun_duration--;
+    else {
 
+    }
 }
+*/

@@ -1,6 +1,8 @@
-/* gy_objecthandler.cpp
- * Gigi Young
- */
+/********************************* 
+ * gy_objecthandler.cpp
+ *
+ * By Gigi Young
+ ********************************/
 
 #include "../../inc/gy_objecthandler.h"
 
@@ -91,13 +93,13 @@ void ObjectHandler::add_steam(int x, int y, QGraphicsItem *parent) {
  */
 void ObjectHandler::pause() {
 
-    for(int i = 0; i < shark_list.size(); i++) 
+    for( int i = 0; i < shark_list.size(); i++ ) 
         shark_list[i]->pause(); 
 
-    for(int i = 0; i < steam_list.size(); i++) 
+    for( int i = 0; i < steam_list.size(); i++ ) 
         steam_list[i]->pause(); 
 
-    for(int i = 0; i < banana_list.size(); i++) 
+    for( int i = 0; i < banana_list.size(); i++ ) 
         banana_list[i]->pause(); 
  
     exit->pause();
@@ -105,13 +107,13 @@ void ObjectHandler::pause() {
 
 void ObjectHandler::resume() {
 
-    for(int i = 0; i < shark_list.size(); i++) 
+    for( int i = 0; i < shark_list.size(); i++ ) 
         shark_list[i]->resume(); 
 
-    for(int i = 0; i < steam_list.size(); i++) 
+    for( int i = 0; i < steam_list.size(); i++ ) 
         steam_list[i]->resume(); 
 
-    for(int i = 0; i < banana_list.size(); i++) 
+    for( int i = 0; i < banana_list.size(); i++ ) 
         banana_list[i]->resume(); 
  
     exit->resume();
@@ -119,20 +121,40 @@ void ObjectHandler::resume() {
 }
 
 void ObjectHandler::remove_all() {
-    while(!shark_list.isEmpty()) 
+
+    // remove from scene and deallocate
+    for( int i = 0; i < shark_list.size(); i++ ) {
+        scene->removeItem(shark_list[i]); 
+        delete shark_list[i];
+    }
+
+    for( int i = 0; i < steam_list.size(); i++ ) {
+        scene->removeItem(steam_list[i]); 
+        delete steam_list[i];
+    }
+
+    for( int i = 0; i < banana_list.size(); i++ ) {
+        scene->removeItem(banana_list[i]);  
+        delete banana_list[i];
+    }
+ 
+    scene->removeItem(exit);
+    if( exit != NULL ) {
+        delete exit;
+        exit = NULL;
+    }
+
+    // clear pointer lists 
+    while( !shark_list.isEmpty() ) 
         shark_list.removeLast();
 
-    while(!steam_list.isEmpty()) 
+    while( !steam_list.isEmpty() ) 
         steam_list.removeLast();
 
-    while(!banana_list.isEmpty()) 
+    while( !banana_list.isEmpty() ) 
         banana_list.removeLast();
 
     while(!platform_list.isEmpty()) 
         platform_list.removeLast();
 
-    if(exit != NULL) {
-        delete exit;
-        exit = NULL;
-    }
 }
