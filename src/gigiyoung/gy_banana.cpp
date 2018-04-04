@@ -51,6 +51,47 @@ void Banana::resume() {
         timer->start();
 }
 
+// 0 for left, 1 for right
+void Banana::chuck(int direction) {
+    if( is_picked_up ) {
+        this->setParentItem(0);
+
+        is_picked_up = false;
+        is_thrown = true;
+        this->setVisible(true);
+
+        if( direction == LEFT ) 
+            vel.x = -vel.x;
+    
+        // connect to new method
+        connect(timer, SIGNAL(timeout()), this, SLOT(move()));
+        timer->start(UPDATE_MS);
+    }
+    
+//    return thrown;
+}
+
+/*
+void Banana::pickup() {
+    is_picked_up = true;
+
+    // disconnect timer from method
+    timer->stop();
+    disconnect(timer, SIGNAL(timeout()), this, SLOT(status()));
+}
+*/
+
+void Banana::eat() {
+    if( is_picked_up ) {
+        is_picked_up = false;
+        scene()->removeItem(this);
+    }
+}
+
+bool Banana::thrown() {
+    return is_thrown;
+}
+
 void Banana::status() {
     if( !is_picked_up ) {
         QList<QGraphicsItem *> items = 
@@ -66,7 +107,8 @@ void Banana::status() {
                setPos(0,0);
 
                // make invisible
-               this->setVisible(false);
+               //this->setVisible(false);
+
                is_picked_up = true;
 
                // disconnect timer from method
@@ -115,43 +157,5 @@ void Banana::move() {
 
     // update position
     setPos(x()+vel.x, y()+vel.y);
-
 }
 
-// 0 for left, 1 for right
-void Banana::chuck(int direction) {
-    if( is_picked_up ) {
-        this->setParentItem(0);
-
-        is_picked_up = false;
-        is_thrown = true;
-        this->setVisible(true);
-
-        if( direction == LEFT ) 
-            vel.x = -vel.x;
-    
-        // connect to new method
-        connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-        timer->start(UPDATE_MS);
-    }
-    
-//    return thrown;
-}
-
-/*
-void Banana::pickup() {
-    is_picked_up = true;
-
-    // disconnect timer from method
-    timer->stop();
-    disconnect(timer, SIGNAL(timeout()), this, SLOT(status()));
-}
-*/
-
-void Banana::eat() {
-
-}
-
-bool Banana::thrown() {
-    return is_thrown;
-}
