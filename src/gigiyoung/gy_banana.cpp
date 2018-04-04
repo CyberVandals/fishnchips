@@ -121,6 +121,8 @@ void Banana::move() {
 // 0 for left, 1 for right
 void Banana::chuck(int direction) {
     if( is_picked_up ) {
+        this->setParentItem(0);
+
         is_picked_up = false;
         is_thrown = true;
         this->setVisible(true);
