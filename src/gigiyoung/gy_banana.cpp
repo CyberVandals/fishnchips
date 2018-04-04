@@ -64,6 +64,7 @@ void Banana::status() {
                this->setParentItem(items[i]); 
                // sets banana position relative to parent's coord system
                setPos(0,0);
+               this->setVisible(false);
 
                pickup();
             }
@@ -112,6 +113,7 @@ void Banana::move() {
 // 0 for left, 1 for right
 void Banana::chuck(int direction) {
     is_thrown = true;
+    this->setVisible(true);
 
     if( direction == LEFT ) 
         vel.x = -vel.x;
