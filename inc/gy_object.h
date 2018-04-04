@@ -67,7 +67,7 @@ public:
 
     // 0 left, 1 right 
     void chuck(int direction);
-    void pickup();
+//    void pickup();
     void eat();
     bool thrown();
 
@@ -130,17 +130,17 @@ public:
     void resume();
 
     bool stun(int time=DEFAULT_STUN_DURATION);
-//    bool cook();
+    bool cooked();
 
 public slots:
     void move();
-//    void status();
+    void cooked_status();
 
 private:
     void init();
     void set_image();
 
-//    bool cooked;
+    bool is_cooked;
     int stun_duration;
     int sound_count;
     struct Velocity vel;

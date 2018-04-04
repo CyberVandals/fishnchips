@@ -64,9 +64,16 @@ void Banana::status() {
                this->setParentItem(items[i]); 
                // sets banana position relative to parent's coord system
                setPos(0,0);
-               this->setVisible(false);
 
-               pickup();
+               // make invisible
+               this->setVisible(false);
+               is_picked_up = true;
+
+               // disconnect timer from method
+               timer->stop();
+               disconnect(timer, SIGNAL(timeout()), this, SLOT(status()));
+
+               //pickup();
             }
         }
     }
@@ -91,6 +98,7 @@ void Banana::move() {
             timer->stop();
             disconnect(timer, SIGNAL(timeout()), this, SLOT(move()));
         }
+
         // if collision with shark, deallocate banana and set shark
         // paralysis timer 
         else if( typeid(*(items[i])) == typeid(Shark) ) {
@@ -112,27 +120,31 @@ void Banana::move() {
 
 // 0 for left, 1 for right
 void Banana::chuck(int direction) {
-    is_thrown = true;
-    this->setVisible(true);
+    if( is_picked_up ) {
+        is_picked_up = false;
+        is_thrown = true;
+        this->setVisible(true);
 
-    if( direction == LEFT ) 
-        vel.x = -vel.x;
+        if( direction == LEFT ) 
+            vel.x = -vel.x;
     
-    // connect to new method
-    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    timer->start(UPDATE_MS);
+        // connect to new method
+        connect(timer, SIGNAL(timeout()), this, SLOT(move()));
+        timer->start(UPDATE_MS);
+    }
     
 //    return thrown;
 }
 
+/*
 void Banana::pickup() {
     is_picked_up = true;
 
     // disconnect timer from method
     timer->stop();
     disconnect(timer, SIGNAL(timeout()), this, SLOT(status()));
-
 }
+*/
 
 void Banana::eat() {
 
