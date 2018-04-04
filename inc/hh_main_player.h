@@ -21,8 +21,10 @@
 #include "henry/hh_health_bar.h"
 #include "wz_graphics.h"
 #include "henry/hh_oxygen.h"
+#include "gy_object.h"
 
 
+class Banana;
 class Graphics;
 
 class Main_player: public QObject, public QGraphicsPixmapItem
@@ -30,6 +32,7 @@ class Main_player: public QObject, public QGraphicsPixmapItem
 Q_OBJECT
 private:
 bool has_banana;
+Banana * banana;
 HealthBar *player_health;
 Oxygen *player_oxygen;
 QList<QGraphicsItem *> collision_item;
@@ -43,6 +46,7 @@ bool right_collision;
 bool top_collision;
 bool bottom_collision;
 bool sink_collision;
+
 
 //Health health;
 
