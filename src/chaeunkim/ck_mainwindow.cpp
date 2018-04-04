@@ -24,7 +24,7 @@ MainWindow::MainWindow(){
     */
 
     WID_HEI = 700;
-    WID_WIDTH  = 1000;
+    WID_WIDTH  = 950;
     setFixedSize(WID_WIDTH, WID_HEI);
     scene->setSceneRect(0,0,WID_WIDTH,WID_HEI);
 
@@ -77,7 +77,7 @@ void MainWindow::displayGameover(){
 }
 void MainWindow::bringGameOverScene(){
     QPixmap pim(":/images/GameOverS.png");
-    scene->setBackgroundBrush(pim.scaled(WID_WIDTH,WID_HEI,Qt::KeepAspectRatio,Qt::SmoothTransformation));
+    scene->setBackgroundBrush(pim.scaled(WID_WIDTH,WID_HEI,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     setScene(scene);
 
     quitBtn = new Button(":/images/quit3.png");
@@ -101,10 +101,11 @@ void MainWindow::restart(){
             scene->items()[i]->setEnabled(false);
     }
     scene->clear();
-    QPixmap pim(":/images/menu_background.jpg");
-    scene->setBackgroundBrush(pim.scaled(WID_WIDTH,WID_HEI,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
-    setScene(scene);
-    //this->mainmenu();
+    delete scene;
+
+    scene = new QGraphicsScene(this);
+
+    this->mainmenu();
     //QTimer::singleShot(0,this, SLOT(start()));
 }
 void MainWindow::start(){
