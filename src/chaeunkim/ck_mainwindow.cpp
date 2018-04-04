@@ -69,7 +69,9 @@ void MainWindow::mainmenu(){
 }
 void MainWindow::displayGameover(){
     for (size_t i = 0, n = scene->items().size(); i < n; i++){
+            //scene->items()[i]->setEnabled(false);
             scene->items()[i]->setEnabled(false);
+            //delete scene->items()[i];
     }
     scene->clear();
     bringGameOverScene();
@@ -97,16 +99,45 @@ void MainWindow::restart(){
     quitBtn->disconnect();
     replayBtn->deleteLater();
     quitBtn->deleteLater();
-    for (size_t i = 0, n = scene->items().size(); i < n; i++){
+    /*for (size_t i = 0, n = scene->items().size(); i < n; i++){
             scene->items()[i]->setEnabled(false);
     }
     scene->clear();
-    delete scene;
+    //delete scene;
+    //scene = new QGraphicsScene(this);
+    //scene->setSceneRect(0,0,WID_WIDTH,WID_HEI);
+    //QPixmap pim(":/images/menu_background.jpg");
+    //scene->setBackgroundBrush(pim.scaled(WID_WIDTH,WID_HEI,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+    //setScene(scene);
+    //scene = new QGraphicsScene(this);
+    //this->mainmenu();
+    //QTimer::singleShot(0,this, SLOT(start()));*/
 
-    scene = new QGraphicsScene(this);
+    QPixmap pim(":/images/menu_background.jpg");
+    scene->setBackgroundBrush(pim.scaled(WID_WIDTH,WID_HEI,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+    setScene(scene);
+    logo = new QGraphicsPixmapItem(QPixmap(":/images/icon_shark.png"));
+    logo->setPos((scene->width() - logo->boundingRect().width()) / 2, scene->height() / 12);
+    scene->addItem(logo);
+    playBtn = new Button(":/images/play3.png");
+    playBtn->setGeometry((scene->width() - playBtn->width()) /2,scene->height()/2,0,0);
+    connect(playBtn,SIGNAL(clicked()),this,SLOT(start()));
+    scene->addWidget(playBtn);
 
-    this->mainmenu();
-    //QTimer::singleShot(0,this, SLOT(start()));
+    quitBtn = new Button(":/images/quit3.png");
+    quitBtn->setGeometry((scene->width() - quitBtn->width()) /2,playBtn->pos().y()+quitBtn->height(),0,0);
+    connect(quitBtn,SIGNAL(clicked()),this,SLOT(close()));
+    scene->addWidget(quitBtn);
+
+    demoBtn = new Button(":/images/demoBtn.png");
+    demoBtn->setGeometry((scene->width() - demoBtn->width()*2)/2, playBtn->pos().y()-demoBtn->height(),0,0);
+    connect(demoBtn,SIGNAL(clicked()),this,SLOT(start_demo()));
+    scene->addWidget(demoBtn);
+
+    stressBtn = new Button(":/images/stressBtn.png");
+    stressBtn->setGeometry((scene->width() - stressBtn->width()/20)/2, playBtn->pos().y()-stressBtn->height(),0,0);
+    connect(stressBtn,SIGNAL(clicked()),this,SLOT(start_stress()));
+    scene->addWidget(stressBtn);
 }
 void MainWindow::start(){
     scene->removeItem(logo);
