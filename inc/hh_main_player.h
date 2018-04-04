@@ -42,6 +42,7 @@ bool left_collision;
 bool right_collision;
 bool top_collision;
 bool bottom_collision;
+bool sink_collision;
 
 //Health health;
 
