@@ -23,6 +23,7 @@ Main_player::Main_player(QGraphicsScene * scene,QGraphicsItem *parent): QObject(
     left_collision = false;
     top_collision = false;
     bottom_collision = false;
+    sink_collision = false;
 
 
     has_banana = false;
@@ -41,27 +42,16 @@ Main_player::Main_player(QGraphicsScene * scene,QGraphicsItem *parent): QObject(
 
 void Main_player::keyPressEvent(QKeyEvent *event)
 {
-    //experi start
-    scene();
-    QPointF current_pos = scenePos();
-    QPointF down_pos = QPointF(current_pos.x(), current_pos.y()+60);
-    QPointF up_pos = QPointF(this->pos().x(), this->boundingRect().top()+10);
-    QPointF right_pos = QPointF(current_pos.x()+30, current_pos.y());
-    QPointF left_pos = QPointF(current_pos.x()-5, current_pos.y());
 
-
-
-    qreal x_pos = current_pos.x();
-    qreal y_pos = current_pos.y();
-    //experi end
     if( event->key() == Qt::Key_Left && (this->pos().x()) > (this->scene()->sceneRect().left()))
     {
+
         if(collidingItems(Qt::IntersectsItemShape).isEmpty())
         {
           setPos(x()-10,y());
           if(!collidingItems(Qt::IntersectsItemShape).isEmpty())
           {
-              this->left_collision = true;
+              if(this->platform_collision()) this->left_collision = true;
               qDebug() << "hit platform down";
           }
           this->right_collision = false;
@@ -86,12 +76,13 @@ void Main_player::keyPressEvent(QKeyEvent *event)
 
     else if( event->key() == Qt::Key_Right && (this->pos().x()+(boundingRect().right()-boundingRect().left())) < (this->scene()->sceneRect().right()))
     {
-        if(collidingItems(Qt::IntersectsItemShape).isEmpty())
+
+       if(collidingItems(Qt::IntersectsItemShape).isEmpty())
         {
           setPos(x()+10,y());
           if(!collidingItems(Qt::IntersectsItemShape).isEmpty())
           {
-              this->right_collision = true;
+              if(this->platform_collision()) this->right_collision = true;
               qDebug() << "hit platform down";
           }
           this->left_collision = false;
@@ -114,12 +105,14 @@ void Main_player::keyPressEvent(QKeyEvent *event)
 
     else if( event->key() == Qt::Key_Up && (this->pos().y()) > (this->scene()->sceneRect().top()))
     {
+
         if(collidingItems(Qt::IntersectsItemShape).isEmpty())
         {
           setPos(x(),y()-10);
+          this->sink_collision = false;
           if(!collidingItems(Qt::IntersectsItemShape).isEmpty())
           {
-              this->top_collision = true;
+              if(this->platform_collision()) this->top_collision = true;
               qDebug() << "hit platform up";
           }
           this->bottom_collision = false;
@@ -131,6 +124,7 @@ void Main_player::keyPressEvent(QKeyEvent *event)
                 if(this->top_collision == false)
                 {
                     setPos(x(),y()-10);
+                    this->sink_collision = false;
                     this->bottom_collision = false;
                 }
 
@@ -139,31 +133,16 @@ void Main_player::keyPressEvent(QKeyEvent *event)
 
     }
 
-     /*
-        if(collidingItems(Qt::IntersectsItemShape).isEmpty() && this->top_collision == false)
-        {
-            qDebug() << "good";
-            this->setPos(x(), y()-10);
-            this->bottom_collision = false;
-        }
-            else{
-            while(!collidingItems(Qt::IntersectsItemShape).isEmpty()){this->setPos(x(), y()+1);}
-            qDebug() << "bad";
-            this->top_collision=true;
-            this->bottom_collision = false;
-        }
-        //move up
-    */
-
-
     else if( event->key() == Qt::Key_Down && (this->pos().y()+(boundingRect().bottom()-boundingRect().top())) < (this->scene()->sceneRect().bottom()))
     {
-        if(collidingItems(Qt::IntersectsItemShape).isEmpty())
+
+       if(collidingItems(Qt::IntersectsItemShape).isEmpty())
         {
           setPos(x(),y()+10);
           if(!collidingItems(Qt::IntersectsItemShape).isEmpty())
           {
-              this->bottom_collision = true;
+              if(this->platform_collision()) this->bottom_collision = true;
+              //this->sink_collision = true;
               qDebug() << "hit platform down";
           }
           this->top_collision = false;
@@ -205,9 +184,10 @@ int Main_player::shark_collision()
           return 0;
           qDebug() << "Level Finished";
         }
-        else if(typeid(*(collision_item[i])) == typeid(Platform))
+        else if(typeid(*(collision_item[i])) == typeid(Steam) && (this->shield == false))
         {
-            return 2;
+            Steam * steam = (Steam*)collision_item[i];
+            if(steam->active() == true) return 2;
         }
     }
     return 3;
@@ -234,7 +214,7 @@ void Main_player::recover()
 
 void Main_player::sink()
 {
-    if(shark_collision()==1)//shark
+    if(shark_collision()==1 || shark_collision() == 2)//shark
     {
 
         shield = true;
@@ -253,9 +233,26 @@ void Main_player::sink()
         this->setPos(scene()->sceneRect().bottom(), scene()->sceneRect().bottom()-50);
     }
 
+
     if(this->pos().y()+(boundingRect().bottom()-boundingRect().top()) < (this->scene()->sceneRect().bottom()))
     {
-    //if(shark_collision()!=2)
-        //setPos(x(), y()+1);
+    if(this->collidingItems(Qt::IntersectsItemBoundingRect).isEmpty())
+    {
+        setPos(x(), y()+1);
+        if(!collidingItems(Qt::IntersectsItemBoundingRect).isEmpty()) this->sink_collision = true;
+    }
+        else if(!this->collidingItems(Qt::IntersectsItemBoundingRect).isEmpty())
+    {
+        if(this->sink_collision == false)
+        {
+          setPos(x(), y()+1);
+          if(!collidingItems(Qt::IntersectsItemBoundingRect).isEmpty()) this->sink_collision = true;
+        }
+    }
+    else if(this->collidingItems(Qt::IntersectsItemBoundingRect).isEmpty() && this->sink_collision == false)
+    {
+       setPos(x(), y()+1);
+       if(!collidingItems(Qt::IntersectsItemBoundingRect).isEmpty()) this->sink_collision = true;
+    }
     }
 }
