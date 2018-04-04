@@ -26,7 +26,7 @@ Steam::Steam(int x, int y, QGraphicsItem *parent):
 void Steam::init() {
 
     is_active = false;
-    time_active = 20 + rand() % 100;
+    time_active = 20 + rand() % 60;
     count = time_active;
 
     timer = new QTimer(this);

@@ -88,9 +88,11 @@ void AutoTest::create_stress_level() {
     obj_handler->add_platform(650,600,600);
 
     obj_handler->add_banana(300,200);
-    obj_handler->add_banana(500,700);
+    obj_handler->add_banana(500,600);
 
     obj_handler->add_steam(500, 200);
+    obj_handler->add_steam(300, 100);
+    obj_handler->add_steam(600, 600);
 
     obj_handler->add_exit();
 
