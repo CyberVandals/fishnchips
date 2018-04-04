@@ -1,6 +1,15 @@
-#ifndef GY_ABSTRACT_H
-#define GY_ABSTRACT_H
+/****************************************
+ * gy_abstract.cpp
+ *
+ * By Gigi Young
+ ***************************************/
 
+#include "../../inc/gigiyoung/gy_abstract.h"
 
-
-#endif /* GY_ABSTRACT_H */
+AbstractObject::AbstractObject(QGraphicsItem *parent):
+    QObject(), QGraphicsPixmapItem(parent)
+{
+    timer = NULL;
+    graphics = NULL;
+    sound = NULL;
+}

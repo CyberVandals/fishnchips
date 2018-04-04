@@ -14,26 +14,28 @@ MainWindow::MainWindow(){
 
     backgroundMusic->playBackground();
 
-    // get desktop resolution
+    //get desktop resolution
+    /*
     QRect rec = QApplication::desktop()->screenGeometry();
     WID_HEI = rec.height();
     WID_WIDTH = rec.width();
-
     setFixedSize(WID_WIDTH/1.5, WID_HEI/1.1);
-
     scene->setSceneRect(0,0,WID_WIDTH/1.5,WID_HEI/1.1);
+    */
+
+    WID_HEI = 700;
+    WID_WIDTH  = 950;
+    setFixedSize(WID_WIDTH, WID_HEI);
+    scene->setSceneRect(0,0,WID_WIDTH,WID_HEI);
+
 
     QPixmap pim(":/images/menu_background.jpg");
     scene->setBackgroundBrush(pim.scaled(WID_WIDTH,WID_HEI,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     setScene(scene);
 
-
-
     // turn off the scroll bars both horizontal and vertical
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
-
 
 }
 
@@ -75,22 +77,37 @@ void MainWindow::displayGameover(){
 }
 void MainWindow::bringGameOverScene(){
     QPixmap pim(":/images/GameOverS.png");
-    scene->setBackgroundBrush(pim.scaled(WID_WIDTH,WID_HEI,Qt::KeepAspectRatio,Qt::SmoothTransformation));
+    scene->setBackgroundBrush(pim.scaled(WID_WIDTH,WID_HEI,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     setScene(scene);
 
     quitBtn = new Button(":/images/quit3.png");
-    quitBtn->setGeometry((scene->width() - quitBtn->width()) /2,scene->height() - (quitBtn->height()*1.5),0,0);
+    quitBtn->setGeometry((scene->width() - quitBtn->width()*2.5) /2,scene->height() - (quitBtn->height()*2),0,0);
     connect(quitBtn,SIGNAL(clicked()),this,SLOT(close()));
     scene->addWidget(quitBtn);
 
     replayBtn = new Button(":/images/replay.png");
     replayBtn->setGeometry((scene->width() - replayBtn->width()/2.2) /2,scene->height() - (replayBtn->height()*2),0,0);
-    //connect(playBtn,SIGNAL(clicked()),this,SLOT(start()));
+    connect(replayBtn,SIGNAL(clicked()),this,SLOT(restart()));
     scene->addWidget(replayBtn);
 
 
 }
+void MainWindow::restart(){
+    replayBtn->disconnect();
+    quitBtn->disconnect();
+    replayBtn->deleteLater();
+    quitBtn->deleteLater();
+    for (size_t i = 0, n = scene->items().size(); i < n; i++){
+            scene->items()[i]->setEnabled(false);
+    }
+    scene->clear();
+    delete scene;
 
+    scene = new QGraphicsScene(this);
+
+    this->mainmenu();
+    //QTimer::singleShot(0,this, SLOT(start()));
+}
 void MainWindow::start(){
     scene->removeItem(logo);
     playBtn->disconnect();
@@ -101,10 +118,9 @@ void MainWindow::start(){
     quitBtn->deleteLater();
     demoBtn->deleteLater();
     stressBtn->deleteLater();
-    //gamescene = new SceneManager(scene,false);
     gamescene = new SceneManager(scene,0);
 
-    gamescene->playGame();
+    gamescene->play_game();
 }
 void MainWindow::start_demo(){
     scene->removeItem(logo);
@@ -116,10 +132,9 @@ void MainWindow::start_demo(){
     quitBtn->deleteLater();
     demoBtn->deleteLater();
     stressBtn->deleteLater();
-    //gamescene = new SceneManager(scene,true);
     gamescene = new SceneManager(scene,1);
 
-    gamescene->playGame();
+    gamescene->play_game();
 }
 void MainWindow::start_stress(){
     scene->removeItem(logo);
@@ -131,8 +146,7 @@ void MainWindow::start_stress(){
     quitBtn->deleteLater();
     demoBtn->deleteLater();
     stressBtn->deleteLater();
-    //gamescene = new SceneManager(scene,true);
     gamescene = new SceneManager(scene,2);
 
-    gamescene->playGame();
+    gamescene->play_game();
 }

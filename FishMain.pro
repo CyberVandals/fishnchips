@@ -52,8 +52,7 @@ SOURCES += \
 	src/matthew/mm_soundmanager.cpp \
         src/wei/wz_graphics.cpp \ 
 	src/chaeunkim/ck_pausescreen.cpp \
-	src/henry/hh_oxygen.cpp \
-	src/koffi/kk_filereader.cpp
+	src/henry/hh_oxygen.cpp
 
 HEADERS  += \
 	inc/ck_mainwindow.h \
@@ -76,7 +75,7 @@ HEADERS  += \
 	inc/henry/hh_oxygen.h \
 	inc/mm_soundmanager.h \
 	inc/koffi/gamecontroller.h \
-	inc/koffi/kk_filereader.h
+    inc/koffi/kk_levelitem.h
 
 RESOURCES += \
 	resources/images/images.qrc \

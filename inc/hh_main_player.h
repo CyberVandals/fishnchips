@@ -16,6 +16,7 @@
 #include <typeinfo>
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
+#include <QTransform>
 #include "henry/hh_health.h"
 #include "henry/hh_health_bar.h"
 #include "wz_graphics.h"
@@ -36,6 +37,12 @@ QTimer * recover_timer;
 QTimer * timer;
 bool shield;
 Graphics * player_pic;
+QGraphicsScene * player_scene;
+bool left_collision;
+bool right_collision;
+bool top_collision;
+bool bottom_collision;
+bool sink_collision;
 
 //Health health;
 

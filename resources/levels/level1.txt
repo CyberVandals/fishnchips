@@ -1,5 +1,9 @@
-LEVEL 1
-HEALTH 5
-BANANA 10
-SCORE 0
-ENEMIES 8
+#ELEMENT_NAME   X_POS   Y_POS
+SCORE           10      5
+BANANA          100     100
+SHARK           120     120
+SHARK           130     130
+EXIT            50      50
+PLATFORM        150     150
+STEAM           180     180
+

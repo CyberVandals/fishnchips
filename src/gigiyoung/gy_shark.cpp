@@ -1,100 +1,97 @@
-/* gy_shark.c - Implementation file for shark object
+/********************************* 
+ * gy_shark.cpp
+ * 
  * By Gigi Young
- */
+ ********************************/
 
 #include <typeinfo>
-#include <QGraphicsItem>
-#include <QGraphicsPixmapItem>
-#include <QPixmap>
-#include <QGraphicsScene>
-#include <QObject>
-#include <QTimer>
 #include <QList>
 #include <QDebug>
 #include "../../inc/gy_object.h"
-//#include "../../inc/wz_graphics.h"
 
-using namespace std;
+Shark::Shark(QGraphicsItem *parent): AbstractObject(parent) {
+    init();
 
-void Shark::init() {
-    sound_count = 0;
-    stunned = 0;
-    cooked = false;
- 
-    //setPixmap(QPixmap(":/images/blue_shark.png").scaled(10,10));
-    //setPixmap(QPixmap(":/images/blue_shark.png"));
+    setPos(DEFAULT_POS_X, DEFAULT_POS_Y);
+    vel.x = DEFAULT_VEL_X;
+    vel.y = DEFAULT_VEL_Y;    
 
-    sound = new SoundManager();
-    graphics = new Graphics();
-
-    // create timer for move slot
-    timer = new QTimer(this);
-    connect( timer, SIGNAL(timeout()), this, SLOT(move()) );
+    set_image();   
     timer->start(UPDATE_MS);
 }
 
-// Default constructor 
-Shark::Shark(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
-{
-    setPos( DEFAULT_POS_X, DEFAULT_POS_Y );
 
+Shark::Shark(int x, int y, QGraphicsItem *parent): 
+    AbstractObject(parent)
+{
+    init();
+
+    setPos(x, y);
     vel.x = DEFAULT_VEL_X;
     vel.y = DEFAULT_VEL_Y;    
 
-    init();
-    graphics->load_shark(DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT, this);
-}
-
-
-// Constructor with position 
-Shark::Shark(int pos_x, int pos_y,
-    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
-{
-    setPos( pos_x, pos_y );
-
-    vel.x = DEFAULT_VEL_X;
-    vel.y = DEFAULT_VEL_Y;    
-
-    init();
-    graphics->load_shark(DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT, this);
+    set_image();   
+    timer->start(UPDATE_MS);
 } 
 
-// Constructor with position and velocity 
-Shark::Shark(int pos_x, int pos_y, int vel_x, int vel_y,
-    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
+Shark::Shark(int x, int y, int vel_x, int vel_y,
+    QGraphicsItem *parent): AbstractObject(parent)
 {
-    setPos( pos_x, pos_y );
+    init();
 
+    setPos(x, y);
     vel.x = vel_x;
     vel.y = vel_y;    
-
-    init();
-    graphics->load_shark(DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT, this);
+    
+    set_image();   
+    timer->start(UPDATE_MS);
 }
 
-// Constructor with position and velocity 
-Shark::Shark(int width, int height, int pos_x, int pos_y, int vel_x, int vel_y,
-    QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
-{
-    setPos( pos_x, pos_y );
+void Shark::init() {
+    sound_count = 0;
+    stun_duration = 0;
+    //cooked = false;
+ 
+    timer = new QTimer(this);
+    graphics = new Graphics();
+    sound = new SoundManager();
 
-    vel.x = vel_x;
-    vel.y = vel_y;    
-
-    init();
-    graphics->load_shark(width, height, this);
+    // create timer for move slot
+    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 }
 
+void Shark::set_image() {
+    // facing right 
+    if( vel.x > 0 ) {
+        graphics->load_shark(
+            DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT, this,
+            false, true);
+    }
+    // facing left
+    else {
+        graphics->load_shark(
+            DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT, this,
+            true, false);
+    }
+}
+
+void Shark::pause() {
+    if( timer != NULL )
+        timer->stop();
+}
+
+void Shark::resume() {
+    if( timer != NULL )
+        timer->start();
+}
 
 bool Shark::stun(int time) {
     if( time > 0 ) 
-        stunned = time;
-        //return true;
-    
-    //return false;
-    return stunned > 0;
+        stun_duration = time;
+    return stun_duration > 0;
 }
 
+/*
 bool Shark::cook() {
     // "cook" shark
 
@@ -102,51 +99,50 @@ bool Shark::cook() {
 
     return cooked = true;
 }
+*/
 
 void Shark::move() {
     static const int X_BUFFER = 50;
-    static const int Y_BUFFER = 8;
+    //static const int Y_BUFFER = 8;
     //qDebug() << "Shark is moving\n";
     static int scene_right = scene()->sceneRect().right();
     static int scene_left = scene()->sceneRect().left(); 
     static int scene_top = scene()->sceneRect().top();
     static int scene_bottom = scene()->sceneRect().bottom();
-    int shark_right, shark_left, shark_top, shark_bottom;
+    static int shark_right, shark_left, shark_top, shark_bottom;
 
 
     // stunned, decrement
-    if( stunned > 0 ) {
-        stunned--;
+    if( stun_duration > 0 ) {
+        stun_duration--;
         return;
     }
-    if(sound_count > 0) {
+
+    // decrement timer for sound - same as player immunity duration
+    if( sound_count > 0 ) {
         sound_count--;
     }
  
     // calculate
     shark_right = x() + this->boundingRect().width();
-    shark_left = x(); //this->boundingRect().left();
-    shark_top = y(); //this->boundingRect().top();
+    shark_left = x(); 
+    shark_top = y(); 
     shark_bottom = y() + this->boundingRect().height();
 
-    //qDebug() << scene()->sceneRect().left() << ", "
-    //         << scene()->sceneRect().right();
-    //qDebug() << "Shark is at " << x() << ", " << y(); 
-    //qDebug() << "Shark's velocity is " << vel.x << ", " << vel.y; 
-
     QList<QGraphicsItem *> items = 
-        //collidingItems(Qt::IntersectsItemBoundingRect);
         collidingItems(Qt::IntersectsItemShape);
 
     // if left or right edges of scene, reverse x velocity
-    if ( (shark_left <= scene_left && vel.x < 0) || 
-         (shark_right >= scene_right && vel.x > 0) ) 
+    if ( (shark_left <= scene_left && vel.x < 0) 
+         || (shark_right >= scene_right && vel.x > 0) ) 
     {
         vel.x = -vel.x;
+        set_image();
+        //graphics->shark_flip(this,true,false);
     }
     // if top or bottom edges of scene, reverse x velocity
-    else if ( (shark_top <= scene_top && vel.y < 0) || 
-         (shark_bottom >= scene_bottom && vel.y > 0) ) 
+    else if ( (shark_top <= scene_top && vel.y < 0) 
+              || (shark_bottom >= scene_bottom && vel.y > 0) ) 
     {
         vel.y = -vel.y;
     }
@@ -166,44 +162,21 @@ void Shark::move() {
             plat_top = platform->y(); 
             plat_bottom = platform->y() + 
                           platform->boundingRect().height();
-/*
-            if( (y() >= plat_bottom) && (y() <= plat_top) ) {
-                if( vel.y > 0 || vel.y < 0)
-                    vel.y = -vel.y;
-            }
 
-            if( (shark_right >= plat_left && 
-                 shark_right <= plat_left + BUFFER &&
-                 shark_left < plat_left && vel.x > 0) ||
-                (shark_left <= plat_right && 
-                 shark_left >= plat_right - BUFFER && 
-                 shark_right > plat_right &&  vel.x < 0) ) 
-
-this one kind works
-            if( (shark_right >= plat_left && 
-                 shark_left < plat_left && vel.x > 0) ||
-                (shark_left <= plat_right && 
-                 shark_right > plat_right &&  vel.x < 0) ) 
-*/
-            if( ((shark_right >= plat_left && 
-                 shark_right <= plat_left + X_BUFFER) && vel.x > 0) ||
-                ((shark_left <= plat_right && 
-                 shark_left >= plat_right - X_BUFFER) &&  vel.x < 0) ) 
+            if( ((shark_right >= plat_left 
+                && shark_right <= plat_left + X_BUFFER) && vel.x > 0) 
+                || ((shark_left <= plat_right 
+                && shark_left >= plat_right - X_BUFFER) &&  vel.x < 0) ) 
             {
                 vel.x = -vel.x;
+                set_image();
+                //graphics->shark_flip(this,true,false);
             }
 
-            if( (shark_bottom >= plat_top && 
-                 shark_top < plat_top && vel.y > 0) || 
-                (shark_top <= plat_bottom && 
-                 shark_bottom > plat_bottom && vel.y < 0) )
-
-/*
-            if( (shark_bottom >= plat_top - Y_BUFFER && 
-                 shark_bottom <= plat_top + Y_BUFFER && vel.y > 0) || 
-                (shark_top <= plat_bottom + Y_BUFFER && 
-                 shark_top >= plat_bottom - Y_BUFFER && vel.y < 0) )
-*/
+            if( (shark_bottom >= plat_top 
+                && shark_top < plat_top && vel.y > 0) 
+                || (shark_top <= plat_bottom 
+                && shark_bottom > plat_bottom && vel.y < 0) )
             {
                 vel.y = -vel.y;
             }
@@ -211,7 +184,7 @@ this one kind works
 
         }
         if( typeid(*(items[i])) == typeid(Main_player) ) {
-            if(sound_count == 0) {
+            if( sound_count == 0 ) {
                 sound->playChomp();
                 sound_count = PLAYER_IMMUNE_DURATION;
             }
@@ -221,16 +194,22 @@ this one kind works
         if( typeid(*(items[i])) == typeid(Banana) ) {
             Banana *banana = (Banana *)items[i];
 
-            if( banana->is_thrown() )
+            if( banana->thrown() )
                 stun(); 
         }
     }
 
     // update position
-    setPos( x()+vel.x, y()+vel.y );
+    setPos(x()+vel.x, y()+vel.y);
 }
 
+/*
 void Shark::status() {
-    qDebug() << "I am a shark. I am now chum.";
+    //qDebug() << "I am a shark. I am now chum.";
+    if( stun_duration > 0 ) 
+        stun_duration--;
+    else {
 
+    }
 }
+*/

@@ -1,3 +1,9 @@
+/*********************************
+ * gy_autotest.h
+ *
+ * By Gigi Young
+ ********************************/
+
 #ifndef AUTOTEST_H
 #define AUTOTEST_H
 
@@ -9,8 +15,9 @@
 #include <QList>
 #include <QGraphicsView>
 
-#include "kk_scenemanager.h"
+//#include "kk_scenemanager.h"
 
+class ObjectHandler;
 class SceneManager;
 
 class AutoTest: public QObject {
@@ -37,7 +44,8 @@ private:
     QGraphicsItem *object;
     QTimer *timer;
     //QObject *receiver;
-    QGraphicsScene *receiver;
+    QGraphicsScene *scene;
+    ObjectHandler *obj_handler;
 
 };
 
