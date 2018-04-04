@@ -5,26 +5,28 @@
 
 SoundManager::SoundManager()
 {
-
-
-    //music.setMedia(QUrl("qrc:/sounds/background.wav"));
-    //music.play();
-
+//The constructor does not do anything
 }
 
 void SoundManager::play_background()
 {
 
+    //A playlist is used to put the background music in a continual loop rather than playing once
     QMediaPlaylist *playlist = new QMediaPlaylist();
     playlist->addMedia( QUrl( background_path ) );
     playlist->setPlaybackMode( QMediaPlaylist::Loop );
 
-    QMediaPlayer *music = new QMediaPlayer();
-    music->setPlaylist( playlist );
-    music->play();
+    music1 = new QMediaPlayer();
+    //The volume is set to 20% since it is very loud otherwise
+    music1->setVolume(20);
+    music1->setPlaylist( playlist );
+    music1->play();
 
 
 }
+
+//Each of these functions declares a qmedia player, passes the path to its respective sound file, and then plays the file.
+//The file paths are the member variables of the SoundManager class
 
 void SoundManager::play_bump()
 {
