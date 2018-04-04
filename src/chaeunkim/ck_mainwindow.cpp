@@ -12,7 +12,7 @@ MainWindow::MainWindow(){
     scene = new QGraphicsScene(this);
     backgroundMusic = new SoundManager();
 
-    backgroundMusic->playBackground();
+    backgroundMusic->play_background();
 
     //get desktop resolution
     /*
