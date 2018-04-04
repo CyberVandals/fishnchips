@@ -230,7 +230,7 @@ void Main_player::sink()
 {
     if(player_oxygen->value() == 0)
     {
-        QTimer::singleShot(0,player_scene->parent(), SLOT(displayGameover()));
+        QTimer::singleShot(0,player_scene->parent(), SLOT(display_gameover()));
     }
     if(shark_collision()==1 || shark_collision() == 2)
     {
@@ -238,7 +238,7 @@ void Main_player::sink()
         shield = true;
         if(player_health->decrease_health() == 0)
         {
-            QTimer::singleShot(0,player_scene->parent(), SLOT(displayGameover()));
+            QTimer::singleShot(0,player_scene->parent(), SLOT(display_gameover()));
         }
         recover_timer->start(1000);
     }
