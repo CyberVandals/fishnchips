@@ -13,8 +13,7 @@
 #include "kk_scenemanager.h"
 
 
-class MainWindow :public QGraphicsView
-{
+class MainWindow :public QGraphicsView {
     Q_OBJECT
 public:
     MainWindow();
@@ -23,6 +22,7 @@ public:
 
 private:
     void bringGameOverScene();
+
     QGraphicsScene * scene;
     QGraphicsPixmapItem *logo;
 

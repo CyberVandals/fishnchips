@@ -14,27 +14,28 @@ MainWindow::MainWindow(){
 
     backgroundMusic->playBackground();
 
-    // get desktop resolution
-    //QRect rec = QApplication::desktop()->screenGeometry();
-    //WID_HEI = rec.height();
-    //WID_WIDTH = rec.width();
-    WID_HEI = 800;
+    //get desktop resolution
+    /*
+    QRect rec = QApplication::desktop()->screenGeometry();
+    WID_HEI = rec.height();
+    WID_WIDTH = rec.width();
+    setFixedSize(WID_WIDTH/1.5, WID_HEI/1.1);
+    scene->setSceneRect(0,0,WID_WIDTH/1.5,WID_HEI/1.1);
+    */
+
+    WID_HEI = 700;
     WID_WIDTH  = 1000;
     setFixedSize(WID_WIDTH, WID_HEI);
-    //setFixedSize(1000,1000);
     scene->setSceneRect(0,0,WID_WIDTH,WID_HEI);
-    //scene->setSceneRect(0,0,1000,1000);
+
+
     QPixmap pim(":/images/menu_background.jpg");
     scene->setBackgroundBrush(pim.scaled(WID_WIDTH,WID_HEI,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     setScene(scene);
 
-
-
     // turn off the scroll bars both horizontal and vertical
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
-
 
 }
 
@@ -92,18 +93,19 @@ void MainWindow::bringGameOverScene(){
 
 }
 void MainWindow::restart(){
-    /*replayBtn->disconnect();
+    replayBtn->disconnect();
     quitBtn->disconnect();
     replayBtn->deleteLater();
-    quitBtn->deleteLater();*/
+    quitBtn->deleteLater();
     for (size_t i = 0, n = scene->items().size(); i < n; i++){
             scene->items()[i]->setEnabled(false);
     }
     scene->clear();
     QPixmap pim(":/images/menu_background.jpg");
     scene->setBackgroundBrush(pim.scaled(WID_WIDTH,WID_HEI,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
-    //setScene(scene);
-    this->mainmenu();
+    setScene(scene);
+    //this->mainmenu();
+    //QTimer::singleShot(0,this, SLOT(start()));
 }
 void MainWindow::start(){
     scene->removeItem(logo);
