@@ -46,11 +46,13 @@ void Main_player::keyPressEvent(QKeyEvent *event)
     if(event->key() == Qt::Key_Z)
     {
         if(this->has_banana == true)this->banana->chuck(LEFT);
+        this->has_banana = false;
     }
 
     else if(event->key() == Qt::Key_X)
     {
         if(this->has_banana==true)this->banana->chuck(RIGHT);
+        this->has_banana = false;
     }
 
     else if( event->key() == Qt::Key_Left && (this->pos().x()) > (this->scene()->sceneRect().left()))
@@ -188,8 +190,10 @@ int Main_player::shark_collision()
             return 1;
         }
 
-        else if(typeid(*(collision_item[i])) == typeid(Banana))
+        else if(typeid(*(collision_item[i])) == typeid(Banana) && this->has_banana == false)
         {
+            this->banana = (Banana*)collision_item[i];
+            //this->has_banana = true;
             return 69;
         }
 
