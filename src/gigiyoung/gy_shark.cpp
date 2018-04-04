@@ -194,10 +194,10 @@ void Shark::move() {
                 stun(); 
         }
         else if( typeid(*(items[i])) == typeid(Steam) ) {
-            is_cooked = true;
+            //is_cooked = true;
 
-            disconnect(timer,SIGNAL(timeout()),this,SLOT(move()));
-            connect(timer,SIGNAL(timeout()),this,SLOT(cooked_status()));
+            //disconnect(timer,SIGNAL(timeout()),this,SLOT(move()));
+            //connect(timer,SIGNAL(timeout()),this,SLOT(cooked_status()));
             
         }
     }
