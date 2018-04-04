@@ -1,14 +1,13 @@
 #include "../../inc/hh_main_player.h"
 #include "../../inc/henry/hh_health_bar.h"
 
-#include "../../inc/gy_object.h"
+//#include "../../inc/gy_object.h"
 #include <QDebug>
 #include <typeinfo>
 Main_player::Main_player(QGraphicsScene * scene,QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
     player_pic = new Graphics();
     player_pic->load_mainplayer(50,50, this);
-    //setPixmap(QPixmap());
     setPos(scene->sceneRect().bottom(), scene->sceneRect().bottom()-50);
     setFlag(QGraphicsItem::ItemIsFocusable);
 
@@ -43,7 +42,18 @@ Main_player::Main_player(QGraphicsScene * scene,QGraphicsItem *parent): QObject(
 void Main_player::keyPressEvent(QKeyEvent *event)
 {
 
-    if( event->key() == Qt::Key_Left && (this->pos().x()) > (this->scene()->sceneRect().left()))
+
+    if(event->key() == Qt::Key_Z)
+    {
+        if(this->has_banana == true)this->banana->chuck(LEFT);
+    }
+
+    else if(event->key() == Qt::Key_X)
+    {
+        if(this->has_banana==true)this->banana->chuck(RIGHT);
+    }
+
+    else if( event->key() == Qt::Key_Left && (this->pos().x()) > (this->scene()->sceneRect().left()))
     {
 
         if(collidingItems(Qt::IntersectsItemShape).isEmpty())
@@ -178,6 +188,10 @@ int Main_player::shark_collision()
             return 1;
         }
 
+        else if(typeid(*(collision_item[i])) == typeid(Banana))
+        {
+            return 69;
+        }
 
         else if(typeid(*(collision_item[i])) == typeid(Exit))
         {
@@ -214,16 +228,17 @@ void Main_player::recover()
 
 void Main_player::sink()
 {
-    if(shark_collision()==1 || shark_collision() == 2)//shark
+    if(player_oxygen->value() == 0)
+    {
+        QTimer::singleShot(0,player_scene->parent(), SLOT(display_gameover()));
+    }
+    if(shark_collision()==1 || shark_collision() == 2)
     {
 
         shield = true;
         if(player_health->decrease_health() == 0)
         {
-            QTimer::singleShot(0,player_scene->parent(), SLOT(displayGameover()));
-            //this->setPos(scene()->sceneRect().bottom(), scene()->sceneRect().bottom()-50);
-            //QGraphicsScene *current_scene = scene();
-            //player_health = new HealthBar(current_scene);
+            QTimer::singleShot(0,player_scene->parent(), SLOT(display_gameover()));
         }
         recover_timer->start(1000);
     }
@@ -232,7 +247,10 @@ void Main_player::sink()
     {
         this->setPos(scene()->sceneRect().bottom(), scene()->sceneRect().bottom()-50);
     }
-
+    else if(shark_collision()==69)
+    {
+        this->has_banana = true;
+    }
 
     if(this->pos().y()+(boundingRect().bottom()-boundingRect().top()) < (this->scene()->sceneRect().bottom()))
     {

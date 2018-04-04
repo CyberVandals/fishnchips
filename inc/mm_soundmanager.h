@@ -9,46 +9,46 @@ class SoundManager
 {
 private:
 
-    QString backgroundPath = "qrc:/sounds/background.mp3";
-    QString bumpPath = "qrc:/sounds/bump.mp3";
-    QString chompPath = "qrc:/sounds/chomp.mp3";
-    QString diePath = "qrc:/sounds/die.mp3";
-    QString eatPath = "qrc:/sounds/eat.mp3";
-    QString endPath = "qrc:/sounds/end.mp3";
-    QString hitPath = "qrc:/sounds/hit.mp3";
-    QString levelupPath = "qrc:/sounds/levelup.mp3";
-    QString pickupPath = "qrc:/sounds/pickup.mp3";
-    QString startPath = "qrc:/sounds/start.mp3";
-    QString steamPath = "qrc:/sounds/steam.mp3";
-    QString throwPath = "qrc:/sounds/throw.mp3";
+    QString background_path = "qrc:/sounds/background.mp3";
+    QString bump_path = "qrc:/sounds/bump.mp3";
+    QString chomp_path = "qrc:/sounds/chomp.mp3";
+    QString die_path = "qrc:/sounds/die.mp3";
+    QString eat_path = "qrc:/sounds/eat.mp3";
+    QString end_path = "qrc:/sounds/end.mp3";
+    QString hit_path = "qrc:/sounds/hit.mp3";
+    QString levelup_path = "qrc:/sounds/levelup.mp3";
+    QString pickup_path = "qrc:/sounds/pickup.mp3";
+    QString start_path = "qrc:/sounds/start.mp3";
+    QString steam_path = "qrc:/sounds/steam.mp3";
+    QString throw_path = "qrc:/sounds/throw.mp3";
 
 public:
 
     SoundManager();
 
-    void playBackground();
+    void play_background();
 
-    void playBump();
+    void play_bump();
 
-    void playChomp();
+    void play_chomp();
 
-    void playDie();
+    void play_die();
 
-    void playEat();
+    void play_eat();
 
-    void playEnd();
+    void play_end();
 
-    void playHit();
+    void play_hit();
 
-    void playLevelup();
+    void play_levelup();
 
-    void playPickup();
+    void play_pickup();
 
-    void playStart();
+    void play_start();
 
-    void playSteam();
+    void play_steam();
 
-    void playThrow();
+    void play_throw();
 
 };
 
