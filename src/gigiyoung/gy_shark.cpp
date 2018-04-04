@@ -181,7 +181,7 @@ void Shark::move() {
         }
         else if( typeid(*(items[i])) == typeid(Main_player) ) {
             if( sound_count == 0 ) {
-                sound->playChomp();
+                sound->play_chomp();
                 sound_count = PLAYER_IMMUNE_DURATION;
             }
         }
