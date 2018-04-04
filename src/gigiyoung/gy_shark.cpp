@@ -50,7 +50,7 @@ Shark::Shark(int x, int y, int vel_x, int vel_y,
 void Shark::init() {
     sound_count = 0;
     stun_duration = 0;
-    //cooked = false;
+    is_cooked = false;
  
     timer = new QTimer(this);
     graphics = new Graphics();
@@ -91,15 +91,13 @@ bool Shark::stun(int time) {
     return stun_duration > 0;
 }
 
-/*
-bool Shark::cook() {
+bool Shark::cooked() {
     // "cook" shark
 
     // change public slot
 
-    return cooked = true;
+    return is_cooked;
 }
-*/
 
 void Shark::move() {
     static const int X_BUFFER = 50;
@@ -180,10 +178,8 @@ void Shark::move() {
             {
                 vel.y = -vel.y;
             }
-            
-
         }
-        if( typeid(*(items[i])) == typeid(Main_player) ) {
+        else if( typeid(*(items[i])) == typeid(Main_player) ) {
             if( sound_count == 0 ) {
                 sound->playChomp();
                 sound_count = PLAYER_IMMUNE_DURATION;
@@ -191,11 +187,18 @@ void Shark::move() {
         }
 
         // if collision with thrown banana, stun shark
-        if( typeid(*(items[i])) == typeid(Banana) ) {
+        else if( typeid(*(items[i])) == typeid(Banana) ) {
             Banana *banana = (Banana *)items[i];
 
             if( banana->thrown() )
                 stun(); 
+        }
+        else if( typeid(*(items[i])) == typeid(Steam) ) {
+            is_cooked = true;
+
+            disconnect(timer,SIGNAL(timeout()),this,SLOT(move()));
+            connect(timer,SIGNAL(timeout()),this,SLOT(cooked_status()));
+            
         }
     }
 
@@ -203,13 +206,7 @@ void Shark::move() {
     setPos(x()+vel.x, y()+vel.y);
 }
 
-/*
-void Shark::status() {
+void Shark::cooked_status() {
     //qDebug() << "I am a shark. I am now chum.";
-    if( stun_duration > 0 ) 
-        stun_duration--;
-    else {
-
-    }
+    
 }
-*/
