@@ -1,5 +1,9 @@
 ## Fish n' Chips
 
+## Environment
+	Windows 10 or Mac
+	QT 5.10.0 version
+
 ## Download game
     Under command line:
 	clone https://github.com/CyberVandals/fishnchips.git
