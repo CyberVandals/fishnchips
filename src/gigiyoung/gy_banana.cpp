@@ -5,6 +5,7 @@
  ******************************/
 
 #include <QList>
+#include <QPointF>
 #include <QDebug>
 #include <typeinfo>
 #include "../../inc/gy_object.h"
@@ -53,15 +54,17 @@ void Banana::resume() {
 
 // 0 for left, 1 for right
 void Banana::chuck(int direction) {
+    QPointF scene_coord;
+
     if( is_picked_up ) {
-        // map banana's position back to scenes coord system
-        setPos(mapToScene(this->pos()));
-        // get rid of player as a parent
+        // get banana's position relative to scene 
+        scene_coord = mapToScene(this->pos());
+       
+        // become an orphan
         this->setParentItem(0);
 
-
+        setPos(scene_coord);
         this->setVisible(true);
-
         is_picked_up = false;
         is_thrown = true;
 
@@ -72,8 +75,6 @@ void Banana::chuck(int direction) {
         connect(timer, SIGNAL(timeout()), this, SLOT(move()));
         timer->start(UPDATE_MS);
     }
-    
-//    return thrown;
 }
 
 /*
@@ -105,22 +106,25 @@ void Banana::status() {
     for( int i = 0; i < items.size() ; i++ ) {
         // player picked up banana 
         if( typeid(*(items[i])) == typeid(Main_player) ) {
-           // make player parent of banana
-           this->setParentItem(items[i]); 
+            if( items[i]->childItems().isEmpty() ) {
 
-           // sets banana position relative to parent's coord system
-           setPos(0,0);
+                // make player parent of banana
+                this->setParentItem(items[i]); 
 
-           // make invisible
-           this->setVisible(false);
+                // sets banana position relative to parent's coord system
+                setPos(0,0);
 
-           is_picked_up = true;
+                // make invisible
+                this->setVisible(false);
 
-           // disconnect timer from method
-           timer->stop();
-           disconnect(timer,SIGNAL(timeout()),this,SLOT(status()));
+                is_picked_up = true;
 
-           //pickup();
+                // disconnect timer from method
+                timer->stop();
+                disconnect(timer,SIGNAL(timeout()),this,SLOT(status()));
+
+                //pickup();
+            }
         }
     }
 }
@@ -157,7 +161,6 @@ void Banana::move() {
             timer->stop();
             disconnect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
-            return;
         }
     }
 
