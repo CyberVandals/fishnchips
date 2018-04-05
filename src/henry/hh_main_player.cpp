@@ -24,7 +24,7 @@ Main_player::Main_player(QGraphicsScene * scene,QGraphicsItem *parent): QObject(
     bottom_collision = false;
     sink_collision = false;
 
-
+    banana = NULL;
     has_banana = false;
     shield = false;
 
@@ -45,14 +45,31 @@ void Main_player::keyPressEvent(QKeyEvent *event)
 
     if(event->key() == Qt::Key_Z)
     {
-        if(this->has_banana == true)this->banana->chuck(LEFT);
-        this->has_banana = false;
-    }
 
+
+            if(this->has_banana == true)
+             {
+                this->banana->chuck(LEFT);
+                this->banana->set_thrown(true);
+                this->has_banana = false;
+                qDebug() << "i threw my banana!!!!!!!!!!!!!!!";
+                this->banana = NULL;
+             }
+
+    }
     else if(event->key() == Qt::Key_X)
     {
-        if(this->has_banana==true)this->banana->chuck(RIGHT);
-        this->has_banana = false;
+
+
+            if(this->has_banana == true)
+             {
+                this->banana->chuck(RIGHT);
+                this->banana->set_thrown(true);
+                this->has_banana = false;
+                qDebug() << "i threw my banana!!!!!!!!!!!!!!!";
+                this->banana = NULL;
+             }
+
     }
 
     else if( event->key() == Qt::Key_Left && (this->pos().x()) > (this->scene()->sceneRect().left()))
@@ -125,7 +142,7 @@ void Main_player::keyPressEvent(QKeyEvent *event)
           if(!collidingItems(Qt::IntersectsItemShape).isEmpty())
           {
               if(this->platform_collision()) this->top_collision = true;
-              qDebug() << "hit platform up";
+              //qDebug() << "hit platform up";
           }
           this->bottom_collision = false;
         }
@@ -155,7 +172,7 @@ void Main_player::keyPressEvent(QKeyEvent *event)
           {
               if(this->platform_collision()) this->bottom_collision = true;
               //this->sink_collision = true;
-              qDebug() << "hit platform down";
+              //qDebug() << "hit platform down";
           }
           this->top_collision = false;
         }
@@ -192,8 +209,14 @@ int Main_player::shark_collision()
 
         else if(typeid(*(collision_item[i])) == typeid(Banana) && this->has_banana == false)
         {
-            this->banana = (Banana*)collision_item[i];
-            //this->has_banana = true;
+            if(this->banana == NULL)
+            {
+                this->banana = (Banana*)collision_item[i];
+
+                if(this->banana->thrown() == true) this->banana = NULL;
+
+                else qDebug() << "i have a banana!!!!!!!!!!!!!!!!!!!!!!";
+            }
             return 69;
         }
 
@@ -251,30 +274,27 @@ void Main_player::sink()
     {
         this->setPos(scene()->sceneRect().bottom(), scene()->sceneRect().bottom()-50);
     }
+
     else if(shark_collision()==69)
     {
-        this->has_banana = true;
+        if(this->banana!=NULL)this->has_banana = true;
     }
 
     if(this->pos().y()+(boundingRect().bottom()-boundingRect().top()) < (this->scene()->sceneRect().bottom()))
     {
-    if(this->collidingItems(Qt::IntersectsItemBoundingRect).isEmpty())
+    if(this->collidingItems(Qt::IntersectsItemShape).isEmpty() && this->sink_collision == false)
     {
-        setPos(x(), y()+1);
-        if(!collidingItems(Qt::IntersectsItemBoundingRect).isEmpty()) this->sink_collision = true;
+        setPos(x(),y()+1);
+        if(!this->collidingItems(Qt::IntersectsItemShape).isEmpty()) this->sink_collision = true;
+
     }
-        else if(!this->collidingItems(Qt::IntersectsItemBoundingRect).isEmpty())
+    else if(!this->collidingItems(Qt::IntersectsItemShape).isEmpty())
     {
-        if(this->sink_collision == false)
+        if(this->bottom_collision == false)
         {
-          setPos(x(), y()+1);
-          if(!collidingItems(Qt::IntersectsItemBoundingRect).isEmpty()) this->sink_collision = true;
+            setPos(x(), y()+1);
+            if(!this->collidingItems(Qt::IntersectsItemShape).isEmpty()) this->sink_collision = true;
         }
-    }
-    else if(this->collidingItems(Qt::IntersectsItemBoundingRect).isEmpty() && this->sink_collision == false)
-    {
-       setPos(x(), y()+1);
-       if(!collidingItems(Qt::IntersectsItemBoundingRect).isEmpty()) this->sink_collision = true;
     }
     }
 }

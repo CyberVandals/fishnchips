@@ -78,7 +78,9 @@ void Banana::chuck(int direction) {
         // become an orphan
         setParentItem(0);
         setPos(scene_coord);
-        setVisible(true);
+        //setVisible(true);
+
+        sound->play_throw();
     
         // connect to new method
         connect(timer, SIGNAL(timeout()), this, SLOT(move()));
@@ -122,6 +124,8 @@ void Banana::status() {
         if( typeid(*(items[i])) == typeid(Main_player) ) {
             if( items[i]->childItems().isEmpty() ) {
 
+                sound->play_pickup();
+
                 // make player parent of banana
                 this->setParentItem(items[i]); 
 
@@ -129,7 +133,7 @@ void Banana::status() {
                 setPos(0,0);
 
                 // make invisible
-                this->setVisible(false);
+                //this->setVisible(false);
                 is_picked_up = true;
 
                 // disconnect timer from method
@@ -166,6 +170,7 @@ void Banana::move() {
         // if collision with platform, deallocate banana
         if( typeid(*(items[i])) == typeid(Platform) ) {
             // splat sound effect
+            sound->play_hit();
 
             scene()->removeItem(this);
             timer->stop();
@@ -177,6 +182,7 @@ void Banana::move() {
         else if( typeid(*(items[i])) == typeid(Shark) ) {
             Shark *shark = (Shark *)items[i];
             // splat sound effect
+            sound->play_hit();
 
             shark->stun();
 
