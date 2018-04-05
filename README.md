@@ -16,6 +16,11 @@
 ## Run game
 	unpress the fishnchips.zip 
 	click the fishnchips.pro file
-	Now you should already run the game
+	click the following button to build game
+![bulid_button](https://github.com/CyberVandals/fishnchips/blob/master/resources/images/build_button.png)  
+
+    click this to run game
+![run_button](https://github.com/CyberVandals/fishnchips/blob/master/resources/images/run_button.png)	
+
 
 ## Enjoy
