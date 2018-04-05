@@ -71,6 +71,11 @@ void SceneManager::generate_level(const QString& filename)
 {
     GameLevel *gameLevel = new GameLevel(filename);
     QList<LevelItem> *level_items = gameLevel->get_levels_items();
+    LevelItem item;
+    for (int i = 0; i < level_items->size(); ++i) {
+        item = level_items->at(i);
+        qDebug() << "title: " << item.title() << " x: " << item.x() << " y: " << item.y();
+    }
 }
 
 Main_player* SceneManager::get_player()

@@ -19,7 +19,7 @@ public:
     QList<LevelItem>* get_levels_items();
 private:
     void parse_level_file(const QString &filename);
-    void parse(LevelItem *item, const QString& line);
+    void parse(const QString& line);
     QString level, score;
     QList<LevelItem> *level_items = new QList<LevelItem>();
 };

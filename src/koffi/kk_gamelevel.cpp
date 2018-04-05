@@ -27,25 +27,23 @@ void GameLevel::parse_level_file(const QString &filename)
     }
 
     QTextStream in(file);
-    LevelItem *item;
 
     while (!in.atEnd())
     {
        QString line = in.readLine();
-       qDebug() << "line: " << line;
-
-       item = new LevelItem();
-       parse(item, line);
-       level_items->append(*item);
+       parse(line);
     }
     file->close();
 }
 
-void GameLevel::parse(LevelItem *item, const QString& line)
+void GameLevel::parse(const QString& line)
 {
-    if(!line.startsWith('#') && line.length() > 0){
-        QStringList list = line.split(QRegExp("\\s+"), QString::SkipEmptyParts);
+    QString simplifiedLine = line.simplified();
+    if(!simplifiedLine.startsWith('#') && !simplifiedLine.isEmpty()){
+        QStringList list = simplifiedLine.split(QRegExp("\\W+"), QString::SkipEmptyParts);
+        LevelItem *item = new LevelItem();
         item->setTitle(list.at(0));
         item->setPosition(list.at(1).toUInt(), list.at(2).toUInt());
+        level_items->append(*item);
     }
 }
