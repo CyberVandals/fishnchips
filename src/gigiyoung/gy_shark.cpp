@@ -185,7 +185,7 @@ void Shark::move() {
                 sound_count = PLAYER_IMMUNE_DURATION;
             }
         }
-
+/*
         // if collision with thrown banana, stun shark
         else if( typeid(*(items[i])) == typeid(Banana) ) {
             Banana *banana = (Banana *)items[i];
@@ -193,6 +193,7 @@ void Shark::move() {
             if( banana->thrown() )
                 stun(); 
         }
+*/
         else if( typeid(*(items[i])) == typeid(Steam) ) {
             //is_cooked = true;
 

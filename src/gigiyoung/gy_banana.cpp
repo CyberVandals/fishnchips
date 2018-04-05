@@ -29,7 +29,7 @@ void Banana::init() {
     is_picked_up = false;
 
     // #define these later
-    vel.x = 30;
+    vel.x = 10;
     vel.y = 0;
 
     timer = new QTimer(this);
@@ -54,11 +54,16 @@ void Banana::resume() {
 // 0 for left, 1 for right
 void Banana::chuck(int direction) {
     if( is_picked_up ) {
+        // map banana's position back to scenes coord system
+        setPos(mapToScene(this->pos()));
+        // get rid of player as a parent
         this->setParentItem(0);
+
+
+        this->setVisible(true);
 
         is_picked_up = false;
         is_thrown = true;
-        this->setVisible(true);
 
         if( direction == LEFT ) 
             vel.x = -vel.x;
@@ -93,30 +98,29 @@ bool Banana::thrown() {
 }
 
 void Banana::status() {
-    if( !is_picked_up ) {
-        QList<QGraphicsItem *> items = 
-            collidingItems(Qt::IntersectsItemShape);
+    QList<QGraphicsItem *> items = 
+        collidingItems(Qt::IntersectsItemShape);
 
-        //qDebug() << "in Banana::check_player()\n";
-        for( int i = 0; i < items.size() ; i++ ) {
-            // player picked up banana 
-            if( typeid(*(items[i])) == typeid(Main_player) ) {
-               // make player parent of banana
-               this->setParentItem(items[i]); 
-               // sets banana position relative to parent's coord system
-               setPos(0,0);
+    //qDebug() << "in Banana::check_player()\n";
+    for( int i = 0; i < items.size() ; i++ ) {
+        // player picked up banana 
+        if( typeid(*(items[i])) == typeid(Main_player) ) {
+           // make player parent of banana
+           this->setParentItem(items[i]); 
 
-               // make invisible
-               //this->setVisible(false);
+           // sets banana position relative to parent's coord system
+           setPos(0,0);
 
-               is_picked_up = true;
+           // make invisible
+           this->setVisible(false);
 
-               // disconnect timer from method
-               timer->stop();
-               disconnect(timer, SIGNAL(timeout()), this, SLOT(status()));
+           is_picked_up = true;
 
-               //pickup();
-            }
+           // disconnect timer from method
+           timer->stop();
+           disconnect(timer,SIGNAL(timeout()),this,SLOT(status()));
+
+           //pickup();
         }
     }
 }
@@ -152,6 +156,8 @@ void Banana::move() {
             scene()->removeItem(this);
             timer->stop();
             disconnect(timer, SIGNAL(timeout()), this, SLOT(move()));
+
+            return;
         }
     }
 
