@@ -44,6 +44,8 @@
 
 #define LEFT	0
 #define RIGHT	1
+#define UP	2
+#define DOWN	3
 
 
 // structs
@@ -70,6 +72,7 @@ public:
 //    void pickup();
     void eat();
     bool thrown();
+    void set_thrown(bool is_thrown);
 
 public slots:
     void status();

@@ -30,7 +30,7 @@ void Banana::init() {
     is_picked_up = false;
 
     // #define these later
-    vel.x = 10;
+    vel.x = 0;
     vel.y = 0;
 
     timer = new QTimer(this);
@@ -52,33 +52,33 @@ void Banana::resume() {
         timer->start();
 }
 
-// 0 for left, 1 for right
+// direction - LEFT, RIGHT, UP, DOWN 
 void Banana::chuck(int direction) {
     QPointF scene_coord;
 
-    //if( is_picked_up ) {
     qDebug() << "try to throw banana";
+
     // if banana has player as a parent, throw
     if( parentItem() != NULL ) {
         is_picked_up = false;
         is_thrown = true;
 
-    //if( typeid(*parentItem()) == typeid(Main_player) ) {
+        if( direction == LEFT ) 
+            vel.x = -10;
+        else if( direction == RIGHT ) 
+            vel.x = 10;
+        else if( direction == UP ) 
+            vel.y = -10;
+        else if( direction == DOWN ) 
+            vel.y = 10;
+
         qDebug() << "throw banana";
-        // get banana's position relative to scene 
         scene_coord = mapToScene(pos());
        
         // become an orphan
-//        for( int i = 0; i < parentItem()->childItems().size(); i++ ) {
-            
-//        }
         setParentItem(0);
-
         setPos(scene_coord);
         setVisible(true);
-
-        if( direction == LEFT ) 
-            vel.x = -vel.x;
     
         // connect to new method
         connect(timer, SIGNAL(timeout()), this, SLOT(move()));
@@ -107,6 +107,11 @@ bool Banana::thrown() {
     return is_thrown;
 }
 
+void Banana::set_thrown(bool is_thrown) {
+    this->is_thrown = is_thrown;
+}
+
+
 void Banana::status() {
     QList<QGraphicsItem *> items = 
         collidingItems(Qt::IntersectsItemShape);
@@ -125,7 +130,6 @@ void Banana::status() {
 
                 // make invisible
                 this->setVisible(false);
-
                 is_picked_up = true;
 
                 // disconnect timer from method
