@@ -56,17 +56,26 @@ void Banana::resume() {
 void Banana::chuck(int direction) {
     QPointF scene_coord;
 
-    if( is_picked_up ) {
-        // get banana's position relative to scene 
-        scene_coord = mapToScene(this->pos());
-       
-        // become an orphan
-        this->setParentItem(0);
-
-        setPos(scene_coord);
-        this->setVisible(true);
+    //if( is_picked_up ) {
+    qDebug() << "try to throw banana";
+    // if banana has player as a parent, throw
+    if( parentItem() != NULL ) {
         is_picked_up = false;
         is_thrown = true;
+
+    //if( typeid(*parentItem()) == typeid(Main_player) ) {
+        qDebug() << "throw banana";
+        // get banana's position relative to scene 
+        scene_coord = mapToScene(pos());
+       
+        // become an orphan
+//        for( int i = 0; i < parentItem()->childItems().size(); i++ ) {
+            
+//        }
+        setParentItem(0);
+
+        setPos(scene_coord);
+        setVisible(true);
 
         if( direction == LEFT ) 
             vel.x = -vel.x;
@@ -131,11 +140,21 @@ void Banana::status() {
 
 
 void Banana::move() {
+    static int scene_right = scene()->sceneRect().right();
+    static int scene_left = scene()->sceneRect().left();
+    static int scene_top = scene()->sceneRect().top();
+    static int scene_bottom = scene()->sceneRect().bottom();
+    static int b_right = x() + this->boundingRect().width();
+    static int b_left = x();
+    static int b_top = y();
+    static int b_bottom = y() + this->boundingRect().height();
+
+
     QList<QGraphicsItem *> items = 
         collidingItems(Qt::IntersectsItemShape);
 
     // move banana
-    setPos(x()+vel.x, y());
+    setPos(x()+vel.x, y()+vel.y);
 
     // check collisions
     for( int i = 0; i < items.size() ; i++ ) {
@@ -164,7 +183,16 @@ void Banana::move() {
         }
     }
 
+    if( b_left <= scene_left || b_right >= scene_right 
+        || b_top <= scene_top || b_bottom >= scene_bottom )
+    {
+        scene()->removeItem(this);
+        timer->stop();
+        disconnect(timer,SIGNAL(timeout()),this,SLOT(move()));
+    } 
+
+
     // update position
-    setPos(x()+vel.x, y()+vel.y);
+//    setPos(x()+vel.x, y()+vel.y);
 }
 
