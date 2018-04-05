@@ -85,10 +85,9 @@ void Shark::resume() {
         timer->start();
 }
 
-bool Shark::stun(int time) {
+void Shark::stun(int time) {
     if( time > 0 ) 
         stun_duration = time;
-    return stun_duration > 0;
 }
 
 bool Shark::cooked() {
@@ -100,14 +99,21 @@ bool Shark::cooked() {
 }
 
 void Shark::move() {
+/*
     static const int X_BUFFER = 50;
-    //static const int Y_BUFFER = 8;
-    //qDebug() << "Shark is moving\n";
     static int scene_right = scene()->sceneRect().right();
     static int scene_left = scene()->sceneRect().left(); 
     static int scene_top = scene()->sceneRect().top();
     static int scene_bottom = scene()->sceneRect().bottom();
     static int shark_right, shark_left, shark_top, shark_bottom;
+*/
+
+    const int X_BUFFER = 50;
+    int scene_right = scene()->sceneRect().right();
+    int scene_left = scene()->sceneRect().left(); 
+    int scene_top = scene()->sceneRect().top();
+    int scene_bottom = scene()->sceneRect().bottom();
+    int shark_right, shark_left, shark_top, shark_bottom;
 
 
     // stunned, decrement

@@ -26,6 +26,7 @@ Banana::Banana(int x, int y, QGraphicsItem *parent):
 
 void Banana::init() {
 
+//    player = NULL;
     is_thrown = false;
     is_picked_up = false;
 
@@ -60,6 +61,8 @@ void Banana::chuck(int direction) {
 
     // if banana has player as a parent, throw
     if( parentItem() != NULL ) {
+//    if( player != NULL ) {
+//        player = NULL;
         is_picked_up = false;
         is_thrown = true;
 
@@ -85,6 +88,9 @@ void Banana::chuck(int direction) {
         // connect to new method
         connect(timer, SIGNAL(timeout()), this, SLOT(move()));
         timer->start(UPDATE_MS);
+    }
+    else if( parentItem() == NULL ) {
+        qDebug() << "banana has no parent";
     }
 }
 
@@ -125,10 +131,11 @@ void Banana::status() {
             if( items[i]->childItems().isEmpty() ) {
 
                 sound->play_pickup();
+//                player = (Main_player *)items[i];
+//                setPos(player->pos());
 
                 // make player parent of banana
-                this->setParentItem(items[i]); 
-
+                setParentItem(items[i]); 
                 // sets banana position relative to parent's coord system
                 setPos(0,0);
 
@@ -140,7 +147,8 @@ void Banana::status() {
                 timer->stop();
                 disconnect(timer,SIGNAL(timeout()),this,SLOT(status()));
 
-                //pickup();
+//                connect(timer,SIGNAL(timeout()),this,SLOT(move()));
+//                timer->start();
             }
         }
     }
@@ -148,6 +156,7 @@ void Banana::status() {
 
 
 void Banana::move() {
+/*
     static int scene_right = scene()->sceneRect().right();
     static int scene_left = scene()->sceneRect().left();
     static int scene_top = scene()->sceneRect().top();
@@ -156,7 +165,21 @@ void Banana::move() {
     static int b_left = x();
     static int b_top = y();
     static int b_bottom = y() + this->boundingRect().height();
+*/
 
+//    if( player != NULL ) {
+//        setPos(player->pos());
+//    }
+//    else {
+
+    int scene_right = scene()->sceneRect().right();
+    int scene_left = scene()->sceneRect().left();
+    int scene_top = scene()->sceneRect().top();
+    int scene_bottom = scene()->sceneRect().bottom();
+    int b_right = x() + this->boundingRect().width();
+    int b_left = x();
+    int b_top = y();
+    int b_bottom = y() + this->boundingRect().height();
 
     QList<QGraphicsItem *> items = 
         collidingItems(Qt::IntersectsItemShape);
@@ -201,8 +224,6 @@ void Banana::move() {
         disconnect(timer,SIGNAL(timeout()),this,SLOT(move()));
     } 
 
-
-    // update position
-//    setPos(x()+vel.x, y()+vel.y);
+//    }
 }
 
