@@ -1,9 +1,9 @@
 ## Fish n' Chips
 
 ## Download game
-	Under command line:
+Under command line:
 	clone https://github.com/CyberVandals/fishnchips.git
-	Downlond from borwser:
+Downlond from borwser:
 	Go to this URL https://github.com/CyberVandals/fishnchips.git
 	Find the "clone or download" button, and click it to download
 
