@@ -5,6 +5,7 @@
  ******************************/
 
 #include <QList>
+#include <QPointF>
 #include <QDebug>
 #include <typeinfo>
 #include "../../inc/gy_object.h"
@@ -29,7 +30,7 @@ void Banana::init() {
     is_picked_up = false;
 
     // #define these later
-    vel.x = 30;
+    vel.x = 0;
     vel.y = 0;
 
     timer = new QTimer(this);
@@ -51,24 +52,38 @@ void Banana::resume() {
         timer->start();
 }
 
-// 0 for left, 1 for right
+// direction - LEFT, RIGHT, UP, DOWN 
 void Banana::chuck(int direction) {
-    if( is_picked_up ) {
-        this->setParentItem(0);
+    QPointF scene_coord;
 
+    qDebug() << "try to throw banana";
+
+    // if banana has player as a parent, throw
+    if( parentItem() != NULL ) {
         is_picked_up = false;
         is_thrown = true;
-        this->setVisible(true);
 
         if( direction == LEFT ) 
-            vel.x = -vel.x;
+            vel.x = -10;
+        else if( direction == RIGHT ) 
+            vel.x = 10;
+        else if( direction == UP ) 
+            vel.y = -10;
+        else if( direction == DOWN ) 
+            vel.y = 10;
+
+        qDebug() << "throw banana";
+        scene_coord = mapToScene(pos());
+       
+        // become an orphan
+        setParentItem(0);
+        setPos(scene_coord);
+        setVisible(true);
     
         // connect to new method
         connect(timer, SIGNAL(timeout()), this, SLOT(move()));
         timer->start(UPDATE_MS);
     }
-    
-//    return thrown;
 }
 
 /*
@@ -92,30 +107,36 @@ bool Banana::thrown() {
     return is_thrown;
 }
 
+void Banana::set_thrown(bool is_thrown) {
+    this->is_thrown = is_thrown;
+}
+
+
 void Banana::status() {
-    if( !is_picked_up ) {
-        QList<QGraphicsItem *> items = 
-            collidingItems(Qt::IntersectsItemShape);
+    QList<QGraphicsItem *> items = 
+        collidingItems(Qt::IntersectsItemShape);
 
-        //qDebug() << "in Banana::check_player()\n";
-        for( int i = 0; i < items.size() ; i++ ) {
-            // player picked up banana 
-            if( typeid(*(items[i])) == typeid(Main_player) ) {
-               // make player parent of banana
-               this->setParentItem(items[i]); 
-               // sets banana position relative to parent's coord system
-               setPos(0,0);
+    //qDebug() << "in Banana::check_player()\n";
+    for( int i = 0; i < items.size() ; i++ ) {
+        // player picked up banana 
+        if( typeid(*(items[i])) == typeid(Main_player) ) {
+            if( items[i]->childItems().isEmpty() ) {
 
-               // make invisible
-               //this->setVisible(false);
+                // make player parent of banana
+                this->setParentItem(items[i]); 
 
-               is_picked_up = true;
+                // sets banana position relative to parent's coord system
+                setPos(0,0);
 
-               // disconnect timer from method
-               timer->stop();
-               disconnect(timer, SIGNAL(timeout()), this, SLOT(status()));
+                // make invisible
+                this->setVisible(false);
+                is_picked_up = true;
 
-               //pickup();
+                // disconnect timer from method
+                timer->stop();
+                disconnect(timer,SIGNAL(timeout()),this,SLOT(status()));
+
+                //pickup();
             }
         }
     }
@@ -123,11 +144,21 @@ void Banana::status() {
 
 
 void Banana::move() {
+    static int scene_right = scene()->sceneRect().right();
+    static int scene_left = scene()->sceneRect().left();
+    static int scene_top = scene()->sceneRect().top();
+    static int scene_bottom = scene()->sceneRect().bottom();
+    static int b_right = x() + this->boundingRect().width();
+    static int b_left = x();
+    static int b_top = y();
+    static int b_bottom = y() + this->boundingRect().height();
+
+
     QList<QGraphicsItem *> items = 
         collidingItems(Qt::IntersectsItemShape);
 
     // move banana
-    setPos(x()+vel.x, y());
+    setPos(x()+vel.x, y()+vel.y);
 
     // check collisions
     for( int i = 0; i < items.size() ; i++ ) {
@@ -152,10 +183,20 @@ void Banana::move() {
             scene()->removeItem(this);
             timer->stop();
             disconnect(timer, SIGNAL(timeout()), this, SLOT(move()));
+
         }
     }
 
+    if( b_left <= scene_left || b_right >= scene_right 
+        || b_top <= scene_top || b_bottom >= scene_bottom )
+    {
+        scene()->removeItem(this);
+        timer->stop();
+        disconnect(timer,SIGNAL(timeout()),this,SLOT(move()));
+    } 
+
+
     // update position
-    setPos(x()+vel.x, y()+vel.y);
+//    setPos(x()+vel.x, y()+vel.y);
 }
 
