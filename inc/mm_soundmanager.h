@@ -1,13 +1,24 @@
+/********************************
+                   *  		mm_soundmanager.h
+                   *		Matthew Mills
+           ********************************/
+
+
+
+
 #ifndef SOUNDMANAGER_H
 #define SOUNDMANAGER_H
 #include <QList>
 #include <QString>
 #include <QMediaPlayer>
 #include "hh_main_player.h"
+#include "mm_resourcemanager.h"
 
-class SoundManager
+class SoundManager: public ResourceManager
 {
 private:
+
+    //These are the paths to the sound files in the resource folder
 
     QString background_path = "qrc:/sounds/background.mp3";
     QString bump_path = "qrc:/sounds/bump.mp3";
@@ -22,7 +33,11 @@ private:
     QString steam_path = "qrc:/sounds/steam.mp3";
     QString throw_path = "qrc:/sounds/throw.mp3";
 
+    QMediaPlayer *music1;
+
 public:
+
+    //These are the member functions and the class constructor
 
     SoundManager();
 
