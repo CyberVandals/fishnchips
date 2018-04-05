@@ -30,7 +30,7 @@ public:
     void init(QGraphicsScene *scene, int demo);
     void play_game();
     void restart_game();
-    void generate_level(QString filename);
+    void generate_level(const QString& filename);
     Main_player* get_player();
 private:
     ObjectHandler *object_handler;

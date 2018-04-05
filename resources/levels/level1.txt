@@ -1,4 +1,4 @@
-#ELEMENT_NAME   X_POS   Y_POS
+#TITLE          X_POS   Y_POS
 SCORE           10      5
 BANANA          100     100
 SHARK           120     120
@@ -7,3 +7,4 @@ EXIT            50      50
 PLATFORM        150     150
 STEAM           180     180
 
+#COMMENTS
