@@ -11,7 +11,7 @@
 	Go to https://www.qt.io/download, choose "Go open Source" then download installer.
 	run the online installer
 	When you under the "Select components",  choose QT 5.10.0 version
-	![When you under the "Select components",  choose QT 5.10.0 version](https://github.com/CyberVandals/fishnchips/blob/master/resources/images/QT_Version.png)
+![When you under the "Select components",  choose QT 5.10.0 version](https://github.com/CyberVandals/fishnchips/blob/master/resources/images/QT_Version.png)
 
 ## Run game
 	unpress the fishnchips.zip 
