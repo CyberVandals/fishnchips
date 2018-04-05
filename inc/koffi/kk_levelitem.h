@@ -7,7 +7,7 @@
 
 class LevelItem {
 public:
-    LevelItem();
+    LevelItem(){};
     void setPosition(int x, int y) {
         x_pos = x;
         y_pos = y;
@@ -30,4 +30,3 @@ private:
     int x_pos, y_pos;
     QString _title;
 };
-

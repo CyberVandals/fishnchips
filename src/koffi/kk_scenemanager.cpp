@@ -41,6 +41,7 @@ void SceneManager::init(QGraphicsScene *scene, int demo)
     main_scene->addGameObject(player);
     main_scene->setFocus(player);
 
+    // Loop over level
     object_handler->add_banana();
     object_handler->add_exit();
     object_handler->add_shark();
@@ -66,9 +67,10 @@ void SceneManager::restart_game()
 //    main_scene->removeGameObject(platform);
 }
 
-void SceneManager::generate_level(QString filename)
+void SceneManager::generate_level(const QString& filename)
 {
-//    QList<ListItem> *levelItems = GameLevel.generate(filename);
+    GameLevel *gameLevel = new GameLevel(filename);
+    QList<LevelItem> *level_items = gameLevel->get_levels_items();
 }
 
 Main_player* SceneManager::get_player()
