@@ -53,6 +53,8 @@ struct Velocity {
     int x, y;
 };
 
+//class Main_player;
+
 //struct Size {
 //    int x, y;
 //};
@@ -84,6 +86,7 @@ private:
     bool is_picked_up;
     bool is_thrown;
     struct Velocity vel;
+//    Main_player *player;
 };
 
 
@@ -132,7 +135,7 @@ public:
     void pause();
     void resume();
 
-    bool stun(int time=DEFAULT_STUN_DURATION);
+    void stun(int time=DEFAULT_STUN_DURATION);
     bool cooked();
 
 public slots:
