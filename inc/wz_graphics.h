@@ -1,3 +1,8 @@
+/********************************
+  *Graphics.h                        
+  *Wei Zhao              
+********************************/
+
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
 
