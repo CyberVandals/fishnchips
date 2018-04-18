@@ -22,7 +22,7 @@ public:
     //void load_mainPlayer(Main_player *player);
     Graphics();
     void load_mainplayer(Main_player *main_player);
-    void load_mainplayer(int width,int heigh,Main_player *main_player);
+    void load_mainplayer(int width,int heigh,Main_player *main_player, bool left_, bool right_);
     void load_mainplayer();
     void load_shark (int width,int heigh,Shark *shark, bool left, bool righ);
     void load_shark (Shark *shark);
