@@ -27,7 +27,7 @@
 class Banana;
 class Graphics;
 
-class Main_player: public QObject, public QGraphicsPixmapItem
+class MainPlayer: public QObject, public QGraphicsPixmapItem
 {
 Q_OBJECT
 private:
@@ -51,7 +51,7 @@ bool has_banana;
 //Health health;
 
 public:
-    Main_player(QGraphicsScene *scene, QGraphicsItem *parent=0);
+    MainPlayer(QGraphicsScene *scene, QGraphicsItem *parent=0);
     void keyPressEvent(QKeyEvent * event);
     int shark_collision();
     bool platform_collision();
