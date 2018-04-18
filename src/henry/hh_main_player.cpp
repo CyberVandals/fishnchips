@@ -83,12 +83,13 @@ void Main_player::keyPressEvent(QKeyEvent *event)
 
     else if( event->key() == Qt::Key_Left && (this->pos().x()) > (this->scene()->sceneRect().left()))
     {
+        this->player_pic->load_mainplayer(50,50, this,true,false);
 
         int list_length = collidingItems(Qt::IntersectsItemShape).length();
 
         if(list_length == 0 || list_length == 1)
         {
-            if(list_length == 1 && this->has_banana == true) {setPos(x()-10,y()); player_pic->load_mainplayer(50,50, this,true,false); }
+            if(list_length == 1 && this->has_banana == true) {setPos(x()-10,y()); }
             else if(list_length == 0 && left_collision == false) setPos(x()-10,y());
             else if(list_length == 1 && left_collision == false) setPos(x()-10,y());
 
@@ -120,6 +121,7 @@ void Main_player::keyPressEvent(QKeyEvent *event)
 
     else if( event->key() == Qt::Key_Right && (this->pos().x()+(boundingRect().right()-boundingRect().left())) < (this->scene()->sceneRect().right()))
     {
+        this->player_pic->load_mainplayer(50,50, this,false,true);
 
         int list_length = collidingItems(Qt::IntersectsItemShape).length();
 
