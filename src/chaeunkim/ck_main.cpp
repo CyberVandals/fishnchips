@@ -2,8 +2,7 @@
 #include <QSplashScreen>
 
 
-int main(int argc, char *argv[])
-{
+int main( int argc, char *argv[] ) {
     QApplication a(argc, argv);
 
     //Add Splash Screen
@@ -12,10 +11,10 @@ int main(int argc, char *argv[])
     splash->show();
     QTimer::singleShot(2000,splash,SLOT(close()));
 
-    MainWindow * mainWin;
-    mainWin = new MainWindow();
-    QTimer::singleShot(2300,mainWin,SLOT(show()));
-    mainWin->mainmenu();
+    MainWindow * mainWindow;
+    mainWindow = new MainWindow();
+    QTimer::singleShot(2300,mainWindow,SLOT(show()));
+    mainWindow->display_mainmenu();
 
     return a.exec();
 }

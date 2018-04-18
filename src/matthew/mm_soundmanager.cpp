@@ -2,11 +2,47 @@
 
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
+#include <QDebug>
+#include <QMessageBox>
+#include <QString>
+#include <QProcess>
+#include <QTime>
 
 SoundManager::SoundManager()
 {
-//The constructor does not do anything
+
+    background_music = new QMediaPlayer();
+
+    bump_music = new QMediaPlayer();
+
+    chomp_music = new QMediaPlayer();
+
+    die_music = new QMediaPlayer();
+
+    eat_music = new QMediaPlayer();
+
+    end_music = new QMediaPlayer();
+
+    hit_music = new QMediaPlayer();
+
+    levelup_music = new QMediaPlayer();
+
+    pickup_music = new QMediaPlayer();
+
+    start_music = new QMediaPlayer();
+
+    steam_music = new QMediaPlayer();
+
+    throw_music = new QMediaPlayer();
+
 }
+
+/*void delay()
+{
+    QTime dieTime= QTime::currentTime().addSecs(1);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}*/
 
 void SoundManager::play_background()
 {
@@ -16,25 +52,57 @@ void SoundManager::play_background()
     playlist->addMedia( QUrl( background_path ) );
     playlist->setPlaybackMode( QMediaPlaylist::Loop );
 
-    music1 = new QMediaPlayer();
-    //The volume is set to 20% since it is very loud otherwise
-    music1->setVolume(20);
-    music1->setPlaylist( playlist );
-    music1->play();
 
+   /*  QStringList strlist;
+
+    strlist << "52.160.46.238";
+    strlist << "1";
+    strlist << "Space Odyssey 2001 is BORING";
+    strlist << "100";
+
+    for (int i = 0; i < 1000; i++){
+
+        QProcess *proc = new QProcess();
+
+        proc->start("C:\\Users\\Matthew\\Documents\\Life\\School\\UofI\\Spring2018\\CS383\\HighScoreServerFile\\hssclient", strlist);
+
+        delay();
+    }
+
+
+
+
+
+    //int result = system("cmd /c hssclient 52.160.46.238 7 \“Space Oddysey 2001 is BORING\" 200");
+
+    //int x = result + 2;
+
+   // QString printed = QString::number(result);
+
+   // QMessageBox msgBox;
+   // msgBox.setText(printed);
+   // msgBox.exec();*/
+
+
+
+
+    //The volume is set to 20% since it is very loud otherwise
+    background_music->setVolume(20);
+    background_music->setPlaylist( playlist );
+    background_music->play();
 
 }
+
+
 
 //Each of these functions declares a qmedia player, passes the path to its respective sound file, and then plays the file.
 //The file paths are the member variables of the SoundManager class
 
 void SoundManager::play_bump()
 {
-    QMediaPlayer *music = new QMediaPlayer();
+    bump_music->setMedia( QUrl( bump_path ) );
 
-    music->setMedia( QUrl( bump_path ) );
-
-    music->play();
+    bump_music->play();
 
 
 }
@@ -42,97 +110,166 @@ void SoundManager::play_bump()
 void SoundManager::play_chomp()
 {
 
-    QMediaPlayer *music = new QMediaPlayer();
 
-    music->setMedia( QUrl( chomp_path ) );
 
-    music->play();
+    chomp_music->setMedia( QUrl( chomp_path ) );
+
+    chomp_music->play();
 
 }
 
 void SoundManager::play_die()
 {
-    QMediaPlayer *music = new QMediaPlayer();
 
-    music->setMedia( QUrl ( die_path ) );
+    die_music->setMedia( QUrl ( die_path ) );
 
-    music->play();
+    die_music->play();
 }
 
 void SoundManager::play_eat()
 {
-    QMediaPlayer *music = new QMediaPlayer();
 
-    music->setMedia( QUrl( eat_path ) );
+    eat_music->setMedia( QUrl( eat_path ) );
 
-    music->play();
+    eat_music->play();
 
 }
 
 void SoundManager::play_end()
 {
-    QMediaPlayer *music = new QMediaPlayer();
 
-    music->setMedia( QUrl( end_path ) );
+    end_music->setMedia( QUrl( end_path ) );
 
-    music->play();
+    end_music->play();
 }
 
 void SoundManager::play_hit()
 {
-    QMediaPlayer *music = new QMediaPlayer();
 
-    music->setMedia( QUrl( hit_path ) );
+    hit_music->setMedia( QUrl( hit_path ) );
 
-    music->play();
+    hit_music->play();
 }
 
 void SoundManager::play_levelup()
 {
-    QMediaPlayer *music = new QMediaPlayer();
 
-    music->setMedia( QUrl( levelup_path ) );
 
-    music->play();
+    levelup_music->setMedia( QUrl( levelup_path ) );
+
+    levelup_music->play();
 }
 
 void SoundManager::play_pickup()
 {
-    QMediaPlayer *music = new QMediaPlayer();
 
-    music->setMedia( QUrl( pickup_path ) );
 
-    music->play();
+    pickup_music->setMedia( QUrl( pickup_path ) );
+
+    pickup_music->play();
 }
 
 void SoundManager::play_start()
 {
-    QMediaPlayer *music = new QMediaPlayer();
 
-    music->setMedia( QUrl( start_path ) );
+    start_music->setMedia( QUrl( start_path ) );
 
-    music->play();
+    start_music->play();
 }
 
 void SoundManager::play_steam()
 {
-    QMediaPlayer *music = new QMediaPlayer();
 
-    music->setMedia( QUrl( steam_path ) );
+    steam_music->setMedia( QUrl( steam_path ) );
 
-    music->play();
+    steam_music->play();
+
 }
 
 void SoundManager::play_throw()
 {
-    QMediaPlayer *music = new QMediaPlayer();
 
-    music->setMedia( QUrl( throw_path ) );
+    throw_music->setMedia( QUrl( throw_path ) );
 
-    music->play();
+    throw_music->play();
 }
 
-//void load_banana_sound(Main_player *player){
+void SoundManager::stop_background()
+{
 
-    //player->banana_throw.setMedia(QUrl("qrc:/sounds/throw.wav"));
-//}
+    background_music->stop();
+
+}
+
+void SoundManager::stop_bump()
+{
+
+    bump_music->stop();
+}
+
+void SoundManager::stop_chomp()
+{
+
+    chomp_music->stop();
+}
+
+void SoundManager::stop_die()
+{
+
+    die_music->stop();
+
+}
+
+void SoundManager::stop_eat()
+{
+
+    eat_music->stop();
+
+}
+
+void SoundManager::stop_end()
+{
+
+    end_music->stop();
+
+}
+
+void SoundManager::stop_hit()
+{
+
+    hit_music->stop();
+
+}
+
+void SoundManager::stop_levelup()
+{
+
+    levelup_music->stop();
+}
+
+void SoundManager::stop_pickup()
+{
+
+    pickup_music->stop();
+
+}
+
+void SoundManager::stop_start()
+{
+
+    start_music->stop();
+
+}
+
+void SoundManager::stop_steam()
+{
+
+    steam_music->stop();
+}
+
+void SoundManager::stop_throw()
+{
+    throw_music->stop();
+
+}
+

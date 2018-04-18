@@ -33,7 +33,19 @@ private:
     QString steam_path = "qrc:/sounds/steam.mp3";
     QString throw_path = "qrc:/sounds/throw.mp3";
 
-    QMediaPlayer *music1;
+    QMediaPlayer *background_music;
+    QMediaPlayer *bump_music;
+    QMediaPlayer *chomp_music;
+    QMediaPlayer *die_music;
+    QMediaPlayer *eat_music;
+    QMediaPlayer *end_music;
+    QMediaPlayer *hit_music;
+    QMediaPlayer *levelup_music;
+    QMediaPlayer *pickup_music;
+    QMediaPlayer *start_music;
+    QMediaPlayer *steam_music;
+    QMediaPlayer *throw_music;
+
 
 public:
 
@@ -64,6 +76,31 @@ public:
     void play_steam();
 
     void play_throw();
+
+
+    void stop_background();
+
+    void stop_bump();
+
+    void stop_chomp();
+
+    void stop_die();
+
+    void stop_eat();
+
+    void stop_end();
+
+    void stop_hit();
+
+    void stop_levelup();
+
+    void stop_pickup();
+
+    void stop_start();
+
+    void stop_steam();
+
+    void stop_throw();
 
 };
 

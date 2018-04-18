@@ -9,23 +9,23 @@
 class Button : public QPushButton
 {
     Q_OBJECT
-    public:
-        Button(QString txt, QPushButton * parent = NULL);
+public:
+    Button(QString txt, QPushButton * parent = NULL);
 
-    private:
-        int new_height;
-        int new_width;
+private:
+    int new_height;
+    int new_width;
 
-    signals:
-        void clicked();
+signals:
+    void clicked();
 
 
-    protected:
-        void mousePressEvent(QMouseEvent *event);
-        void hoverEnter(QHoverEvent *event);
-        void hoverLeave(QHoverEvent *event);
-        void hoverMove(QHoverEvent *event);
-        bool event(QEvent *event);
+protected:
+    void mousePressEvent(QMouseEvent *event);
+    void hoverEnter(QHoverEvent *event);
+    void hoverLeave(QHoverEvent *event);
+    void hoverMove(QHoverEvent *event);
+    bool event(QEvent *event);
 
 };
 

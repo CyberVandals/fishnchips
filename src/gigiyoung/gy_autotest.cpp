@@ -15,11 +15,8 @@
 #include "../../inc/hh_main_player.h"
 #include "../../inc/kk_scenemanager.h"
 
-// add main player
-//AutoTest::AutoTest(QObject *main_window, QGraphicsItem *object): 
-//AutoTest::AutoTest(QGraphicsScene *scene, SceneManager *sm, QGraphicsItem *object): 
-AutoTest::AutoTest(QGraphicsScene *scene, QGraphicsItem *object, SceneManager *sm): 
-    QObject() 
+AutoTest::AutoTest(QGraphicsScene *scene, QGraphicsItem *object, 
+    SceneManager *sm): QObject() 
 {
     // init 
     this->object = object; 
@@ -66,20 +63,32 @@ void AutoTest::create_stress_level() {
     scene->setFocusItem(player);
 
     obj_handler->add_shark(30,30,5,5);
-    obj_handler->add_shark(50,30,10,0);
-    obj_handler->add_shark(100,30,3,7);
+    obj_handler->add_shark(30,30,6,4);
+    obj_handler->add_shark(30,30,7,3);
+    obj_handler->add_shark(50,30,11,0);
+    obj_handler->add_shark(50,30,8,-2);
+    obj_handler->add_shark(50,30,9,-1);
+    obj_handler->add_shark(50,30,10,1);
+    obj_handler->add_shark(100,30,4,7);
+    obj_handler->add_shark(100,30,3,6);
+    obj_handler->add_shark(100,30,2,7);
     obj_handler->add_shark(100,500,10,0);
+    obj_handler->add_shark(300,30,10,1);
+    obj_handler->add_shark(300,30,11,0);
     obj_handler->add_shark(300,30,10,0);
     obj_handler->add_shark(300,30,8,3);
     obj_handler->add_shark(300,30,10,3);
+    obj_handler->add_shark(500,300,4,6);
+    obj_handler->add_shark(500,300,6,6);
     obj_handler->add_shark(500,300,5,6);
+    obj_handler->add_shark(500,300,8,6);
     obj_handler->add_shark(500,300,8,4);
     obj_handler->add_shark(600,100,10,4);
     obj_handler->add_shark(600,100,9,3);
     obj_handler->add_shark(600,300,8,4);
+    obj_handler->add_shark(600,300,9,5);
     obj_handler->add_shark(600,300,10,5);
     obj_handler->add_shark(600,300,2,10);
-    obj_handler->add_shark(600,300,10,5);
 
     obj_handler->add_platform(0,150,600);
     obj_handler->add_platform(200,300,1000);
@@ -87,13 +96,31 @@ void AutoTest::create_stress_level() {
     obj_handler->add_platform(0,600,500);
     obj_handler->add_platform(650,600,600);
 
+    obj_handler->add_banana(100,200);
+    obj_handler->add_banana(100,350);
+    obj_handler->add_banana(100,500);
+    obj_handler->add_banana(100,650);
+    obj_handler->add_banana(200,200);
+    obj_handler->add_banana(200,350);
+    obj_handler->add_banana(200,500);
+    obj_handler->add_banana(200,650);
     obj_handler->add_banana(300,200);
+    obj_handler->add_banana(300,350);
+    obj_handler->add_banana(300,500);
+    obj_handler->add_banana(300,650);
+    obj_handler->add_banana(400,200);
+    obj_handler->add_banana(400,350);
     obj_handler->add_banana(400,500);
-    obj_handler->add_banana(400,600);
+    obj_handler->add_banana(400,650);
+    obj_handler->add_banana(500,200);
+    obj_handler->add_banana(500,350);
     obj_handler->add_banana(500,500);
-    obj_handler->add_banana(500,600);
+    obj_handler->add_banana(500,650);
+    obj_handler->add_banana(600,200);
+    obj_handler->add_banana(600,350);
     obj_handler->add_banana(600,500);
-    obj_handler->add_banana(600,600);
+    obj_handler->add_banana(600,650);
+
 
     obj_handler->add_steam(500, 200);
     obj_handler->add_steam(300, 100);
