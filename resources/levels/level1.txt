@@ -6,4 +6,5 @@ SHARK           130     130
 EXIT            50      50
 PLATFORM        150     150
 STEAM           180     180
+PLAYER          70      70
 #COMMENTS
