@@ -18,15 +18,16 @@ SceneManager::SceneManager(QGraphicsScene *scene)
     main_scene = new GameScene(scene);
 //    object_handler = new ObjectHandler(scene);
     object_handler = NULL;
+    level_number = 0;
     set_levels();
 }
 
 SceneManager::SceneManager(QGraphicsScene *scene, int demo)
 {
     main_scene = new GameScene(scene);
+    level_number = 0;
     set_levels();
     init(scene, demo);
-
 }
 
 void SceneManager::init(QGraphicsScene *scene, int demo)
@@ -60,7 +61,8 @@ void SceneManager::init(QGraphicsScene *scene, int demo)
 
 void SceneManager::play_game(){
     main_scene->setBackground(":/images/back_ground.jpg");
-    generate_level(levels->at(0));
+//    generate_level(levels->at(level_number));
+    next_level();
 }
 
 void SceneManager::restart_game()
@@ -80,8 +82,13 @@ void SceneManager::generate_level(const QString& filename)
     for (int i = 0; i < level_items->size(); ++i) {
         item = level_items->at(i);
         levelBuilder->position(item);
-        qDebug() << "title: " << item.title() << " x: " << item.x() << " y: " << item.y();
     }
+}
+
+void SceneManager::next_level()
+{
+    object_handler->remove_all();
+    generate_level(levels->at(level_number));
 }
 
 MainPlayer* SceneManager::get_player()
@@ -92,4 +99,5 @@ MainPlayer* SceneManager::get_player()
 void SceneManager::set_levels()
 {
     levels->push_back(":/levels/level1.txt");
+    levels->push_back(":/levels/level2.txt");
 }
