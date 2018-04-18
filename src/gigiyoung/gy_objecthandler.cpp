@@ -47,6 +47,14 @@ void ObjectHandler::add_platform(QGraphicsItem *parent) {
     platform_list.append(obj);
 }
 
+void ObjectHandler::add_platform(int x, int y, QGraphicsItem *parent)
+{
+    Platform *obj = new Platform(x, y, DEFAULT_PLAT_WIDTH, parent);
+    scene->addItem(obj);
+    platform_list.append(obj);
+}
+
+
 void ObjectHandler::add_platform(int x, int y, int width, 
     QGraphicsItem *parent)
 {

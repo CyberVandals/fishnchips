@@ -57,7 +57,7 @@ void Banana::resume() {
 void Banana::chuck(int direction) {
     QPointF scene_coord;
 
-    qDebug() << "try to throw banana";
+//    qDebug() << "try to throw banana";
 
     // if banana has player as a parent, throw
     if( parentItem() != NULL ) {
@@ -75,7 +75,7 @@ void Banana::chuck(int direction) {
         else if( direction == DOWN ) 
             vel.y = 10;
 
-        qDebug() << "throw banana";
+//        qDebug() << "throw banana";
         scene_coord = mapToScene(pos());
        
         // become an orphan
@@ -90,7 +90,7 @@ void Banana::chuck(int direction) {
         timer->start(UPDATE_MS);
     }
     else if( parentItem() == NULL ) {
-        qDebug() << "banana has no parent";
+//        qDebug() << "banana has no parent";
     }
 }
 
@@ -107,7 +107,12 @@ void Banana::pickup() {
 void Banana::eat() {
     if( is_picked_up ) {
         is_picked_up = false;
-        scene()->removeItem(this);
+
+        // become an orphan
+        setParentItem(0);
+        //setPos(scene_coord);
+        //scene()->removeItem(this);
+        setVisible(false);
     }
 }
 
@@ -127,12 +132,10 @@ void Banana::status() {
     //qDebug() << "in Banana::check_player()\n";
     for( int i = 0; i < items.size() ; i++ ) {
         // player picked up banana 
-        if( typeid(*(items[i])) == typeid(Main_player) ) {
+        if( typeid(*(items[i])) == typeid(MainPlayer) ) {
             if( items[i]->childItems().isEmpty() ) {
 
                 sound->play_pickup();
-//                player = (Main_player *)items[i];
-//                setPos(player->pos());
 
                 // make player parent of banana
                 setParentItem(items[i]); 
@@ -195,7 +198,8 @@ void Banana::move() {
             // splat sound effect
             sound->play_hit();
 
-            scene()->removeItem(this);
+            //scene()->removeItem(this);
+            setVisible(false);
             timer->stop();
             disconnect(timer, SIGNAL(timeout()), this, SLOT(move()));
         }
@@ -209,7 +213,8 @@ void Banana::move() {
 
             shark->stun();
 
-            scene()->removeItem(this);
+            //scene()->removeItem(this);
+            setVisible(false);
             timer->stop();
             disconnect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
@@ -219,11 +224,11 @@ void Banana::move() {
     if( b_left <= scene_left || b_right >= scene_right 
         || b_top <= scene_top || b_bottom >= scene_bottom )
     {
-        scene()->removeItem(this);
+        //scene()->removeItem(this);
+        setVisible(false);
         timer->stop();
         disconnect(timer,SIGNAL(timeout()),this,SLOT(move()));
     } 
 
-//    }
 }
 

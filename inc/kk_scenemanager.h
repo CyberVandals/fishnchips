@@ -5,6 +5,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
 #include <QString>
+#include <QList>
 
 #include "gy_object.h"
 
@@ -12,9 +13,6 @@
 
 
 #include "inc/gy_autotest.h"
-
-//#include "inc/koffi/kk_gamelevel.h"
-//#include "inc/koffi/kk_gamescene.h"
 
 class GameLevel;
 
@@ -31,11 +29,13 @@ public:
     void play_game();
     void restart_game();
     void generate_level(const QString& filename);
-    Main_player* get_player();
+    MainPlayer* get_player();
 private:
+    void set_levels();
     ObjectHandler *object_handler;
-    Main_player *player;
+    MainPlayer *player;
     GameScene *main_scene;
+    QList<QString> *levels = new QList<QString>();
 };
 
 #endif // SCENEMANAGER_H
