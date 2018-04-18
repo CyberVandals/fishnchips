@@ -6,11 +6,11 @@ Graphics::Graphics()
 //
 }
 
-void Graphics::load_mainplayer(Main_player *main_player){
+void Graphics::load_mainplayer(MainPlayer *main_player){
     main_player->setPixmap(QPixmap(":/images/monkey.png"));
 }
 
-void Graphics::load_mainplayer(int width, int heigh, Main_player *main_player, bool left_, bool right_){
+void Graphics::load_mainplayer(int width, int heigh, MainPlayer *main_player, bool left_, bool right_){
     //QPixmap pixmap(":/images/monkey.png");
     //pixmap = pixmap.scaled(width,heigh,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     //main_player->setPixmap(pixmap);
