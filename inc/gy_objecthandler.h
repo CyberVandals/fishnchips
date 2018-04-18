@@ -20,6 +20,7 @@ public:
     void add_exit(int x, int y, QGraphicsItem *parent=0);
 
     void add_platform(QGraphicsItem *parent=0);
+    void add_platform(int x, int y, QGraphicsItem *parent=0);
     void add_platform(int x, int y, int width, QGraphicsItem *parent=0);
 
     void add_shark(QGraphicsItem *parent=0);
