@@ -84,7 +84,7 @@ void SceneManager::generate_level(const QString& filename)
     }
 }
 
-Main_player* SceneManager::get_player()
+MainPlayer* SceneManager::get_player()
 {
     return player;
 }

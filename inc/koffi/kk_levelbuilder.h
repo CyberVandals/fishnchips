@@ -8,18 +8,18 @@
 
 class ObjectHandler;
 
-//class LevelItem;
+class LevelItem;
 
 class LevelBuilder
 {
 public:
     LevelBuilder();
-    LevelBuilder(ObjectHandler *objectHandler);
+    LevelBuilder(ObjectHandler *object_handler);
 
     void position(LevelItem levelItem);
 
 private:
-    ObjectHandler *objectHandler;
+    ObjectHandler *object_handler;
 
     void position_shark(LevelItem levelItem);
     void position_player(LevelItem levelItem);
