@@ -20,6 +20,7 @@
         <file>platform_.png</file>
         <file>blue_shark_left.png</file>
         <file>steam_.png</file>
+        <file>monkey_left.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>
