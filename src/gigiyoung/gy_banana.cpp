@@ -132,12 +132,10 @@ void Banana::status() {
     //qDebug() << "in Banana::check_player()\n";
     for( int i = 0; i < items.size() ; i++ ) {
         // player picked up banana 
-        if( typeid(*(items[i])) == typeid(Main_player) ) {
+        if( typeid(*(items[i])) == typeid(MainPlayer) ) {
             if( items[i]->childItems().isEmpty() ) {
 
                 sound->play_pickup();
-//                player = (Main_player *)items[i];
-//                setPos(player->pos());
 
                 // make player parent of banana
                 setParentItem(items[i]); 
@@ -227,7 +225,7 @@ void Banana::move() {
         || b_top <= scene_top || b_bottom >= scene_bottom )
     {
         //scene()->removeItem(this);
-        setVisible(this);
+        setVisible(false);
         timer->stop();
         disconnect(timer,SIGNAL(timeout()),this,SLOT(move()));
     } 
