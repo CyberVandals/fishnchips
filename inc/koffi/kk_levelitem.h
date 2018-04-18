@@ -3,28 +3,21 @@
 
 #endif // LEVELITEM_H
 
+
+#include "gy_object.h"
+
 #include <QString>
+
+class ObjectHandler;
 
 class LevelItem {
 public:
-    LevelItem(){};
-    void setPosition(int x, int y) {
-        x_pos = x;
-        y_pos = y;
-    }
-    void setTitle(QString title) {
-        _title = title;
-    }
-    int x() {
-        return x_pos;
-    }
-    int y() {
-        return y_pos;
-    }
-    QString title() {
-        return _title;
-    }
-
+    LevelItem();
+    void setPosition(int x, int y);
+    void setTitle(QString title);
+    int x();
+    int y();
+    QString title();
 
 private:
     int x_pos, y_pos;
