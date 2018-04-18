@@ -6,12 +6,13 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#define WID_HEI 700
+#define WID_WIDTH 950
+
 #include <QGraphicsScene>
 #include <QGraphicsView>
-#include <QKeyEvent>
-#include <QTimer>
-#include "mm_soundmanager.h"
 
+#include "mm_soundmanager.h"
 #include "chaeunkim/ck_button.h"
 #include "chaeunkim/ck_pausebutton.h"
 #include "chaeunkim/ck_pausescreen.h"
@@ -22,8 +23,7 @@ class MainWindow :public QGraphicsView {
     Q_OBJECT
 public:
     MainWindow();
-    void mainmenu();
-    void gameplay();
+    void display_mainmenu();
 
 private:
     void bring_gameover_scene();
@@ -40,9 +40,6 @@ private:
     SceneManager * game_scene;
 
     SoundManager * background_music;
-
-    int WID_WIDTH;
-    int WID_HEI;
 
 public slots:
     void start();
