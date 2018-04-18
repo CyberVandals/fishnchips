@@ -10,11 +10,19 @@ void Graphics::load_mainplayer(Main_player *main_player){
     main_player->setPixmap(QPixmap(":/images/monkey.png"));
 }
 
-void Graphics::load_mainplayer(int width, int heigh, Main_player *main_player){
-    QPixmap pixmap(":/images/monkey.png");
+void Graphics::load_mainplayer(int width, int heigh, Main_player *main_player, bool left_, bool right_){
+    //QPixmap pixmap(":/images/monkey.png");
+    //pixmap = pixmap.scaled(width,heigh,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    //main_player->setPixmap(pixmap);
+    QPixmap pixmap;
+    if (right){
+        pixmap.load(":/images/monkey.png");
+    }
+    else if(left){
+        pixmap.load(":/images/monkey_left.png");
+    }
     pixmap = pixmap.scaled(width,heigh,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-    main_player->setPixmap(pixmap);
-
+    shark->setPixmap(pixmap);
 }
 
 void Graphics::load_shark(Shark *shark){
@@ -23,7 +31,7 @@ void Graphics::load_shark(Shark *shark){
 }
 
 void Graphics::load_shark(int width,int heigh,Shark *shark, bool left_, bool right_){
-//shark->setPixmap(QPixmap(":/blue_shark.png"));
+    //shark->setPixmap(QPixmap(":/blue_shark.png"));
     QPixmap pixmap;
     if (right){
         pixmap.load(":/images/blue_shark.png");
