@@ -107,6 +107,10 @@ void Banana::pickup() {
 void Banana::eat() {
     if( is_picked_up ) {
         is_picked_up = false;
+
+        // become an orphan
+        setParentItem(0);
+        //setPos(scene_coord);
         scene()->removeItem(this);
     }
 }

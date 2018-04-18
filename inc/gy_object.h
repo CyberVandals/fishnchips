@@ -55,10 +55,6 @@ struct Velocity {
 
 //class Main_player;
 
-//struct Size {
-//    int x, y;
-//};
-
 // Banana 
 class Banana: public AbstractObject {
     Q_OBJECT
@@ -80,13 +76,13 @@ public slots:
     void status();
     void move();
 
-private:
+protected:
     void init();
 
+private:
     bool is_picked_up;
     bool is_thrown;
     struct Velocity vel;
-//    Main_player *player;
 };
 
 
@@ -103,7 +99,7 @@ public:
 public slots:
     void status();
 
-private:
+protected:
     void init();
 };
 
@@ -111,7 +107,6 @@ private:
 
 
 // Platform - maybe use Draw/Paint() instead of an image
-//class Platform: public QGraphicsRectItem {
 class Platform: public QGraphicsPixmapItem {
 public:
     Platform(QGraphicsItem *parent=0);
@@ -136,24 +131,25 @@ public:
     void resume();
 
     void stun(int time=DEFAULT_STUN_DURATION);
-    bool cooked();
+//    bool cooked(); /* undecided */
 
 public slots:
     void move();
-    void cooked_status();
+//    void cooked_status(); /* undecided */
+
+protected:
+    void init();
 
 private:
-    void init();
     void set_image();
 
-    bool is_cooked;
+//    bool is_cooked;
     int stun_duration;
     int sound_count;
     struct Velocity vel;
 };
 
 
-// Steam needs to check if SomeObject collided with it
 class Steam: public AbstractObject {
     Q_OBJECT
 public:
@@ -168,9 +164,10 @@ public:
 public slots:
     void status();
 
-private:
+protected:
     void init();
 
+private:
     bool is_active;
     int count, time_active;
 };

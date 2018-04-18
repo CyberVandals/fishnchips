@@ -50,7 +50,7 @@ Shark::Shark(int x, int y, int vel_x, int vel_y,
 void Shark::init() {
     sound_count = 0;
     stun_duration = 0;
-    is_cooked = false;
+//    is_cooked = false;
  
     timer = new QTimer(this);
     graphics = new Graphics();
@@ -90,6 +90,7 @@ void Shark::stun(int time) {
         stun_duration = time;
 }
 
+/*
 bool Shark::cooked() {
     // "cook" shark
 
@@ -97,6 +98,7 @@ bool Shark::cooked() {
 
     return is_cooked;
 }
+*/
 
 void Shark::move() {
 /*
@@ -213,7 +215,9 @@ void Shark::move() {
     setPos(x()+vel.x, y()+vel.y);
 }
 
+/*
 void Shark::cooked_status() {
     //qDebug() << "I am a shark. I am now chum.";
     
 }
+*/
