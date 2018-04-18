@@ -1,25 +1,31 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-//#include <QPushButton>
-#include <QGraphicsTextItem>
 #include <QtWidgets>
+
+#define DEFAULT_BTN_HEIGHT 100
+#define DEFAULT_BTN_WIDTH 150
 
 class Button : public QPushButton
 {
     Q_OBJECT
-public:
-    Button(QString txt, QPushButton * parent = NULL);
+    public:
+        Button(QString txt, QPushButton * parent = NULL);
 
-signals:
-    void clicked();
+    private:
+        int new_height;
+        int new_width;
 
-protected:
-    void mousePressEvent(QMouseEvent *event);
-    void hoverEnter(QHoverEvent *event);
-    void hoverLeave(QHoverEvent *event);
-    void hoverMove(QHoverEvent *event);
-    bool event(QEvent *event);
+    signals:
+        void clicked();
+
+
+    protected:
+        void mousePressEvent(QMouseEvent *event);
+        void hoverEnter(QHoverEvent *event);
+        void hoverLeave(QHoverEvent *event);
+        void hoverMove(QHoverEvent *event);
+        bool event(QEvent *event);
 
 };
 

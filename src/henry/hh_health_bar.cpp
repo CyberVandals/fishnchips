@@ -2,11 +2,14 @@
 #include "../../inc/henry/hh_health.h"
 #include <QDebug>
 
-void HealthBar::add_health()
+void HealthBar::add_health(QGraphicsScene * scene)
 {
+    qDebug() << "add health";
     int new_x_pos = health_list.last()->new_x_pos+30;
     Health * health = new Health(new_x_pos);
     health_list.append(health);
+    scene->addItem(health);
+    health_list.last()->setVisible(true);
 }
 
 void HealthBar::renew_health()
