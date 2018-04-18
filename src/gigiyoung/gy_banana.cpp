@@ -227,7 +227,7 @@ void Banana::move() {
         || b_top <= scene_top || b_bottom >= scene_bottom )
     {
         //scene()->removeItem(this);
-        setVisible(this);
+        setVisible(false);
         timer->stop();
         disconnect(timer,SIGNAL(timeout()),this,SLOT(move()));
     } 
