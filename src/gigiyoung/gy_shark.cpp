@@ -90,32 +90,13 @@ void Shark::stun(int time) {
         stun_duration = time;
 }
 
-/*
-bool Shark::cooked() {
-    // "cook" shark
-
-    // change public slot
-
-    return is_cooked;
-}
-*/
-
 void Shark::move() {
-/*
-    static const int X_BUFFER = 50;
-    static int scene_right = scene()->sceneRect().right();
-    static int scene_left = scene()->sceneRect().left(); 
-    static int scene_top = scene()->sceneRect().top();
-    static int scene_bottom = scene()->sceneRect().bottom();
-    static int shark_right, shark_left, shark_top, shark_bottom;
-*/
-
     const int X_BUFFER = 50;
+    int shark_right, shark_left, shark_top, shark_bottom;
     int scene_right = scene()->sceneRect().right();
     int scene_left = scene()->sceneRect().left(); 
     int scene_top = scene()->sceneRect().top();
     int scene_bottom = scene()->sceneRect().bottom();
-    int shark_right, shark_left, shark_top, shark_bottom;
 
 
     // stunned, decrement
@@ -144,7 +125,6 @@ void Shark::move() {
     {
         vel.x = -vel.x;
         set_image();
-        //graphics->shark_flip(this,true,false);
     }
     // if top or bottom edges of scene, reverse x velocity
     else if ( (shark_top <= scene_top && vel.y < 0) 
@@ -176,7 +156,6 @@ void Shark::move() {
             {
                 vel.x = -vel.x;
                 set_image();
-                //graphics->shark_flip(this,true,false);
             }
 
             if( (shark_bottom >= plat_top 
@@ -193,31 +172,9 @@ void Shark::move() {
                 sound_count = PLAYER_IMMUNE_DURATION;
             }
         }
-/*
-        // if collision with thrown banana, stun shark
-        else if( typeid(*(items[i])) == typeid(Banana) ) {
-            Banana *banana = (Banana *)items[i];
-
-            if( banana->thrown() )
-                stun(); 
-        }
-*/
-        else if( typeid(*(items[i])) == typeid(Steam) ) {
-            //is_cooked = true;
-
-            //disconnect(timer,SIGNAL(timeout()),this,SLOT(move()));
-            //connect(timer,SIGNAL(timeout()),this,SLOT(cooked_status()));
-            
-        }
     }
 
     // update position
     setPos(x()+vel.x, y()+vel.y);
 }
 
-/*
-void Shark::cooked_status() {
-    //qDebug() << "I am a shark. I am now chum.";
-    
-}
-*/
