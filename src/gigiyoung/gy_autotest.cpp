@@ -9,9 +9,11 @@
 #include <QKeyEvent>
 #include <QCoreApplication>
 #include <QDebug>
+#include <QList>
 
 #include "../../inc/gy_autotest.h"
 #include "../../inc/gy_objecthandler.h"
+#include "../../inc/gy_object.h"
 #include "../../inc/hh_main_player.h"
 #include "../../inc/kk_scenemanager.h"
 
@@ -28,13 +30,14 @@ AutoTest::AutoTest(QGraphicsScene *scene, QGraphicsItem *object,
     dest = QPoint(-1,-1);
 
     // add test points
-    add_point(QPoint(300,400));
-    add_point(QPoint(500,0));
-    add_point(QPoint(200,0));
-    //add_point(QPoint(120,120));
-    //add_point(QPoint(100,120));
-    add_point(QPoint(100,100));
-    add_point(QPoint(600,50));
+    add_point(QPoint(800,600));
+    add_point(QPoint(800,410));
+    add_point(QPoint(400,410));
+    add_point(QPoint(400,310));
+    add_point(QPoint(700,310));
+    add_point(QPoint(700,80));
+    add_point(QPoint(70,80));
+    add_point(QPoint(800,600));
 
 
     // if no player object passed, then create a demo level
@@ -43,7 +46,7 @@ AutoTest::AutoTest(QGraphicsScene *scene, QGraphicsItem *object,
 
     else {
         connect(timer, SIGNAL(timeout()), this, SLOT(simulate_keypress()));
-        timer->start(100);
+        timer->start(75);
     }
 }
 
@@ -56,7 +59,7 @@ bool AutoTest::change_scene(QGraphicsScene *scene) {
 }
 
 void AutoTest::create_stress_level() {
-    static MainPlayer *player;
+    //static MainPlayer *player;
 
     player = new MainPlayer(scene);
     scene->addItem(player);
@@ -128,15 +131,6 @@ void AutoTest::create_stress_level() {
 
     obj_handler->add_exit();
 
-/*
-    obj_handler->pause();
-
-    for(int i = 0; i < 10e9; i++) {
-        qDebug() << "waiting...\n";
-    }
-
-    obj_handler->resume();
-*/
 }
 
 void AutoTest::restart_scene() {
@@ -170,22 +164,39 @@ void AutoTest::add_path(QList<QPoint> points) {
 
 
 void AutoTest::simulate_keypress() {
-    //QKeyEvent key_event;
+//    QList<QGraphicsItem *> items = player->collidingItems(
+//                                       Qt::IntersectsItemShape);
     int x = object->x();
     int y = object->y();
     
-    //qDebug() << x << ", " << y;
 
     // init if self.points isn't empty
     if( (dest.x() == -1 && dest.y() == -1) && points.size() > 0 )
         dest = (points.at(list_pos));
 
-    // wrap-around list if index is beyond array
-    //if( list_pos >= points.size() )
-    //    list_pos = 0;
+//    // wrap-around list if index is beyond array
+//    if( list_pos >= points.size() )
+//        list_pos = 0;
+/*
+    // check for banana
+    if( player->childItems().size() > 0 ) {
+        QKeyEvent event(QEvent::KeyPress, Qt::Key_E, Qt::NoModifier);
+        QCoreApplication::sendEvent(scene, &event);
+    } 
+    // check for exit
+    for( int i = 0; i < items.size(); i++ ) {
+        if( typeid(*(items[i])) == typeid(Exit) ) {
+            if( list_pos < points.size() - 1 )
+                list_pos++;
+            else
+                list_pos = 0;
+            dest = points.at(list_pos);
+ 
+        }
+    }
+*/
 
     // move towards dest
-
     // left or right
     if( x != dest.x() ) {
         if( x < dest.x()-5 ) {

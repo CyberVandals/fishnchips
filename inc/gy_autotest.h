@@ -15,6 +15,7 @@
 #include <QList>
 #include <QGraphicsView>
 
+class MainPlayer;
 //#include "kk_scenemanager.h"
 
 class ObjectHandler;
@@ -40,10 +41,10 @@ private:
     int list_pos;
     QPoint dest;
     QList<QPoint> points;
- 
+
+    MainPlayer *player; 
     QGraphicsItem *object;
     QTimer *timer;
-    //QObject *receiver;
     QGraphicsScene *scene;
     ObjectHandler *obj_handler;
 
