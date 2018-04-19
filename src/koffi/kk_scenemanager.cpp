@@ -96,4 +96,12 @@ void SceneManager::set_levels()
 {
     levels->push_back(":/levels/level1.txt");
     levels->push_back(":/levels/level2.txt");
+    levels->push_back(":/levels/level3.txt");
+    levels->push_back(":/levels/level4.txt");
+    levels->push_back(":/levels/level5.txt");
+    levels->push_back(":/levels/level6.txt");
+    levels->push_back(":/levels/level7.txt");
+    levels->push_back(":/levels/level8.txt");
+    levels->push_back(":/levels/level9.txt");
+    levels->push_back(":/levels/level10.txt");
 }

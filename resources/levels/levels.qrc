@@ -2,5 +2,13 @@
     <qresource prefix="/levels">
         <file>level1.txt</file>
 		<file>level2.txt</file>
+        <file>level3.txt</file>
+        <file>level4.txt</file>
+        <file>level5.txt</file>
+        <file>level6.txt</file>
+        <file>level7.txt</file>
+        <file>level8.txt</file>
+        <file>level9.txt</file>
+        <file>level10.txt</file>
     </qresource>
 </RCC>
