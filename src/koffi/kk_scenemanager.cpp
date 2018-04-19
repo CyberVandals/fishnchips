@@ -18,14 +18,12 @@ SceneManager::SceneManager(QGraphicsScene *scene)
     main_scene = new GameScene(scene);
 //    object_handler = new ObjectHandler(scene);
     object_handler = NULL;
-    level_number = 0;
     set_levels();
 }
 
 SceneManager::SceneManager(QGraphicsScene *scene, int demo)
 {
     main_scene = new GameScene(scene);
-    level_number = 0;
     set_levels();
     init(scene, demo);
 }
@@ -46,13 +44,6 @@ void SceneManager::init(QGraphicsScene *scene, int demo)
     main_scene->addGameObject(player);
     main_scene->setFocus(player);
 
-    // Loop over level
-//    object_handler->add_banana();
-//    object_handler->add_exit();
-//    object_handler->add_shark();
-//    object_handler->add_platform();
-//    object_handler->add_steam();
-
     // demo
     if(demo == 1) {
         AutoTest * autoTest = new AutoTest(scene, player, this);
@@ -61,7 +52,6 @@ void SceneManager::init(QGraphicsScene *scene, int demo)
 
 void SceneManager::play_game(){
     main_scene->setBackground(":/images/back_ground.jpg");
-//    generate_level(levels->at(level_number));
     next_level();
 }
 
@@ -87,8 +77,14 @@ void SceneManager::generate_level(const QString& filename)
 
 void SceneManager::next_level()
 {
-    object_handler->remove_all();
-    generate_level(levels->at(level_number));
+    if(!levels->isEmpty()){
+        object_handler->remove_all();
+        generate_level(levels->takeFirst());
+    }
+    else {
+        qDebug() << "Maximum number of levels reached!\n";
+        // display end game windows
+    }
 }
 
 MainPlayer* SceneManager::get_player()

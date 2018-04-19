@@ -33,8 +33,6 @@ public:
     void next_level();
     MainPlayer* get_player();
 private:
-    int level_number;
-
     void set_levels();
     ObjectHandler *object_handler;
     MainPlayer *player;
