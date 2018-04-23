@@ -1,0 +1,4 @@
+#ifndef CK_ABSTRACT_BUTTON_H
+#define CK_ABSTRACT_BUTTON_H
+
+#endif // CK_ABSTRACT_BUTTON_H

@@ -55,7 +55,8 @@ SOURCES += \
 	src/henry/hh_oxygen.cpp \
     src/matthew/mm_resourcemanager.cpp \
     src/koffi/kk_levelitem.cpp \
-    src/koffi/kk_levelbuilder.cpp
+    src/koffi/kk_levelbuilder.cpp \
+    src/chaeunkim/ck_abstract_button.cpp
 
 HEADERS  += \
 	inc/ck_mainwindow.h \
@@ -80,7 +81,8 @@ HEADERS  += \
 	inc/koffi/gamecontroller.h \
     inc/koffi/kk_levelitem.h \
     inc/mm_resourcemanager.h \
-    inc/koffi/kk_levelbuilder.h
+    inc/koffi/kk_levelbuilder.h \
+    inc/chaeunkim/ck_abstract_button.h
 
 RESOURCES += \
 	resources/images/images.qrc \
