@@ -1,6 +1,7 @@
 #include "../../inc/ck_mainwindow.h"
 #include <QSplashScreen>
 
+MainWindow * MainWindow::mainwindow_inst = NULL;
 
 int main( int argc, char *argv[] ) {
     QApplication a(argc, argv);
@@ -11,8 +12,8 @@ int main( int argc, char *argv[] ) {
     splash->show();
     QTimer::singleShot(2000,splash,SLOT(close()));
 
-    MainWindow * mainWindow;
-    mainWindow = new MainWindow();
+    MainWindow * mainWindow = MainWindow::get_instance();
+    mainWindow->init();
     QTimer::singleShot(2300,mainWindow,SLOT(show()));
     mainWindow->display_mainmenu();
 

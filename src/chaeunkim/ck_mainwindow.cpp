@@ -9,6 +9,26 @@
 
 
 MainWindow::MainWindow(){
+    /*scene = new QGraphicsScene(this);
+    background_music = new SoundManager();
+
+    background_music->play_background();
+
+    setFixedSize(WID_WIDTH, WID_HEI);
+    scene->setSceneRect(0,0,WID_WIDTH,WID_HEI);
+
+
+    QPixmap pim(":/images/menu_background.jpg");
+    scene->setBackgroundBrush(pim.scaled(WID_WIDTH,WID_HEI,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+    setScene(scene);
+
+    // turn off the scroll bars both horizontal and vertical
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);*/
+
+}
+
+void MainWindow::init(){
     scene = new QGraphicsScene(this);
     background_music = new SoundManager();
 
@@ -25,7 +45,6 @@ MainWindow::MainWindow(){
     // turn off the scroll bars both horizontal and vertical
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
 }
 
 void MainWindow::display_mainmenu(){
@@ -36,22 +55,22 @@ void MainWindow::display_mainmenu(){
     scene->addItem(logo);
 
     //add play and quit buttons
-    play_button = new Button(":/images/play3.png");
+    play_button = new MainButton(":/images/play3.png");
     play_button->setGeometry((scene->width() - play_button->width()) /2,scene->height()/2,0,0);
     connect(play_button,SIGNAL(clicked()),this,SLOT(start()));
     scene->addWidget(play_button);
 
-    quit_button = new Button(":/images/quit3.png");
+    quit_button = new MainButton(":/images/quit3.png");
     quit_button->setGeometry((scene->width() - quit_button->width()) /2,play_button->pos().y()+quit_button->height(),0,0);
     connect(quit_button,SIGNAL(clicked()),this,SLOT(close()));
     scene->addWidget(quit_button);
 
-    demo_button = new Button(":/images/demoBtn.png");
+    demo_button = new MainButton(":/images/demoBtn.png");
     demo_button->setGeometry((scene->width() - demo_button->width()*2)/2, play_button->pos().y()-demo_button->height(),0,0);
     connect(demo_button,SIGNAL(clicked()),this,SLOT(start_demo()));
     scene->addWidget(demo_button);
 
-    stress_button = new Button(":/images/stressBtn.png");
+    stress_button = new MainButton(":/images/stressBtn.png");
     stress_button->setGeometry((scene->width() - stress_button->width()/20)/2, play_button->pos().y()-stress_button->height(),0,0);
     connect(stress_button,SIGNAL(clicked()),this,SLOT(start_stress()));
     scene->addWidget(stress_button);
@@ -72,12 +91,12 @@ void MainWindow::bring_gameover_scene(){
     scene->setBackgroundBrush(pim.scaled(WID_WIDTH,WID_HEI,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     setScene(scene);
 
-    quit_button = new Button(":/images/quit3.png");
+    quit_button = new MainButton(":/images/quit3.png");
     quit_button->setGeometry((scene->width() - quit_button->width()*2.5) /2,scene->height() - (quit_button->height()*2),0,0);
     connect(quit_button,SIGNAL(clicked()),this,SLOT(close()));
     scene->addWidget(quit_button);
 
-    replay_button = new Button(":/images/replay.png");
+    replay_button = new MainButton(":/images/replay.png");
     replay_button->setGeometry((scene->width() - replay_button->width()/2.2) /2,scene->height() - (replay_button->height()*2),0,0);
     connect(replay_button,SIGNAL(clicked()),this,SLOT(restart()));
     scene->addWidget(replay_button);
@@ -98,22 +117,22 @@ void MainWindow::restart(){
     logo->setPos((scene->width() - logo->boundingRect().width()) / 2, scene->height() / 12);
     scene->addItem(logo);
 
-    play_button = new Button(":/images/play3.png");
+    play_button = new MainButton(":/images/play3.png");
     play_button->setGeometry((scene->width() - play_button->width()) /2,scene->height()/2,0,0);
     connect(play_button,SIGNAL(clicked()),this,SLOT(start()));
     scene->addWidget(play_button);
 
-    quit_button = new Button(":/images/quit3.png");
+    quit_button = new MainButton(":/images/quit3.png");
     quit_button->setGeometry((scene->width() - quit_button->width()) /2,play_button->pos().y()+quit_button->height(),0,0);
     connect(quit_button,SIGNAL(clicked()),this,SLOT(close()));
     scene->addWidget(quit_button);
 
-    demo_button = new Button(":/images/demoBtn.png");
+    demo_button = new MainButton(":/images/demoBtn.png");
     demo_button->setGeometry((scene->width() - demo_button->width()*2)/2, play_button->pos().y()-demo_button->height(),0,0);
     connect(demo_button,SIGNAL(clicked()),this,SLOT(start_demo()));
     scene->addWidget(demo_button);
 
-    stress_button = new Button(":/images/stressBtn.png");
+    stress_button = new MainButton(":/images/stressBtn.png");
     stress_button->setGeometry((scene->width() - stress_button->width()/20)/2, play_button->pos().y()-stress_button->height(),0,0);
     connect(stress_button,SIGNAL(clicked()),this,SLOT(start_stress()));
     scene->addWidget(stress_button);
@@ -131,7 +150,6 @@ void MainWindow::start(){
     // integer argument '0' is an indication to
     // scene manager that the mode is a normal game play
     game_scene = new SceneManager(scene,0);
-
     game_scene->play_game();
 }
 void MainWindow::start_demo(){
@@ -144,10 +162,9 @@ void MainWindow::start_demo(){
     quit_button->deleteLater();
     demo_button->deleteLater();
     stress_button->deleteLater();
-    // integer argument '0' is an indication to
+    // integer argument '1' is an indication to
     // scene manager that the mode is a demo mode
     game_scene = new SceneManager(scene,1);
-
     game_scene->play_game();
 }
 void MainWindow::start_stress(){
@@ -160,9 +177,8 @@ void MainWindow::start_stress(){
     quit_button->deleteLater();
     demo_button->deleteLater();
     stress_button->deleteLater();
-    // integer argument '0' is an indication to
+    // integer argument '2' is an indication to
     // scene manager that the mode is a stress test mode
     game_scene = new SceneManager(scene,2);
-
     game_scene->play_game();
 }

@@ -21,25 +21,36 @@
 
 class MainWindow :public QGraphicsView {
     Q_OBJECT
-public:
-    MainWindow();
-    void display_mainmenu();
 
 private:
     void bring_gameover_scene();
 
+    MainWindow();
+    static MainWindow * mainwindow_inst;
+
     QGraphicsScene * scene;
     QGraphicsPixmapItem *logo;
 
-    Button *play_button;
-    Button *replay_button;
-    Button *quit_button;
-    Button *demo_button;
-    Button *stress_button;
+    MainButton *play_button;
+    MainButton *replay_button;
+    MainButton *quit_button;
+    MainButton *demo_button;
+    MainButton *stress_button;
 
     SceneManager * game_scene;
 
     SoundManager * background_music;
+
+public:
+    void init();
+    void display_mainmenu();
+    // singleton pattern
+    static MainWindow* get_instance() {
+        if( mainwindow_inst == NULL ){
+            mainwindow_inst = new MainWindow();
+        }
+        return mainwindow_inst;
+    }
 
 public slots:
     void start();
