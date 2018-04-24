@@ -22,6 +22,7 @@
 #include "wz_graphics.h"
 #include "henry/hh_oxygen.h"
 #include "gy_object.h"
+#include "kk_scenemanager.h"
 
 
 class Banana;
@@ -39,6 +40,7 @@ QTimer * recover_timer;
 QTimer * timer;
 Graphics * player_pic;
 QGraphicsScene * player_scene;
+SceneManager * scene_manager;
 bool left_collision;
 bool right_collision;
 bool top_collision;
