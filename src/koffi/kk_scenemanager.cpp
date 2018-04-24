@@ -40,7 +40,7 @@ void SceneManager::init(QGraphicsScene *scene, int demo)
     // stress
     if(demo == 2) {
          main_scene->setBackground(":/images/back_ground.jpg");
-        AutoTest * autoTest = new AutoTest(scene);
+        AutoTest * autoTest = new AutoTest(scene, this);
         return;
     }
 
@@ -51,7 +51,7 @@ void SceneManager::init(QGraphicsScene *scene, int demo)
 
     // demo
     if(demo == 1) {
-        AutoTest * autoTest = new AutoTest(scene, player, this);
+        AutoTest * autoTest = new AutoTest(scene, this, player);
     }
 }
 
