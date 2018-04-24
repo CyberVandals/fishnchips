@@ -7,7 +7,7 @@
 LoadMainPlayer * LoadMainPlayer::instance=NULL;
 LoadMainPlayer * player_pic = LoadMainPlayer::get_instance();
 
-MainPlayer::MainPlayer(QGraphicsScene * scene,QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
+MainPlayer::MainPlayer(QGraphicsScene * scene, SceneManager * scene_manager,QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
     //player_pic = new Graphics();
     //player_pic->load_mainplayer(50,50, this,false,true);
@@ -27,7 +27,7 @@ MainPlayer::MainPlayer(QGraphicsScene * scene,QGraphicsItem *parent): QObject(),
 
     player_health = new HealthBar(scene);
     player_oxygen = new Oxygen(scene);
-    scene_manager = new SceneManager(scene);
+    this->scene_manager = scene_manager;
 
     right_collision = false;
     left_collision = false;
@@ -264,7 +264,6 @@ int MainPlayer::shark_collision()
 
                 if(this->banana->thrown() == true) this->banana = NULL;
 
-                //else qDebug() << "i have a banana!!!!!!!!!!!!!!!!!!!!!!";
             }
             return 3;
         }

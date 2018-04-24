@@ -54,7 +54,7 @@ bool has_banana;
 //Health health;
 
 public:
-    MainPlayer(QGraphicsScene *scene, QGraphicsItem *parent=0);
+    MainPlayer(QGraphicsScene *scene, SceneManager *scene_manager, QGraphicsItem *parent=0);
     void keyPressEvent(QKeyEvent * event);
     int shark_collision();
     bool platform_collision();
