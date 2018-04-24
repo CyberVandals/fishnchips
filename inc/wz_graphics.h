@@ -173,8 +173,8 @@ private:
     Graphics *path=new Graphics();
 public:
     LoadPlatform(){
-        high=10;
-        width=500;
+        path->high=10;
+        path->width=500;
     }
     void set(int high_,int width_){
         path->high=high_;
