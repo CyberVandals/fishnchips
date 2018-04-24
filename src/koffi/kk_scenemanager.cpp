@@ -42,7 +42,8 @@ void SceneManager::init(QGraphicsScene *scene, int demo)
         return;
     }
 
-    player = new MainPlayer(this->scene);
+
+    player = new MainPlayer(scene);
     main_scene->addGameObject(player);
     main_scene->setFocus(player);
 
@@ -81,11 +82,13 @@ void SceneManager::next_level()
     qDebug() << "Calling next level!\n";
     if(!levels->isEmpty()){
         qDebug() << "object handler: " << object_handler;
-//        object_handler->remove_all();
+        object_handler->remove_all();
+//
 //        for (size_t i = 0, n = this->scene->items().size(); i < n; i++){
 //            this->scene->items()[i]->setEnabled(false);
 //        }
-//        scene->clear();
+//        this->scene->clear();
+
         main_scene->setBackground(":/images/back_ground.jpg");
         generate_level(levels->takeFirst());
     }
