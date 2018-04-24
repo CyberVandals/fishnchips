@@ -1,7 +1,7 @@
 #include "../../inc/wz_graphics.h"
 #include "../../inc/gy_object.h"
 
-/*Graphics::Graphics()
+Graphics::Graphics()
 {
 //
 }
@@ -43,7 +43,7 @@ void Graphics::load_shark(int width,int heigh,Shark *shark, bool left_, bool rig
     shark->setPixmap(pixmap);
 
 }
-*/
+
 /*void Graphics :: shark_flip(Shark *shark, bool horizontal , bool vertical)
 {
 QImage image(":/images/blue_shark.png");
@@ -52,7 +52,7 @@ QPixmap pixmap = QPixmap::fromImage(mirroredImage);
 shark->setPixmap(pixmap);
 }
 */
-/*
+
 void Graphics::load_banana(Banana *banana){
     banana->setPixmap(QPixmap(":/images/banana.png"));
 }
@@ -96,7 +96,7 @@ void Graphics::load_exit_door(int width, int heigh, Exit *exit_door){
     exit_door->setPixmap(pixmap);
 }
 
-*/
+/*
 void LoadMainPlayer::load_main_player(MainPlayer *main_player)
 {
     QPixmap pixmap;
@@ -153,3 +153,4 @@ void LoadPlatform::load_platform(Platform *plat)
     plat->setPixmap(pixmap);
 
 }
+ */

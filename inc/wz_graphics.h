@@ -17,7 +17,7 @@ class Platform;
 class Steam;
 class MainPlayer;
 class Exit;
-/*class Graphics : public QGraphicsPathItem {
+class Graphics : public QGraphicsPathItem {
 public:
     //void load_mainPlayer(Main_player *player);
     Graphics();
@@ -37,7 +37,7 @@ public:
     void load_exit_door(int width,int heigh,Exit *exit_door);
 private:
 };
-*/
+/*
 
 // save all path for all graphics
 // values and functions could be resued as supperclass
@@ -180,5 +180,5 @@ public:
     }
     void load_steam(Steam *steam);
 };
-
+*/
 #endif // GRAPHICS_H
