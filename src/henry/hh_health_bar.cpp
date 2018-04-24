@@ -4,28 +4,27 @@
 
 void HealthBar::add_health(QGraphicsScene * scene)
 {
-    qDebug() << "add health";
-    int new_x_pos = health_list.last()->new_x_pos+30;
+    //qDebug() << "add health";
+    int new_x_pos = health_list.last()->new_x_pos+30; //for visual cleanliness, each health box will be 30 pixels to the right of the last
     Health * health = new Health(new_x_pos);
     health_list.append(health);
-    scene->addItem(health);
+    scene->addItem(health); //adds them to the scene and makes them visible
     health_list.last()->setVisible(true);
 }
 
 void HealthBar::renew_health()
 {
-
+//unused currently
 }
 
 int HealthBar::decrease_health()
 {
-    //qDebug() << ";
-    if(health_list.isEmpty() == false)
+    if(health_list.isEmpty() == false) //only do this if list is empty, otherwise will seg fault
     {
         health_list.last()->setVisible(false);
         health_list.removeLast();
         qDebug() << health_list.count();
-        return health_list.count();
+        return health_list.count(); //return this so we know when there is no more health left (player is dead)
     }
 
 
@@ -38,15 +37,13 @@ HealthBar::HealthBar(QGraphicsScene *scene): QGraphicsRectItem()
 
     if(scene == 0)qDebug() << "no scene visualized";
 
-    //Health * health = new Health(); //y position doesnt need to change
-    //scene->addItem(health);
 
-    int x_pos = 5;
+    int x_pos = 5; //padding before health bar
     for(int i = 0; i < 5; i++)
     {
-        Health * health = new Health(x_pos); //y position doesnt need to change
+        Health * health = new Health(x_pos); //y position doesnt need to change, intialize all 5 health objects
         scene->addItem(health);
-        x_pos = x_pos + 30;
+        x_pos = x_pos + 30; //increment health position so they're not stacked
         health_list.append(health);
     }
 }

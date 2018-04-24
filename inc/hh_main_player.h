@@ -25,6 +25,7 @@
 #include "kk_scenemanager.h"
 
 
+class LoadMainPlayer;
 class Banana;
 class Graphics;
 
@@ -38,7 +39,7 @@ Oxygen *player_oxygen;
 QList<QGraphicsItem *> collision_item;
 QTimer * recover_timer;
 QTimer * timer;
-Graphics * player_pic;
+//Graphics * player_pic;
 QGraphicsScene * player_scene;
 SceneManager * scene_manager;
 bool left_collision;

@@ -3,10 +3,20 @@
 
 #include <QDebug>
 #include <typeinfo>
+
+LoadMainPlayer * LoadMainPlayer::instance=NULL;
+LoadMainPlayer * player_pic = LoadMainPlayer::get_instance();
+
 MainPlayer::MainPlayer(QGraphicsScene * scene,QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
-    player_pic = new Graphics();
-    player_pic->load_mainplayer(50,50, this,false,true);
+    //player_pic = new Graphics();
+    //player_pic->load_mainplayer(50,50, this,false,true);
+    //start
+    player_pic->set_high(50);
+    player_pic->set_width(50);
+    player_pic->set_direction(false);
+    player_pic->load_main_player(this);
+    //end
     setPos(scene->sceneRect().bottom(), scene->sceneRect().bottom()-50);
     setFlag(QGraphicsItem::ItemIsFocusable);
 
@@ -85,7 +95,9 @@ void MainPlayer::keyPressEvent(QKeyEvent *event)
 
     else if( event->key() == Qt::Key_Left && (this->pos().x()) > (this->scene()->sceneRect().left()))
     {
-        this->player_pic->load_mainplayer(50,50, this,true,false);
+        //this->player_pic->load_mainplayer(50,50, this,true,false);
+        player_pic->set_direction(true);
+          player_pic->load_main_player(this);
 
         int list_length = collidingItems(Qt::IntersectsItemBoundingRect).length();
 
@@ -123,7 +135,9 @@ void MainPlayer::keyPressEvent(QKeyEvent *event)
 
     else if( event->key() == Qt::Key_Right && (this->pos().x()+(boundingRect().right()-boundingRect().left())) < (this->scene()->sceneRect().right()))
     {
-        this->player_pic->load_mainplayer(50,50, this,false,true);
+        //this->player_pic->load_mainplayer(50,50, this,false,true);
+        player_pic->set_direction(false);
+        player_pic->load_main_player(this);
 
         int list_length = collidingItems(Qt::IntersectsItemBoundingRect).length();
 
@@ -239,9 +253,6 @@ int MainPlayer::shark_collision()
 
         if( (typeid(*(collision_item[i])) == typeid(Shark)) && (this->shield == false))
         {
-
-            //qDebug() << "hit a shark";
-            //shield = true;
             return 1;
         }
 
@@ -255,7 +266,7 @@ int MainPlayer::shark_collision()
 
                 //else qDebug() << "i have a banana!!!!!!!!!!!!!!!!!!!!!!";
             }
-            return 69;
+            return 3;
         }
 
         else if(typeid(*(collision_item[i])) == typeid(Exit))
@@ -303,9 +314,11 @@ void MainPlayer::sink()
         shield = true;
         if(player_health->decrease_health() == 0)
         {
+            //delete this;
             QTimer::singleShot(0,player_scene->parent(), SLOT(display_gameover()));
+            //this->scene()->removeItem(this);
         }
-        recover_timer->start(1000);
+        else recover_timer->start(1000);
     }
 
     else if(shark_collision()==0)//door
@@ -314,7 +327,7 @@ void MainPlayer::sink()
         this->scene_manager->next_level();
     }
 
-    else if(shark_collision()==69)
+    else if(shark_collision()==3)
     {
         if(this->banana!=NULL)this->has_banana = true;
     }
