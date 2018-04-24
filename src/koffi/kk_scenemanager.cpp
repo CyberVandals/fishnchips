@@ -17,15 +17,15 @@ SceneManager::SceneManager(QGraphicsScene *scene)
 {
     this->scene = scene;
     main_scene = new GameScene(scene);
-    object_handler = new ObjectHandler(scene);
+//    object_handler = new ObjectHandler(scene);
     set_levels();
 }
 
-SceneManager::SceneManager(QGraphicsScene *scene, int demo)
+SceneManager::SceneManager(QGraphicsScene *scene, int demo, ObjectHandler *object_handler)
 {
     this->scene = scene;
     main_scene = new GameScene(scene);
-    object_handler = new ObjectHandler(scene);
+    this->object_handler = object_handler;
     set_levels();
     init(scene, demo);
 }
@@ -38,6 +38,7 @@ void SceneManager::init(QGraphicsScene *scene, int demo)
 
     // stress
     if(demo == 2) {
+         main_scene->setBackground(":/images/back_ground.jpg");
         AutoTest * autoTest = new AutoTest(scene);
         return;
     }
