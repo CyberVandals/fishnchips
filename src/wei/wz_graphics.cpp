@@ -1,6 +1,6 @@
 #include "../../inc/wz_graphics.h"
 #include "../../inc/gy_object.h"
-
+/*
 Graphics::Graphics()
 {
 //
@@ -43,7 +43,7 @@ void Graphics::load_shark(int width,int heigh,Shark *shark, bool left_, bool rig
     shark->setPixmap(pixmap);
 
 }
-
+*/
 /*void Graphics :: shark_flip(Shark *shark, bool horizontal , bool vertical)
 {
 QImage image(":/images/blue_shark.png");
@@ -52,7 +52,7 @@ QPixmap pixmap = QPixmap::fromImage(mirroredImage);
 shark->setPixmap(pixmap);
 }
 */
-
+/*
 void Graphics::load_banana(Banana *banana){
     banana->setPixmap(QPixmap(":/images/banana.png"));
 }
@@ -95,39 +95,40 @@ void Graphics::load_exit_door(int width, int heigh, Exit *exit_door){
     pixmap = pixmap.scaled(width,heigh,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     exit_door->setPixmap(pixmap);
 }
-
+*/
 
 void LoadMainPlayer::load_main_player(MainPlayer *main_player)
 {
     QPixmap pixmap;
-    if (!PathName::left){
-        pixmap.load(PathName::monkey_path);
+    if (!Graphics::left){
+        pixmap.load(Graphics::monkey_path);
     }
-    else if(PathName::left){
-        pixmap.load(PathName::left_monkey_path);
+    else if(Graphics::left){
+        pixmap.load(Graphics::left_monkey_path);
     }
-    pixmap = pixmap.scaled(PathName::width,PathName::high,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    pixmap = pixmap.scaled(Graphics::width,Graphics::high,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     main_player->setPixmap(pixmap);
 }
-/*
+
 void LoadShark::load_shark(Shark *shark)
 {
     QPixmap pixmap;
-    if (!PathName::left){
-        pixmap.load(PathName::shark_path);
+    if (!Graphics::left){
+        pixmap.load(Graphics::shark_path);
     }
-    else if(PathName::left){
-        pixmap.load(PathName::left_shark_path);
+    else if(Graphics::left){
+        pixmap.load(Graphics::left_shark_path);
     }
-    pixmap = pixmap.scaled(PathName::width,PathName::high,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    pixmap = pixmap.scaled(Graphics::width,Graphics::high,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     shark->setPixmap(pixmap);
 }
 
 
 void LoadSteam::load_steam(Steam *steam)
 {
-    QPixmap pixmap(path->steam_path);
-    pixmap = pixmap.scaled(path->width,path->high,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    //QPixmap pixmap(path->steam_path);
+    QPixmap pixmap(steam_path);
+    pixmap = pixmap.scaled(width,high,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     steam->setPixmap(pixmap);
 }
 
@@ -148,9 +149,9 @@ void LoadExit::load_exit(Exit *exit_door)
 
 void LoadPlatform::load_platform(Platform *plat)
 {
-    QPixmap pixmap(platform_path);
-    pixmap = pixmap.scaled(width,high,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    QPixmap pixmap(path->platform_path);
+    pixmap = pixmap.scaled(path->width,path->high,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     plat->setPixmap(pixmap);
 
 }
- */
+
