@@ -37,12 +37,16 @@ SoundManager::SoundManager()
 
 }
 
-/*void delay()
+//This is the dynamically bound function that takes as its inputs a QMediaPlayer
+//object from the calling object, and an integer value to control the level of the volume
+
+void SoundManager::adjust_volume(QMediaPlayer *music, int volume)
 {
-    QTime dieTime= QTime::currentTime().addSecs(1);
-    while (QTime::currentTime() < dieTime)
-        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
-}*/
+    music->setVolume(volume);
+
+}
+
+
 
 void SoundManager::play_background()
 {
@@ -53,41 +57,11 @@ void SoundManager::play_background()
     playlist->setPlaybackMode( QMediaPlaylist::Loop );
 
 
-   /*  QStringList strlist;
-
-    strlist << "52.160.46.238";
-    strlist << "1";
-    strlist << "Space Odyssey 2001 is BORING";
-    strlist << "100";
-
-    for (int i = 0; i < 1000; i++){
-
-        QProcess *proc = new QProcess();
-
-        proc->start("C:\\Users\\Matthew\\Documents\\Life\\School\\UofI\\Spring2018\\CS383\\HighScoreServerFile\\hssclient", strlist);
-
-        delay();
-    }
-
-
-
-
-
-    //int result = system("cmd /c hssclient 52.160.46.238 7 \“Space Oddysey 2001 is BORING\" 200");
-
-    //int x = result + 2;
-
-   // QString printed = QString::number(result);
-
-   // QMessageBox msgBox;
-   // msgBox.setText(printed);
-   // msgBox.exec();*/
-
-
 
 
     //The volume is set to 20% since it is very loud otherwise
-    background_music->setVolume(20);
+    //background_music->setVolume(20);
+    this->adjust_volume(background_music,20);
     background_music->setPlaylist( playlist );
     background_music->play();
 
