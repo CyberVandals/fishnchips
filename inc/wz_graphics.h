@@ -37,7 +37,7 @@ public:
     void load_exit_door(int width,int heigh,Exit *exit_door);
 private:
 };
-/*
+
 
 // save all path for all graphics
 // values and functions could be resued as supperclass
@@ -85,7 +85,7 @@ public:
     }
     void load_main_player(MainPlayer *main_player);
 };
-
+/*
 // this is a abstract class as a interface of decorator class
 class PathName;
 class InterShark{
