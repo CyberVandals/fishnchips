@@ -1,26 +1,19 @@
 
-#COMMENTS
+
 #TITLE          X_POS   Y_POS
-EXIT            10      60
-BANANA          440     20
-BANANA          530     400
-BANANA          40      530
-SHARK           220     130
-SHARK           30      130
-SHARK           320     330
-SHARK           130      230
-SHARK           420     430
-SHARK           230      430
-SHARK           330      530
-SHARK           30      530
-PLATFORM        10      150
-PLATFORM        10      60
-PLATFORM        150     250
-PLATFORM        450     360
-PLATFORM        10     460
-PLATFORM        310     560
-STEAM           105     65
-STEAM           420     65
-STEAM           520     165
-STEAM           220     265
-STEAM           220     565
+SCORE           10      5
+BANANA          100     100
+BANANA          150     100
+BANANA          100     150
+SHARK           120     120
+SHARK           30     130
+SHARK           130     30
+SHARK           200     200
+SHARK           130     130
+SHARK           160     130
+EXIT            50      50
+PLATFORM        150     150
+STEAM           180     180
+STEAM           180     10
+#PLAYER          70      70
+#COMMENTS
