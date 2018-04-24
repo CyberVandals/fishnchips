@@ -44,6 +44,7 @@ private:
 
     MainPlayer *player; 
     QGraphicsItem *object;
+    //QGraphicsItem *player;
     QTimer *timer;
     QGraphicsScene *scene;
     ObjectHandler *obj_handler;
