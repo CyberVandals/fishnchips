@@ -13,7 +13,7 @@ MainWindow::MainWindow(){
 }
 
 void MainWindow::init(){
-    //obj_handler = new ObjectHandler(scene);
+    obj_handler = new ObjectHandler(scene);
     scene = new QGraphicsScene(this);
     background_music = new SoundManager();
 
@@ -62,7 +62,7 @@ void MainWindow::display_mainmenu(){
 }
 
 void MainWindow::display_gameover(){
-    //obj_handler->remove_all();
+    obj_handler->remove_all();
     for (size_t i = 0, n = scene->items().size(); i < n; i++){
         scene->items()[i]->setEnabled(false);
     }
@@ -135,7 +135,7 @@ void MainWindow::start(){
     stress_button->deleteLater();
     // integer argument '0' is an indication to
     // scene manager that the mode is a normal game play
-    game_scene = new SceneManager(scene,0);
+    game_scene = new SceneManager(scene,0,obj_handler);
     game_scene->play_game();
 }
 void MainWindow::start_demo(){
@@ -150,7 +150,7 @@ void MainWindow::start_demo(){
     stress_button->deleteLater();
     // integer argument '1' is an indication to
     // scene manager that the mode is a demo mode
-    game_scene = new SceneManager(scene,1);
+    game_scene = new SceneManager(scene,1,obj_handler);
     game_scene->play_game();
 }
 void MainWindow::start_stress(){
@@ -165,5 +165,5 @@ void MainWindow::start_stress(){
     stress_button->deleteLater();
     // integer argument '2' is an indication to
     // scene manager that the mode is a stress test mode
-    game_scene = new SceneManager(scene,2);
+    game_scene = new SceneManager(scene,2,obj_handler);
 }
