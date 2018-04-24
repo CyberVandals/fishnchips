@@ -92,7 +92,7 @@ void SceneManager::next_level()
 //        }
 //        this->scene->clear();
 
-        main_scene->setBackground(":/images/back_ground.jpg");
+//        main_scene->setBackground(":/images/back_ground.jpg");
         generate_level(levels->takeFirst());
     }
     else {
