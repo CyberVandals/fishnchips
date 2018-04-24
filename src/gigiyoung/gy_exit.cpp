@@ -24,15 +24,16 @@ Exit::Exit(int x, int y, QGraphicsItem *parent):
 
 void Exit::init() {
     timer = new QTimer(this);
-//    graphics = new Graphics(); 
-    graphics = new LoadExit(); 
+    graphics = new Graphics(); 
+//    graphics = new LoadExit(); 
     sound = new SoundManager();
 
-    graphics->set_width(DEFAULT_EXIT_WIDTH);
-    graphics->set_high(DEFAULT_EXIT_HEIGHT);
-    graphics->load_exit_door(this);
-//    graphics->load_exit_door(
-//        DEFAULT_EXIT_WIDTH, DEFAULT_EXIT_HEIGHT, this);
+//    graphics->set_width(DEFAULT_EXIT_WIDTH);
+//    graphics->set_high(DEFAULT_EXIT_HEIGHT);
+//    graphics->load_exit_door(this);
+
+    graphics->load_exit_door(
+        DEFAULT_EXIT_WIDTH, DEFAULT_EXIT_HEIGHT, this);
 
     connect(timer, SIGNAL(timeout()), this, SLOT(status()));
 }

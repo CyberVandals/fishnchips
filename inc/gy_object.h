@@ -54,6 +54,7 @@ struct Velocity {
 };
 
 //class Main_player;
+class LoadPlatform;
 
 // Banana 
 class Banana: public AbstractObject {
@@ -116,6 +117,7 @@ public:
 private:
     void init();
 
+    //LoadPlatform *graphics;
     Graphics *graphics;
 };
 
