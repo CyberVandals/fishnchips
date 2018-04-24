@@ -17,6 +17,7 @@
 #include "chaeunkim/ck_pausebutton.h"
 #include "chaeunkim/ck_pausescreen.h"
 #include "kk_scenemanager.h"
+#include "gy_objecthandler.h"
 
 
 class MainWindow :public QGraphicsView {
@@ -40,6 +41,8 @@ private:
     SceneManager * game_scene;
 
     SoundManager * background_music;
+
+    ObjectHandler * obj_handler;
 
 public:
     void init();
