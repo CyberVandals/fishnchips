@@ -26,11 +26,9 @@ Banana::Banana(int x, int y, QGraphicsItem *parent):
 
 void Banana::init() {
 
-//    player = NULL;
     is_thrown = false;
     is_picked_up = false;
 
-    // #define these later
     vel.x = 0;
     vel.y = 0;
 
@@ -63,12 +61,9 @@ void Banana::resume() {
 void Banana::chuck(int direction) {
     QPointF scene_coord;
 
-//    qDebug() << "try to throw banana";
 
     // if banana has player as a parent, throw
     if( parentItem() != NULL ) {
-//    if( player != NULL ) {
-//        player = NULL;
         is_picked_up = false;
         is_thrown = true;
 
@@ -87,7 +82,6 @@ void Banana::chuck(int direction) {
         // become an orphan
         setParentItem(0);
         setPos(scene_coord);
-        //setVisible(true);
 
         sound->play_throw();
     
@@ -100,15 +94,6 @@ void Banana::chuck(int direction) {
     }
 }
 
-/*
-void Banana::pickup() {
-    is_picked_up = true;
-
-    // disconnect timer from method
-    timer->stop();
-    disconnect(timer, SIGNAL(timeout()), this, SLOT(status()));
-}
-*/
 
 void Banana::eat() {
     if( is_picked_up ) {
@@ -116,8 +101,6 @@ void Banana::eat() {
 
         // become an orphan
         setParentItem(0);
-        //setPos(scene_coord);
-        //scene()->removeItem(this);
         setVisible(false);
     }
 }
@@ -135,7 +118,6 @@ void Banana::status() {
     QList<QGraphicsItem *> items = 
         collidingItems(Qt::IntersectsItemShape);
 
-    //qDebug() << "in Banana::check_player()\n";
     for( int i = 0; i < items.size() ; i++ ) {
         // player picked up banana 
         if( typeid(*(items[i])) == typeid(MainPlayer) ) {
@@ -147,17 +129,12 @@ void Banana::status() {
                 setParentItem(items[i]); 
                 // sets banana position relative to parent's coord system
                 setPos(0,0);
-
-                // make invisible
-                //this->setVisible(false);
                 is_picked_up = true;
 
                 // disconnect timer from method
                 timer->stop();
                 disconnect(timer,SIGNAL(timeout()),this,SLOT(status()));
 
-//                connect(timer,SIGNAL(timeout()),this,SLOT(move()));
-//                timer->start();
             }
         }
     }
@@ -165,22 +142,6 @@ void Banana::status() {
 
 
 void Banana::move() {
-/*
-    static int scene_right = scene()->sceneRect().right();
-    static int scene_left = scene()->sceneRect().left();
-    static int scene_top = scene()->sceneRect().top();
-    static int scene_bottom = scene()->sceneRect().bottom();
-    static int b_right = x() + this->boundingRect().width();
-    static int b_left = x();
-    static int b_top = y();
-    static int b_bottom = y() + this->boundingRect().height();
-*/
-
-//    if( player != NULL ) {
-//        setPos(player->pos());
-//    }
-//    else {
-
     int scene_right = scene()->sceneRect().right();
     int scene_left = scene()->sceneRect().left();
     int scene_top = scene()->sceneRect().top();
@@ -197,20 +158,20 @@ void Banana::move() {
     setPos(x()+vel.x, y()+vel.y);
 
     // check collisions
-    for( int i = 0; i < items.size() ; i++ ) {
+    for( int i = 0; i < items.size(); i++ ) {
 
-        // if collision with platform, deallocate banana
+        // if collision with platform, make banana invisible 
         if( typeid(*(items[i])) == typeid(Platform) ) {
             // splat sound effect
             sound->play_hit();
 
-            //scene()->removeItem(this);
             setVisible(false);
+
             timer->stop();
             disconnect(timer, SIGNAL(timeout()), this, SLOT(move()));
         }
 
-        // if collision with shark, deallocate banana and set shark
+        // if collision with shark, make banana invisible and set shark
         // paralysis timer 
         else if( typeid(*(items[i])) == typeid(Shark) ) {
             Shark *shark = (Shark *)items[i];
@@ -219,18 +180,18 @@ void Banana::move() {
 
             shark->stun();
 
-            //scene()->removeItem(this);
             setVisible(false);
+
             timer->stop();
             disconnect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
         }
     }
 
+    // if banana moves out of bounds, make it invisible
     if( b_left <= scene_left || b_right >= scene_right 
         || b_top <= scene_top || b_bottom >= scene_bottom )
     {
-        //scene()->removeItem(this);
         setVisible(false);
         timer->stop();
         disconnect(timer,SIGNAL(timeout()),this,SLOT(move()));

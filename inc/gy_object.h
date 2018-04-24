@@ -48,15 +48,12 @@
 #define DOWN	3
 
 
-// structs
 struct Velocity {
     int x, y;
 };
 
-//class Main_player;
-class LoadPlatform;
+//class LoadPlatform;
 
-// Banana 
 class Banana: public AbstractObject {
     Q_OBJECT
 public:
@@ -68,7 +65,6 @@ public:
 
     // 0 left, 1 right 
     void chuck(int direction);
-//    void pickup();
     void eat();
     bool thrown();
     void set_thrown(bool is_thrown);
@@ -87,7 +83,6 @@ private:
 };
 
 
-// Exit Object - needs to check whether play has collided with it
 class Exit: public AbstractObject {
     Q_OBJECT
 public:
@@ -107,7 +102,6 @@ protected:
 
 
 
-// Platform - maybe use Draw/Paint() instead of an image
 class Platform: public QGraphicsPixmapItem {
 public:
     Platform(QGraphicsItem *parent=0);
@@ -121,7 +115,8 @@ private:
     Graphics *graphics;
 };
 
-// Shark - needs to move 
+
+
 class Shark: public AbstractObject {
     Q_OBJECT
 public:
@@ -133,11 +128,9 @@ public:
     void resume();
 
     void stun(int time=DEFAULT_STUN_DURATION);
-//    bool cooked(); /* undecided */
 
 public slots:
     void move();
-//    void cooked_status(); /* undecided */
 
 protected:
     void init();
@@ -145,7 +138,6 @@ protected:
 private:
     void set_image();
 
-//    bool is_cooked;
     int stun_duration;
     int sound_count;
     struct Velocity vel;

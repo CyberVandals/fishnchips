@@ -12,9 +12,6 @@
 #include <QGraphicsPixmapItem>
 #include <QTimer>
 
-//#include "../wz_graphics.h"
-//#include "../mm_soundmanager.h"
-
 class Graphics;
 class SoundManager;
 

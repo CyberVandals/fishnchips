@@ -39,6 +39,8 @@ AutoTest::AutoTest(QGraphicsScene *scene, SceneManager *sm,
     add_point(QPoint(700,80));
     add_point(QPoint(70,80));
     add_point(QPoint(800,600));
+    add_point(QPoint(600,600));
+    add_point(QPoint(600,500));
 
 
     // if no player object passed, then create a demo level
@@ -60,8 +62,6 @@ bool AutoTest::change_scene(QGraphicsScene *scene) {
 }
 
 void AutoTest::create_stress_level() {
-    //static MainPlayer *player;
-
     player = new MainPlayer(scene,scene_manager);
     scene->addItem(player);
     scene->setFocusItem(player);
@@ -148,21 +148,6 @@ void AutoTest::add_point(QPoint point) {
     points.append(point);
 }
 
-/*
-void AutoTest::add_path(QList<QPoint> points) {
-    QPoint *ptr = points;
-
-    while( *ptr != NULL ) {
-        this->points.append(*ptr++);
-    }
-
-    if( this->points == NULL ) {
-        this->points = new <QPoint>QList();
-    }
-    (this->points)->append( (const QList<QPoint> *) points);
-}
-*/
-
 
 void AutoTest::simulate_keypress() {
     QList<QGraphicsItem *> items = object->collidingItems(
@@ -183,51 +168,51 @@ void AutoTest::simulate_keypress() {
     if( object->childItems().size() > 0 ) {
         QKeyEvent event(QEvent::KeyPress, Qt::Key_E, Qt::NoModifier);
         QCoreApplication::sendEvent(scene, &event);
+        qDebug() << "Press 'e' key";
     } 
     // check for exit
     for( int i = 0; i < items.size(); i++ ) {
         if( typeid(*(items[i])) == typeid(Exit) ) {
+
+            // get next item in position list
             if( list_pos < points.size() - 1 )
                 list_pos++;
             else
                 list_pos = 0;
             dest = points.at(list_pos);
- 
-            timer->stop();
-            disconnect(timer, SIGNAL(timeout()), this, SLOT(simulate_keypress()));
         }
     }
 
-    // move towards dest
-    // left or right
+    // move towards dest - left/right
     if( x != dest.x() ) {
         if( x < dest.x()-5 ) {
-            //object->setPos(x+10, y);
             QKeyEvent event(QEvent::KeyPress, Qt::Key_Right, Qt::NoModifier);
             QCoreApplication::sendEvent(scene, &event);
+            qDebug() << "Press right arrow key";
         }
         else if( x > dest.x()+5 ) {
-            //object->setPos(x-10, y);
             QKeyEvent event(QEvent::KeyPress, Qt::Key_Left, Qt::NoModifier);
             QCoreApplication::sendEvent(scene, &event);
+            qDebug() << "Press left arrow key";
         }
     }
 
-   // up or down
+   // move towards dest - up/down
     if( y != dest.y() ) {
         if( y < dest.y()-5 ) {
-            //object->setPos(x, y+10);
             QKeyEvent event(QEvent::KeyPress, Qt::Key_Down, Qt::NoModifier);
             QCoreApplication::sendEvent(scene, &event);
+            qDebug() << "Press down arrow key";
         }
         else if( y > dest.y()+5 ) {
-            //object->setPos(x, y-10);
             QKeyEvent event(QEvent::KeyPress, Qt::Key_Up, Qt::NoModifier);
             QCoreApplication::sendEvent(scene, &event);
+            qDebug() << "Press up arrow key";
         }
             
     }
-        
+
+    // if player position is within +/- 10 of the destination, get next point   
     if( (x < dest.x()+10 && x > dest.x()-10) && 
         (y < dest.y()+10 && y > dest.y()-10) &&
         list_pos < points.size()-1 )
@@ -236,11 +221,5 @@ void AutoTest::simulate_keypress() {
         dest = points.at(list_pos);
     }
 
-   
-     
-    // testing, just use up key
-    //QKeyEvent event(QEvent::KeyPress, Qt::Key_Up, Qt::NoModifier);
-    //QCoreApplication::sendEvent(receiver, &event);
-    //QCoreApplication::sendEvent(scene(), &event);
 }
 

@@ -16,8 +16,6 @@
 #include <QGraphicsView>
 
 class MainPlayer;
-//#include "kk_scenemanager.h"
-
 class ObjectHandler;
 class SceneManager;
 
@@ -25,14 +23,13 @@ class AutoTest: public QObject {
     Q_OBJECT
 
 public:
-    //AutoTest(QGraphicsScene *scene, SceneManager *sm=0, QGraphicsItem *object=0); 
-    AutoTest(QGraphicsScene *scene, SceneManager *sm=0, QGraphicsItem *object=0) ; 
+    AutoTest(QGraphicsScene *scene, SceneManager *sm=0, 
+             QGraphicsItem *object=0) ; 
     bool change_scene(QGraphicsScene *scene);
     void create_stress_level();
     void restart_scene();
     void clear_scene();
     void add_point(QPoint point);
-//    void add_path(QPoint* points);
 
 public slots:
     void simulate_keypress();
@@ -44,7 +41,6 @@ private:
 
     MainPlayer *player; 
     QGraphicsItem *object;
-    //QGraphicsItem *player;
     QTimer *timer;
     QGraphicsScene *scene;
     ObjectHandler *obj_handler;

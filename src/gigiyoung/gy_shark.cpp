@@ -50,7 +50,6 @@ Shark::Shark(int x, int y, int vel_x, int vel_y,
 void Shark::init() {
     sound_count = 0;
     stun_duration = 0;
-//    is_cooked = false;
  
     timer = new QTimer(this);
     graphics = new Graphics();
@@ -133,15 +132,15 @@ void Shark::move() {
         collidingItems(Qt::IntersectsItemShape);
 
     // if left or right edges of scene, reverse x velocity
-    if ( (shark_left <= scene_left && vel.x < 0) 
+    if( (shark_left <= scene_left && vel.x < 0) 
          || (shark_right >= scene_right && vel.x > 0) ) 
     {
         vel.x = -vel.x;
         set_image();
     }
     // if top or bottom edges of scene, reverse x velocity
-    else if ( (shark_top <= scene_top && vel.y < 0) 
-              || (shark_bottom >= scene_bottom && vel.y > 0) ) 
+    else if( (shark_top <= scene_top && vel.y < 0) 
+             || (shark_bottom >= scene_bottom && vel.y > 0) ) 
     {
         vel.y = -vel.y;
     }
@@ -149,7 +148,7 @@ void Shark::move() {
 
 
     for( int i = 0; i < items.size() ; i++ ) {
-        // if collision with platform, invert x velocity
+        // if collision with platform, invert velocity
         if( typeid(*(items[i])) == typeid(Platform) ) {
             int plat_right, plat_left, plat_top, plat_bottom;
             QGraphicsItem *platform = items[i];
@@ -162,6 +161,7 @@ void Shark::move() {
             plat_bottom = platform->y() + 
                           platform->boundingRect().height();
 
+            // collided with platform on left or right sides, invert x velocity
             if( ((shark_right >= plat_left 
                 && shark_right <= plat_left + X_BUFFER) && vel.x > 0) 
                 || ((shark_left <= plat_right 
@@ -171,6 +171,7 @@ void Shark::move() {
                 set_image();
             }
 
+            // collided with platform on top or bottom, invert y velocity
             if( (shark_bottom >= plat_top 
                 && shark_top < plat_top && vel.y > 0) 
                 || (shark_top <= plat_bottom 
@@ -179,6 +180,7 @@ void Shark::move() {
                 vel.y = -vel.y;
             }
         }
+        // play chomp sound if collided with player
         else if( typeid(*(items[i])) == typeid(MainPlayer) ) {
             if( sound_count == 0 ) {
                 sound->play_chomp();

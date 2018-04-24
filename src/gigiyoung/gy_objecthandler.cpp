@@ -8,7 +8,6 @@
 
 ObjectHandler::ObjectHandler(QGraphicsScene *scene) {
     this->scene = scene;
-
     exit = NULL;
 }
 
@@ -132,8 +131,6 @@ void ObjectHandler::remove_all() {
     int size;
 
     // remove from scene and deallocate
-    //size = shark_list.size();
-    //for( int i = size - 1; i >= 0; i-- ) {
     for( int i = 0; i < shark_list.size(); i++ ) {
         shark_list[i]->setVisible(false); 
         shark_list[i]->setEnabled(false); 
@@ -142,8 +139,6 @@ void ObjectHandler::remove_all() {
         delete shark_list[i];
     }
 
-    //size = steam_list.size();
-    //for( int i = size - 1; i >= 0; i-- ) {
     for( int i = 0; i < shark_list.size(); i++ ) {
         steam_list[i]->setVisible(false); 
         steam_list[i]->setEnabled(false); 
@@ -151,8 +146,6 @@ void ObjectHandler::remove_all() {
         delete steam_list[i];
     }
 
-    //size = banana_list.size();
-    //for( int i = size - 1; i >= 0; i-- ) {
     for( int i = 0; i < shark_list.size(); i++ ) {
         banana_list[i]->setVisible(false); 
         banana_list[i]->setEnabled(false); 
