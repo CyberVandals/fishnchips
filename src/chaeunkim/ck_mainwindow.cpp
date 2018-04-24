@@ -9,26 +9,11 @@
 
 
 MainWindow::MainWindow(){
-    /*scene = new QGraphicsScene(this);
-    background_music = new SoundManager();
-
-    background_music->play_background();
-
-    setFixedSize(WID_WIDTH, WID_HEI);
-    scene->setSceneRect(0,0,WID_WIDTH,WID_HEI);
-
-
-    QPixmap pim(":/images/menu_background.jpg");
-    scene->setBackgroundBrush(pim.scaled(WID_WIDTH,WID_HEI,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
-    setScene(scene);
-
-    // turn off the scroll bars both horizontal and vertical
-    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);*/
 
 }
 
 void MainWindow::init(){
+    //obj_handler = new ObjectHandler(scene);
     scene = new QGraphicsScene(this);
     background_music = new SoundManager();
 
@@ -77,7 +62,7 @@ void MainWindow::display_mainmenu(){
 }
 
 void MainWindow::display_gameover(){
-    obj_handler->remove_all();
+    //obj_handler->remove_all();
     for (size_t i = 0, n = scene->items().size(); i < n; i++){
         scene->items()[i]->setEnabled(false);
     }
