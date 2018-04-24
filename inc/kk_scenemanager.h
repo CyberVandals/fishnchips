@@ -26,7 +26,7 @@ public:
 
     SceneManager(QGraphicsScene *scene);
     SceneManager(QGraphicsScene *scene, int demo);
-    void init(QGraphicsScene *scene, int demo);
+    void init(QGraphicsScene *scene, int demo, ObjectHandler *object_handler);
     void play_game();
     void restart_game();
     void generate_level(const QString& filename);
