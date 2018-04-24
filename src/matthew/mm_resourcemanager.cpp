@@ -5,3 +5,5 @@ ResourceManager::ResourceManager(){
 
 
 }
+
+void ResourceManager::adjust_volume(){}

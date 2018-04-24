@@ -7,6 +7,8 @@ class ResourceManager{
 public:
 
     ResourceManager();
+
+    virtual void adjust_volume();
 };
 
 #endif // MM_RESOURCEMANAGER_H

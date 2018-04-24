@@ -53,6 +53,8 @@ public:
 
     SoundManager();
 
+    void adjust_volume(QMediaPlayer *music, int volume);
+
     void play_background();
 
     void play_bump();
