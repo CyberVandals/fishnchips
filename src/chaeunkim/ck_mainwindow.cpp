@@ -13,9 +13,9 @@ MainWindow::MainWindow(){
 }
 
 void MainWindow::init(){
-    obj_handler = new ObjectHandler(scene);
 
     scene = new QGraphicsScene(this);
+    obj_handler = new ObjectHandler(scene);
     background_music = new SoundManager();
 
     background_music->play_background();
