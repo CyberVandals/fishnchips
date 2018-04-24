@@ -37,6 +37,7 @@ private:
     ObjectHandler *object_handler;
     MainPlayer *player;
     GameScene *main_scene;
+    QGraphicsScene *scene;
     QList<QString> *levels = new QList<QString>();
 };
 

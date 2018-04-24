@@ -96,7 +96,7 @@ void Graphics::load_exit_door(int width, int heigh, Exit *exit_door){
     exit_door->setPixmap(pixmap);
 }
 
-/*
+
 void LoadMainPlayer::load_main_player(MainPlayer *main_player)
 {
     QPixmap pixmap;
@@ -109,7 +109,7 @@ void LoadMainPlayer::load_main_player(MainPlayer *main_player)
     pixmap = pixmap.scaled(PathName::width,PathName::high,Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     main_player->setPixmap(pixmap);
 }
-
+/*
 void LoadShark::load_shark(Shark *shark)
 {
     QPixmap pixmap;
