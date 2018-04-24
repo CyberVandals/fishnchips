@@ -77,6 +77,7 @@ void MainWindow::display_mainmenu(){
 }
 
 void MainWindow::display_gameover(){
+    obj_handler->remove_all();
     for (size_t i = 0, n = scene->items().size(); i < n; i++){
         scene->items()[i]->setEnabled(false);
     }
@@ -180,5 +181,4 @@ void MainWindow::start_stress(){
     // integer argument '2' is an indication to
     // scene manager that the mode is a stress test mode
     game_scene = new SceneManager(scene,2);
-    game_scene->play_game();
 }
