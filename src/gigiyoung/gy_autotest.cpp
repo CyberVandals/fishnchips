@@ -17,12 +17,13 @@
 #include "../../inc/hh_main_player.h"
 #include "../../inc/kk_scenemanager.h"
 
-AutoTest::AutoTest(QGraphicsScene *scene, QGraphicsItem *object, 
-    SceneManager *sm): QObject() 
+AutoTest::AutoTest(QGraphicsScene *scene, SceneManager *sm, 
+    QGraphicsItem *object): QObject() 
 {
     // init 
     this->object = object; 
     this->scene = scene;
+    this->scene_manager = sm;
     timer = new QTimer(this);
     obj_handler = new ObjectHandler(scene);
 
@@ -61,7 +62,7 @@ bool AutoTest::change_scene(QGraphicsScene *scene) {
 void AutoTest::create_stress_level() {
     //static MainPlayer *player;
 
-    player = new MainPlayer(scene);
+    player = new MainPlayer(scene,sm);
     scene->addItem(player);
     scene->setFocusItem(player);
 

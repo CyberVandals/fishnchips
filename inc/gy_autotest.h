@@ -26,7 +26,7 @@ class AutoTest: public QObject {
 
 public:
     //AutoTest(QGraphicsScene *scene, SceneManager *sm=0, QGraphicsItem *object=0); 
-    AutoTest(QGraphicsScene *scene, QGraphicsItem *object=0, SceneManager *sm=0); 
+    AutoTest(QGraphicsScene *scene, SceneManager *sm=0, QGraphicsItem *object=0) ; 
     bool change_scene(QGraphicsScene *scene);
     void create_stress_level();
     void restart_scene();
@@ -48,6 +48,7 @@ private:
     QTimer *timer;
     QGraphicsScene *scene;
     ObjectHandler *obj_handler;
+    SceneManager *scene_manager;
 
 };
 
