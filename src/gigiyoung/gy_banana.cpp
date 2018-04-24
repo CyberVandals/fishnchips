@@ -35,11 +35,16 @@ void Banana::init() {
     vel.y = 0;
 
     timer = new QTimer(this);
-    graphics = new Graphics();
+    //graphics = new Graphics();
+    graphics = new LoadBanana();
     sound = new SoundManager();
 
-    graphics->load_banana(
-        DEFAULT_BANANA_WIDTH, DEFAULT_BANANA_HEIGHT, this);
+    graphics->set_width(DEFAULT_BANANA_WIDTH);
+    graphics->set_high(DEFAULT_BANANA_HEIGHT);
+    graphics->load_banana(this);
+
+//    graphics->load_banana(
+//        DEFAULT_BANANA_WIDTH, DEFAULT_BANANA_HEIGHT, this);
     connect(timer, SIGNAL(timeout()), this, SLOT(status()));
 }
 

@@ -53,7 +53,8 @@ void Shark::init() {
 //    is_cooked = false;
  
     timer = new QTimer(this);
-    graphics = new Graphics();
+    //graphics = new Graphics();
+    graphics = new LoadShark();
     sound = new SoundManager();
 
     // create timer for move slot
@@ -63,15 +64,27 @@ void Shark::init() {
 void Shark::set_image() {
     // facing right 
     if( vel.x > 0 ) {
-        graphics->load_shark(
-            DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT, this,
-            false, true);
+        graphics->set_direction(false);
+        graphics->set_width(DEFAULT_SHARK_WIDTH);
+        graphics->set_high(DEFAULT_SHARK_HEIGHT);
+        graphics->load_shark(this);
+
+//        graphics->load_shark(
+//            DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT, this,
+//            false, true);
     }
     // facing left
     else {
-        graphics->load_shark(
-            DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT, this,
-            true, false);
+        graphics->set_direction(true);
+        graphics->set_width(DEFAULT_SHARK_WIDTH);
+        graphics->set_high(DEFAULT_SHARK_HEIGHT);
+        graphics->load_shark(this);
+
+
+
+//        graphics->load_shark(
+//            DEFAULT_SHARK_WIDTH, DEFAULT_SHARK_HEIGHT, this,
+//            true, false);
     }
 }
 

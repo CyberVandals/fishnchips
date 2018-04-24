@@ -30,11 +30,15 @@ void Steam::init() {
     count = time_active;
 
     timer = new QTimer(this);
-    graphics = new Graphics();
+//    graphics = new Graphics();
+    graphics = new LoadSteam();
     sound = new SoundManager();
 
-    graphics->load_steam(
-        DEFAULT_STEAM_WIDTH, DEFAULT_STEAM_HEIGHT, this);
+    graphics->set_width(DEFAULT_STEAM_WIDTH);
+    graphics->set_high(DEFAULT_STEAM_HEIGHT);
+    graphics->load_steam(this);
+//    graphics->load_steam(
+//        DEFAULT_STEAM_WIDTH, DEFAULT_STEAM_HEIGHT, this);
 
     // create timer for move slot
     connect(timer, SIGNAL(timeout()), this, SLOT(status()));
