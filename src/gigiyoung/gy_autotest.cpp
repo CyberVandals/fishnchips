@@ -193,6 +193,8 @@ void AutoTest::simulate_keypress() {
                 list_pos = 0;
             dest = points.at(list_pos);
  
+            timer->stop();
+            disconnect(timer, SIGNAL(timeout()), this, SLOT(simulate_keypress()));
         }
     }
 
