@@ -62,11 +62,7 @@ bool AutoTest::change_scene(QGraphicsScene *scene) {
 void AutoTest::create_stress_level() {
     //static MainPlayer *player;
 
-<<<<<<< HEAD
-    player = new MainPlayer(scene,sm);
-=======
-    player = new MainPlayer(scene,this);
->>>>>>> c9a6d3441ba7a0ea24845ecbf1f4586816219196
+    player = new MainPlayer(scene,scene_manager);
     scene->addItem(player);
     scene->setFocusItem(player);
 
