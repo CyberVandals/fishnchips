@@ -14,6 +14,7 @@ MainWindow::MainWindow(){
 
 void MainWindow::init(){
     obj_handler = new ObjectHandler(scene);
+
     scene = new QGraphicsScene(this);
     background_music = new SoundManager();
 
@@ -62,7 +63,7 @@ void MainWindow::display_mainmenu(){
 }
 
 void MainWindow::display_gameover(){
-    obj_handler->remove_all();
+    //obj_handler->remove_all();
     for (size_t i = 0, n = scene->items().size(); i < n; i++){
         scene->items()[i]->setEnabled(false);
     }

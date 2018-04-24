@@ -42,7 +42,7 @@ private:
 
     SoundManager * background_music;
 
-    ObjectHandler * obj_handler;
+    ObjectHandler * obj_handler = NULL;
 
 public:
     void init();
