@@ -37,6 +37,9 @@ SoundManager::SoundManager()
 
 }
 
+//This is the dynamically bound function that takes as its inputs a QMediaPlayer
+//object from the calling object, and an integer value to control the level of the volume
+
 void SoundManager::adjust_volume(QMediaPlayer *music, int volume)
 {
     music->setVolume(volume);
