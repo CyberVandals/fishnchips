@@ -23,9 +23,10 @@ SceneManager::SceneManager(QGraphicsScene *scene)
 
 SceneManager::SceneManager(QGraphicsScene *scene, int demo, ObjectHandler *object_handler)
 {
-    this->scene = scene;
+//    this->scene = scene;
     main_scene = new GameScene(scene);
     this->object_handler = object_handler;
+    level_builder = new LevelBuilder(object_handler);
     set_levels();
     init(scene, demo);
 }
@@ -44,7 +45,7 @@ void SceneManager::init(QGraphicsScene *scene, int demo)
     }
 
 
-    player = new MainPlayer(scene);
+    player = new MainPlayer(scene, this);
     main_scene->addGameObject(player);
     main_scene->setFocus(player);
 
@@ -56,6 +57,7 @@ void SceneManager::init(QGraphicsScene *scene, int demo)
 
 void SceneManager::play_game(){
     next_level();
+    qDebug() << "game is running\n";
 }
 
 void SceneManager::restart_game()
@@ -68,13 +70,13 @@ void SceneManager::restart_game()
 
 void SceneManager::generate_level(const QString& filename)
 {
+    qDebug() <<"Generate level " << object_handler;
     GameLevel *gameLevel = new GameLevel(filename);
     QList<LevelItem> *level_items = gameLevel->get_levels_items();
     LevelItem item;
-    LevelBuilder *levelBuilder = new LevelBuilder(object_handler);
     for (int i = 0; i < level_items->size(); ++i) {
         item = level_items->at(i);
-        levelBuilder->position(item);
+        level_builder->position(item);
     }
 }
 
@@ -83,7 +85,7 @@ void SceneManager::next_level()
     qDebug() << "Calling next level!\n";
     if(!levels->isEmpty()){
         qDebug() << "object handler: " << object_handler;
-        object_handler->remove_all();
+//        object_handler->remove_all();
 //
 //        for (size_t i = 0, n = this->scene->items().size(); i < n; i++){
 //            this->scene->items()[i]->setEnabled(false);
@@ -97,6 +99,7 @@ void SceneManager::next_level()
         qDebug() << "Maximum number of levels reached!\n";
         // display end game windows
     }
+    qDebug() << "finished next level\n";
 }
 
 MainPlayer* SceneManager::get_player()

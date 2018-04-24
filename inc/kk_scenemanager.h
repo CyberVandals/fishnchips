@@ -20,6 +20,8 @@ class GameScene;
 
 class ObjectHandler;
 
+class LevelBuilder;
+
 class SceneManager: public QGraphicsView
 {
 public:
@@ -34,7 +36,8 @@ public:
     MainPlayer* get_player();
 private:
     void set_levels();
-    ObjectHandler *object_handler;
+    ObjectHandler *object_handler = NULL;
+    LevelBuilder *level_builder;
     MainPlayer *player;
     GameScene *main_scene;
     QGraphicsScene *scene;

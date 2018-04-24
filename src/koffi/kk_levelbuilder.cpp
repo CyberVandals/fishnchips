@@ -17,6 +17,7 @@ void LevelBuilder::position(LevelItem levelItem)
     position_exit(levelItem);
     position_platform(levelItem);
     position_steam(levelItem);
+    qDebug() << "positioning items\n";
 }
 
 void LevelBuilder::position_player(LevelItem levelItem)
@@ -29,6 +30,7 @@ void LevelBuilder::position_shark(LevelItem levelItem)
     if(levelItem.title().compare("SHARK") == 0) {
         object_handler->add_shark(levelItem.x(), levelItem.y());
     }
+    qDebug() << "shark object: " << object_handler;
 }
 
 void LevelBuilder::position_banana(LevelItem levelItem)
@@ -57,4 +59,6 @@ void LevelBuilder::position_steam(LevelItem levelItem)
     if(levelItem.title().compare("STEAM") == 0) {
         object_handler->add_steam(levelItem.x(), levelItem.y());
     }
+
+    qDebug() << "object in position steam: " << object_handler << levelItem.x();
 }
