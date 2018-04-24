@@ -164,8 +164,8 @@ void AutoTest::add_path(QList<QPoint> points) {
 
 
 void AutoTest::simulate_keypress() {
-//    QList<QGraphicsItem *> items = player->collidingItems(
-//                                       Qt::IntersectsItemShape);
+    QList<QGraphicsItem *> items = object->collidingItems(
+                                       Qt::IntersectsItemShape);
     int x = object->x();
     int y = object->y();
     
@@ -174,12 +174,12 @@ void AutoTest::simulate_keypress() {
     if( (dest.x() == -1 && dest.y() == -1) && points.size() > 0 )
         dest = (points.at(list_pos));
 
-//    // wrap-around list if index is beyond array
-//    if( list_pos >= points.size() )
-//        list_pos = 0;
-/*
+    // wrap-around list if index is beyond array
+    if( list_pos >= points.size() )
+        list_pos = 0;
+
     // check for banana
-    if( player->childItems().size() > 0 ) {
+    if( object->childItems().size() > 0 ) {
         QKeyEvent event(QEvent::KeyPress, Qt::Key_E, Qt::NoModifier);
         QCoreApplication::sendEvent(scene, &event);
     } 
@@ -194,7 +194,6 @@ void AutoTest::simulate_keypress() {
  
         }
     }
-*/
 
     // move towards dest
     // left or right
