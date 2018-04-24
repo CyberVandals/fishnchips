@@ -1,7 +1,6 @@
 #include "../../inc/hh_main_player.h"
 #include "../../inc/henry/hh_health_bar.h"
 
-//#include "../../inc/gy_object.h"
 #include <QDebug>
 #include <typeinfo>
 MainPlayer::MainPlayer(QGraphicsScene * scene,QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
@@ -13,10 +12,12 @@ MainPlayer::MainPlayer(QGraphicsScene * scene,QGraphicsItem *parent): QObject(),
 
     player_scene = scene;
 
+
     setFocus();
 
     player_health = new HealthBar(scene);
     player_oxygen = new Oxygen(scene);
+    scene_manager = new SceneManager(scene);
 
     right_collision = false;
     left_collision = false;
@@ -52,7 +53,7 @@ void MainPlayer::keyPressEvent(QKeyEvent *event)
                 this->banana->chuck(LEFT);
                 this->banana->set_thrown(true);
                 this->has_banana = false;
-                qDebug() << "i threw my banana!!!!!!!!!!!!!!!";
+                //qDebug() << "i threw my banana!!!!!!!!!!!!!!!";
                 this->banana = NULL;
              }
 
@@ -66,7 +67,7 @@ void MainPlayer::keyPressEvent(QKeyEvent *event)
                 this->banana->chuck(RIGHT);
                 this->banana->set_thrown(true);
                 this->has_banana = false;
-                qDebug() << "i threw my banana!!!!!!!!!!!!!!!";
+                //qDebug() << "i threw my banana!!!!!!!!!!!!!!!";
                 this->banana = NULL;
              }
 
@@ -97,7 +98,7 @@ void MainPlayer::keyPressEvent(QKeyEvent *event)
             if(collidingItems(Qt::IntersectsItemBoundingRect).length() > list_length)
           {
               if(this->platform_collision()) this->left_collision = true;
-              qDebug() << "hit platform down";
+              //qDebug() << "hit platform down";
           }
           this->right_collision = false;
         }
@@ -135,7 +136,7 @@ void MainPlayer::keyPressEvent(QKeyEvent *event)
            if(collidingItems(Qt::IntersectsItemBoundingRect).length() > list_length)
           {
               if(this->platform_collision()) this->right_collision = true;
-              qDebug() << "hit platform down";
+              //qDebug() << "hit platform down";
           }
           this->left_collision = false;
         }
@@ -166,7 +167,7 @@ void MainPlayer::keyPressEvent(QKeyEvent *event)
           if(list_length == 1 && this->has_banana == true){setPos(x(),y()-10);}
           else if(list_length == 0 && this->top_collision == false){setPos(x(),y()-10);}
           else if(list_length == 1 && this->top_collision == false) {setPos(x(),y()-10);}
-          qDebug() << "here";
+          //qDebug() << "here";
           this->sink_collision = false;
           if(collidingItems(Qt::IntersectsItemBoundingRect).length() > list_length)
           {
@@ -182,7 +183,7 @@ void MainPlayer::keyPressEvent(QKeyEvent *event)
                 if(this->top_collision == false)
                 {
                     setPos(x(),y()-10);
-                    qDebug() << "or here";
+                    //qDebug() << "or here";
                     this->sink_collision = false;
                     this->bottom_collision = false;
                     if(collidingItems(Qt::IntersectsItemBoundingRect).length() > list_length) this->top_collision = true;
@@ -203,7 +204,7 @@ void MainPlayer::keyPressEvent(QKeyEvent *event)
           if(list_length == 1 && this->has_banana == true){setPos(x(),y()+10);}
           else if(list_length == 0 && this->bottom_collision == false){setPos(x(),y()+10);}
           else if(list_length == 1 && this->bottom_collision == false) {setPos(x(),y()+10);}
-          qDebug() << "here";
+          //qDebug() << "here";
           if(collidingItems(Qt::IntersectsItemBoundingRect).length() > list_length)
           {
               if(this->platform_collision()) {this->bottom_collision = true; this->top_collision = false;}
@@ -218,7 +219,7 @@ void MainPlayer::keyPressEvent(QKeyEvent *event)
                 if(this->bottom_collision == false)
                 {
                     setPos(x(),y()+10);
-                    qDebug() << "or here";
+                    //qDebug() << "or here";
                     this->sink_collision = false;
                     this->top_collision = false;
                     if(collidingItems(Qt::IntersectsItemBoundingRect).length() > list_length) this->bottom_collision = true;
@@ -239,7 +240,7 @@ int MainPlayer::shark_collision()
         if( (typeid(*(collision_item[i])) == typeid(Shark)) && (this->shield == false))
         {
 
-            qDebug() << "hit a shark";
+            //qDebug() << "hit a shark";
             //shield = true;
             return 1;
         }
@@ -252,7 +253,7 @@ int MainPlayer::shark_collision()
 
                 if(this->banana->thrown() == true) this->banana = NULL;
 
-                else qDebug() << "i have a banana!!!!!!!!!!!!!!!!!!!!!!";
+                //else qDebug() << "i have a banana!!!!!!!!!!!!!!!!!!!!!!";
             }
             return 69;
         }
@@ -310,6 +311,7 @@ void MainPlayer::sink()
     else if(shark_collision()==0)//door
     {
         this->setPos(scene()->sceneRect().bottom(), scene()->sceneRect().bottom()-50);
+        this->scene_manager->next_level();
     }
 
     else if(shark_collision()==69)
