@@ -129,23 +129,34 @@ void ObjectHandler::resume() {
 }
 
 void ObjectHandler::remove_all() {
+    int size;
 
     // remove from scene and deallocate
+    //size = shark_list.size();
+    //for( int i = size - 1; i >= 0; i-- ) {
     for( int i = 0; i < shark_list.size(); i++ ) {
+        shark_list[i]->setEnabled(false); 
         scene->removeItem(shark_list[i]); 
         delete shark_list[i];
     }
 
-    for( int i = 0; i < steam_list.size(); i++ ) {
+    //size = steam_list.size();
+    //for( int i = size - 1; i >= 0; i-- ) {
+    for( int i = 0; i < shark_list.size(); i++ ) {
+        steam_list[i]->setEnabled(false); 
         scene->removeItem(steam_list[i]); 
         delete steam_list[i];
     }
 
-    for( int i = 0; i < banana_list.size(); i++ ) {
+    //size = banana_list.size();
+    //for( int i = size - 1; i >= 0; i-- ) {
+    for( int i = 0; i < shark_list.size(); i++ ) {
+        banana_list[i]->setEnabled(false); 
         scene->removeItem(banana_list[i]);  
         delete banana_list[i];
     }
- 
+
+    exit->setEnabled(false); 
     scene->removeItem(exit);
     if( exit != NULL ) {
         delete exit;
@@ -162,7 +173,7 @@ void ObjectHandler::remove_all() {
     while( !banana_list.isEmpty() ) 
         banana_list.removeLast();
 
-    while(!platform_list.isEmpty()) 
+    while( !platform_list.isEmpty() ) 
         platform_list.removeLast();
 
 }
