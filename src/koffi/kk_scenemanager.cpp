@@ -23,7 +23,7 @@ SceneManager::SceneManager(QGraphicsScene *scene)
 
 SceneManager::SceneManager(QGraphicsScene *scene, int demo, ObjectHandler *object_handler)
 {
-//    this->scene = scene;
+    this->scene = scene;
     main_scene = new GameScene(scene);
     this->object_handler = object_handler;
     level_builder = new LevelBuilder(object_handler);
@@ -34,7 +34,7 @@ SceneManager::SceneManager(QGraphicsScene *scene, int demo, ObjectHandler *objec
 void SceneManager::init(QGraphicsScene *scene, int demo)
 {
 
-//    main_scene = new GameScene(scene);
+    main_scene = new GameScene(scene);
 //    object_handler = new ObjectHandler(scene);
 
     // stress
@@ -62,10 +62,7 @@ void SceneManager::play_game(){
 
 void SceneManager::restart_game()
 {
-//    main_scene->removeGameObject(player);
-//    main_scene->removeGameObject(shark);
-//    main_scene->removeGameObject(exit);
-//    main_scene->removeGameObject(platform);
+    // TODO implement
 }
 
 void SceneManager::generate_level(const QString& filename)
@@ -85,7 +82,7 @@ void SceneManager::next_level()
     qDebug() << "Calling next level!\n";
     if(!levels->isEmpty()){
         qDebug() << "object handler: " << object_handler;
-        object_handler->remove_all();
+//        object_handler->remove_all();
 //
 //        for (size_t i = 0, n = this->scene->items().size(); i < n; i++){
 //            this->scene->items()[i]->setEnabled(false);
