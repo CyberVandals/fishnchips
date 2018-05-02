@@ -23,8 +23,8 @@ int HealthBar::decrease_health()
     {
         health_list.last()->setVisible(false);
         health_list.removeLast();
-        qDebug() << health_list.count();
-        return health_list.count(); //return this so we know when there is no more health left (player is dead)
+        //qDebug() << health_list.count();
+        return health_list.count(); //return this so we know when there is no more health left (player is dead), returns to shark_collision()
     }
 
 
@@ -39,7 +39,7 @@ HealthBar::HealthBar(QGraphicsScene *scene): QGraphicsRectItem()
 
 
     int x_pos = 5; //padding before health bar
-    for(int i = 0; i < 5; i++)
+    for(int i = 0; i < 5; i++)//player starts with 5 health
     {
         Health * health = new Health(x_pos); //y position doesnt need to change, intialize all 5 health objects
         scene->addItem(health);

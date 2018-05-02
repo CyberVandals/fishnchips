@@ -11,9 +11,11 @@ AbstractButton::AbstractButton( QPushButton *parent )
 }
 
 void AbstractButton::hover_enter( QHoverEvent * ) {
+    if(new_height!=DEFAULT_BTN_HEIGHT){
     new_width = this->width() + 5;
     new_height = this->height() + 5;
     this->setIconSize(QSize(new_width,new_height));
+    }
 }
 
 void AbstractButton::hover_leave( QHoverEvent * ) {

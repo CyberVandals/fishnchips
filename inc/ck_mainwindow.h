@@ -48,6 +48,9 @@ public:
     void init();
     void display_mainmenu();
     // singleton pattern
+    // main function will use this function to create
+    // an instance of MainWindow, which will be created
+    // only once.
     static MainWindow* get_instance() {
         if( mainwindow_inst == NULL ){
             mainwindow_inst = new MainWindow();
@@ -57,6 +60,7 @@ public:
 
 public slots:
     void start();
+    void re_start();
     void restart();
     void start_demo();
     void start_stress();

@@ -8,6 +8,7 @@
 #include <QGraphicsView>
 
 #include "henry/hh_health.h"
+//composite pattern
 
 class HealthBar: public QGraphicsRectItem //lineup of Health objects
 {
@@ -16,7 +17,7 @@ public:
     int decrease_health();
     void renew_health();
     HealthBar(QGraphicsScene *);
-private:
+private://delegation
 QLinkedList<Health *> health_list; //health bar is implemented as a linked list for easy management
 
 };

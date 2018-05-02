@@ -9,7 +9,7 @@
 #include <QPalette>
 #include <QPropertyAnimation>
 
-class Oxygen: public QProgressBar
+class Oxygen: public QProgressBar//singleton and or observer
 {
 Q_OBJECT
 public:
