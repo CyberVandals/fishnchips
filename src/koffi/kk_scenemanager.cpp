@@ -45,17 +45,21 @@ void SceneManager::init(QGraphicsScene *scene, int demo)
     }
 
 
-    player = new MainPlayer(scene, this);
-    main_scene->addGameObject(player);
-    main_scene->setFocus(player);
+
 
     // demo
     if(demo == 1) {
+        player = new MainPlayer(scene, this);
+        main_scene->addGameObject(player);
+        main_scene->setFocus(player);
         AutoTest * autoTest = new AutoTest(scene, this, player);
     }
 }
 
 void SceneManager::play_game(){
+    player = new MainPlayer(scene, this);
+    main_scene->addGameObject(player);
+    main_scene->setFocus(player);
     next_level();
     qDebug() << "game is running\n";
 }
