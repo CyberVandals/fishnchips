@@ -35,6 +35,8 @@ SoundManager::SoundManager()
 
     throw_music = new QMediaPlayer();
 
+
+
 }
 
 //This is the dynamically bound function that takes as its inputs a QMediaPlayer
