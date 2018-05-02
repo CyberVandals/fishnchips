@@ -5,12 +5,12 @@ SCORE           10      5
 BANANA          50      650
 BANANA          850     450
 BANANA          900     550
-SHARK           130     30
-SHARK           120     120
+#SHARK           130     30
+#SHARK           120     120
 SHARK           30      280
-SHARK           200     400
-SHARK           630     500
-SHARK           160     600
+#SHARK           200     400
+#SHARK           630     500
+#SHARK           160     600
 EXIT            50      50
 PLATFORM        150     100
 PLATFORM        600     100

@@ -1,10 +1,22 @@
 #TITLE          X_POS   Y_POS
 SCORE           10      5
-BANANA          100     100
-SHARK           120     120
-SHARK           130     130
-EXIT            50      50
+BANANA          200     100
+BANANA          400     200
+BANANA          600     300
+BANANA          800     400
+#SHARK           320     120
+#SHARK           420     170
+#SHARK           620     200
+SHARK           730     230
+EXIT            900      50
 PLATFORM        150     150
-STEAM           180     180
+PLATFORM        750     150
+PLATFORM        0       300
+PLATFORM        750     300
+PLATFORM        150     450
+PLATFORM        750     450
+PLATFORM        350     600
+STEAM           380     180
+STEAM           480     480
 #PLAYER          70      70
 #COMMENTS
