@@ -147,12 +147,12 @@ void MainWindow::start(){
     scene->removeItem(logo);
     play_button->disconnect();
     quit_button->disconnect();
-    demo_button->disconnect();
-    stress_button->disconnect();
+    //demo_button->disconnect();
+    //stress_button->disconnect();
     play_button->deleteLater();
     quit_button->deleteLater();
-    demo_button->deleteLater();
-    stress_button->deleteLater();
+    //demo_button->deleteLater();
+    //stress_button->deleteLater();
     // integer argument '0' is an indication to
     // scene manager that the mode is a normal game play
     game_scene = new SceneManager(scene,0,obj_handler);
@@ -162,12 +162,12 @@ void MainWindow::start_demo(){
     scene->removeItem(logo);
     play_button->disconnect();
     quit_button->disconnect();
-    demo_button->disconnect();
-    stress_button->disconnect();
+    //demo_button->disconnect();
+    //stress_button->disconnect();
     play_button->deleteLater();
     quit_button->deleteLater();
-    demo_button->deleteLater();
-    stress_button->deleteLater();
+    //demo_button->deleteLater();
+    //stress_button->deleteLater();
     // integer argument '1' is an indication to
     // scene manager that the mode is a demo mode
     game_scene = new SceneManager(scene,1,obj_handler);
@@ -177,12 +177,12 @@ void MainWindow::start_stress(){
     scene->removeItem(logo);
     play_button->disconnect();
     quit_button->disconnect();
-    demo_button->disconnect();
-    stress_button->disconnect();
+    //demo_button->disconnect();
+    //stress_button->disconnect();
     play_button->deleteLater();
     quit_button->deleteLater();
-    demo_button->deleteLater();
-    stress_button->deleteLater();
+    //demo_button->deleteLater();
+    //stress_button->deleteLater();
     // integer argument '2' is an indication to
     // scene manager that the mode is a stress test mode
     game_scene = new SceneManager(scene,2,obj_handler);
