@@ -85,7 +85,7 @@ void SceneManager::next_level()
     qDebug() << "Calling next level!\n";
     if(!levels->isEmpty()){
         qDebug() << "object handler: " << object_handler;
-//        object_handler->remove_all();
+        object_handler->remove_all();
 //
 //        for (size_t i = 0, n = this->scene->items().size(); i < n; i++){
 //            this->scene->items()[i]->setEnabled(false);
