@@ -1,3 +1,10 @@
+/***************************************
+ *
+ *    ck_abstract_button.h
+ *    Chaeun Kim
+ *
+ ****************************************/
+
 #ifndef CK_ABSTRACT_BUTTON_H
 #define CK_ABSTRACT_BUTTON_H
 

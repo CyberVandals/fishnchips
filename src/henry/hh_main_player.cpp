@@ -181,6 +181,7 @@ void MainPlayer::keyPressEvent(QKeyEvent *event)
           if(list_length == 1 && this->has_banana == true){setPos(x(),y()-10);}
           else if(list_length == 0 && this->top_collision == false){setPos(x(),y()-10);}
           else if(list_length == 1 && this->top_collision == false) {setPos(x(),y()-10);}
+          else if((list_length == 0) || (list_length == 1 && this->has_banana == true)){setPos(x(),y()-10);}
           //qDebug() << "here";
           this->sink_collision = false;
           if(collidingItems(Qt::IntersectsItemBoundingRect).length() > list_length)
@@ -330,22 +331,11 @@ void MainPlayer::sink()
     {
         if(this->banana!=NULL)this->has_banana = true;
     }
-
-    if(this->pos().y()+(boundingRect().bottom()-boundingRect().top()) < (this->scene()->sceneRect().bottom()))
+if(this->platform_collision() == false || this ->bottom_collision == false)
     {
-    if(this->collidingItems(Qt::IntersectsItemShape).isEmpty() && this->sink_collision == false)
-    {
-        //setPos(x(),y()+1);
-        //if(!this->collidingItems(Qt::IntersectsItemShape).isEmpty()) this->sink_collision = true;
+    if(this->platform_collision() == false) {this->setPos(x(), y()+1); }
+    else if(this->top_collision == true) {this->setPos(x(), y()+1); }
+    }
 
     }
-    else if(!this->collidingItems(Qt::IntersectsItemShape).isEmpty())
-    {
-        if(this->bottom_collision == false)
-        {
-            //setPos(x(), y()+1);
-            //if(!this->collidingItems(Qt::IntersectsItemShape).isEmpty()) this->sink_collision = true;
-        }
-    }
-    }
-}
+

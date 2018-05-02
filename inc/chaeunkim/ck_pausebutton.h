@@ -1,3 +1,9 @@
+/***************************************
+ *
+ *    ck_pausebutton.h
+ *    Chaeun Kim
+ *
+ ****************************************/
 #ifndef PAUSEBUTTON_H
 #define PAUSEBUTTON_H
 
