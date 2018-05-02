@@ -17,13 +17,13 @@ SceneManager::SceneManager(QGraphicsScene *scene)
 {
     this->scene = scene;
     main_scene = new GameScene(scene);
-//    object_handler = new ObjectHandler(scene);
+    //    object_handler = new ObjectHandler(scene);
     set_levels();
 }
 
 SceneManager::SceneManager(QGraphicsScene *scene, int demo, ObjectHandler *object_handler)
 {
-//    this->scene = scene;
+    this->scene = scene;
     main_scene = new GameScene(scene);
     this->object_handler = object_handler;
     level_builder = new LevelBuilder(object_handler);
@@ -34,12 +34,12 @@ SceneManager::SceneManager(QGraphicsScene *scene, int demo, ObjectHandler *objec
 void SceneManager::init(QGraphicsScene *scene, int demo)
 {
 
-//    main_scene = new GameScene(scene);
-//    object_handler = new ObjectHandler(scene);
+    main_scene = new GameScene(scene);
+    //    object_handler = new ObjectHandler(scene);
 
     // stress
     if(demo == 2) {
-         main_scene->setBackground(":/images/back_ground.jpg");
+        main_scene->setBackground(":/images/back_ground.jpg");
         AutoTest * autoTest = new AutoTest(scene, this);
         return;
     }
@@ -62,10 +62,7 @@ void SceneManager::play_game(){
 
 void SceneManager::restart_game()
 {
-//    main_scene->removeGameObject(player);
-//    main_scene->removeGameObject(shark);
-//    main_scene->removeGameObject(exit);
-//    main_scene->removeGameObject(platform);
+    // TODO implement
 }
 
 void SceneManager::generate_level(const QString& filename)
@@ -83,16 +80,22 @@ void SceneManager::generate_level(const QString& filename)
 void SceneManager::next_level()
 {
     qDebug() << "Calling next level!\n";
-    if(!levels->isEmpty()){
-        qDebug() << "object handler: " << object_handler;
+    if(levels->size() == 10){
+        qDebug() << "first level: " << object_handler;
+    } else {
+        qDebug() << "after first level: " << object_handler;
         object_handler->remove_all();
-//
-//        for (size_t i = 0, n = this->scene->items().size(); i < n; i++){
-//            this->scene->items()[i]->setEnabled(false);
-//        }
-//        this->scene->clear();
+    }
+    if(!levels->isEmpty()){
 
-//        main_scene->setBackground(":/images/back_ground.jpg");
+        qDebug() << "after first level" ;
+        //
+        //        for (size_t i = 0, n = this->scene->items().size(); i < n; i++){
+        //            this->scene->items()[i]->setEnabled(false);
+        //        }
+        //        this->scene->clear();
+
+        //        main_scene->setBackground(":/images/back_ground.jpg");
         generate_level(levels->takeFirst());
     }
     else {
@@ -101,7 +104,6 @@ void SceneManager::next_level()
     }
     qDebug() << "finished next level\n";
 }
-
 MainPlayer* SceneManager::get_player()
 {
     return player;
