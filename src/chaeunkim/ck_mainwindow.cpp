@@ -130,7 +130,7 @@ void MainWindow::restart(){
     scene->addWidget(stress_button);*/
 }
 void MainWindow::re_start(){
-    scene->removeItem(logo);
+    /*scene->removeItem(logo);
     play_button->disconnect();
     quit_button->disconnect();
     demo_button->disconnect();
@@ -140,7 +140,8 @@ void MainWindow::re_start(){
     demo_button->deleteLater();
     stress_button->deleteLater();
 
-    game_scene->play_game();
+    game_scene->play_game();*/
+
 }
 void MainWindow::start(){
     scene->removeItem(logo);
