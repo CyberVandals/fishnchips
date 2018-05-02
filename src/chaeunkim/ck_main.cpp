@@ -10,7 +10,6 @@ int main( int argc, char *argv[] ) {
     QSplashScreen *splash = new QSplashScreen;
     splash->setPixmap(QPixmap(":/images/icon_shark.png"));
     splash->show();
-    //
     QTimer::singleShot(2000,splash,SLOT(close()));
 
     MainWindow * mainWindow = MainWindow::get_instance();

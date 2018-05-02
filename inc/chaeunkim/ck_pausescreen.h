@@ -1,3 +1,9 @@
+/***************************************
+ *
+ *    ck_pausescreen.h
+ *    Chaeun Kim
+ *
+ ****************************************/
 #ifndef CK_PAUSESCREEN_H
 #define CK_PAUSESCREEN_H
 
