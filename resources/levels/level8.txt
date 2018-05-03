@@ -11,10 +11,10 @@ BANANA          900     550
 BANANA          900     650
 BANANA          800     650
 #SHARK           100     120
-#SHARK           30      230
-#SHARK           130     430
-#SHARK           200     500
-#SHARK           630     550
+SHARK           30      230
+SHARK           130     430
+SHARK           200     500
+SHARK           630     550
 SHARK           160     600
 EXIT            800      50
 PLATFORM        150     150
