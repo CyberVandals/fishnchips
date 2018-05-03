@@ -13,7 +13,6 @@ PLATFORM        750     150
 PLATFORM        150     300
 PLATFORM        750     300
 PLATFORM        0       450
-PLATFORM        350     450
 PLATFORM        150     600
 PLATFORM        750     600
 STEAM           180     480
